@@ -30,7 +30,7 @@ dynamic = ["dependencies", "version"]
 
 [project.urls]
 homepage = "https://www.fiduswriter.org"
-repository = "https://www.github.com/fiduswriter/fiduswriter"
+repository = "https://git.fiduswriter.org/fiduswriter/fiduswriter-server-backend"
 
 [project.optional-dependencies]
 books = ["fiduswriter-books ~= 4.1.4"]

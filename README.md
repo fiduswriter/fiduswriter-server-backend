@@ -1,46 +1,66 @@
-Fidus Writer
-============
+Fidus Writer server backend
+===========================
 
-Fidus Writer is an online collaborative editor especially made for academics who need to use citations and/or formulas. The editor focuses on the content rather than the layout, so that with the same text, you can later on publish it in multiple ways: On a website, as a printed book, or as an ebook. In each case, you can choose from a number of layouts that are adequate for the medium of choice.
+This repository contains the **Fidus Writer server backend**: the Django
+application that powers the classic Fidus Writer server (user management,
+document storage, bibliography, WebSocket-based real-time collaboration, REST
+API, and the Django admin).
 
+The Python package / PyPI distribution published from this repository is named
+**`fiduswriter`** (kept for backwards compatibility — `pip install fiduswriter`
+installs the server). The repository itself is called `fiduswriter-server-backend`
+to distinguish it from the main `fiduswriter` repository, which holds packaging
+(docker/deb/rpm/snap), documentation, dev-scripts, and CI only.
 
-[![Fidus Writer](https://snapcraft.io/fiduswriter/badge.svg)](https://snapcraft.io/fiduswriter)
+Fidus Writer is an online collaborative editor especially made for academics who
+need to use citations and/or formulas. The editor focuses on the content rather
+than the layout, so that with the same text, you can later on publish it in
+multiple ways: on a website, as a printed book, or as an ebook.
 
-[![Coverage Status](https://coveralls.io/repos/github/fiduswriter/fiduswriter/badge.svg?branch=main)](https://coveralls.io/github/fiduswriter/fiduswriter?branch=main)
+Installation and documentation
+------------------------------
 
+Installation guides, packaging (Debian/RPM/Snap/Docker), and the full
+documentation live in the [main `fiduswriter` repository](https://git.fiduswriter.org/fiduswriter/fiduswriter).
 
-Installation
-------------
+Quick start for development:
 
-The installation procedures can be found in our [documentation](docs/installation/).
+```bash
+# Install Python dependencies
+pip install -r fiduswriter/dev-requirements.txt
 
-**Quick Start:**
-- **Debian/Ubuntu/Mint**: [APT Repository](docs/debian-packaging.md#apt-repository-recommended-for-debianubuntu)
-- **RHEL/Rocky/AlmaLinux/Fedora**: [RPM Packages](docs/installation/rpm.md)
-- **Ubuntu**: [Snap Installation](docs/installation/snap.md)
-- **Docker**: [Docker Installation](docs/installation/docker.md)
-- **Developers**: [Development Setup](docs/installation/developer-install.md)
+# Copy and adapt the default configuration
+cp fiduswriter/configuration-default.py fiduswriter/configuration.py
 
-Documentation
--------------
+# Run the setup (migrate, npm install, transpile)
+python fiduswriter/manage.py setup
 
-📚 **[Full Documentation](docs/README.md)**
+# Run the development server
+python fiduswriter/manage.py runserver
+```
 
-- [Installation Guides](docs/installation/)
-- [Debian Packaging](docs/debian-packaging.md)
-- [Configuration](docs/configuration/)
-- [Development](docs/development/)
-- [Contributing](docs/contributing.md)
+Running tests:
 
-Contributing
-------------
+```bash
+cd fiduswriter/fiduswriter
+python manage.py test document.tests.test_external_save --noinput
+```
 
-We welcome contributions! Please read our [Contributing Guide](docs/contributing.md) for details on how to get started.
+Related repositories
+--------------------
 
-To get started, [sign the Contributor License Agreement](https://cla-assistant.io/fiduswriter/fiduswriter).
-
+- `fiduswriter/` — main repository: packaging, docs, dev-scripts, CI.
+- `fwtoolkit/` — shared UI toolkit (`fwtoolkit` npm package).
+- `fiduswriter-document-ts/` — `@fiduswriter/document` npm package.
+- `fiduswriter-editor-ts/` — `@fiduswriter/editor` npm package.
+- `fiduswriter-frontend-ts/` — `@fiduswriter/frontend` npm package.
+- `fiduswriter-bibliography-manager-ts/`, `fiduswriter-image-manager-ts/`,
+  `fiduswriter-document-template-editor-ts/` — supporting npm packages.
 
 License
 -------
 
-All of Fidus Writer's original code is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, for details see LICENSE. Some third party libraries are licensed under other, compatible open source libraries. Licensing information is included in those files.
+All of Fidus Writer's original code is licensed under the GNU AFFERO GENERAL
+PUBLIC LICENSE, for details see LICENSE. Some third party libraries are
+licensed under other, compatible open source libraries. Licensing information
+is included in those files.

@@ -399,8 +399,10 @@ those repositories for a high-level map of how they relate to one another,
 including which code belongs in which repository and the dependency flow between
 them.
 
-The `dev-scripts/` directory contains helpers for switching between published
-npm versions of these sibling packages and the local checkouts:
+The `dev-scripts/` directory lives in the **main `fiduswriter` repository**
+(packaging/docs/dev-scripts), not in this repository. It contains helpers for
+switching between published npm versions of these sibling packages and the
+local checkouts:
 
 - `dev-scripts/switch-local-deps.sh local` — Rewrite `base/package.json5`,
   `book/package.json5`, and the sibling `package.json` files to use local
@@ -417,8 +419,9 @@ npm versions of these sibling packages and the local checkouts:
 Typical workflow for testing a change in `@fiduswriter/document`:
 
 ```bash
-# 1. Switch the main app and siblings to local sources
-./dev-scripts/switch-local-deps.sh local
+# 1. Switch the main app and siblings to local sources (run from the
+#    main fiduswriter repository)
+../fiduswriter/dev-scripts/switch-local-deps.sh local
 
 # 2. Install/build the sibling you changed
 cd ../fiduswriter-document-ts
@@ -426,14 +429,23 @@ pnpm install
 pnpm run build
 
 # 3. Rebuild the main app's bundle
-cd ../fiduswriter/fiduswriter
 python manage.py transpile --force
 
 # 4. When done, revert to npm versions
-./dev-scripts/switch-local-deps.sh npm
+../fiduswriter/dev-scripts/switch-local-deps.sh npm
 ```
 
 Note: `switch-local-deps.sh` modifies `package.json5`/`package.json` files in
 place. Make sure to revert to npm mode before committing if you do not intend
 to keep the local dependency paths in the repository.
+
+## Repository vs PyPI name
+
+This repository is named `fiduswriter-server-backend` but the Python package /
+PyPI distribution it publishes is **`fiduswriter`** (kept for backwards
+compatibility — `pip install fiduswriter` installs the server). The main
+`fiduswriter` repository now holds packaging (docker/deb/rpm/snap), docs,
+dev-scripts, and CI only; no Python source lives there. If a desktop variant
+ever ships as a Python distribution it must use a distinct PyPI name (e.g.
+`fiduswriter-desktop`) so it does not clash with the server's `fiduswriter`.
 
