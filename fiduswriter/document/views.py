@@ -1193,24 +1193,37 @@ def get_doc_data(request):
 
     if request.user.is_authenticated:
         user_id = request.user.id
-        doc = (
-            Document.objects.filter(id=doc_id)
-            .filter(Q(owner=request.user) | Q(accessright__user=request.user))
-            .select_related("owner", "template")
-            .first()
-        )
-        if doc:
-            if doc.owner_id == request.user.id:
+        if request.user.is_staff:
+            # Staff members can open any document in the Django admin
+            # (used by the admin document editor).
+            doc = (
+                Document.objects.filter(id=doc_id)
+                .select_related("owner", "template")
+                .first()
+            )
+            if doc:
                 is_owner = True
                 access_rights = "write"
                 path = doc.path
-            else:
-                ar = AccessRight.objects.filter(
-                    document_id=doc.id, user=request.user
-                ).first()
-                if ar:
-                    access_rights = ar.rights
-                    path = ar.path
+        else:
+            doc = (
+                Document.objects.filter(id=doc_id)
+                .filter(Q(owner=request.user) | Q(accessright__user=request.user))
+                .select_related("owner", "template")
+                .first()
+            )
+            if doc:
+                if doc.owner_id == request.user.id:
+                    is_owner = True
+                    access_rights = "write"
+                    path = doc.path
+                else:
+                    ar = AccessRight.objects.filter(
+                        document_id=doc.id, user=request.user
+                    ).first()
+                    if ar:
+                        access_rights = ar.rights
+                        path = ar.path
         if not doc and token_str:
             token_doc, rights = get_token_access(token_str)
             if token_doc and str(token_doc.id) == str(doc_id):
@@ -1628,19 +1641,25 @@ def save_doc(request):
     bibliography = request.JSON.get("bibliography")
     comments = request.JSON.get("comments")
     diffs = request.JSON.get("diffs")
-    version = request.JSON.get("version")
     if content is not None:
         doc.content = content
     if bibliography is not None:
         doc.bibliography = bibliography
     if comments is not None:
         doc.comments = comments
-    if version is not None:
-        doc.version = version
     if diffs is not None:
         doc.diffs = diffs
     doc.doc_version = FW_DOCUMENT_VERSION
+    doc.version += 1
     doc.save()
+
+    image_updates = request.JSON.get("image_updates", [])
+    if image_updates and not doc.e2ee:
+        from document.helpers.document_store import update_document_images_sync
+
+        update_document_images_sync(doc.id, image_updates, request.user)
+
+    response["version"] = doc.version
     return JsonResponse(response, status=status)
 
 

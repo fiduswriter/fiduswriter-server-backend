@@ -25,6 +25,17 @@ class DocumentAdmin(admin.ModelAdmin):
         response["settings"] = json.dumps(get_frontend_settings())
         return render(request, "admin/document/maintenance.html", response)
 
+    def changeform_view(
+        self, request, object_id=None, form_url="", extra_context=None
+    ):
+        # Expose the frontend settings to the visual document editor
+        # (document_admin.mjs) loaded by the change form template.
+        extra_context = extra_context or {}
+        extra_context["settings"] = json.dumps(get_frontend_settings())
+        return super().changeform_view(
+            request, object_id, form_url, extra_context=extra_context
+        )
+
 
 admin.site.register(models.Document, DocumentAdmin)
 

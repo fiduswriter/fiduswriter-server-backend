@@ -1,0 +1,26 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% block extrahead %}{{ block.super }}
+<!-- Font Awesome -->
+<link type="text/css" rel="stylesheet" href="{% static "css/fontawesome/css/all.css" %}" />
+<!-- Color variables and base fwtoolkit styles required by the document editor -->
+<link type="text/css" rel="stylesheet" href="{% static "css/fwtoolkit/colors.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "css/colors.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "css/fonts.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "css/fwtoolkit/fwtoolkit.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "css/document_admin.css" %}" />
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+<!-- Translations -->
+<script type="text/javascript" src="/api/jsi18n/"></script>
+
+<!-- Set window.settings FIRST, before dependent scripts -->
+{% include "includes/frontend_settings.html" %}
+
+<!-- JS error handling -->
+<script type="text/javascript" src="{% static "js/error_hook.mjs" %}" crossorigin="anonymous"></script>
+
+<!-- Now load the admin script that uses window.settings -->
+<script type="text/javascript" src="{% static "js/document_admin.mjs" %}"></script>
+
+{{ media }}
+{% endblock %}
