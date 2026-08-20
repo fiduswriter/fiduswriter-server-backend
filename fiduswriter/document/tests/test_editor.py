@@ -792,9 +792,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         WebDriverWait(self.driver, self.wait_time).until(
             EC.invisibility_of_element_located((By.CSS_SELECTOR, ".fw-dialog"))
         )
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Documents"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Documents"]')
+        )
         # Wait for document list page to load
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
@@ -942,9 +942,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Documents"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Documents"]')
+        )
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1154,9 +1154,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Documents"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Documents"]')
+        )
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1191,9 +1191,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Documents"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Documents"]')
+        )
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1228,9 +1228,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Decline invite"]'
         ).click()
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Documents"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Documents"]')
+        )
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1342,9 +1342,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         WebDriverWait(self.driver, self.wait_time).until(
             EC.element_to_be_clickable((By.ID, "preferences-btn"))
         ).click()
-        self.retry_click(self.driver, (
-            By.XPATH, '//*[normalize-space()="Contacts"]'
-        ))
+        self.retry_click(
+            self.driver, (By.XPATH, '//*[normalize-space()="Contacts"]')
+        )
         self.assertEqual(
             len(
                 self.driver.find_elements(
