@@ -13,6 +13,7 @@ from django.conf import settings
 import os
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException
 from document.models import AccessRight
 
 
@@ -569,12 +570,22 @@ class FunctionalOfflineTests(EditorHelper, ChannelsLiveServerTestCase):
         ).click()
 
         # click on 'Insert image' button
-        self.driver.find_element(By.ID, "insert-figure-image").click()
-
-        upload_button = WebDriverWait(self.driver, self.wait_time).until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//*[normalize-space()="Add new image"]')
-            )
+        # The button's click listener is bound only after the MathLive module
+        # finishes loading, so retry the click until the image selection
+        # dialog opens.
+        for _attempt in range(5):
+            self.driver.find_element(By.ID, "insert-figure-image").click()
+            try:
+                WebDriverWait(self.driver, 2).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[normalize-space()="Add new image"]')
+                    )
+                )
+                break
+            except TimeoutException:
+                continue
+        upload_button = self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Add new image"]'
         )
         upload_button.click()
 
@@ -775,7 +786,20 @@ class FunctionalOfflineTests(EditorHelper, ChannelsLiveServerTestCase):
         ).click()
 
         # click on 'Insert image' button
-        self.driver.find_element(By.ID, "insert-figure-image").click()
+        # The button's click listener is bound only after the MathLive module
+        # finishes loading, so retry the click until the image selection
+        # dialog opens.
+        for _attempt in range(5):
+            self.driver.find_element(By.ID, "insert-figure-image").click()
+            try:
+                WebDriverWait(self.driver, 2).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[normalize-space()="Use image"]')
+                    )
+                )
+                break
+            except TimeoutException:
+                continue
 
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
