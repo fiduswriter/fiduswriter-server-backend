@@ -182,12 +182,23 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
             )
         ).click()
         # click on 'Insert image' button
-        self.driver.find_element(By.ID, "insert-figure-image").click()
+        # The button's click listener is bound only after the MathLive module
+        # finishes loading, so retry the click until the image selection
+        # dialog opens.
+        for _attempt in range(5):
+            self.driver.find_element(By.ID, "insert-figure-image").click()
+            try:
+                WebDriverWait(self.driver, 2).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[normalize-space()="Add new image"]')
+                    )
+                )
+                break
+            except TimeoutException:
+                continue
 
-        upload_button = WebDriverWait(self.driver, self.wait_time).until(
-            EC.presence_of_element_located(
-                (By.XPATH, '//*[normalize-space()="Add new image"]')
-            )
+        upload_button = self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Add new image"]'
         )
 
         upload_button.click()
@@ -409,23 +420,12 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
             "arguments[0].scrollIntoView({block: 'center'});", heading
         )
         heading.click()
-        ActionChains(self.driver).send_keys(Keys.BACKSPACE).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(Keys.BACKSPACE).send_keys(Keys.BACKSPACE).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).send_keys(
-            Keys.BACKSPACE
-        ).perform()
+        # Wait for the click's selection to settle, then delete the heading
+        # text and the heading node itself so the cross-reference target
+        # becomes missing.
+        time.sleep(1)
+        for _i in range(20):
+            ActionChains(self.driver).send_keys(Keys.BACKSPACE).perform()
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".doc-body .cross-reference.missing-target")
@@ -792,9 +792,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         WebDriverWait(self.driver, self.wait_time).until(
             EC.invisibility_of_element_located((By.CSS_SELECTOR, ".fw-dialog"))
         )
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Documents"]'
-        ).click()
+        ))
         # Wait for document list page to load
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
@@ -942,9 +942,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Documents"]'
-        ).click()
+        ))
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1154,9 +1154,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Documents"]'
-        ).click()
+        ))
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1191,9 +1191,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Accept invite"]'
         ).click()
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Documents"]'
-        ).click()
+        ))
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1228,9 +1228,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Decline invite"]'
         ).click()
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Documents"]'
-        ).click()
+        ))
         WebDriverWait(self.driver, self.wait_time).until(
             EC.presence_of_element_located(
                 (By.CSS_SELECTOR, ".new_document button")
@@ -1342,9 +1342,9 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         WebDriverWait(self.driver, self.wait_time).until(
             EC.element_to_be_clickable((By.ID, "preferences-btn"))
         ).click()
-        self.driver.find_element(
+        self.retry_click(self.driver, (
             By.XPATH, '//*[normalize-space()="Contacts"]'
-        ).click()
+        ))
         self.assertEqual(
             len(
                 self.driver.find_elements(
