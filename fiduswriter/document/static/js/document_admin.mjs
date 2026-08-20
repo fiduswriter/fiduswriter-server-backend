@@ -1,4 +1,4 @@
-import {DocumentEditorAdmin} from "@fiduswriter/document-admin-editor"
+import {DocumentEditorAdmin} from "./modules/document_admin/document_admin.ts"
 import {postJson} from "fwtoolkit"
 import {initSettings} from "fwtoolkit/settings"
 

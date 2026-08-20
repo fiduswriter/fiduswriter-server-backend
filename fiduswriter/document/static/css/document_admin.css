@@ -1,0 +1,16 @@
+/* Document admin editor container */
+.document-editor {
+    margin-bottom: 20px;
+}
+
+.document-editor #document-editor {
+    min-height: 600px;
+}
+
+.document-editor ul.fw-errorlist {
+    margin: 0 0 8px;
+}
+
+#document-editor .editor {
+    background: var(--main-background-color, #f2f2f2);
+}
