@@ -76,12 +76,11 @@ class AdminTest(SeleniumHelper, ChannelsLiveServerTestCase):
             By.CSS_SELECTOR, "a[href='/admin/document/document/maintenance/']"
         ).click()
         self.driver.find_element(By.CSS_SELECTOR, "#update").click()
-        time.sleep(self.wait_time)  # Give some time to update database
-        self.assertEqual(
-            1,
-            len(
-                self.driver.find_elements(By.CSS_SELECTOR, "#update[disabled]")
-            ),
+        # The update button is disabled while the maintenance update runs.
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "#update[disabled]")
+            )
         )
 
     def test_templates(self):
@@ -519,6 +518,14 @@ class AdminTest(SeleniumHelper, ChannelsLiveServerTestCase):
         WebDriverWait(self.driver, self.wait_time).until(
             EC.staleness_of(old_body)
         )
+        # The copied document's editor renders asynchronously (webfonts +
+        # document load); wait for the fonts so the layout settles before
+        # checking the body text.
+        self.driver.set_script_timeout(30)
+        self.driver.execute_async_script(
+            "document.fonts.ready.then(() => "
+            "arguments[arguments.length - 1]())"
+        )
         WebDriverWait(self.driver, self.wait_time).until(
             EC.text_to_be_present_in_element(
                 (By.CSS_SELECTOR, ".doc-body"), "Initial text"
@@ -607,8 +614,14 @@ class AdminTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.CSS_SELECTOR, "#fidus-template-uploader"
         ).send_keys(path)
-        # Check whether there now are two templates
-        time.sleep(1)
+        # The import runs asynchronously and the page reloads when it is done;
+        # wait until the second template appears.
+        WebDriverWait(self.driver, self.wait_time).until(
+            lambda driver: len(
+                driver.find_elements(By.CSS_SELECTOR, "#result_list tbody a")
+            )
+            == 2
+        )
         template_links = self.driver.find_elements(
             By.CSS_SELECTOR, "#result_list tbody a"
         )

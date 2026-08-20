@@ -41,7 +41,7 @@
         "fwtoolkit": "^0.2.13",
         // Remaining dependencies are listed here to ensure they are hoisted to
         // to the top as static files need to be copied from them (see above)
-        "@fiduswriter/editor": "^0.1.79",
+        "@fiduswriter/editor": "^0.1.80",
         "@fiduswriter/bibliography-manager": "^0.1.31",
         "@fiduswriter/image-manager": "^0.1.22",
         "@fiduswriter/document-template-editor": "^0.1.16",
