@@ -185,6 +185,8 @@ class SeleniumHelper:
         options.add_argument("--safebrowsing-disable-download-protection")
         options.add_argument("--safebrowsing-disable-extension-blacklist")
         options.add_argument("--window-size=1920,1080")
+        # Capture browser console output so tests can inspect JS errors.
+        options.set_capability("goog:loggingPrefs", {"browser": "ALL"})
         prefs = {
             "profile.password_manager_leak_detection": False,
         }

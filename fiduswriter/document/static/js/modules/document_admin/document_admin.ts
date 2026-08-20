@@ -90,7 +90,8 @@ export class DocumentEditorAdmin {
                 "afterbegin",
                 '<ul class="object-tools"></ul>'
             )
-            this.objectTools = document.querySelector("ul.object-tools") || false
+            this.objectTools =
+                document.querySelector("ul.object-tools") || false
         }
         this.titleInput = document.querySelector(
             "#id_title"
@@ -115,12 +116,18 @@ export class DocumentEditorAdmin {
         }
         this.titleBlock = findRow(this.titleInput as HTMLElement)
         this.contentBlock = findRow(this.contentTextarea as HTMLElement)
-        this.bibliographyBlock = findRow(this.bibliographyTextarea as HTMLElement)
+        this.bibliographyBlock = findRow(
+            this.bibliographyTextarea as HTMLElement
+        )
         this.commentsBlock = findRow(this.commentsTextarea as HTMLElement)
-        ;[this.titleBlock, this.contentBlock, this.bibliographyBlock, this.commentsBlock]
+        ;[
+            this.titleBlock,
+            this.contentBlock,
+            this.bibliographyBlock,
+            this.commentsBlock
+        ]
             .filter(Boolean)
-            .forEach(block => (block as HTMLElement).style.display = "none")
-
+            .forEach(block => ((block as HTMLElement).style.display = "none"))
         ;(this.objectTools as HTMLElement).insertAdjacentHTML(
             "beforeend",
             `<li>
@@ -237,7 +244,7 @@ export class DocumentEditorAdmin {
         }
         if (this.bibliographyTextarea) {
             this.bibliographyTextarea.value = JSON.stringify(
-                (this.editor.mod.db?.bibDB.db) ?? {}
+                this.editor.mod.db?.bibDB.db ?? {}
             )
         }
         if (this.commentsTextarea) {
@@ -252,7 +259,9 @@ export class DocumentEditorAdmin {
     }
 
     showErrors(errors: Record<string, string>) {
-        const list = (this.editorBlock as HTMLElement | null)?.querySelector("ul.fw-errorlist")
+        const list = (this.editorBlock as HTMLElement | null)?.querySelector(
+            "ul.fw-errorlist"
+        )
         if (list) {
             list.innerHTML = Object.values(errors)
                 .map(error => `<li>${escapeText(error)}</li>`)
@@ -261,19 +270,27 @@ export class DocumentEditorAdmin {
     }
 
     bind() {
-        document.body.addEventListener("click", (event) => {
+        document.body.addEventListener("click", event => {
             const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, "#toggle-document-editor", el):
                     event.preventDefault()
-                    if (this.editor && (this.editorBlock as HTMLElement).style.display === "none") {
+                    if (
+                        this.editor &&
+                        (this.editorBlock as HTMLElement).style.display ===
+                            "none"
+                    ) {
                         this.restoreVisual()
                     } else {
                         this.showSource()
                     }
                     break
                 case findTarget(event, "div.submit-row input[type=submit]", el):
-                    if (this.editor && (this.editorBlock as HTMLElement).style.display !== "none") {
+                    if (
+                        this.editor &&
+                        (this.editorBlock as HTMLElement).style.display !==
+                            "none"
+                    ) {
                         if (!this.setCurrentValue()) {
                             event.preventDefault()
                         }
@@ -287,9 +304,14 @@ export class DocumentEditorAdmin {
 
     showSource() {
         ;(this.editorBlock as HTMLElement).style.display = "none"
-        ;[this.titleBlock, this.contentBlock, this.bibliographyBlock, this.commentsBlock]
+        ;[
+            this.titleBlock,
+            this.contentBlock,
+            this.bibliographyBlock,
+            this.commentsBlock
+        ]
             .filter(Boolean)
-            .forEach(block => (block as HTMLElement).style.display = "")
+            .forEach(block => ((block as HTMLElement).style.display = ""))
         this.setCurrentValue()
         if (this.editor) {
             this.editor.close()
@@ -297,9 +319,14 @@ export class DocumentEditorAdmin {
     }
 
     restoreVisual() {
-        ;[this.titleBlock, this.contentBlock, this.bibliographyBlock, this.commentsBlock]
+        ;[
+            this.titleBlock,
+            this.contentBlock,
+            this.bibliographyBlock,
+            this.commentsBlock
+        ]
             .filter(Boolean)
-            .forEach(block => (block as HTMLElement).style.display = "none")
+            .forEach(block => ((block as HTMLElement).style.display = "none"))
         ;(this.editorBlock as HTMLElement).style.display = ""
         this.initEditor()
     }

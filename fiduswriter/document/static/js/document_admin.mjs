@@ -1,6 +1,6 @@
-import {DocumentEditorAdmin} from "./modules/document_admin/document_admin.ts"
 import {postJson} from "fwtoolkit"
 import {initSettings} from "fwtoolkit/settings"
+import {DocumentEditorAdmin} from "./modules/document_admin/document_admin.ts"
 
 import {djangoApiConnectors} from "../../base/static/js/modules/api_adapters/index.js"
 

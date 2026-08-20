@@ -1208,7 +1208,9 @@ def get_doc_data(request):
         else:
             doc = (
                 Document.objects.filter(id=doc_id)
-                .filter(Q(owner=request.user) | Q(accessright__user=request.user))
+                .filter(
+                    Q(owner=request.user) | Q(accessright__user=request.user)
+                )
                 .select_related("owner", "template")
                 .first()
             )

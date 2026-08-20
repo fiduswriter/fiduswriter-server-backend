@@ -1,6 +1,5 @@
 import os
 import time
-import zipfile
 from tempfile import mkdtemp
 
 from selenium.webdriver.common.keys import Keys
@@ -225,13 +224,25 @@ class BibliographyOverviewTest(SeleniumHelper, ChannelsLiveServerTestCase):
         driver.find_element(
             By.CSS_SELECTOR, "li.content-menu-item:nth-child(2)"
         ).click()
-        time.sleep(1)
-        zip_path = os.path.join(self.download_dir, "bibliography.zip")
-        assert os.path.isfile(zip_path)
-        with zipfile.ZipFile(zip_path, "r") as z:
-            bib_content = z.read("bibliography.bib").decode("utf-8")
+        # The export dialog opens with a format selection; choose BibLaTeX and
+        # confirm the export.
+        driver.find_element(
+            By.XPATH,
+            "//label[contains(@class,'fw-checkable-label') and "
+            "contains(normalize-space(.), 'BibLaTeX')]",
+        ).click()
+        driver.find_element(
+            By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark"
+        ).click()
+        bib_path = os.path.join(self.download_dir, "bibliography.bib")
+        deadline = time.time() + 10
+        while time.time() < deadline and not os.path.isfile(bib_path):
+            time.sleep(0.2)
+        assert os.path.isfile(bib_path)
+        with open(bib_path, encoding="utf-8") as bib_file:
+            bib_content = bib_file.read()
         self.assertIn("@", bib_content)
-        os.remove(zip_path)
+        os.remove(bib_path)
 
         # Delete bib entry
         entries = self.driver.find_elements(

@@ -1,9 +1,9 @@
+import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
 import type {
     EditorContactsApi,
     EditorDocumentApi,
     EditorDocumentImportApi
 } from "@fiduswriter/editor"
-import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
 import type {ImageApi} from "@fiduswriter/image-manager"
 
 /**
