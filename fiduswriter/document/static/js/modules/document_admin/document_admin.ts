@@ -167,7 +167,10 @@ export class DocumentEditorAdmin {
             console.error(error)
             return
         }
-        if (!json.content) {
+        // The API returns the document data nested under "doc" together with
+        // "doc_info"; accept both that shape and a flat shape.
+        const doc = (json.doc ?? json) as Record<string, any>
+        if (!doc.content) {
             this.showErrors({
                 error: gettext("Could not load the document.") as string
             })
@@ -190,16 +193,16 @@ export class DocumentEditorAdmin {
             saveMode: "direct",
             documentData: async () => ({
                 doc: {
-                    v: json.v,
-                    content: json.content,
-                    comments: json.comments ?? {},
-                    bibliography: json.bibliography ?? {},
-                    images: json.images ?? {}
+                    v: doc.v,
+                    content: doc.content,
+                    comments: doc.comments ?? {},
+                    bibliography: doc.bibliography ?? {},
+                    images: doc.images ?? {}
                 },
                 doc_info: (this.documentInfo as Record<string, unknown>) || {},
                 time: Date.now()
             }),
-            initialImages: (json.images ?? {}) as Record<number, never> as any,
+            initialImages: (doc.images ?? {}) as Record<number, never> as any,
             apiConnectors: {
                 document: this.connectors.document,
                 documentImport: this.connectors.documentImport,

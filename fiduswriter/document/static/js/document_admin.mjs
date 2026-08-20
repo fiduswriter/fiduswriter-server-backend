@@ -10,14 +10,14 @@ window.settings.interpolate = window.interpolate
 initSettings(window.settings)
 
 // Document saves go through the staff-only admin endpoint so that admins can
-// edit any document regardless of ownership.
-const adminDocumentApi = {
-    ...djangoApiConnectors.document,
-    saveDocument: data =>
-        postJson("/api/document/admin/save_doc/", data).then(
-            ({json, status}) => ({json, status})
-        )
-}
+// edit any document regardless of ownership. Use Object.create so the
+// connector's prototype methods (getDocumentData etc.) are inherited — a
+// spread only copies own enumerable properties.
+const adminDocumentApi = Object.create(djangoApiConnectors.document)
+adminDocumentApi.saveDocument = data =>
+    postJson("/api/document/admin/save_doc/", data).then(
+        ({json, status}) => ({json, status})
+    )
 
 const theDocumentAdmin = new DocumentEditorAdmin({
     document: adminDocumentApi,
