@@ -29,6 +29,26 @@ module.exports = {
     module: {
         rules: [
             {
+                // TypeScript sources (e.g. the admin document editor in a
+                // Django app's static/js folder) are transpiled with the
+                // built-in SWC loader.
+                test: /\.tsx?$/,
+                use: [
+                    {
+                        loader: "builtin:swc-loader",
+                        options: {
+                            jsc: {
+                                parser: {
+                                    syntax: "typescript",
+                                    tsx: true
+                                },
+                                target: "es2020"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.js$/,
                 use: ["source-map-loader"],
                 enforce: "pre",
