@@ -12,6 +12,15 @@ const predefinedVariables = {
 module.exports = {
     mode: settings.DEBUG ? "development" : "production",
     devtool: settings.SOURCE_MAPS || false,
+    // The bundle runs in the browser: `__dirname`/`__filename` must be
+    // undefined (not the mock rspack would otherwise inject). This also
+    // prevents Emscripten-style Node branches (e.g. fonteditor-core's WOFF2
+    // decoder) from ever being taken, and silences the associated mock
+    // warnings.
+    node: {
+        __dirname: false,
+        __filename: false
+    },
     externals: [
         ({request}, callback) => {
             if (request && request.startsWith("node:")) {
@@ -27,6 +36,16 @@ module.exports = {
         modules: [path.resolve(__dirname, "node_modules"), "node_modules"]
     },
     module: {
+        // Emscripten/CJS glue (e.g. fonteditor-core's WOFF2 decoder) contains
+        // guarded Node-only requires such as require(["fs"].join()); rspack
+        // cannot statically analyze those. They are never executed in the
+        // browser, so downgrade the "critical dependency" warnings.
+        parser: {
+            javascript: {
+                unknownContextCritical: false,
+                exprContextCritical: false
+            }
+        },
         rules: [
             {
                 // TypeScript sources (e.g. the admin document editor in a
