@@ -17,6 +17,10 @@
         copy_fontawesome: "mkdir -p ../static-libs/css/fontawesome/css/ && rsync -av --no-perms --checksum node_modules/@fortawesome/fontawesome-free/css/ ../static-libs/css/fontawesome/css/ && rsync -av --no-perms --checksum node_modules/@fortawesome/fontawesome-free/webfonts/ ../static-libs/css/fontawesome/webfonts/",
         copy_prosemirror_css: "mkdir -p ../static-libs/css/ && rsync -av --no-perms --checksum node_modules/prosemirror-view/style/prosemirror.css ../static-libs/css/ && rsync -av --no-perms --checksum node_modules/prosemirror-menu/style/menu.css ../static-libs/css/prosemirror-menu.css && rsync -av --no-perms --checksum node_modules/prosemirror-example-setup/style/style.css ../static-libs/css/prosemirror-example-setup.css",
         copy_mathlive: "mkdir -p ../static-libs/css/libs/ ../static-libs/zip/ && (rsync -av --no-perms --checksum node_modules/@fiduswriter/document/static-libs/css/libs/mathlive/ ../static-libs/css/libs/mathlive/ 2>/dev/null || echo 'MathLive CSS not found (transitive dep not hoisted), skipping.') && (rsync -av --no-perms --checksum node_modules/@fiduswriter/document/static-libs/zip/mathlive_style.zip ../static-libs/zip/mathlive_style.zip 2>/dev/null || echo 'MathLive zip not found, skipping.')",
+        // The vivliostyle-pdf WOFF2 decoder wasm and fallback fonts, bundled in
+        // @fiduswriter/document's static-libs/ and served from static-libs/
+        // (used by the direct PDF export).
+        copy_vivliostyle_pdf_assets: "mkdir -p ../static-libs/woff2/ ../static-libs/fonts/ && (rsync -av --no-perms --checksum node_modules/@fiduswriter/document/static-libs/woff2/ ../static-libs/woff2/ 2>/dev/null || echo 'Vivliostyle WOFF2 decoder wasm not found (transitive dep not hoisted), skipping.') && (rsync -av --no-perms --checksum node_modules/@fiduswriter/document/static-libs/fonts/ ../static-libs/fonts/ 2>/dev/null || echo 'Vivliostyle fallback fonts not found (transitive dep not hoisted), skipping.')",
         copy_schema: "mkdir -p ../static-libs/json && (test -f node_modules/@fiduswriter/document/schema.json && cp node_modules/@fiduswriter/document/schema.json ../static-libs/json/schema.json) || (node node_modules/@fiduswriter/document/scripts/export-schema.js 2>/dev/null && cp node_modules/@fiduswriter/document/schema.json ../static-libs/json/schema.json) || echo 'Schema not found (transitive dep not hoisted), skipping.'",
         // Aggregate per-package locale JSON files into static-libs/json/ so the
         // /api/jsi18n/ view can read them at runtime.  Scans all @fiduswriter/*
@@ -30,7 +34,7 @@
         // top-level CSS files and url("../../img/...") for files one level deep.
         fix_css_urls: "find ../static-libs/css -maxdepth 1 -name '*.css' -exec sed -i 's|url(\"../static/|url(\"../|g' {} \\; 2>/dev/null; find ../static-libs/css -mindepth 2 -maxdepth 2 -name '*.css' -exec sed -i 's|url(\"../static/|url(\"../../|g' {} \\; 2>/dev/null; echo '  fixed CSS url() paths' || true",
         copy_locale_json: "mkdir -p ../static-libs/json/ && for pkg_dir in node_modules/fwtoolkit node_modules/@fiduswriter/*/; do [ -d \"$pkg_dir\" ] || continue; pkg_name=$(basename \"$pkg_dir\"); if [ -d \"$pkg_dir/locale\" ]; then mkdir -p \"../static-libs/json/$pkg_name/\" && rsync -av --no-perms --checksum \"$pkg_dir/locale/\" \"../static-libs/json/$pkg_name/locale/\" 2>/dev/null && echo \"  copied locale for $pkg_name\"; fi; done",
-        postinstall: "npm run copy_fwtoolkit_css && npm run copy_frontend_css && npm run copy_editor_css && npm run copy_bibliography_css && npm run copy_image_manager_css && npm run copy_document_template_editor_css && npm run copy_frontend_static && npm run copy_editor_static && npm run copy_fontawesome && npm run copy_prosemirror_css && npm run copy_mathlive && npm run copy_schema && npm run copy_locale_json && npm run fix_css_urls",
+        postinstall: "npm run copy_fwtoolkit_css && npm run copy_frontend_css && npm run copy_editor_css && npm run copy_bibliography_css && npm run copy_image_manager_css && npm run copy_document_template_editor_css && npm run copy_frontend_static && npm run copy_editor_static && npm run copy_fontawesome && npm run copy_prosemirror_css && npm run copy_mathlive && npm run copy_vivliostyle_pdf_assets && npm run copy_schema && npm run copy_locale_json && npm run fix_css_urls",
         "babel-transform-template-literals": "babel --plugins @babel/plugin-transform-template-literals"
     },
     author: "Johannes Wilm",
@@ -41,11 +45,11 @@
         "fwtoolkit": "^0.2.14",
         // Remaining dependencies are listed here to ensure they are hoisted to
         // to the top as static files need to be copied from them (see above)
-        "@fiduswriter/editor": "^0.1.81",
+        "@fiduswriter/editor": "^0.2.0",
         "@fiduswriter/bibliography-manager": "^0.1.31",
         "@fiduswriter/image-manager": "^0.1.23",
         "@fiduswriter/document-template-editor": "^0.1.17",
-        "@fiduswriter/document": "^0.2.43",
+        "@fiduswriter/document": "^0.3.0",
         "@fortawesome/fontawesome-free": "^7.2.0",
         "source-map-loader": "^5.0.0",
         "regenerator-runtime": "^0.14.1",
