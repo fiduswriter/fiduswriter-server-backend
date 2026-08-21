@@ -1107,12 +1107,21 @@ def get_doc_styles(request):
 
     # Resolve the document and access rights
     if request.user.is_authenticated:
-        doc = (
-            Document.objects.filter(id=doc_id)
-            .filter(Q(owner=request.user) | Q(accessright__user=request.user))
-            .select_related("template")
-            .first()
-        )
+        if request.user.is_staff:
+            # Staff members can open any document in the Django admin
+            # (used by the admin document editor).
+            doc = (
+                Document.objects.filter(id=doc_id)
+                .select_related("template")
+                .first()
+            )
+        else:
+            doc = (
+                Document.objects.filter(id=doc_id)
+                .filter(Q(owner=request.user) | Q(accessright__user=request.user))
+                .select_related("template")
+                .first()
+            )
         # is_owner = doc and doc.owner_id == request.user.id
         if not doc:
             if not token_str:

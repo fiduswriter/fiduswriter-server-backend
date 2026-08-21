@@ -1,16 +1,75 @@
+/* The embedded editor must not disable admin page scrolling — fwtoolkit's
+   common.css sets body { overflow-y: hidden }. */
+body {
+    overflow-y: auto !important;
+}
+
 /* Document admin editor container */
 .document-editor {
     margin-bottom: 20px;
-}
-
-.document-editor #document-editor {
-    min-height: 600px;
 }
 
 .document-editor ul.fw-errorlist {
     margin: 0 0 8px;
 }
 
-#document-editor .editor {
+/* The Source/Editor toggle rendered into ul.object-tools is a plain span —
+   give it the same look as the template designer's object-tools links. */
+.object-tools span.link {
+    display: block;
+    float: left;
+    cursor: pointer;
+    border-radius: 15px;
+    background: var(--object-tools-bg);
+    color: var(--cs-2-text);
+    padding: 3px 12px;
+}
+
+.object-tools span.link:hover,
+.object-tools span.link:focus {
+    background-color: var(--object-tools-hover-bg);
+}
+
+/* The editor is mounted into #document-editor (not the surrounding
+   form-row). Give it a minimum height and let it grow with the content —
+   the admin page scrolls normally (see body rule above). */
+.document-editor #document-editor {
+    min-height: 600px;
+    position: relative;
+}
+
+.document-editor #document-editor .editor {
     background: var(--main-background-color, #f2f2f2);
+}
+
+/* Neutralize the full-page editor offsets that assume a fixed overlay
+   header/toolbar — in embedded mode those are in normal flow above the
+   content. Keep position:relative so #margin-box-column (absolutely
+   positioned inside #editor-content) still anchors correctly. */
+.document-editor #editor-content {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    max-width: none;
+    padding: 0.5in 54px 0;
+}
+
+.document-editor #flow {
+    top: auto;
+    bottom: auto;
+}
+
+/* Hide the full-page floating chrome (document navigator, close button,
+   unobtrusive messages) that would otherwise overlay the Django admin page. */
+.document-editor #navigator,
+.document-editor #navigator-content,
+.document-editor #close-document-top,
+.document-editor #unobtrusive-messages {
+    display: none;
+}
+
+/* Django admin's base.css sets ul margins that clash with the editor's
+   fw-pulldown menus (e.g. the citation/menu dropdowns). */
+div.fw-pulldown ul {
+    margin-left: initial;
 }

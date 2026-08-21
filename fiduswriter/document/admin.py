@@ -32,6 +32,13 @@ class DocumentAdmin(admin.ModelAdmin):
         # (document_admin.mjs) loaded by the change form template.
         extra_context = extra_context or {}
         extra_context["settings"] = json.dumps(get_frontend_settings())
+        # E2EE documents are shown in source mode only — the visual editor
+        # cannot decrypt them in the admin.
+        extra_context["document_e2ee"] = False
+        if object_id:
+            doc = models.Document.objects.filter(id=object_id).only("e2ee").first()
+            if doc and doc.e2ee:
+                extra_context["document_e2ee"] = True
         return super().changeform_view(
             request, object_id, form_url, extra_context=extra_context
         )

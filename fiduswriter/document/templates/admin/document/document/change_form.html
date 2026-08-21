@@ -17,6 +17,12 @@
 <!-- Set window.settings FIRST, before dependent scripts -->
 {% include "includes/frontend_settings.html" %}
 
+<!-- E2EE documents cannot be edited visually in the admin: the frontend
+     shows the source form instead of mounting the editor. -->
+<script type="text/javascript">
+    window.documentAdminE2EE = {% if document_e2ee %}true{% else %}false{% endif %};
+</script>
+
 <!-- JS error handling -->
 <script type="text/javascript" src="{% static "js/error_hook.mjs" %}" crossorigin="anonymous"></script>
 
