@@ -4,7 +4,10 @@
         "browserslist-useragent-regexp": "4.1.4"
     },
     scripts: {
-        create_browser_check: "mkdir -p ../static-libs/js/ && echo \"if(!$(browserslist-useragent-regexp --allowHigherVersions).test(navigator.userAgent)) {window.location = '/api/browser_check/';}\" > ../static-libs/js/browser_check.mjs",
+        // Generate the entry point into this app's own assets folder
+        // (django-npm-mjs 5.0 reads JS/TS sources from assets/, no longer
+        // from static-libs/js/).
+        create_browser_check: "mkdir -p ../browser_check/assets/js/ && echo \"if(!$(browserslist-useragent-regexp --allowHigherVersions).test(navigator.userAgent)) {window.location = '/api/browser_check/';}\" > ../browser_check/assets/js/browser_check.mjs",
         postinstall: "npm run create_browser_check"
     }
 }

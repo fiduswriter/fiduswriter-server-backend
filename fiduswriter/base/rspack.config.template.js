@@ -33,7 +33,14 @@ module.exports = {
         }
     ],
     resolve: {
-        modules: [path.resolve(__dirname, "node_modules"), "node_modules"]
+        modules: [path.resolve(__dirname, "node_modules"), "node_modules"],
+        // Resolve extensionless imports to TypeScript sources as well, so
+        // that JS modules can be converted to TS by renaming them.
+        extensions: [".tsx", ".ts", ".jsx", ".js", ".mjs", ".json", ".wasm"],
+        extensionAlias: {
+            // Allow importing TS modules with a ".js" suffix.
+            ".js": [".ts", ".tsx", ".jsx", ".js"]
+        }
     },
     module: {
         // Emscripten/CJS glue (e.g. fonteditor-core's WOFF2 decoder) contains
