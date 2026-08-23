@@ -113,42 +113,13 @@ class Image(models.Model):
 
         self.width, self.height = image.size
 
-        # cropping the thumbnail to exactly 60 x 60 px
-        src_width, src_height = image.size
-        dst_width = dst_height = 60
+        # Resize to fit within 150x100 pixels while preserving the aspect
+        # ratio. The image is never cropped and never upscaled, so the
+        # complete image remains visible. The selection dialog displays
+        # thumbnails at up to 150x100 CSS pixels.
+        dst_width = 150
+        dst_height = 100
 
-        if src_width < src_height:
-            crop_width = crop_height = src_width
-            x_offset = 0
-            y_offset = int((src_height - crop_height) / 2)
-        else:
-            crop_width = crop_height = src_height
-            x_offset = int((src_width - crop_width) / 2)
-            y_offset = 0
-
-        image = image.crop(
-            (
-                x_offset,
-                y_offset,
-                x_offset + int(crop_width),
-                y_offset + int(crop_height),
-            )
-        )
-
-        # Convert to RGB if necessary
-        # Thanks to Limodou on DjangoSnippets.org
-        # http://www.djangosnippets.org/snippets/20/
-        #
-        # I commented this part since it messes up my png files
-        #
-        # if image.mode not in ('L', 'RGB'):
-        #    image = image.convert('RGB')
-
-        # We use our PIL Image object to create the thumbnail, which already
-        # has a thumbnail() convenience method that contrains proportions.
-        # Additionally, we use Image.Resampling.LANCZOS to make the image look
-        # better.
-        # Without antialiasing the image pattern artifacts may result.
         image.thumbnail((dst_width, dst_height), PilImage.Resampling.LANCZOS)
 
         # Save the thumbnail
