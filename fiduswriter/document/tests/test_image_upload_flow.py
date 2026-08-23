@@ -38,7 +38,9 @@ class CropFlowTest(EditorTest):
         # Open figure dialog and image selection dialog
         driver.find_element(By.XPATH, '//*[@title="Figure"]').click()
         WebDriverWait(driver, self.wait_time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.math-field"))
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "span.math-field")
+            )
         )
         for _ in range(5):
             driver.find_element(By.ID, "insert-figure-image").click()
@@ -90,7 +92,9 @@ class CropFlowTest(EditorTest):
         time.sleep(1.5)
 
         # 2) Rotate right once, then crop to a region
-        driver.find_element(By.CSS_SELECTOR, "#editimage .figure-edit-menu").click()
+        driver.find_element(
+            By.CSS_SELECTOR, "#editimage .figure-edit-menu"
+        ).click()
         time.sleep(0.6)
         clicked_rotate = driver.execute_script(
             """
@@ -106,7 +110,9 @@ class CropFlowTest(EditorTest):
         print("rotate:", clicked_rotate)
         time.sleep(1.0)
 
-        driver.find_element(By.CSS_SELECTOR, "#editimage .figure-edit-menu").click()
+        driver.find_element(
+            By.CSS_SELECTOR, "#editimage .figure-edit-menu"
+        ).click()
         time.sleep(0.6)
         clicked_crop = driver.execute_script(
             """
@@ -169,9 +175,9 @@ class CropFlowTest(EditorTest):
             thumb = PilImage.open(io.BytesIO(response.read()))
         w, h = thumb.size
         print(f"thumbnail dimensions: {w}x{h}")
-        assert w <= 150 and h <= 100, (
-            f"thumbnail larger than the 150x100 box: {w}x{h}"
-        )
+        assert (
+            w <= 150 and h <= 100
+        ), f"thumbnail larger than the 150x100 box: {w}x{h}"
         expected_ratio = 900 / 1200  # rotated before upload: portrait 3:4
         actual_ratio = w / h
         assert abs(actual_ratio - expected_ratio) < 0.02, (

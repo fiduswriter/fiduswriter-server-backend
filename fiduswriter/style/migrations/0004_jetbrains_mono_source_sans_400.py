@@ -31,7 +31,10 @@ COURIER_REPLACEMENTS = (
         '"Courier New", Courier, mono-space',
         '"JetBrains Mono", "DejaVu Sans Mono", monospace',
     ),
-    ("'Courier', monospace", '"JetBrains Mono", "DejaVu Sans Mono", monospace'),
+    (
+        "'Courier', monospace",
+        '"JetBrains Mono", "DejaVu Sans Mono", monospace',
+    ),
 )
 
 
@@ -96,15 +99,20 @@ def forward(apps, schema_editor):
 
         # The Regular font file must be registered for the exporter to embed
         # it (CSS url() → media/... rewrite + http file list).
-        if "SourceSansPro-Regular.woff" in new_contents and not DocumentStyleFile.objects.filter(
-            style=style, filename=SOURCE_SANS_REGULAR_FILENAME
-        ).exists():
+        if (
+            "SourceSansPro-Regular.woff" in new_contents
+            and not DocumentStyleFile.objects.filter(
+                style=style, filename=SOURCE_SANS_REGULAR_FILENAME
+            ).exists()
+        ):
             if FONT_PATH.exists():
                 dsf = DocumentStyleFile(
                     style=style, filename=SOURCE_SANS_REGULAR_FILENAME
                 )
                 with FONT_PATH.open("rb") as font_file:
-                    dsf.file.save(SOURCE_SANS_REGULAR_FILENAME, File(font_file))
+                    dsf.file.save(
+                        SOURCE_SANS_REGULAR_FILENAME, File(font_file)
+                    )
                 dsf.save()
 
 

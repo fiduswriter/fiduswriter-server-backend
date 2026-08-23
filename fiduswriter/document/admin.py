@@ -36,7 +36,11 @@ class DocumentAdmin(admin.ModelAdmin):
         # cannot decrypt them in the admin.
         extra_context["document_e2ee"] = False
         if object_id:
-            doc = models.Document.objects.filter(id=object_id).only("e2ee").first()
+            doc = (
+                models.Document.objects.filter(id=object_id)
+                .only("e2ee")
+                .first()
+            )
             if doc and doc.e2ee:
                 extra_context["document_e2ee"] = True
         return super().changeform_view(

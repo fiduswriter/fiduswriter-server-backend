@@ -48,10 +48,10 @@
         // Remaining dependencies are listed here to ensure they are hoisted to
         // to the top as static files need to be copied from them (see above)
         "@fiduswriter/editor": "^0.2.9",
-        "@fiduswriter/bibliography-manager": "^0.1.32",
+        "@fiduswriter/bibliography-manager": "^0.1.33",
         "@fiduswriter/image-manager": "^0.1.26",
         "@fiduswriter/document-template-editor": "^0.1.18",
-        "@fiduswriter/document": "^0.3.12",
+        "@fiduswriter/document": "^0.3.13",
         "@fortawesome/fontawesome-free": "^7.2.0",
         "source-map-loader": "^5.0.0",
         "regenerator-runtime": "^0.14.1",

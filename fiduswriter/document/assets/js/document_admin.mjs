@@ -15,9 +15,10 @@ initSettings(window.settings)
 // spread only copies own enumerable properties.
 const adminDocumentApi = Object.create(djangoApiConnectors.document)
 adminDocumentApi.saveDocument = data =>
-    postJson("/api/document/admin/save_doc/", data).then(
-        ({json, status}) => ({json, status})
-    )
+    postJson("/api/document/admin/save_doc/", data).then(({json, status}) => ({
+        json,
+        status
+    }))
 
 const theDocumentAdmin = new DocumentEditorAdmin({
     document: adminDocumentApi,

@@ -22,7 +22,14 @@ def make_test_images(dir_path):
     """Create images of various types; return list of (name, path)."""
     out = []
     if not HAS_PIL:
-        return [("png", os.path.join(settings.PROJECT_PATH, "document/tests/uploads/image.png"))]
+        return [
+            (
+                "png",
+                os.path.join(
+                    settings.PROJECT_PATH, "document/tests/uploads/image.png"
+                ),
+            )
+        ]
     specs = [
         ("png", "PNG", "RGB"),
         ("jpg", "JPEG", "RGB"),
@@ -55,13 +62,19 @@ class DiagnosticImageUploadTest(EditorTest):
         )
         # Type some body text first (mirrors the working test)
         self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys("Test")
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Test"
+        )
         self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys("Body")
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys(
+            "Body"
+        )
         # Add a figure
         self.driver.find_element(By.XPATH, '//*[@title="Figure"]').click()
         WebDriverWait(self.driver, self.wait_time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.math-field"))
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "span.math-field")
+            )
         )
         # Click Insert image (retry until MathLive loaded)
         for _attempt in range(5):

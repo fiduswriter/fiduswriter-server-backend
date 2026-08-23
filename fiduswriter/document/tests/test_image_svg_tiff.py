@@ -31,7 +31,9 @@ class SvgTiffFlowTest(EditorTest):
         # Open figure dialog -> selection dialog -> upload dialog
         driver.find_element(By.XPATH, '//*[@title="Figure"]').click()
         WebDriverWait(driver, self.wait_time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.math-field"))
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "span.math-field")
+            )
         )
         for _ in range(5):
             driver.find_element(By.ID, "insert-figure-image").click()
@@ -122,7 +124,9 @@ class SvgTiffFlowTest(EditorTest):
         assert st.get("previewVisible") is True
         assert upload_disabled() is False
 
-        driver.find_element(By.CSS_SELECTOR, "#editimage .figure-edit-menu").click()
+        driver.find_element(
+            By.CSS_SELECTOR, "#editimage .figure-edit-menu"
+        ).click()
         time.sleep(0.6)
         menu = driver.execute_script(
             """
@@ -137,11 +141,15 @@ class SvgTiffFlowTest(EditorTest):
         print("SVG edit menu:", menu)
         for name in ("Rotate Left", "Rotate Right", "Crop"):
             item = next((i for i in menu if i["text"] == name), None)
-            assert item and item["disabled"], f"{name} should be disabled for SVG"
-        copy_item = next((i for i in menu if i["text"] == "Set Copyright"), None)
-        assert copy_item and not copy_item["disabled"], (
-            "Set Copyright should be enabled"
+            assert (
+                item and item["disabled"]
+            ), f"{name} should be disabled for SVG"
+        copy_item = next(
+            (i for i in menu if i["text"] == "Set Copyright"), None
         )
+        assert (
+            copy_item and not copy_item["disabled"]
+        ), "Set Copyright should be enabled"
         driver.execute_script(
             "const m = document.querySelector('.fw-content-menu'); "
             "if (m && m.nextElementSibling) m.nextElementSibling.click()"
@@ -149,7 +157,9 @@ class SvgTiffFlowTest(EditorTest):
         time.sleep(0.4)
 
         # Give it a title so we can find it later, then upload
-        title_input = driver.find_element(By.CSS_SELECTOR, "#editimage .fw-media-title")
+        title_input = driver.find_element(
+            By.CSS_SELECTOR, "#editimage .fw-media-title"
+        )
         title_input.send_keys("My vector image")
         assert top_dialog_button("Upload")
         time.sleep(2)

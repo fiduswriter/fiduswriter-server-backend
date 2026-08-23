@@ -1,8 +1,8 @@
 import {CSL} from "@fiduswriter/document/citeproc-plus"
 import {Editor} from "@fiduswriter/editor"
+import {recreateTransform} from "@fiduswriter/editor/collab/merge/recreate_transform"
 import {createStaticApp} from "@fiduswriter/editor/static_app"
 import type {EditorApp, EditorUser} from "@fiduswriter/editor/types"
-import {recreateTransform} from "@fiduswriter/editor/collab/merge/recreate_transform"
 import {
     ensureCSS,
     escapeText,
@@ -239,9 +239,10 @@ export class DocumentEditorAdmin {
         // session-local implementation that returns the current form field
         // values so source edits survive the round trip.
         const connector = this.connectors.document as {
-            getDocumentData: (
-                data: {id: number}
-            ) => Promise<{json: any; status: number}>
+            getDocumentData: (data: {id: number}) => Promise<{
+                json: any
+                status: number
+            }>
         }
         if (useCurrentValues) {
             let restoredDoc: Record<string, any>
@@ -249,12 +250,8 @@ export class DocumentEditorAdmin {
                 restoredDoc = {
                     ...(this.lastDoc ?? {}),
                     v: this.getCurrentVersion(),
-                    content: JSON.parse(
-                        this.contentTextarea?.value || "{}"
-                    ),
-                    comments: JSON.parse(
-                        this.commentsTextarea?.value || "{}"
-                    ),
+                    content: JSON.parse(this.contentTextarea?.value || "{}"),
+                    comments: JSON.parse(this.commentsTextarea?.value || "{}"),
                     bibliography: JSON.parse(
                         this.bibliographyTextarea?.value || "{}"
                     )
@@ -269,15 +266,13 @@ export class DocumentEditorAdmin {
                 return
             }
             this.lastDoc = restoredDoc
-            const docInfo =
-                (this.documentInfo as Record<string, unknown>) || {}
+            const docInfo = (this.documentInfo as Record<string, unknown>) || {}
             connector.getDocumentData = async () => ({
                 json: {doc: restoredDoc, doc_info: docInfo, time: Date.now()},
                 status: 200
             })
         } else {
-            connector.getDocumentData =
-                this.defaultGetDocumentData.bind(this)
+            connector.getDocumentData = this.defaultGetDocumentData.bind(this)
         }
 
         let json: Record<string, any>
@@ -398,9 +393,7 @@ export class DocumentEditorAdmin {
                 // Versioning mirrors the collaborative flow: the version
                 // increases by the number of *new* diffs appended (the stored
                 // diffs already counted towards the version at load).
-                const diffCount = (
-                    JSON.parse(diffsJson) as unknown[]
-                ).length
+                const diffCount = (JSON.parse(diffsJson) as unknown[]).length
                 newVersion =
                     this.baseVersion +
                     Math.max(0, diffCount - this.initialDiffs.length)
@@ -454,9 +447,7 @@ export class DocumentEditorAdmin {
         // Keep the stored diffs that led up to the loaded version and append
         // the session's changes, capped at the same length the WebSocket
         // consumer keeps.
-        return JSON.stringify(
-            [...this.initialDiffs, ...newDiffs].slice(-1000)
-        )
+        return JSON.stringify([...this.initialDiffs, ...newDiffs].slice(-1000))
     }
 
     parseDiffs(value?: string): unknown[] {
@@ -489,7 +480,7 @@ export class DocumentEditorAdmin {
         status: number
     }> {
         delete (this.connectors.document as any).getDocumentData
-        return (this.connectors.document as any).getDocumentData(data)
+        return await (this.connectors.document as any).getDocumentData(data)
     }
 
     /**
