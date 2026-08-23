@@ -4,7 +4,7 @@
 
 **Fidus Writer** is an online collaborative editor designed for academics who need to use citations and/or formulas. The editor focuses on content rather than layout, allowing users to publish the same text in multiple formats (website, printed book, or ebook) with different appropriate layouts.
 
-- **Repository**: https://github.com/fiduswriter/fiduswriter
+- **Repository**: https://github.com/fiduswriter/fiduswriter-server-backend
 - **License**: GNU AFFERO GENERAL PUBLIC LICENSE
 - **Website**: http://fiduswriter.org
 
@@ -47,7 +47,7 @@ fiduswriter/
 │   │   ├── rspack.config.template.js
 │   │   └── settings.py             # Base Django settings
 │   ├── document/                   # Document management app
-│   │   ├── static/js/              # JavaScript modules
+│   │   ├── assets/js/              # JS/TS sources (transpiled by django-npm-mjs)
 │   │   ├── consumers.py            # WebSocket consumers
 │   │   └── package.json5           # Document-specific npm dependencies
 │   ├── bibliography/               # Bibliography/citations management
@@ -67,11 +67,10 @@ fiduswriter/
 ## JavaScript Build System
 
 ### Cross-app JavaScript imports
-The `transpile` management command merges `static/js/modules/` directories from all installed Django apps into a single output tree. This means modules in one app can import from another app using relative paths as if they lived in the same directory.
+The `transpile` management command merges `assets/js/modules/` and `assets/ts/modules/` directories from all installed Django apps into a single output tree. This means modules in one app can import from another app using relative paths as if they lived in the same directory.
 
-For example, from a file in `gitrepo_export/static/js/modules/gitrepo_export/`:
-- `../../books/exporter/docx` resolves to `books/static/js/modules/books/exporter/docx`
-- `../../exporter/html` resolves to `document/static/js/modules/exporter/html`
+For example, from a file in `gitrepo_export/assets/js/modules/gitrepo_export/`:
+- `../../books/assets/js/modules/...` and `../../document/assets/...` resolve inside the other app's asset folders
 
 All apps' `js/modules` folders are overlaid, so cross-app imports work transparently without needing absolute or package-style paths.
 
@@ -80,7 +79,7 @@ The project uses **rspack** to bundle frontend JavaScript. The `npm_mjs` Django 
 the default `{% static %}` template tag so that requests for `.mjs` files are transparently
 rewritten to `.js` and served from `fiduswriter/static-transpile/js/` (the pre-built bundle).
 
-**Critical implication:** Editing source files under `fiduswriter/*/static/js/**/*.js` is
+**Critical implication:** Editing source files under `fiduswriter/*/assets/{js,ts}/**` is
 **not enough** — the browser loads the bundled output, not the sources. You must run:
 
 ```bash
@@ -90,7 +89,7 @@ python fiduswriter/manage.py transpile --force
 After any JS change that should be visible in the browser (including Selenium tests).
 
 The `manage.py transpile` command:
-1. Copies source `.mjs`/`.js` files into `fiduswriter/.transpile/js/`
+1. Copies source files from the apps' `assets/{js,ts}/` folders into `fiduswriter/.transpile/js/`
 2. Runs rspack to produce the bundle in `fiduswriter/static-transpile/js/`
 3. Updates the version hash used for cache-busting query strings
 
@@ -117,8 +116,8 @@ the browser is loading the old bundle. Run `manage.py transpile --force` and re-
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/fiduswriter/fiduswriter.git
-   cd fiduswriter
+   git clone https://github.com/fiduswriter/fiduswriter-server-backend.git
+   cd fiduswriter-server-backend
    ```
 
 2. **Install Python dependencies**:
@@ -192,7 +191,7 @@ For `POST` requests with `Content-Type: multipart/form-data`, the middleware add
 
 **Typical backend pattern:**
 
-```fiduswriter/fiduswriter/document/views.py#L1-5
+```fiduswriter/document/views.py#L1-5
 @login_required
 @ajax_required
 @require_POST
@@ -217,7 +216,7 @@ def my_view(request):
 
 Allauth's class-based views (e.g. `LoginView`, `SignupView`, `PasswordResetView`, `PasswordResetFromKeyView`) derive from Django's `FormView` and populate the form from `request.POST` internally via `get_form_kwargs`. To make these views accept a JSON body instead, inherit from `JsonFormMixin` **before** the allauth base class:
 
-```fiduswriter/fiduswriter/user/views.py#L1-5
+```fiduswriter/user/views.py#L1-5
 from base.mixins import JsonFormMixin
 
 class FidusPasswordResetView(JsonFormMixin, PasswordResetView):
@@ -228,7 +227,7 @@ The mixin overrides `get_form_kwargs` to build a `MultiValueDict` from `request.
 
 ### Frontend conventions
 
-Use the three `jsonPost*` helpers in `base/static/js/modules/common/network.js` for all requests to the backend:
+Use the three `jsonPost*` helpers in `fwtoolkit` for all requests to the backend:
 
 | Function | Description |
 |---|---|
@@ -242,7 +241,7 @@ When `files` is provided (a dictionary mapping field names to `File`/`Blob` valu
 
 **Usage example:**
 
-```fiduswriter/fiduswriter/base/static/js/modules/common/network.js#L1-5
+```js
 import {jsonPost} from "../common"
 
 const response = await jsonPost("/api/document/delete/", {
@@ -268,7 +267,7 @@ Fidus Writer is a single-page application (SPA). The Django backend serves the s
 
 ### Client-Side Router
 
-**File:** `base/static/js/modules/app/index.js`
+**File:** `base/assets/js/modules/app/index.ts`
 
 This file is the client-side router. It maps URL path segments to page modules:
 
@@ -361,7 +360,7 @@ When `handle_e2ee_snapshot` receives new `e2ee_salt`/`e2ee_iterations`:
 
 8. **Service worker**: In production mode, a service worker is generated for offline support. This is handled automatically during transpilation.
 
-9. **Frontend routing is client-side**: The file `base/static/js/modules/app/index.js` is the router. Django `urls.py` files are **only for API endpoints** (AJAX/fetch calls). When adding a new user-facing page, you typically need to add a route in the frontend router, not a Django URL pattern.
+9. **Frontend routing is client-side**: The file `base/assets/js/modules/app/index.ts` is the router. Django `urls.py` files are **only for API endpoints** (AJAX/fetch calls). When adding a new user-facing page, you typically need to add a route in the frontend router, not a Django URL pattern.
 
 10. **SPA architecture**: The Django backend serves the same HTML shell for all non-API paths. The frontend JavaScript reads the URL and decides what to render. This means you cannot rely on Django URL patterns for page-level access control — use the `requireLogin` flag in the frontend route definition instead.
 

@@ -42,7 +42,7 @@ python fiduswriter/manage.py runserver
 Running tests:
 
 ```bash
-cd fiduswriter/fiduswriter
+cd fiduswriter
 python manage.py test document.tests.test_external_save --noinput
 ```
 
@@ -50,6 +50,7 @@ Related repositories
 --------------------
 
 - `fiduswriter/` — main repository: packaging, docs, dev-scripts, CI.
+- `fiduswriter-server-backend/` — backend repository.
 - `fwtoolkit/` — shared UI toolkit (`fwtoolkit` npm package).
 - `fiduswriter-document-ts/` — `@fiduswriter/document` npm package.
 - `fiduswriter-editor-ts/` — `@fiduswriter/editor` npm package.

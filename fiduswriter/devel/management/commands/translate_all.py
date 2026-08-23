@@ -62,7 +62,7 @@ def _is_ts_package(label):
 def _discover_typescript_package_locales():
     """Find TypeScript package locale directories next to the main repo.
 
-    SRC_PATH is <parent>/fiduswriter/fiduswriter/ (the Django project root).
+    SRC_PATH is <parent>/fiduswriter/ (the Django project root).
     os.path.dirname(os.path.dirname(SRC_PATH)) is <parent>/ — the directory
     that contains the main fiduswriter repo and all TypeScript package repos.
     """
