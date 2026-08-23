@@ -649,6 +649,14 @@ class FunctionalOfflineTests(EditorHelper, ChannelsLiveServerTestCase):
             "//span[contains(@title,'Export the document to an HTML file.')]",
         ).click()
 
+        # Confirm the HTML export options dialog.
+        export_button = WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark")
+            )
+        )
+        export_button.click()
+
         # Check that the file has downloaded.
         path = os.path.join(self.download_dir, "my-title.html.zip")
         self.wait_until_file_exists(path, self.wait_time)

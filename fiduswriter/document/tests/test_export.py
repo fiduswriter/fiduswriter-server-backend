@@ -396,6 +396,13 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="HTML"]'
         ).click()
+        # The HTML export first shows an options dialog. Confirm it.
+        export_button = WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark")
+            )
+        )
+        export_button.click()
         path = os.path.join(self.download_dir, "title.html.zip")
         self.wait_until_file_exists(path, self.wait_time * 2)
         assert os.path.isfile(path)
@@ -409,6 +416,13 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Epub"]'
         ).click()
+        # Confirm the EPUB export options dialog.
+        export_button = WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark")
+            )
+        )
+        export_button.click()
         path = os.path.join(self.download_dir, "title.epub")
         self.wait_until_file_exists(path, self.wait_time * 2)
         assert os.path.isfile(path)
@@ -440,31 +454,8 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         assert os.path.isfile(path)
         os.remove(path)
 
-        # DOCX
-        self.driver.find_element(
-            By.CSS_SELECTOR,
-            '.header-nav-item[title="Export of the document contents"]',
-        ).click()
-        self.driver.find_element(
-            By.XPATH, '//*[normalize-space()="Classic (DOCX)"]'
-        ).click()
-        path = os.path.join(self.download_dir, "title.docx")
-        self.wait_until_file_exists(path, self.wait_time * 2)
-        assert os.path.isfile(path)
-        os.remove(path)
-
-        # ODT
-        self.driver.find_element(
-            By.CSS_SELECTOR,
-            '.header-nav-item[title="Export of the document contents"]',
-        ).click()
-        self.driver.find_element(
-            By.XPATH, '//*[normalize-space()="Free (ODT)"]'
-        ).click()
-        path = os.path.join(self.download_dir, "title.odt")
-        self.wait_until_file_exists(path, self.wait_time * 2)
-        assert os.path.isfile(path)
-        os.remove(path)
+        # DOCX and ODT exports are provided by the pandoc plugin and are
+        # covered by the pandoc plugin tests.
 
         # Save a revision
         self.driver.find_element(
