@@ -670,11 +670,11 @@ class FunctionalOfflineTests(EditorHelper, ChannelsLiveServerTestCase):
         ).click()
         time.sleep(1)
 
-        # Click on the Print PDF button
+        # Click on the Print button
         self.driver.find_element(
             By.XPATH,
-            "//span[contains(@title,'Either print or"
-            + " create a PDF using your browser print dialog.')]",
+            "//span[contains(@title,'Print the document using"
+            + " your browser print dialog.')]",
         ).click()
 
         # The print action opens the browser print dialog; just verify the

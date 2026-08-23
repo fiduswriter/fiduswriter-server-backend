@@ -405,6 +405,20 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         export_button.click()
         path = os.path.join(self.download_dir, "title.html.zip")
         self.wait_until_file_exists(path, self.wait_time * 2)
+        if not os.path.isfile(path):
+            for entry in self.driver.get_log("browser"):
+                print(
+                    "BROWSER:",
+                    entry.get("level"),
+                    entry.get("message")[:600],
+                )
+            import time as _t
+
+            _t.sleep(5)
+            print(
+                "DOWNLOAD DIR:",
+                os.listdir(self.download_dir),
+            )
         assert os.path.isfile(path)
         os.remove(path)
 
@@ -518,6 +532,13 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Export selected as Epub"]'
         ).click()
+        # Confirm the EPUB export options dialog.
+        export_button = WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark")
+            )
+        )
+        export_button.click()
         path = os.path.join(self.download_dir, "title.epub")
         self.wait_until_file_exists(path, self.wait_time * 2)
         assert os.path.isfile(path)
@@ -530,6 +551,13 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Export selected as HTML"]'
         ).click()
+        # Confirm the HTML export options dialog.
+        export_button = WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".fw-dialog-buttonpane button.fw-dark")
+            )
+        )
+        export_button.click()
         path = os.path.join(self.download_dir, "title.html.zip")
         self.wait_until_file_exists(path, self.wait_time * 2)
         assert os.path.isfile(path)
