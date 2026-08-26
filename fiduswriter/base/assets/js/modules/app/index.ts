@@ -1,3 +1,4 @@
+import type {Settings} from "@fiduswriter/frontend"
 import {App} from "@fiduswriter/frontend/app"
 
 // Django API adapters
@@ -8,7 +9,8 @@ import {djangoApiConnectors} from "../api_adapters/index.ts"
  * it scans all installed Django apps for files under
  * <app>/static/js/plugins/<type>/ and writes an aggregated index.js into the
  * transpile cache under plugins/<type>/index.js. That generated module exports
- * a `plugins` array of [appName, pluginModule] tuples.
+ * a `plugins` array of [appName, pluginModule] tuples; its type is declared
+ * as a wildcard ambient module in ../globals.d.ts.
  *
  * The App class filters the discovered plugins by settings.APPS at runtime, so
  * optional apps that are not installed never end up in the bundle.
@@ -23,7 +25,8 @@ import {plugins as editorPlugins} from "../../plugins/editor/index.js"
 import {plugins as menuPlugins} from "../../plugins/menu/index.js"
 import {plugins as profilePlugins} from "../../plugins/profile/index.js"
 
-const djangoApiUrlMap = {
+/** Maps logical API endpoint names to the Django backend URLs. */
+const djangoApiUrlMap: Record<string, string> = {
     "i18n.setLang": "/api/i18n/setlang/",
     "e2ee.user_encryption_key": "/api/user/encryption_key/",
     "e2ee.user_encryption_key_save": "/api/user/encryption_key/save/",
@@ -38,7 +41,12 @@ const djangoApiUrlMap = {
 
 window.settings.apiUrlMap = djangoApiUrlMap
 
-const theApp = new App(djangoApiConnectors, window.settings, {
+// The settings object is injected by the Django template; error_hook's
+// global declaration types it narrowly, so widen it for the App
+// constructor here.
+const settings = window.settings as Settings
+
+const theApp = new App(djangoApiConnectors, settings, {
     appPlugins,
     menuPlugins,
     editorPlugins,

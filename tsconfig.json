@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "lib": ["es2020", "dom", "dom.iterable"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "noEmit": true,
+        "strict": true,
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": false,
+        "skipLibCheck": true,
+        "noFallthroughCasesInSwitch": true,
+        "types": [],
+        // The frontend dependencies are installed by `manage.py npm_install`
+        // into fiduswriter/.transpile/node_modules (the same copies the
+        // rspack bundle uses). Subpath exports map to dist/*.
+        "paths": {
+            "fwtoolkit": ["./fiduswriter/.transpile/node_modules/fwtoolkit/dist/index.d.ts"],
+            "fwtoolkit/*": ["./fiduswriter/.transpile/node_modules/fwtoolkit/dist/*"],
+            "@fiduswriter/frontend": ["./fiduswriter/.transpile/node_modules/@fiduswriter/frontend/dist/index.d.ts"],
+            "@fiduswriter/frontend/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/frontend/dist/*"],
+            "@fiduswriter/editor": ["./fiduswriter/.transpile/node_modules/@fiduswriter/editor/dist/index.d.ts"],
+            "@fiduswriter/editor/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/editor/dist/*"],
+            // @fiduswriter/document has no ./* wildcard export and mangles
+            // file names (citeproc-plus -> citeproc_plus), so its subpaths
+            // are enumerated explicitly.
+            "@fiduswriter/document": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/index.d.ts"],
+            "@fiduswriter/document/citeproc-plus": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/citeproc_plus.d.ts"],
+            "@fiduswriter/bibliography-manager": ["./fiduswriter/.transpile/node_modules/@fiduswriter/bibliography-manager/dist/index.d.ts"],
+            "@fiduswriter/bibliography-manager/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/bibliography-manager/dist/*"],
+            "@fiduswriter/image-manager": ["./fiduswriter/.transpile/node_modules/@fiduswriter/image-manager/dist/index.d.ts"],
+            "@fiduswriter/image-manager/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/image-manager/dist/*"],
+            "@fiduswriter/document-template-editor": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document-template-editor/dist/index.d.ts"],
+            "@fiduswriter/document-template-editor/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document-template-editor/dist/*"],
+            "prosemirror-state": ["./fiduswriter/.transpile/node_modules/prosemirror-state"],
+            "prosemirror-view": ["./fiduswriter/.transpile/node_modules/prosemirror-view"]
+        }
+    },
+    "include": [
+        "fiduswriter/*/assets/js/**/*.ts"
+    ],
+    // Optional Django plugins are symlinked into fiduswriter/ at runtime
+    // (see .gitignore). They are separate repositories and are not part of
+    // this repository's type checking.
+    "exclude": [
+        "fiduswriter/book",
+        "fiduswriter/citation_api_import",
+        "fiduswriter/gitrepo_export",
+        "fiduswriter/languagetool",
+        "fiduswriter/llm",
+        "fiduswriter/ojs",
+        "fiduswriter/pandoc",
+        "fiduswriter/payment",
+        "fiduswriter/phplist",
+        "fiduswriter/website"
+    ]
+}

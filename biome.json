@@ -169,5 +169,17 @@
             "settings_LANGUAGES",
             "settings_E2EE_MODE"
         ]
-    }
+    },
+    "overrides": [
+        {
+            "include": ["**/*.d.ts"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        "noUnusedVariables": "off"
+                    }
+                }
+            }
+        }
+    ]
 }

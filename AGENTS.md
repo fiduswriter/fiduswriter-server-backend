@@ -66,6 +66,40 @@ fiduswriter/
 
 ## JavaScript Build System
 
+### TypeScript type checking
+The TypeScript sources under `fiduswriter/*/assets/js/` are transpiled by the
+rspack SWC loader, which strips types without checking them. The repository
+therefore carries a `tsconfig.json` (repo root) for type checking with
+`tsc --noEmit`:
+
+```bash
+# 1. Install/refresh the frontend dependencies (also populates the copies of
+#    the packages that tsconfig.json points to):
+python fiduswriter/manage.py npm_install
+
+# 2. Type check all .ts sources:
+npx -p typescript tsc --project tsconfig.json
+```
+
+Notes:
+
+- The `paths` mappings in `tsconfig.json` point at
+  `fiduswriter/.transpile/node_modules/`, so `npm_install` must have run at
+  least once (and again after bumping versions in a `package.json5`).
+- The Django API adapters in
+  `fiduswriter/base/assets/js/modules/api_adapters/index.ts` implement the
+  connector interfaces exported by `@fiduswriter/frontend/api` (and the
+  other `@fiduswriter/*` packages), so type errors surface whenever the
+  backend adapters drift from what the frontend packages expect.
+- The plugin aggregators (`plugins/<type>/index.js`) are generated into the
+  transpile cache and do not exist in the source tree; their shape is
+  declared as an ambient wildcard module in
+  `fiduswriter/base/assets/js/modules/globals.d.ts`. That file also declares
+  the host-page globals (`gettext`, `window.theApp`, ...). It must remain a
+  script file (no top-level imports): wildcard ambient modules only match
+  relative import specifiers when declared from a script file — use
+  `import("...")` type expressions to refer to package types there.
+
 ### Cross-app JavaScript imports
 The `transpile` management command merges `assets/js/modules/` and `assets/ts/modules/` directories from all installed Django apps into a single output tree. This means modules in one app can import from another app using relative paths as if they lived in the same directory.
 

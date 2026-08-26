@@ -59,6 +59,15 @@ body {
     bottom: auto;
 }
 
+/* The editor root is a container query container (container-type: inline-size
+   in editor.css), so the editor's fixed header becomes anchored to the
+   editor element rather than the viewport. Keep it pinned while the admin
+   page scrolls, matching the behavior the fixed rule used to give. */
+.document-editor .fw-editor header {
+    position: sticky;
+    top: 0;
+}
+
 /* Hide the full-page floating chrome (document navigator, close button,
    unobtrusive messages) that would otherwise overlay the Django admin page. */
 .document-editor #navigator,

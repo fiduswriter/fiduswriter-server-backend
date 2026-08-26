@@ -1,120 +1,206 @@
+import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
+import type {
+    BibDBEntry,
+    SaveCategoriesRequest as BibSaveCategoriesRequest,
+    SaveCategoriesResponse as BibSaveCategoriesResponse,
+    BiblistResponse,
+    SaveBibEntriesResponse
+} from "@fiduswriter/bibliography-manager/types/biblio"
+import type {DocumentTemplateApi} from "@fiduswriter/document-template-editor"
+import type {
+    ImportedTemplate,
+    SaveDocumentStyleResponse,
+    SaveExportTemplateResponse,
+    TemplateExportResponse,
+    TemplateExtras
+} from "@fiduswriter/document-template-editor/types"
+import type {
+    ApiConnectors,
+    AuthApi,
+    ConfigApi,
+    ContactsApi,
+    ContactsInviteResponse,
+    ContactsListResponse,
+    DocumentApi,
+    DocumentImportApi,
+    ErrorHookApi,
+    FeedbackApi,
+    FlatPageApi,
+    MaintenanceApi,
+    OldDocsResponse,
+    RevisionApi,
+    RevisionIdsResponse,
+    SystemMessageApi,
+    TemplateBaseResponse,
+    TemplateIdsResponse,
+    TwoFactorSetupResponse,
+    TwoFactorStatusResponse,
+    TwoFactorVerifyResponse,
+    UserBibListResponse,
+    UserProfileApi
+} from "@fiduswriter/frontend/api"
+import type {
+    ImageApi,
+    SaveCategoriesRequest as ImageSaveCategoriesRequest,
+    SaveCategoriesResponse as ImageSaveCategoriesResponse,
+    ImagesResponse,
+    SaveImageRequest,
+    SaveImageResponse
+} from "@fiduswriter/image-manager/types"
+/*
+ * Django implementations of the API connector interfaces that the Fidus
+ * Writer frontend packages consume (@fiduswriter/frontend/api and friends).
+ *
+ * Each class implements one of those interfaces, so a mismatch between what
+ * the backend adapters return and what the frontend packages expect is
+ * caught by `npx tsc --project tsconfig.json`.
+ *
+ * The backend answers with arbitrary JSON payloads; wherever an interface
+ * promises a more specific shape, the payload is asserted at this boundary.
+ */
 import {get, getJson, post, postBare, postJson} from "fwtoolkit"
+import type {PostFiles} from "fwtoolkit/network"
+
+/** Asserts that a JSON response body is an object. */
+const asRecord = (value: unknown): Record<string, unknown> =>
+    value as Record<string, unknown>
 
 // ---- DocumentApi ----
-export class DjangoDocumentApi {
-    getDocumentList() {
-        return postJson("/api/document/documentlist/").then(({json}) => json)
+export class DjangoDocumentApi implements DocumentApi {
+    getDocumentList(): Promise<Record<string, unknown>> {
+        return postJson("/api/document/documentlist/").then(({json}) =>
+            asRecord(json)
+        )
     }
 
-    getDocumentListExtra(ids) {
+    getDocumentListExtra(ids: number[]): Promise<Record<string, unknown>> {
         return postJson("/api/document/documentlist/extra/", {ids}).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    deleteDocument(data) {
-        return postJson("/api/document/delete/", data).then(({json}) => json)
+    deleteDocument(data: {
+        id?: number
+        ids?: number[]
+    }): Promise<Record<string, unknown>> {
+        return postJson("/api/document/delete/", data).then(({json}) =>
+            asRecord(json)
+        )
     }
 
-    moveDocument(data) {
-        return postJson("/api/document/move/", data).then(({json}) => json)
+    moveDocument(data: {
+        id: number
+        path: string
+    }): Promise<Record<string, unknown>> {
+        return postJson("/api/document/move/", data).then(({json}) =>
+            asRecord(json)
+        )
     }
 
-    getEncryptionKeys() {
+    getEncryptionKeys(): Promise<Record<string, unknown>> {
         return postJson("/api/document/encryption_key/get_all/", {}).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    createDocument(data) {
+    createDocument(data: Record<string, unknown>) {
         return postJson("/api/document/create_doc/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    getWebSocketBase(data) {
+    getWebSocketBase(data: {id: number; token?: string}) {
         return postJson("/api/document/get_ws_base/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    getDocumentStyles(data) {
+    getDocumentStyles(data: {id: number; token?: string}) {
         return postJson("/api/document/get_doc_styles/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    getDocumentData(data) {
+    getDocumentData(data: {id: number; token?: string; v?: number}) {
         return postJson("/api/document/get_doc_data/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    saveDocument(data, options = {}) {
+    saveDocument(
+        data: Record<string, unknown>,
+        options: {keepalive?: boolean} = {}
+    ) {
         return postJson("/api/document/save/", data, {}, options).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    commentNotify(data) {
+    commentNotify(data: Record<string, unknown>) {
         return post("/api/document/comment_notify/", data)
     }
 
-    requestAccess(data) {
+    requestAccess(data: {document_id: number; rights: string}) {
         return postJson("/api/document/request_access/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    validateShareToken(token) {
+    validateShareToken(token: string) {
         return postJson(`/api/document/share_token/validate/${token}/`).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    listShareTokens(document_id) {
+    listShareTokens(document_id: number) {
         return postJson("/api/document/share_token/list/", {document_id}).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    createShareToken(data) {
+    createShareToken(data: Record<string, unknown>) {
         return postJson("/api/document/share_token/create/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    revokeShareToken(token_id) {
+    revokeShareToken(token_id: number) {
         return postJson("/api/document/share_token/revoke/", {token_id}).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    getAccessRights(data) {
+    getAccessRights(data: {document_ids: number[]}) {
         return postJson("/api/document/get_access_rights/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    saveAccessRights(data) {
+    saveAccessRights(data: {
+        document_ids: number[]
+        access_rights: unknown[]
+    }) {
         return post("/api/document/save_access_rights/", data)
     }
 
-    saveE2EEImage(data, files) {
+    saveE2EEImage(data: Record<string, unknown>, files?: PostFiles) {
         return postJson("/api/document/e2ee_image/", data, files).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    deleteE2EEImage(data) {
+    deleteE2EEImage(data: {doc_id: number; image_id: number}) {
         return post("/api/document/delete_e2ee_image/", data)
     }
 
-    uploadRevision(data, files) {
+    uploadRevision(
+        data: {note: string; document_id: number},
+        files: PostFiles
+    ) {
         return post("/api/document/upload/", data, files)
     }
 
-    getTemplateForDoc(id, token) {
+    getTemplateForDoc(id: number | string, token: string | false) {
         return postJson(
             "/api/document/get_template_for_doc/",
             token ? {id, token} : {id}
@@ -123,109 +209,120 @@ export class DjangoDocumentApi {
 }
 
 // ---- ImageApi ----
-export class DjangoImageApi {
-    getImages() {
-        return postJson("/api/usermedia/images/").then(({json}) => json)
+export class DjangoImageApi implements ImageApi {
+    getImages(): Promise<ImagesResponse> {
+        return postJson("/api/usermedia/images/").then(
+            ({json}) => json as ImagesResponse
+        )
     }
 
-    saveImage(data, files) {
+    saveImage(
+        data: SaveImageRequest,
+        files?: PostFiles
+    ): Promise<SaveImageResponse> {
         return postJson("/api/usermedia/save/", data, files).then(
-            ({json}) => json
+            ({json}) => json as SaveImageResponse
         )
     }
 
-    saveCategories(cats) {
-        return postJson("/api/usermedia/save_category/", cats).then(
-            ({json}) => json
+    saveCategories(
+        cats: ImageSaveCategoriesRequest
+    ): Promise<ImageSaveCategoriesResponse> {
+        return postJson("/api/usermedia/save_category/", {...cats}).then(
+            ({json}) => json as ImageSaveCategoriesResponse
         )
     }
 
-    deleteImages(ids) {
+    deleteImages(ids: number[]) {
         return post("/api/usermedia/delete/", {ids})
     }
 }
 
 // ---- BibliographyApi ----
-export class DjangoBibliographyApi {
-    getDB(lastModified, numberOfEntries, localStorageOwnerId) {
+export class DjangoBibliographyApi implements BibliographyApi {
+    getDB(
+        lastModified: number,
+        numberOfEntries: number,
+        localStorageOwnerId: number
+    ): Promise<BiblistResponse> {
         return postJson("/api/bibliography/biblist/", {
             last_modified: lastModified,
             number_of_entries: numberOfEntries,
             user_id: localStorageOwnerId
-        }).then(({json}) => json)
+        }).then(({json}) => json as BiblistResponse)
     }
 
-    saveBibEntries(tmpDB, isNew) {
+    saveBibEntries(
+        tmpDB: Record<number, BibDBEntry>,
+        isNew: boolean
+    ): Promise<SaveBibEntriesResponse> {
         return postJson("/api/bibliography/save/", {
             is_new: isNew,
             bibs: tmpDB
-        }).then(({json}) => json)
+        }).then(({json}) => json as SaveBibEntriesResponse)
     }
 
-    saveCategories(cats) {
-        return postJson("/api/bibliography/save_category/", cats).then(
-            ({json}) => json
+    saveCategories(
+        cats: BibSaveCategoriesRequest
+    ): Promise<BibSaveCategoriesResponse> {
+        return postJson("/api/bibliography/save_category/", {...cats}).then(
+            ({json}) => json as BibSaveCategoriesResponse
         )
     }
 
-    deleteCategory(ids) {
+    deleteCategory(ids: number[]) {
         return post("/api/bibliography/delete_category/", {ids})
     }
 
-    deleteBibEntries(ids) {
+    deleteBibEntries(ids: number[]) {
         return post("/api/bibliography/delete/", {ids})
     }
 }
 
 // ---- DocumentImportApi ----
-export class DjangoDocumentImportApi {
-    createDoc(data, files) {
-        if (files) {
-            return postJson("/api/document/import/create/", data, files).then(
-                ({json, status}) => ({json, status})
-            )
-        }
-        return postJson("/api/document/import/create/", data).then(
+export class DjangoDocumentImportApi implements DocumentImportApi {
+    createDoc(data: Record<string, unknown>, files?: PostFiles) {
+        return postJson("/api/document/import/create/", data, files).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    saveImage(data, files) {
+    saveImage(data: Record<string, unknown>, files: PostFiles) {
         return postJson("/api/document/import/image/", data, files).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    saveE2EEImage(data, files) {
+    saveE2EEImage(data: Record<string, unknown>, files: PostFiles) {
         return postJson("/api/document/e2ee_image/", data, files).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    saveDocument(data) {
+    saveDocument(data: Record<string, unknown>) {
         return postJson("/api/document/import/", data).then(
             ({json, status}) => ({json, status})
         )
     }
 
-    getTemplate(importId) {
+    getTemplate(importId: string): Promise<Record<string, unknown>> {
         return postJson("/api/document/get_template/", {
             import_id: importId
-        }).then(({json}) => json)
+        }).then(({json}) => asRecord(json))
     }
 }
 
 // ---- UserProfileApi ----
-export class DjangoUserProfileApi {
-    save(data) {
+export class DjangoUserProfileApi implements UserProfileApi {
+    save(data: Record<string, unknown>) {
         return post("/api/user/save/", data)
     }
 
-    updatePreferences(data) {
+    updatePreferences(data: Record<string, unknown>) {
         return post("/api/user/preferences/update/", data)
     }
 
-    avatarUpload(files) {
+    avatarUpload(files: PostFiles) {
         return post("/api/user/avatar/upload/", {}, files)
     }
 
@@ -233,27 +330,35 @@ export class DjangoUserProfileApi {
         return post("/api/user/avatar/delete/", {})
     }
 
-    passwordChange(data) {
+    passwordChange(data: Record<string, unknown>) {
+        // Deliberately postBare: HTTP error statuses are part of the normal
+        // result here (wrong password, etc.).
         return postBare("/api/user/passwordchange/", data).then(response =>
-            response.json().then(json => ({json, status: response.status}))
+            response.json().then(json => ({
+                json: asRecord(json),
+                status: response.status
+            }))
         )
     }
 
-    emailAdd(data) {
+    emailAdd(data: Record<string, unknown>) {
         return postBare("/api/user/email/add/", data).then(response =>
-            response.json().then(json => ({json, status: response.status}))
+            response.json().then(json => ({
+                json: asRecord(json),
+                status: response.status
+            }))
         )
     }
 
-    emailDelete(data) {
+    emailDelete(data: Record<string, unknown>) {
         return post("/api/user/email/delete/", data)
     }
 
-    emailPrimary(data) {
+    emailPrimary(data: Record<string, unknown>) {
         return post("/api/user/email/primary/", data)
     }
 
-    deleteUser(data) {
+    deleteUser(data: Record<string, unknown>) {
         return postBare("/api/user/delete/", data)
     }
 
@@ -261,29 +366,39 @@ export class DjangoUserProfileApi {
         return getJson("/api/user/social/accounts/")
     }
 
-    deleteSocialAccount(data) {
+    deleteSocialAccount(data: Record<string, unknown>) {
         return post("/api/user/social/delete/", data)
     }
 
-    getConfirmKeyData(data) {
+    getConfirmKeyData(data: Record<string, unknown>) {
+        // Returns the raw response body (username/email/verified/logout),
+        // which is what @fiduswriter/frontend's EmailConfirm page consumes.
+        // The published UserProfileApi interface up to 0.1.54 mis-declares
+        // this as Promise<{json: ...}>; the interface was corrected in the
+        // frontend repository (ConfirmKeyDataResponse). Once a fixed
+        // frontend version is required here, simplify to
+        // `.then(({json}) => json as ConfirmKeyDataResponse)`.
         return postJson("/api/user/get_confirmkey_data/", data).then(
-            ({json}) => json
+            ({json}) => json as unknown as {json: Record<string, unknown>}
         )
     }
 
-    confirmEmail(key) {
+    confirmEmail(key: string) {
         return post(`/api/user/confirm-email/${key}/`)
     }
 }
 
 // ---- AuthApi ----
-export class DjangoAuthApi {
-    login(data) {
+export class DjangoAuthApi implements AuthApi {
+    login(data: Record<string, unknown>) {
         return postJson("/api/user/login/", data).then(({json, status}) => {
+            const payload = asRecord(json)
             let requiresEmailConfirmation = false
-            if (json.html && typeof json.html === "string") {
+            if (typeof payload.html === "string") {
                 try {
-                    const htmlValues = JSON.parse(json.html)
+                    const htmlValues = JSON.parse(payload.html) as {
+                        Location?: string
+                    }
                     if (htmlValues.Location === "/api/account/confirm-email/") {
                         requiresEmailConfirmation = true
                     }
@@ -291,23 +406,26 @@ export class DjangoAuthApi {
                     // ignore malformed html payload
                 }
             }
-            return {json, status, requiresEmailConfirmation}
+            return {json: payload, status, requiresEmailConfirmation}
         })
     }
 
-    signup(data) {
-        return postJson("/api/user/signup/", data).then(({json}) => ({
-            json,
-            requiresEmailConfirmation:
-                json.location === "/api/account/confirm-email/"
-        }))
+    signup(data: Record<string, unknown>) {
+        return postJson("/api/user/signup/", data).then(({json}) => {
+            const payload = asRecord(json)
+            return {
+                json: payload,
+                requiresEmailConfirmation:
+                    payload.location === "/api/account/confirm-email/"
+            }
+        })
     }
 
-    passwordReset(data) {
+    passwordReset(data: {email: string}) {
         return post("/api/user/password/reset/", data)
     }
 
-    passwordResetKeyGet(key) {
+    passwordResetKeyGet(key: string) {
         return get(`/api/account/password/reset/key/${key}/`).then(
             response => ({
                 url: response.url
@@ -315,7 +433,7 @@ export class DjangoAuthApi {
         )
     }
 
-    passwordResetKeyPost(url, data) {
+    passwordResetKeyPost(url: string, data: Record<string, unknown>) {
         return post(url, data)
     }
 
@@ -323,175 +441,214 @@ export class DjangoAuthApi {
         return post("/api/user/logout/")
     }
 
-    twoFactorSetup() {
-        return postJson("/api/user/two-factor/setup/").then(({json}) => json)
-    }
-
-    twoFactorVerify(data) {
-        return postJson("/api/user/two-factor/verify/", data).then(
-            ({json}) => json
+    twoFactorSetup(): Promise<TwoFactorSetupResponse> {
+        return postJson("/api/user/two-factor/setup/").then(
+            ({json}) => json as TwoFactorSetupResponse
         )
     }
 
-    twoFactorLogin(data) {
-        return postJson("/api/user/login/", data).then(({json}) => json)
+    twoFactorVerify(
+        data: Record<string, unknown>
+    ): Promise<TwoFactorVerifyResponse> {
+        return postJson("/api/user/two-factor/verify/", data).then(
+            ({json}) => json as TwoFactorVerifyResponse
+        )
     }
 
-    twoFactorDisable() {
-        return postJson("/api/user/two-factor/disable/").then(({json}) => json)
+    twoFactorLogin(
+        data: Record<string, unknown>
+    ): Promise<TwoFactorVerifyResponse> {
+        return postJson("/api/user/login/", data).then(
+            ({json}) => json as TwoFactorVerifyResponse
+        )
     }
 
-    twoFactorStatus() {
-        return postJson("/api/user/two-factor/status/").then(({json}) => json)
+    twoFactorDisable(): Promise<TwoFactorVerifyResponse> {
+        return postJson("/api/user/two-factor/disable/").then(
+            ({json}) => json as TwoFactorVerifyResponse
+        )
+    }
+
+    twoFactorStatus(): Promise<TwoFactorStatusResponse> {
+        return postJson("/api/user/two-factor/status/").then(
+            ({json}) => json as TwoFactorStatusResponse
+        )
     }
 }
 
 // ---- ContactsApi ----
-export class DjangoContactsApi {
-    list() {
-        return postJson("/api/user/contacts/list/").then(({json}) => json)
+export class DjangoContactsApi implements ContactsApi {
+    list(): Promise<ContactsListResponse> {
+        return postJson("/api/user/contacts/list/").then(
+            ({json}) => json as ContactsListResponse
+        )
     }
 
-    delete(data) {
+    delete(data: Record<string, unknown>) {
+        // Deliberately postBare: the status code carries the result.
         return postBare("/api/user/contacts/delete/", data).then(response => ({
             status: response.status
         }))
     }
 
-    add(data) {
+    add(data: {user_string: string}) {
         return postBare("/api/user/invites/add/", data).then(response =>
-            response.json().then(json => ({json, status: response.status}))
+            response.json().then(json => ({
+                json: asRecord(json),
+                status: response.status
+            }))
         )
     }
 
-    accept(data) {
+    accept(data: Record<string, unknown>) {
         return postBare("/api/user/invites/accept/", data).then(response =>
-            response.json().then(json => ({json, status: response.status}))
+            response.json().then(json => ({
+                json: asRecord(json),
+                status: response.status
+            }))
         )
     }
 
-    decline(data) {
+    decline(data: Record<string, unknown>) {
         return postBare("/api/user/invites/decline/", data).then(response => ({
             status: response.status
         }))
     }
 
-    invite(data) {
-        return postJson("/api/user/invite/", data).then(({json}) => json)
+    invite(data: {key: string}): Promise<ContactsInviteResponse> {
+        return postJson("/api/user/invite/", data).then(
+            ({json}) => json as ContactsInviteResponse
+        )
     }
 }
 
 // ---- DocumentTemplateApi ----
-export class DjangoDocumentTemplateApi {
-    list() {
-        return getJson("/api/user_template_manager/list/")
+export class DjangoDocumentTemplateApi implements DocumentTemplateApi {
+    list(): Promise<Record<string, unknown>> {
+        return getJson("/api/user_template_manager/list/") as Promise<
+            Record<string, unknown>
+        >
     }
 
-    get(data) {
+    get(data: {id: number; token?: string}): Promise<Record<string, unknown>> {
         return postJson(
             "/api/user_template_manager/get/",
             data.token ? data : {id: data.id}
-        ).then(({json}) => json)
+        ).then(({json}) => asRecord(json))
     }
 
-    save(data) {
+    save(data: Record<string, unknown>) {
         return post("/api/user_template_manager/save/", data)
     }
 
-    delete(data) {
+    delete(data: {id: number}): Promise<Record<string, unknown>> {
         return postJson("/api/user_template_manager/delete/", data).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    create(data, files) {
-        if (files) {
-            return post("/api/user_template_manager/create/", data, files)
-        }
-        return post("/api/user_template_manager/create/", data)
+    create(data: Record<string, unknown>, files?: PostFiles) {
+        return post("/api/user_template_manager/create/", data, files)
     }
 
-    copy(data) {
+    copy(data: {
+        id: number
+        title: string
+    }): Promise<Record<string, unknown>> {
         return postJson("/api/user_template_manager/copy/", data).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    getTemplate(id, token) {
+    getTemplate(id: number, token?: string): Promise<TemplateExportResponse> {
         return postJson(
             "/api/user_template_manager/get/",
             token ? {id, token} : {id}
-        ).then(({json}) => json)
+        ).then(({json}) => json as TemplateExportResponse)
     }
 
-    createTemplate(data, files) {
+    createTemplate(
+        data: Record<string, unknown>,
+        files?: PostFiles
+    ): Promise<ImportedTemplate> {
         return postJson("/api/user_template_manager/create/", data, files).then(
-            ({json}) => json
+            ({json}) => json as ImportedTemplate
         )
     }
 
-    saveExportTemplate(data, files) {
+    saveExportTemplate(
+        data: Record<string, unknown>,
+        files?: PostFiles
+    ): Promise<SaveExportTemplateResponse> {
         return postJson("/api/style/save_export_template/", data, files).then(
-            ({json}) => json
+            ({json}) => json as SaveExportTemplateResponse
         )
     }
 
-    deleteExportTemplate(id) {
+    deleteExportTemplate(id: number): Promise<Record<string, unknown>> {
         return postJson("/api/style/delete_export_template/", {id}).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    saveDocumentStyle(data, files) {
+    saveDocumentStyle(
+        data: Record<string, unknown>,
+        files?: PostFiles
+    ): Promise<SaveDocumentStyleResponse> {
         return postJson("/api/style/save_document_style/", data, files).then(
-            ({json}) => json
+            ({json}) => json as SaveDocumentStyleResponse
         )
     }
 
-    deleteDocumentStyle(id) {
+    deleteDocumentStyle(id: number): Promise<Record<string, unknown>> {
         return postJson("/api/style/delete_document_style/", {id}).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    importDocumentStyle(data, files) {
+    importDocumentStyle(
+        data: Record<string, unknown>,
+        files?: PostFiles
+    ): Promise<Record<string, unknown>> {
         return postJson("/api/style/import_document_style/", data, files).then(
-            ({json}) => json
+            ({json}) => asRecord(json)
         )
     }
 
-    getTemplateExtras(data) {
+    getTemplateExtras(data: {id: number}): Promise<TemplateExtras> {
         return postJson("/api/document/admin/get_template/extras/", data).then(
-            ({json}) => json
+            ({json}) => json as TemplateExtras
         )
     }
 }
 
 // ---- FlatPageApi ----
-export class DjangoFlatPageApi {
-    get(key) {
-        return postJson("/api/base/flatpage/", {url: key}).then(
-            ({json}) => json
+export class DjangoFlatPageApi implements FlatPageApi {
+    get(key: string): Promise<Record<string, unknown>> {
+        return postJson("/api/base/flatpage/", {url: key}).then(({json}) =>
+            asRecord(json)
         )
     }
 }
 
 // ---- SystemMessageApi ----
-export class DjangoSystemMessageApi {
-    get() {
-        return getJson("/api/base/connection_info/")
+export class DjangoSystemMessageApi implements SystemMessageApi {
+    get(): Promise<Record<string, unknown>> {
+        return getJson("/api/base/connection_info/") as Promise<
+            Record<string, unknown>
+        >
     }
 
-    send(data) {
-        return postJson("/api/base/send_system_message/", data).then(
-            ({json}) => json
+    send(data: Record<string, unknown>): Promise<Record<string, unknown>> {
+        return postJson("/api/base/send_system_message/", data).then(({json}) =>
+            asRecord(json)
         )
     }
 }
 
 // ---- ErrorHookApi ----
-export class DjangoErrorHookApi {
-    send(data) {
+export class DjangoErrorHookApi implements ErrorHookApi {
+    send(data: {context?: string; details: string}) {
         const body = new FormData()
         body.append("context", data.context || navigator.userAgent)
         body.append("details", data.details)
@@ -507,68 +664,70 @@ export class DjangoErrorHookApi {
 }
 
 // ---- FeedbackApi ----
-export class DjangoFeedbackApi {
-    send(data) {
+export class DjangoFeedbackApi implements FeedbackApi {
+    send(data: {message: string}) {
         return post("/api/feedback/feedback/", data)
     }
 }
 
 // ---- ConfigApi ----
-export class DjangoConfigApi {
-    getConfiguration() {
-        return getJson("/api/base/configuration/")
+export class DjangoConfigApi implements ConfigApi {
+    getConfiguration(): Promise<Record<string, unknown>> {
+        return getJson("/api/base/configuration/") as Promise<
+            Record<string, unknown>
+        >
     }
 }
 
 // ---- MaintenanceApi ----
-export class DjangoMaintenanceApi {
-    getAllOldDocs() {
+export class DjangoMaintenanceApi implements MaintenanceApi {
+    getAllOldDocs(): Promise<OldDocsResponse> {
         return postJson("/api/document/admin/get_all_old/").then(
-            ({json}) => json
+            ({json}) => json as OldDocsResponse
         )
     }
 
-    getUserBibList(data) {
+    getUserBibList(data: {user_id: number}): Promise<UserBibListResponse> {
         return postJson("/api/document/admin/get_user_biblist/", data).then(
-            ({json}) => json
+            ({json}) => json as UserBibListResponse
         )
     }
 
-    saveDoc(data) {
+    saveDoc(data: Record<string, unknown>) {
         return post("/api/document/admin/save_doc/", data)
     }
 
-    addImagesToDoc(data) {
+    addImagesToDoc(data: Record<string, unknown>) {
         return post("/api/document/admin/add_images_to_doc/", data)
     }
 
-    getAllTemplateIds() {
+    getAllTemplateIds(): Promise<TemplateIdsResponse> {
         return postJson("/api/document/admin/get_all_template_ids/").then(
-            ({json}) => json
+            ({json}) => json as TemplateIdsResponse
         )
     }
 
-    getTemplateBase(data) {
+    getTemplateBase(data: {id: number}): Promise<TemplateBaseResponse> {
         return postJson("/api/document/admin/get_template/base/", data).then(
-            ({json}) => json
+            ({json}) => json as TemplateBaseResponse
         )
     }
 
-    saveTemplate(data) {
+    saveTemplate(data: Record<string, unknown>) {
         return post("/api/document/admin/save_template/", data)
     }
 
-    getAllRevisionIds() {
+    getAllRevisionIds(): Promise<RevisionIdsResponse> {
         return postJson("/api/document/admin/get_all_revision_ids/").then(
-            ({json}) => json
+            ({json}) => json as RevisionIdsResponse
         )
     }
 
-    getRevision(id) {
+    getRevision(id: number) {
         return get(`/api/document/get_revision/${id}/`)
     }
 
-    updateRevision(id, blob) {
+    updateRevision(id: number, blob: Blob) {
         return post(
             "/api/document/admin/update_revision/",
             {id},
@@ -583,20 +742,20 @@ export class DjangoMaintenanceApi {
 }
 
 // ---- RevisionApi ----
-export class DjangoRevisionApi {
-    getRevisionBlob(id) {
+export class DjangoRevisionApi implements RevisionApi {
+    getRevisionBlob(id: number): Promise<Blob> {
         return get(`/api/document/get_revision/${id}/`).then(response =>
             response.blob()
         )
     }
 
-    deleteRevision(data) {
+    deleteRevision(data: {id: number}) {
         return post("/api/document/delete_revision/", data)
     }
 }
 
 // ---- Bundled connectors ----
-export const djangoApiConnectors = {
+export const djangoApiConnectors: ApiConnectors = {
     document: new DjangoDocumentApi(),
     documentImport: new DjangoDocumentImportApi(),
     userProfile: new DjangoUserProfileApi(),

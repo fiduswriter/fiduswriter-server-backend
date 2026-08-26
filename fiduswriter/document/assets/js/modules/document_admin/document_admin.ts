@@ -3,6 +3,7 @@ import {Editor} from "@fiduswriter/editor"
 import {recreateTransform} from "@fiduswriter/editor/collab/merge/recreate_transform"
 import {createStaticApp} from "@fiduswriter/editor/static_app"
 import type {EditorApp, EditorUser} from "@fiduswriter/editor/types"
+import type {Image} from "@fiduswriter/image-manager/types"
 import {
     ensureCSS,
     escapeText,
@@ -113,7 +114,7 @@ export class DocumentEditorAdmin {
         // The visual editor cannot edit E2EE documents in the admin (they are
         // stored encrypted), and there is no document to load on the add form.
         // In both cases show the source form directly.
-        if ((window as any).documentAdminE2EE || !this.id) {
+        if (window.documentAdminE2EE || !this.id) {
             return
         }
         // The editor's own init() loads the editor CSS; here we only need the
@@ -126,7 +127,8 @@ export class DocumentEditorAdmin {
     }
 
     async setup() {
-        this.objectTools = document.querySelector("ul.object-tools") || false
+        this.objectTools =
+            document.querySelector<HTMLElement>("ul.object-tools") || false
         if (!this.objectTools) {
             const mainContent = document.querySelector("#content-main")
             mainContent?.insertAdjacentHTML(
@@ -134,7 +136,7 @@ export class DocumentEditorAdmin {
                 '<ul class="object-tools"></ul>'
             )
             this.objectTools =
-                document.querySelector("ul.object-tools") || false
+                document.querySelector<HTMLElement>("ul.object-tools") || false
         }
         this.titleInput = document.querySelector(
             "#id_title"
@@ -250,10 +252,12 @@ export class DocumentEditorAdmin {
                 restoredDoc = {
                     ...(this.lastDoc ?? {}),
                     v: this.getCurrentVersion(),
-                    content: JSON.parse(this.contentTextarea?.value || "{}"),
-                    comments: JSON.parse(this.commentsTextarea?.value || "{}"),
+                    content: JSON.parse(this.fieldValue(this.contentTextarea)),
+                    comments: JSON.parse(
+                        this.fieldValue(this.commentsTextarea)
+                    ),
                     bibliography: JSON.parse(
-                        this.bibliographyTextarea?.value || "{}"
+                        this.fieldValue(this.bibliographyTextarea)
                     )
                 }
             } catch (error) {
@@ -310,18 +314,33 @@ export class DocumentEditorAdmin {
         }
 
         const locale =
-            ((window as any).settings?.LANGUAGE as string) ||
+            (window.settings.LANGUAGE as string | undefined) ||
             (window.navigator.language || "en").slice(0, 2)
+
+        const info = this.documentInfo || {}
 
         this.app = await createStaticApp({
             locale,
-            gettext: (window as any).gettext || ((msgid: string) => msgid),
+            gettext:
+                typeof gettext === "function"
+                    ? gettext
+                    : (msgid: string) => msgid,
             csl: this.csl,
+            // The static app's built-in document connector would read the
+            // payload from documentData(); it is never called here because
+            // the apiConnectors override below replaces getDocumentData.
+            // Supplying the loaded values keeps the contract intact.
+            documentData: () =>
+                Promise.resolve({
+                    doc,
+                    doc_info: info,
+                    time: Date.now()
+                }),
             // The admin page must not autosave: nothing is persisted until one
             // of the Django admin save buttons is clicked (setCurrentValue()
             // copies the editor state into the hidden form fields on submit).
             saveMode: "external",
-            initialImages: (doc.images ?? {}) as Record<number, never> as any,
+            initialImages: (doc.images ?? {}) as Record<number, Image>,
             apiConnectors: {
                 document: this.connectors.document,
                 documentImport: this.connectors.documentImport,
@@ -331,7 +350,11 @@ export class DocumentEditorAdmin {
             }
         })
 
-        const owner = (this.documentInfo as any)?.owner || {}
+        const owner = (info.owner ?? {}) as {
+            id?: number
+            name?: string
+            username?: string
+        }
         const user = {
             id: owner.id,
             name: owner.name,
@@ -343,7 +366,7 @@ export class DocumentEditorAdmin {
 
         this.editor = new Editor(
             {app: this.app, user, mount: this.editorBlock as HTMLElement},
-            String((this.documentInfo as any)?.path ?? ""),
+            String((info.path as string | undefined) ?? ""),
             String(this.id)
         )
         try {
@@ -462,8 +485,19 @@ export class DocumentEditorAdmin {
         }
     }
 
+    /**
+     * Returns the value of one of the (possibly absent) document source
+     * form fields, falling back to an empty JSON object.
+     */
+    fieldValue(field: HTMLTextAreaElement | false | null): string {
+        if (!field) {
+            return "{}"
+        }
+        return field.value || "{}"
+    }
+
     getCurrentVersion(): number {
-        const v = Number(this.versionInput?.value)
+        const v = Number(this.versionInput ? this.versionInput.value : NaN)
         if (!isNaN(v) && v >= 0) {
             return v
         }
