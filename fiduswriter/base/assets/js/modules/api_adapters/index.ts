@@ -18,6 +18,7 @@ import type {
     ApiConnectors,
     AuthApi,
     ConfigApi,
+    ConfirmKeyDataResponse,
     ContactsApi,
     ContactsInviteResponse,
     ContactsListResponse,
@@ -373,13 +374,8 @@ export class DjangoUserProfileApi implements UserProfileApi {
     getConfirmKeyData(data: Record<string, unknown>) {
         // Returns the raw response body (username/email/verified/logout),
         // which is what @fiduswriter/frontend's EmailConfirm page consumes.
-        // The published UserProfileApi interface up to 0.1.54 mis-declares
-        // this as Promise<{json: ...}>; the interface was corrected in the
-        // frontend repository (ConfirmKeyDataResponse). Once a fixed
-        // frontend version is required here, simplify to
-        // `.then(({json}) => json as ConfirmKeyDataResponse)`.
         return postJson("/api/user/get_confirmkey_data/", data).then(
-            ({json}) => json as unknown as {json: Record<string, unknown>}
+            ({json}) => json as ConfirmKeyDataResponse
         )
     }
 
