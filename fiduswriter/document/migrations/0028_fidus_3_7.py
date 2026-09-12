@@ -5,6 +5,7 @@ import zipfile
 import tempfile
 from decimal import Decimal
 
+from django.conf import settings
 from django.db import migrations
 from django.core.files import File
 
@@ -37,10 +38,24 @@ def update_document_string(doc_string):
     return json.dumps(doc)
 
 
-def update_revision_zip(file_field, file_name):
+def find_revision_file(name):
+    """Revisions may live in the media folder or, after the
+    0027_move_revisions_to_app_storage migration, in the app storage folder.
+    """
+    candidates = [
+        os.path.join(settings.MEDIA_ROOT, name),
+        os.path.join(settings.APP_STORAGE_ROOT, name),
+    ]
+    for path in candidates:
+        if os.path.isfile(path):
+            return path
+    return None
+
+
+def update_revision_zip(source_path, revision):
     tmpfd, tmpname = tempfile.mkstemp()
     os.close(tmpfd)
-    with zipfile.ZipFile(file_field.open(), "r") as zin:
+    with zipfile.ZipFile(open(source_path, "rb"), "r") as zin:
         with zipfile.ZipFile(tmpname, "w") as zout:
             zout.comment = zin.comment
             for item in zin.infolist():
@@ -51,9 +66,21 @@ def update_revision_zip(file_field, file_name):
                     zout.writestr(item, update_document_string(doc_string))
                 else:
                     zout.writestr(item, zin.read(item.filename))
-    with open(tmpname, "rb") as tmp_file:
-        file_field.save(file_name, File(tmp_file))
-    os.remove(tmpname)
+    app_storage_path = os.path.join(
+        settings.APP_STORAGE_ROOT, revision.file_object.name
+    )
+    if source_path == app_storage_path:
+        # The revision file lives in the app storage folder: replace it
+        # there directly.
+        os.replace(tmpname, source_path)
+    else:
+        # The revision file lives in the media folder: save it back through
+        # the file field.
+        with open(tmpname, "rb") as tmp_file:
+            revision.file_object.save(
+                revision.file_name, File(tmp_file), save=False
+            )
+        os.remove(tmpname)
 
 
 def downgrade_documents(apps, schema_editor):
@@ -91,14 +118,17 @@ def update_documents(apps, schema_editor):
             revision.delete()
             continue
         if revision.doc_version == Decimal(str(OLD_FW_DOCUMENT_VERSION)):
-            update_revision_zip(revision.file_object, revision.file_name)
+            source_path = find_revision_file(revision.file_object.name)
+            if source_path is None:
+                continue
+            update_revision_zip(source_path, revision)
             revision.doc_version = FW_DOCUMENT_VERSION
             revision.save()
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("document", "0026_fidus_3_6"),
+        ("document", "0027_move_revisions_to_app_storage"),
     ]
     operations = [
         migrations.RunPython(update_documents, downgrade_documents),

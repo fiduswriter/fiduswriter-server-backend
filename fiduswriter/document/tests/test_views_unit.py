@@ -1,9 +1,19 @@
 """Unit tests for document views that don't require a browser."""
 
+import importlib
 import json
 import base64
+import os
+import shutil
+import tempfile
+import zipfile
+from io import StringIO
+from unittest.mock import patch
 from django.test import TestCase, Client, override_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
+from django.core.management.base import CommandError
+from django.conf import settings
 
 from user.models import User, UserEncryptionKey
 from document.models import (
@@ -15,6 +25,17 @@ from document.models import (
     DocumentRevision,
 )
 from document.views import _handle_automatic_key_sharing
+
+_revision_migration = importlib.import_module(
+    "document.migrations.0027_move_revisions_to_app_storage"
+)
+move_revisions_to_app_storage = (
+    _revision_migration.move_revisions_to_app_storage
+)
+_fidus37_migration = importlib.import_module(
+    "document.migrations.0028_fidus_3_7"
+)
+fidus37_update_documents = _fidus37_migration.update_documents
 
 
 AJAX_HEADERS = {"HTTP_X_REQUESTED_WITH": "XMLHttpRequest"}
@@ -833,3 +854,501 @@ class GetRevisionViewTest(TestCase):
             f"/api/document/get_revision/{self.revision.id}/"
         )
         self.assertEqual(response.status_code, 302)
+
+    def test_revision_file_stored_in_app_storage(self):
+        name = self.revision.file_object.name
+        self.assertTrue(name.startswith("document-revisions/"))
+        self.assertTrue(
+            os.path.isfile(
+                os.path.join(settings.APP_STORAGE_ROOT, name)
+            )
+        )
+        self.assertFalse(
+            os.path.isfile(os.path.join(settings.MEDIA_ROOT, name))
+        )
+
+    def test_legacy_file_in_media_folder_is_moved_on_download(self):
+        name = self.revision.file_object.name
+        current_path = self.revision.file_object.storage.path(name)
+        legacy_dir = os.path.join(settings.MEDIA_ROOT, "document-revisions")
+        os.makedirs(legacy_dir, exist_ok=True)
+        legacy_path = os.path.join(legacy_dir, name.split("/")[-1])
+        os.remove(current_path)
+        with open(legacy_path, "wb") as f:
+            f.write(b"PK\x03\x04legacy")
+        response = self.client.get(
+            f"/api/document/get_revision/{self.revision.id}/"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"PK\x03\x04legacy")
+        self.assertTrue(os.path.isfile(current_path))
+        self.assertFalse(os.path.isfile(legacy_path))
+
+    def test_legacy_file_with_bare_name_is_moved_on_download(self):
+        name = self.revision.file_object.name
+        bare_name = name.split("/")[-1]
+        current_path = self.revision.file_object.storage.path(name)
+        os.remove(current_path)
+        DocumentRevision.objects.filter(pk=self.revision.pk).update(
+            file_object=bare_name
+        )
+        legacy_path = os.path.join(settings.MEDIA_ROOT, bare_name)
+        with open(legacy_path, "wb") as f:
+            f.write(b"PK\x03\x04bare")
+        response = self.client.get(
+            f"/api/document/get_revision/{self.revision.id}/"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"PK\x03\x04bare")
+        self.assertTrue(
+            os.path.isfile(os.path.join(settings.APP_STORAGE_ROOT, bare_name))
+        )
+        self.assertFalse(os.path.isfile(legacy_path))
+
+    def test_missing_revision_file_returns_404(self):
+        name = self.revision.file_object.name
+        os.remove(self.revision.file_object.storage.path(name))
+        response = self.client.get(
+            f"/api/document/get_revision/{self.revision.id}/"
+        )
+        self.assertEqual(response.status_code, 404)
+
+
+class MoveRevisionsToAppStorageTest(TestCase):
+    """Tests for the data migration moving revision files."""
+
+    def setUp(self):
+        self.owner = User.objects.create_user(
+            username="migrationuser", password="pass"
+        )
+        self.template = DocumentTemplate.objects.create(
+            title="Default Template", content={}
+        )
+        self.doc = Document.objects.create(
+            owner=self.owner, template=self.template, title="Test"
+        )
+        self.media_root = tempfile.mkdtemp()
+        self.app_storage_root = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.media_root, ignore_errors=True)
+        shutil.rmtree(self.app_storage_root, ignore_errors=True)
+
+    def _create_revision_row(self, name):
+        revision = DocumentRevision.objects.create(
+            document=self.doc, note="", file_object=""
+        )
+        DocumentRevision.objects.filter(pk=revision.pk).update(
+            file_object=name
+        )
+        return revision
+
+    def _run_migration(self):
+        class AppsShim:
+            @staticmethod
+            def get_model(app_label, model_name):
+                return DocumentRevision
+
+        with override_settings(
+            MEDIA_ROOT=self.media_root,
+            APP_STORAGE_ROOT=self.app_storage_root,
+        ):
+            move_revisions_to_app_storage(AppsShim, None)
+
+    def test_moves_prefixed_and_bare_files(self):
+        self._create_revision_row("document-revisions/11.fidus")
+        self._create_revision_row("12.fidus")
+        legacy_dir = os.path.join(self.media_root, "document-revisions")
+        os.makedirs(legacy_dir)
+        with open(os.path.join(legacy_dir, "11.fidus"), "wb") as f:
+            f.write(b"data11")
+        with open(os.path.join(self.media_root, "12.fidus"), "wb") as f:
+            f.write(b"data12")
+        self._run_migration()
+        self.assertEqual(
+            open(
+                os.path.join(
+                    self.app_storage_root, "document-revisions", "11.fidus"
+                ),
+                "rb",
+            ).read(),
+            b"data11",
+        )
+        self.assertEqual(
+            open(
+                os.path.join(self.app_storage_root, "12.fidus"), "rb"
+            ).read(),
+            b"data12",
+        )
+        self.assertFalse(os.path.exists(legacy_dir))
+
+    def test_migration_is_idempotent(self):
+        self._create_revision_row("document-revisions/13.fidus")
+        legacy_dir = os.path.join(self.media_root, "document-revisions")
+        os.makedirs(legacy_dir)
+        with open(os.path.join(legacy_dir, "13.fidus"), "wb") as f:
+            f.write(b"data13")
+        self._run_migration()
+        self._run_migration()
+        self.assertEqual(
+            open(
+                os.path.join(
+                    self.app_storage_root, "document-revisions", "13.fidus"
+                ),
+                "rb",
+            ).read(),
+            b"data13",
+        )
+
+    def test_missing_files_are_tolerated(self):
+        self._create_revision_row("document-revisions/14.fidus")
+        self._run_migration()
+
+    def test_leftover_orphan_files_are_moved_out_of_media(self):
+        self._create_revision_row("document-revisions/15.fidus")
+        legacy_dir = os.path.join(self.media_root, "document-revisions")
+        os.makedirs(legacy_dir)
+        with open(os.path.join(legacy_dir, "15.fidus"), "wb") as f:
+            f.write(b"live")
+        # Orphaned files without a database row, in both possible locations:
+        with open(os.path.join(legacy_dir, "16.fidus"), "wb") as f:
+            f.write(b"orphan1")
+        with open(os.path.join(self.media_root, "17.fidus"), "wb") as f:
+            f.write(b"orphan2")
+        self._run_migration()
+        orphan_dir = os.path.join(
+            self.app_storage_root, "orphaned-revisions"
+        )
+        self.assertFalse(os.path.exists(legacy_dir))
+        self.assertEqual(
+            open(os.path.join(orphan_dir, "16.fidus"), "rb").read(),
+            b"orphan1",
+        )
+        self.assertEqual(
+            open(os.path.join(orphan_dir, "17.fidus"), "rb").read(),
+            b"orphan2",
+        )
+        # The referenced file is moved into the revision storage, not the
+        # orphan folder.
+        self.assertEqual(
+            open(
+                os.path.join(
+                    self.app_storage_root, "document-revisions", "15.fidus"
+                ),
+                "rb",
+            ).read(),
+            b"live",
+        )
+        self.assertFalse(os.path.exists(os.path.join(orphan_dir, "15.fidus")))
+
+
+class Fidus37MigrationRevisionTest(TestCase):
+    """Tests for the fidus_3_7 migration handling revision files that have
+    already been moved to the app storage folder."""
+
+    def setUp(self):
+        self.owner = User.objects.create_user(
+            username="fidus37user", password="pass"
+        )
+        self.template = DocumentTemplate.objects.create(
+            title="Default Template", content={}
+        )
+        self.doc = Document.objects.create(
+            owner=self.owner, template=self.template, title="Test"
+        )
+        self.media_root = tempfile.mkdtemp()
+        self.app_storage_root = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.media_root, ignore_errors=True)
+        shutil.rmtree(self.app_storage_root, ignore_errors=True)
+
+    def _make_revision_zip(self, path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with zipfile.ZipFile(path, "w") as zout:
+            zout.writestr("filetype-version", "3.6")
+            zout.writestr(
+                "document.json",
+                json.dumps(
+                    {
+                        "type": "article",
+                        "attrs": {
+                            "citationstyle": "chicago-note-bibliography"
+                        },
+                    }
+                ),
+            )
+
+    def _run_update(self):
+        class AppsShim:
+            @staticmethod
+            def get_model(app_label, model_name):
+                return {
+                    "Document": Document,
+                    "DocumentTemplate": DocumentTemplate,
+                    "DocumentRevision": DocumentRevision,
+                }[model_name]
+
+        with override_settings(
+            MEDIA_ROOT=self.media_root,
+            APP_STORAGE_ROOT=self.app_storage_root,
+        ):
+            fidus37_update_documents(AppsShim, None)
+
+    def test_revision_in_app_storage_is_updated_in_place(self):
+        self._make_revision_zip(
+            os.path.join(
+                self.app_storage_root, "document-revisions", "21.fidus"
+            )
+        )
+        revision = DocumentRevision.objects.create(
+            document=self.doc, note="", file_object=""
+        )
+        DocumentRevision.objects.filter(pk=revision.pk).update(
+            file_object="document-revisions/21.fidus", doc_version="3.6"
+        )
+        self._run_update()
+        revision.refresh_from_db()
+        self.assertEqual(str(revision.doc_version), "3.7")
+        path = os.path.join(
+            self.app_storage_root, "document-revisions", "21.fidus"
+        )
+        self.assertTrue(os.path.isfile(path))
+        with zipfile.ZipFile(path, "r") as zin:
+            self.assertEqual(zin.read("filetype-version"), b"3.7")
+            doc = json.loads(zin.read("document.json"))
+        self.assertEqual(
+            doc["attrs"]["citationstyle"],
+            "chicago-notes-bibliography",
+        )
+
+
+class CleanupRevisionsCommandTest(TestCase):
+    """Tests for the cleanup_revisions management command."""
+
+    def setUp(self):
+        self.owner = User.objects.create_user(
+            username="cleanupuser", password="pass"
+        )
+        self.template = DocumentTemplate.objects.create(
+            title="Default Template", content={}
+        )
+        self.doc = Document.objects.create(
+            owner=self.owner, template=self.template, title="Test"
+        )
+        self.media_root = tempfile.mkdtemp()
+        self.app_storage_root = tempfile.mkdtemp()
+        self.override = override_settings(
+            MEDIA_ROOT=self.media_root,
+            APP_STORAGE_ROOT=self.app_storage_root,
+        )
+        self.override.enable()
+
+    def tearDown(self):
+        self.override.disable()
+        shutil.rmtree(self.media_root, ignore_errors=True)
+        shutil.rmtree(self.app_storage_root, ignore_errors=True)
+
+    def _write(self, path, content=b"x"):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "wb") as f:
+            f.write(content)
+
+    def _create_revision_row(self, name):
+        revision = DocumentRevision.objects.create(
+            document=self.doc, note="", file_object=""
+        )
+        DocumentRevision.objects.filter(pk=revision.pk).update(
+            file_object=name
+        )
+        return revision
+
+    def test_default_moves_unreferenced_files_to_orphan_folder(self):
+        self._create_revision_row("document-revisions/31.fidus")
+        # Referenced file in app storage: keep.
+        self._write(
+            os.path.join(
+                self.app_storage_root, "document-revisions", "31.fidus"
+            )
+        )
+        # Referenced bare-name file in media root: keep.
+        self._create_revision_row("32.fidus")
+        self._write(os.path.join(self.media_root, "32.fidus"))
+        # Orphans: move into the orphan folder.
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "41.fidus")
+        )
+        self._write(os.path.join(self.media_root, "42.fidus"))
+        self._write(
+            os.path.join(
+                self.app_storage_root, "document-revisions", "43.fidus"
+            )
+        )
+        # Non-fidus files are never touched.
+        self._write(os.path.join(self.media_root, "image.png"))
+        out = StringIO()
+        call_command("cleanup_revisions", stdout=out)
+        orphan_dir = os.path.join(self.app_storage_root, "orphaned-revisions")
+        self.assertTrue(
+            os.path.isfile(
+                os.path.join(
+                    self.app_storage_root, "document-revisions", "31.fidus"
+                )
+            )
+        )
+        self.assertTrue(
+            os.path.isfile(os.path.join(self.media_root, "32.fidus"))
+        )
+        for file_name in ["41.fidus", "42.fidus", "43.fidus"]:
+            self.assertTrue(
+                os.path.isfile(os.path.join(orphan_dir, file_name))
+            )
+        self.assertTrue(
+            os.path.isfile(os.path.join(self.media_root, "image.png"))
+        )
+        self.assertIn("Moved 3 orphaned", out.getvalue())
+        # A second run finds nothing new to move.
+        out2 = StringIO()
+        call_command("cleanup_revisions", stdout=out2)
+        self.assertIn("No orphaned revision files found", out2.getvalue())
+
+    def test_delete_only_considers_orphan_folder(self):
+        # An orphan outside the orphan folder is NOT touched by --delete.
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "61.fidus")
+        )
+        out = StringIO()
+        call_command("cleanup_revisions", "--delete", stdout=out)
+        self.assertIn("Nothing to delete", out.getvalue())
+        self.assertTrue(
+            os.path.isfile(
+                os.path.join(self.media_root, "document-revisions", "61.fidus")
+            )
+        )
+
+    def test_delete_prompts_and_aborts_on_no(self):
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "71.fidus")
+        )
+        call_command("cleanup_revisions", stdout=StringIO())
+        out = StringIO()
+        with patch("sys.stdin", StringIO("no\n")):
+            call_command("cleanup_revisions", "--delete", stdout=out)
+        self.assertIn("WARNING", out.getvalue())
+        self.assertIn("Aborted", out.getvalue())
+        # Nothing was deleted.
+        self.assertTrue(
+            os.path.isfile(
+                os.path.join(
+                    self.app_storage_root, "orphaned-revisions", "71.fidus"
+                )
+            )
+        )
+
+    def test_delete_prompts_and_deletes_on_yes(self):
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "72.fidus")
+        )
+        call_command("cleanup_revisions", stdout=StringIO())
+        out = StringIO()
+        with patch("sys.stdin", StringIO("yes\n")):
+            call_command("cleanup_revisions", "--delete", stdout=out)
+        self.assertIn("Deleted 1 orphaned", out.getvalue())
+        self.assertFalse(
+            os.path.isfile(
+                os.path.join(
+                    self.app_storage_root, "orphaned-revisions", "72.fidus"
+                )
+            )
+        )
+
+    def test_delete_prompt_aborts_on_eof(self):
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "73.fidus")
+        )
+        call_command("cleanup_revisions", stdout=StringIO())
+        out = StringIO()
+        with patch("sys.stdin", StringIO("")):
+            call_command("cleanup_revisions", "--delete", stdout=out)
+        self.assertIn("Aborted", out.getvalue())
+        self.assertTrue(
+            os.path.isfile(
+                os.path.join(
+                    self.app_storage_root, "orphaned-revisions", "73.fidus"
+                )
+            )
+        )
+
+    def test_delete_with_confirm_removes_orphan_folder(self):
+        self._write(
+            os.path.join(self.media_root, "document-revisions", "81.fidus")
+        )
+        call_command("cleanup_revisions", stdout=StringIO())
+        out = StringIO()
+        call_command("cleanup_revisions", "--delete", "--confirm", stdout=out)
+        self.assertIn("Deleted 1 orphaned", out.getvalue())
+        self.assertFalse(
+            os.path.isfile(
+                os.path.join(
+                    self.app_storage_root, "orphaned-revisions", "81.fidus"
+                )
+            )
+        )
+
+    def test_confirm_requires_delete(self):
+        with self.assertRaises(CommandError):
+            call_command("cleanup_revisions", "--confirm", stdout=StringIO())
+
+
+class RevisionFileDeletionTest(TestCase):
+    """Deleting a revision must remove its file from the revision storage."""
+
+    def setUp(self):
+        self.owner = User.objects.create_user(
+            username="deletionuser", password="pass"
+        )
+        self.template = DocumentTemplate.objects.create(
+            title="Default Template", content={}
+        )
+        self.doc = Document.objects.create(
+            owner=self.owner, template=self.template, title="Test"
+        )
+        self.revision = DocumentRevision.objects.create(
+            document=self.doc,
+            note="first",
+            file_object=SimpleUploadedFile(
+                "rev.fidus",
+                b"PK\x03\x04fidus",
+                content_type="application/zip",
+            ),
+        )
+
+    def _file_path(self, revision):
+        return revision.file_object.storage.path(revision.file_object.name)
+
+    def test_deleting_revision_removes_file(self):
+        path = self._file_path(self.revision)
+        self.assertTrue(os.path.isfile(path))
+        with self.captureOnCommitCallbacks(execute=True):
+            self.revision.delete()
+        self.assertFalse(os.path.isfile(path))
+        self.assertFalse(
+            DocumentRevision.objects.filter(pk=self.revision.pk).exists()
+        )
+
+    def test_deleting_document_removes_revision_files(self):
+        path = self._file_path(self.revision)
+        self.assertTrue(os.path.isfile(path))
+        with self.captureOnCommitCallbacks(execute=True):
+            self.doc.delete()
+        self.assertFalse(os.path.isfile(path))
+
+    def test_deleting_revision_without_file_does_not_error(self):
+        revision = DocumentRevision.objects.create(
+            document=self.doc, note="", file_object=""
+        )
+        with self.captureOnCommitCallbacks(execute=True):
+            revision.delete()
+        self.assertFalse(
+            DocumentRevision.objects.filter(pk=revision.pk).exists()
+        )

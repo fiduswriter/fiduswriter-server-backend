@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("document", "0027_fidus_3_7"),
+        ("document", "0028_fidus_3_7"),
     ]
 
     operations = [

@@ -67,6 +67,7 @@ debian/*-stamp
 /fiduswriter/testdb.sqlite3-journal
 /fiduswriter/.transpile/
 /fiduswriter/media/
+/fiduswriter/app-data/
 /fiduswriter/screenshots/
 /fiduswriter/media.backup/
 /fiduswriter/static-collected/

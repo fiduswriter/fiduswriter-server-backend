@@ -30,6 +30,7 @@ from document.models import (
     CAN_UPDATE_DOCUMENT,
     CAN_COMMUNICATE,
     FW_DOCUMENT_VERSION,
+    ensure_revision_file,
 )
 from usermedia.models import DocumentImage, EncryptedDocumentImage, Image
 from bibliography.models import Entry
@@ -920,14 +921,17 @@ def get_revision(request, revision_id):
         filename = (
             filename.replace('"', "").replace("\r", "").replace("\n", "")
         )
-        http_response = HttpResponse(
-            revision.file_object.file,
-            content_type="application/vnd.fiduswriter+zip",
-            status=200,
-        )
-        http_response["Content-Disposition"] = (
-            f'attachment; filename="{filename}"'
-        )
+        if ensure_revision_file(revision):
+            http_response = HttpResponse(
+                revision.file_object.file,
+                content_type="application/vnd.fiduswriter+zip",
+                status=200,
+            )
+            http_response["Content-Disposition"] = (
+                f'attachment; filename="{filename}"'
+            )
+        else:
+            http_response = HttpResponse(status=404)
     else:
         http_response = HttpResponse(status=404)
     return http_response

@@ -1,5 +1,11 @@
 import os
 
+# pnpm 11+ fails installs with ERR_PNPM_IGNORED_BUILDS when a dependency has
+# an unapproved build script (e.g. core-js-pure's postinstall). Turn the hard
+# error back into a warning so that `manage.py setup`/transpile keeps working
+# with any pnpm version. Can be overridden by setting the variable beforehand.
+os.environ.setdefault("PNPM_CONFIG_STRICT_DEP_BUILDS", "false")
+
 # The ports Fidus Writer is running on:
 # For multi-server setups, this must be the FULL list of ports/connections
 # across all servers so that document routing is consistent everywhere.
@@ -131,6 +137,11 @@ MEDIA_ROOT = os.path.join(PROJECT_PATH, "media/")
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 MEDIA_URL = "/media/"
+
+# Absolute filesystem path to the directory that holds files managed by the
+# application itself, such as document revisions. Unlike MEDIA_ROOT, this
+# directory is not served over HTTP.
+APP_STORAGE_ROOT = os.path.join(PROJECT_PATH, "app-data/")
 
 # The maximum size of user uploaded images in bytes. If you use NGINX, note
 # that also it needs to support at least this size.
