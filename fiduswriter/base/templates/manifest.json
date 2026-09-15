@@ -18,5 +18,26 @@
       "type": "image/png",
       "sizes": "512x512"
     }
+  ],
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "application/vnd.fiduswriter+zip": [".fidus"],
+        "application/fidus+zip": [".fidus"],
+        "application/vnd.fiduswriter.book+zip": [".fidusbook"],
+        "application/fidusbook+zip": [".fidusbook"],
+        "application/vnd.fiduswriter.template+zip": [".fidustemplate"],
+        "application/fidustemplate+zip": [".fidustemplate"]
+      },
+      "icons": [
+        {
+          "src": "{% static "img/icon_192.avif" %}",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ],
+      "launch_type": "single-client"
+    }
   ]
 }
