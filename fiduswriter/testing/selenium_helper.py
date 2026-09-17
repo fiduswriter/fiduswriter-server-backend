@@ -209,6 +209,11 @@ class SeleniumHelper:
                         "Chrome/150.0.0.0 Safari/537.36"
                     )
             options.add_argument("--disable-gpu")
+            if os.geteuid() == 0:
+                # Chrome cannot use its sandbox when running as root, which is
+                # the case inside the Forgejo runner containers.
+                options.add_argument("--no-sandbox")
+                options.add_argument("--disable-dev-shm-usage")
             wait_time = 20
         else:
             wait_time = 10
