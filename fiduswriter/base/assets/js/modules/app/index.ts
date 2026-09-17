@@ -114,7 +114,10 @@ function launchedFileExtension(file: File): string {
     return parts.length > 1 ? parts.pop()! : ""
 }
 
-function waitForElement(id: string, timeout = 3000): Promise<HTMLElement | null> {
+function waitForElement(
+    id: string,
+    timeout = 3000
+): Promise<HTMLElement | null> {
     return new Promise(resolve => {
         const existing = document.getElementById(id)
         if (existing) {
@@ -192,9 +195,12 @@ function setupFileHandling(app: App): void {
                     )
                     continue
                 }
-                if (window.location.pathname !== spec.route && !entry.navigated) {
+                if (
+                    window.location.pathname !== spec.route &&
+                    !entry.navigated
+                ) {
                     entry.navigated = true
-                    void app.goTo(spec.route)
+                    app.goTo(spec.route).catch(() => undefined)
                     return
                 }
                 const actions = (app.page as any)?.mod?.actions
@@ -216,7 +222,9 @@ function setupFileHandling(app: App): void {
                     addAlert(
                         "info",
                         interpolate(
-                            gettext('Selected "%s". Confirm to finish the import.'),
+                            gettext(
+                                'Selected "%s". Confirm to finish the import.'
+                            ),
                             [entry.file.name]
                         )
                     )
@@ -258,7 +266,7 @@ function setupFileHandling(app: App): void {
         return result
     }
 
-    void dispatch()
+    dispatch().catch(() => undefined)
 }
 
 setupFileHandling(theApp)

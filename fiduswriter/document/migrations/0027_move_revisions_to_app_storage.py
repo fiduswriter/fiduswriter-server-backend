@@ -12,15 +12,15 @@ def move_revisions_to_app_storage(apps, schema_editor):
     DocumentRevision = apps.get_model("document", "DocumentRevision")
     moved = 0
     missing = 0
-    for revision in DocumentRevision.objects.exclude(file_object="").iterator():
+    for revision in DocumentRevision.objects.exclude(
+        file_object=""
+    ).iterator():
         name = revision.file_object.name
         base_name = name.split("/")[-1]
         target_path = os.path.join(settings.APP_STORAGE_ROOT, name)
         legacy_paths = [
             os.path.join(settings.MEDIA_ROOT, name),
-            os.path.join(
-                settings.MEDIA_ROOT, "document-revisions", base_name
-            ),
+            os.path.join(settings.MEDIA_ROOT, "document-revisions", base_name),
         ]
         if os.path.isfile(target_path):
             # Already moved. Clean up any leftover in the old location.
@@ -93,14 +93,17 @@ def move_revisions_to_app_storage(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('document', '0026_fidus_3_6'),
+        ("document", "0026_fidus_3_6"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='documentrevision',
-            name='file_object',
-            field=models.FileField(storage=document.models.create_revision_storage, upload_to=document.models.revision_filename),
+            model_name="documentrevision",
+            name="file_object",
+            field=models.FileField(
+                storage=document.models.create_revision_storage,
+                upload_to=document.models.revision_filename,
+            ),
         ),
         migrations.RunPython(
             move_revisions_to_app_storage, migrations.RunPython.noop

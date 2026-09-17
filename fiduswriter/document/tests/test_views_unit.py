@@ -859,9 +859,7 @@ class GetRevisionViewTest(TestCase):
         name = self.revision.file_object.name
         self.assertTrue(name.startswith("document-revisions/"))
         self.assertTrue(
-            os.path.isfile(
-                os.path.join(settings.APP_STORAGE_ROOT, name)
-            )
+            os.path.isfile(os.path.join(settings.APP_STORAGE_ROOT, name))
         )
         self.assertFalse(
             os.path.isfile(os.path.join(settings.MEDIA_ROOT, name))
@@ -975,9 +973,7 @@ class MoveRevisionsToAppStorageTest(TestCase):
             b"data11",
         )
         self.assertEqual(
-            open(
-                os.path.join(self.app_storage_root, "12.fidus"), "rb"
-            ).read(),
+            open(os.path.join(self.app_storage_root, "12.fidus"), "rb").read(),
             b"data12",
         )
         self.assertFalse(os.path.exists(legacy_dir))
@@ -1016,9 +1012,7 @@ class MoveRevisionsToAppStorageTest(TestCase):
         with open(os.path.join(self.media_root, "17.fidus"), "wb") as f:
             f.write(b"orphan2")
         self._run_migration()
-        orphan_dir = os.path.join(
-            self.app_storage_root, "orphaned-revisions"
-        )
+        orphan_dir = os.path.join(self.app_storage_root, "orphaned-revisions")
         self.assertFalse(os.path.exists(legacy_dir))
         self.assertEqual(
             open(os.path.join(orphan_dir, "16.fidus"), "rb").read(),
