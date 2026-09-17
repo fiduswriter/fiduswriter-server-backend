@@ -94,7 +94,9 @@ class E2EEBasicTest(SeleniumHelper, ChannelsLiveServerTestCase):
                 )
             )
 
-    def create_e2ee_document_via_ui(self, password="SecurePass123"):
+    def create_e2ee_document_via_ui(
+        self, password="SecurePass123", retry=True
+    ):
         """
         Create a new E2EE document through the UI.
         The frontend has E2EE_MODE baked in as "enabled", so we must
@@ -116,8 +118,14 @@ class E2EEBasicTest(SeleniumHelper, ChannelsLiveServerTestCase):
         # Select "Encrypted" radio button
         self.driver.find_element(By.ID, "e2ee").click()
         # Click "Create"
-        self.driver.find_element(
-            By.CSS_SELECTOR, ".fw-dialog .fw-dark"
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    "//div[contains(@class, 'fw-dialog')]"
+                    "//button[normalize-space()='Create']",
+                )
+            )
         ).click()
 
         self._skip_passphrase_offer_if_present()
@@ -133,14 +141,30 @@ class E2EEBasicTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self._fill_input("e2ee-confirm-password-input", password)
 
         # Click "Create Encrypted Document"
-        self.driver.find_element(
-            By.CSS_SELECTOR, ".fw-dialog .fw-dark"
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    "//button[normalize-space()='Create Encrypted Document']",
+                )
+            )
         ).click()
 
-        # Wait for editor to load
-        WebDriverWait(self.driver, self.wait_time).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
-        )
+        # Wait for editor to load. The dialog closes before the document is
+        # created, so a dropped/failed create request cannot be retried by
+        # clicking again. Restart the flow once instead.
+        try:
+            WebDriverWait(self.driver, self.wait_time).until(
+                EC.presence_of_element_located(
+                    (By.CLASS_NAME, "editor-toolbar")
+                )
+            )
+        except TimeoutException:
+            if not retry:
+                raise
+            return self.create_e2ee_document_via_ui(
+                password=password, retry=False
+            )
 
         # Extract document ID from URL
         url = self.driver.current_url
@@ -704,7 +728,9 @@ class E2EEAccessRightsTest(SeleniumHelper, ChannelsLiveServerTestCase):
                 )
             )
 
-    def create_e2ee_document_via_ui(self, password="SecurePass123"):
+    def create_e2ee_document_via_ui(
+        self, password="SecurePass123", retry=True
+    ):
         """Helper to create an E2EE document through the UI."""
         self.driver.get(self.base_url)
         WebDriverWait(self.driver, self.wait_time).until(
@@ -718,8 +744,14 @@ class E2EEAccessRightsTest(SeleniumHelper, ChannelsLiveServerTestCase):
             EC.presence_of_element_located((By.CSS_SELECTOR, ".fw-dialog"))
         )
         self.driver.find_element(By.ID, "e2ee").click()
-        self.driver.find_element(
-            By.CSS_SELECTOR, ".fw-dialog .fw-dark"
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    "//div[contains(@class, 'fw-dialog')]"
+                    "//button[normalize-space()='Create']",
+                )
+            )
         ).click()
 
         self._skip_passphrase_offer_if_present()
@@ -729,13 +761,27 @@ class E2EEAccessRightsTest(SeleniumHelper, ChannelsLiveServerTestCase):
         )
         self._fill_input("e2ee-new-password-input", password)
         self._fill_input("e2ee-confirm-password-input", password)
-        self.driver.find_element(
-            By.CSS_SELECTOR, ".fw-dialog .fw-dark"
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    "//button[normalize-space()='Create Encrypted Document']",
+                )
+            )
         ).click()
 
-        WebDriverWait(self.driver, self.wait_time).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
-        )
+        try:
+            WebDriverWait(self.driver, self.wait_time).until(
+                EC.presence_of_element_located(
+                    (By.CLASS_NAME, "editor-toolbar")
+                )
+            )
+        except TimeoutException:
+            if not retry:
+                raise
+            return self.create_e2ee_document_via_ui(
+                password=password, retry=False
+            )
 
         doc_id = int(
             self.driver.current_url.split("/document/")[1].split("/")[0]
