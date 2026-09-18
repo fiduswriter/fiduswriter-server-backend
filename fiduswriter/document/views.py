@@ -45,6 +45,13 @@ from user.helpers import Avatars
 from document.helpers.token_access import get_token_access
 
 
+# Number of covering diff messages kept for documents saved through the
+# non-collaborative ("direct") save endpoint. They let another client that is
+# behind catch up without recreating the steps, and are bounded so the JSON
+# column does not grow without limit (a direct save happens every ~10 s).
+DIRECT_SAVE_HISTORY_LENGTH = 200
+
+
 @login_required
 @ajax_required
 @require_POST
@@ -855,6 +862,20 @@ def save_document(request):
         # with a previous key.
         if document.diffs:
             document.diffs = []
+    else:
+        # Store the client's unconfirmed steps as a covering diff (one
+        # message per save, matching the version increment below) so that
+        # get_doc_data can hand them back to another client that needs to
+        # catch up. Clients verify that replaying the steps reproduces the
+        # server document and fall back to recreating them otherwise.
+        steps = request.JSON.get("steps")
+        message = {"ds": steps if isinstance(steps, list) else []}
+        client_id = request.JSON.get("client_id")
+        if client_id is not None:
+            message["cid"] = client_id
+        diffs = list(document.diffs or [])
+        diffs.append(message)
+        document.diffs = diffs[-DIRECT_SAVE_HISTORY_LENGTH:]
 
     document.version += 1
     document.save()

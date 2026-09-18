@@ -24,7 +24,10 @@ from document.models import (
     ShareToken,
     DocumentRevision,
 )
-from document.views import _handle_automatic_key_sharing
+from document.views import (
+    DIRECT_SAVE_HISTORY_LENGTH,
+    _handle_automatic_key_sharing,
+)
 
 _revision_migration = importlib.import_module(
     "document.migrations.0027_move_revisions_to_app_storage"
@@ -640,6 +643,115 @@ class SaveDocumentViewTest(TestCase):
         self.assertEqual(response_b2.status_code, 200)
         doc.refresh_from_db()
         self.assertEqual(doc.version, 2)
+
+    def test_save_document_stores_covering_steps(self):
+        doc = Document.objects.create(
+            owner=self.owner,
+            template=self.template,
+            content={"type": "doc", "content": [{"type": "title"}]},
+            title="Test",
+            version=0,
+            diffs=[],
+        )
+        steps = [
+            {
+                "stepType": "replace",
+                "from": 1,
+                "to": 1,
+                "slice": {"content": [{"type": "text", "text": "hi"}]},
+            }
+        ]
+        response = json_post(
+            self.client,
+            "/api/document/save/",
+            {
+                "id": doc.id,
+                "content": {
+                    "type": "doc",
+                    "content": [
+                        {"type": "title", "content": [{"text": "hi"}]}
+                    ],
+                },
+                "comments": {},
+                "bibliography": {},
+                "title": "Test",
+                "version": 0,
+                "steps": steps,
+                "client_id": 42,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        doc.refresh_from_db()
+        self.assertEqual(
+            doc.diffs, [{"ds": steps, "cid": 42}]
+        )
+
+        # A client that is behind gets the covering steps back.
+        data_response = json_post(
+            self.client,
+            "/api/document/get_doc_data/",
+            {"id": doc.id, "v": 0},
+        )
+        self.assertEqual(data_response.status_code, 200)
+        self.assertEqual(
+            data_response.json()["m"], [{"ds": steps, "cid": 42}]
+        )
+
+    def test_save_document_without_steps_stores_empty_covering_message(self):
+        doc = Document.objects.create(
+            owner=self.owner,
+            template=self.template,
+            content={"type": "doc", "content": [{"type": "title"}]},
+            title="Test",
+            version=0,
+            diffs=[],
+        )
+        response = json_post(
+            self.client,
+            "/api/document/save/",
+            {
+                "id": doc.id,
+                "content": {"type": "doc", "content": [{"type": "title"}]},
+                "comments": {},
+                "bibliography": {},
+                "title": "Test",
+                "version": 0,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        doc.refresh_from_db()
+        # One message per version keeps the version/diffs-length invariant
+        # used by get_doc_data; replaying the empty steps will not reproduce
+        # the document, so clients fall back to recreating them.
+        self.assertEqual(doc.diffs, [{"ds": []}])
+
+    def test_save_document_caps_diff_history(self):
+        doc = Document.objects.create(
+            owner=self.owner,
+            template=self.template,
+            content={"type": "doc", "content": [{"type": "title"}]},
+            title="Test",
+            version=0,
+            diffs=[{"ds": []} for _ in range(DIRECT_SAVE_HISTORY_LENGTH)],
+        )
+        response = json_post(
+            self.client,
+            "/api/document/save/",
+            {
+                "id": doc.id,
+                "content": {"type": "doc", "content": [{"type": "title"}]},
+                "comments": {},
+                "bibliography": {},
+                "title": "Test",
+                "version": 0,
+                "steps": [],
+                "client_id": 7,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        doc.refresh_from_db()
+        self.assertEqual(len(doc.diffs), DIRECT_SAVE_HISTORY_LENGTH)
+        self.assertEqual(doc.diffs[-1], {"ds": [], "cid": 7})
 
 
 class SaveDocumentBlockedInCollaborativeModeTest(TestCase):
