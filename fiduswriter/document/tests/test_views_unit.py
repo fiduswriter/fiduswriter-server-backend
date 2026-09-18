@@ -682,9 +682,7 @@ class SaveDocumentViewTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         doc.refresh_from_db()
-        self.assertEqual(
-            doc.diffs, [{"ds": steps, "cid": 42}]
-        )
+        self.assertEqual(doc.diffs, [{"ds": steps, "cid": 42}])
 
         # A client that is behind gets the covering steps back.
         data_response = json_post(
@@ -693,9 +691,7 @@ class SaveDocumentViewTest(TestCase):
             {"id": doc.id, "v": 0},
         )
         self.assertEqual(data_response.status_code, 200)
-        self.assertEqual(
-            data_response.json()["m"], [{"ds": steps, "cid": 42}]
-        )
+        self.assertEqual(data_response.json()["m"], [{"ds": steps, "cid": 42}])
 
     def test_save_document_without_steps_stores_empty_covering_message(self):
         doc = Document.objects.create(
@@ -752,6 +748,106 @@ class SaveDocumentViewTest(TestCase):
         doc.refresh_from_db()
         self.assertEqual(len(doc.diffs), DIRECT_SAVE_HISTORY_LENGTH)
         self.assertEqual(doc.diffs[-1], {"ds": [], "cid": 7})
+
+
+@override_settings(EDITOR_SAVE_MODE="direct")
+class GetDocumentVersionViewTest(TestCase):
+    """Tests for the cheap version probe used by direct-save mode."""
+
+    def setUp(self):
+        self.client = Client()
+        self.owner = User.objects.create_user(
+            username="docverowner", password="pass"
+        )
+        self.other = User.objects.create_user(
+            username="docverother", password="pass"
+        )
+        self.template = DocumentTemplate.objects.create(
+            title="Default Template", content={}
+        )
+        self.client.force_login(self.owner)
+
+    def _create_doc(self, **kwargs):
+        defaults = {
+            "owner": self.other,
+            "template": self.template,
+            "title": "Doc",
+            "version": 3,
+        }
+        defaults.update(kwargs)
+        return Document.objects.create(**defaults)
+
+    def test_owner_gets_version(self):
+        doc = self._create_doc(owner=self.owner)
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"version": 3})
+
+    def test_user_with_access_right_gets_version(self):
+        doc = self._create_doc()
+        AccessRight.objects.create(
+            document=doc, holder_obj=self.owner, rights="write"
+        )
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["version"], 3)
+
+    def test_user_without_access_gets_401(self):
+        doc = self._create_doc()
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.json(), {})
+
+    def test_anonymous_user_gets_401(self):
+        doc = self._create_doc()
+        self.client.logout()
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_version_reflects_saves(self):
+        doc = self._create_doc(owner=self.owner, version=0)
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.json()["version"], 0)
+        save_response = json_post(
+            self.client,
+            "/api/document/save/",
+            {
+                "id": doc.id,
+                "content": {"type": "doc", "content": [{"type": "title"}]},
+                "comments": {},
+                "bibliography": {},
+                "title": "Doc",
+                "version": 0,
+            },
+        )
+        self.assertEqual(save_response.status_code, 200)
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.json()["version"], 1)
+
+    def test_e2ee_returns_snapshot_version(self):
+        doc = self._create_doc(
+            owner=self.owner,
+            version=5,
+            e2ee=True,
+            e2ee_snapshot_version=2,
+        )
+        response = json_post(
+            self.client, "/api/document/get_doc_version/", {"id": doc.id}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["version"], 2)
 
 
 class SaveDocumentBlockedInCollaborativeModeTest(TestCase):

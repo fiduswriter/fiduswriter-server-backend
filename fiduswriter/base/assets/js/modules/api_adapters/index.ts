@@ -128,6 +128,16 @@ export class DjangoDocumentApi implements DocumentApi {
         )
     }
 
+    /**
+     * Cheap version probe used by the editor's direct-save mode to detect
+     * changes by other users without downloading the full document.
+     */
+    getDocumentVersion(data: {id: number; token?: string}) {
+        return postJson("/api/document/get_doc_version/", data).then(
+            ({json, status}) => ({json, status})
+        )
+    }
+
     saveDocument(
         data: Record<string, unknown>,
         options: {keepalive?: boolean} = {}

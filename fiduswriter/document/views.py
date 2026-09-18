@@ -892,6 +892,56 @@ def save_document(request):
     return JsonResponse(response, status=200)
 
 
+@ajax_required
+@require_POST
+def get_doc_version(request):
+    """Return only the current version of a document.
+
+    Used by the editor's direct-save mode (``EDITOR_SAVE_MODE = "direct"``)
+    as a cheap probe for changes made by other users: the periodic remote
+    check can compare a number instead of downloading the whole document.
+    Access rules mirror ``get_doc_data`` (owner, staff, access rights or a
+    share token), but the response contains no document content.
+    """
+    doc_id = request.JSON.get("id")
+    token_str = request.JSON.get("token", "")
+    doc = None
+
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            doc = Document.objects.filter(id=doc_id).first()
+        else:
+            doc = (
+                Document.objects.filter(id=doc_id)
+                .filter(
+                    Q(owner=request.user) | Q(accessright__user=request.user)
+                )
+                .first()
+            )
+        if not doc and token_str:
+            token_doc, _rights = get_token_access(token_str)
+            if token_doc and str(token_doc.id) == str(doc_id):
+                doc = token_doc
+    elif token_str:
+        token_doc, _rights = get_token_access(token_str)
+        if token_doc and str(token_doc.id) == str(doc_id):
+            doc = token_doc
+
+    if not doc:
+        return JsonResponse({}, status=401)
+
+    if doc.e2ee:
+        # Mirrors the "v" that get_doc_data exposes for encrypted documents.
+        version = (
+            doc.e2ee_snapshot_version
+            if doc.e2ee_snapshot_version is not None
+            else 0
+        )
+    else:
+        version = doc.version
+    return JsonResponse({"version": version}, status=200)
+
+
 @login_required
 @ajax_required
 @require_POST
