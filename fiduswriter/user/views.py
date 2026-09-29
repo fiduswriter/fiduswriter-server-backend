@@ -960,6 +960,7 @@ def update_preferences(request):
         "has_dismissed_passphrase_offer",
         "inline_references",
         "inline_math",
+        "grammar_check_continuous",
     }
     for key in allowed_keys:
         if key in request.JSON:

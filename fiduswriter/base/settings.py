@@ -1,3 +1,4 @@
+import importlib.util
 import os
 
 # pnpm 11+ fails installs with ERR_PNPM_IGNORED_BUILDS when a dependency has
@@ -597,3 +598,29 @@ ASGI_APPLICATION = "base.routing.application"
 # 'enabled'   - Both E2EE and non-encrypted documents are supported. EXPERIMENTAL
 # 'required'  - Only E2EE documents are allowed. EXPERIMENTAL
 E2EE_MODE = "disabled"  # Default: disabled for backward compatibility
+
+# PRINT_ENGINE selects the pagination engine used for printing and PDF
+# export:
+#   "paged-with-floats"  - paged-with-floats (LGPL-3.0), the default. Works
+#                          everywhere, including WordPress.org installs.
+#   "vivliostyle-pdf"    - vivliostyle-pdf wrapping @vivliostyle/print
+#                          (AGPL-3.0). Only available when the
+#                          `fiduswriter-vivliostyle` pip package (installable
+#                          via `pip install fiduswriter[vivliostyle]`) is
+#                          installed, as it contributes both the npm
+#                          dependency and the JavaScript for this engine.
+# The default below detects the extra automatically; it can be overridden
+# from configuration.py.
+def _vivliostyle_extra_installed() -> bool:
+    try:
+        return importlib.util.find_spec("fiduswriter.vivliostyle") is not None
+    except (ImportError, AttributeError):
+        # The fiduswriter namespace only exists when the packages are
+        # installed as such (pip/deb/rpm); source checkouts use plain app
+        # modules and always get the default engine.
+        return False
+
+
+PRINT_ENGINE = (
+    "vivliostyle-pdf" if _vivliostyle_extra_installed() else "paged-with-floats"
+)

@@ -121,6 +121,7 @@ def get_frontend_settings():
         "LANGUAGES": settings.LANGUAGES,
         "VERSION": get_version(),
         "EDITOR_SAVE_MODE": settings.EDITOR_SAVE_MODE,
+        "PRINT_ENGINE": getattr(settings, "PRINT_ENGINE", "paged-with-floats"),
         "E2EE_ENABLED": settings.E2EE_MODE != "disabled",
         "APPS": list(
             filter(

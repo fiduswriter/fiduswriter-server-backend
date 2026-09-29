@@ -896,7 +896,7 @@ class AdditionalScreenshotCollector(ScreenshotCollector):
                 self.close_dialog()
 
     # ------------------------------------------------------------------
-    # 13 languagetool
+    # 13 grammar check (built-in)
     # ------------------------------------------------------------------
 
     def capture_languagetool(self):

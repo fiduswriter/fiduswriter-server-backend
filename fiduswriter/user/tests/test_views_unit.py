@@ -307,6 +307,28 @@ class PreferencesViewTest(TestCase):
         data = response.json()
         self.assertTrue(data["preferences"]["has_dismissed_passphrase_offer"])
 
+    def test_update_preferences_grammar_check_continuous(self):
+        response = json_post(
+            self.client,
+            "/api/user/preferences/update/",
+            {"grammar_check_continuous": True},
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["preferences"]["grammar_check_continuous"])
+        # Persisted to the database, not just returned
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.preferences["grammar_check_continuous"])
+
+        response = json_post(
+            self.client,
+            "/api/user/preferences/update/",
+            {"grammar_check_continuous": False},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.user.refresh_from_db()
+        self.assertFalse(self.user.preferences["grammar_check_continuous"])
+
     def test_update_preferences_unknown_key_is_ignored(self):
         response = json_post(
             self.client,

@@ -125,7 +125,11 @@ module.exports = {
                     })
                 })
             ],
-            additionalManifestEntries: transpile.STATIC_FRONTEND_FILES.map(
+            additionalManifestEntries: transpile.STATIC_FRONTEND_FILES.filter(
+                // Language data packs (~200 MB) must not be precached; the
+                // grammar checker fetches each pack individually on demand.
+                url => !url.includes("lingotweaker-packs/")
+            ).map(
                 url => {
                     if (url.includes("/fonts/")) {
                         return {url, revision: transpile.VERSION.toString()}
