@@ -601,7 +601,7 @@ E2EE_MODE = "disabled"  # Default: disabled for backward compatibility
 
 # PRINT_ENGINE selects the pagination engine used for printing and PDF
 # export:
-#   "paged-with-floats"  - paged-with-floats (LGPL-3.0), the default. Works
+#   "paginate-for-print"  - paginate-for-print (LGPL-3.0), the default. Works
 #                          everywhere, including WordPress.org installs.
 #   "vivliostyle-pdf"    - vivliostyle-pdf wrapping @vivliostyle/print
 #                          (AGPL-3.0). Only available when the
@@ -622,5 +622,5 @@ def _vivliostyle_extra_installed() -> bool:
 
 
 PRINT_ENGINE = (
-    "vivliostyle-pdf" if _vivliostyle_extra_installed() else "paged-with-floats"
+    "vivliostyle-pdf" if _vivliostyle_extra_installed() else "paginate-for-print"
 )
