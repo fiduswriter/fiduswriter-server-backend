@@ -346,6 +346,81 @@ class PreferencesViewTest(TestCase):
         data = response.json()
         self.assertTrue(data["preferences"]["has_dismissed_passphrase_offer"])
 
+    def test_update_preferences_ignored_words_stored_trimmed(self):
+        response = json_post(
+            self.client,
+            "/api/user/preferences/update/",
+            {"grammar_check_ignored_words": [" teh ", "van der Berg"]},
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(
+            data["preferences"]["grammar_check_ignored_words"],
+            ["teh", "van der Berg"],
+        )
+        self.user.refresh_from_db()
+        self.assertEqual(
+            self.user.preferences["grammar_check_ignored_words"],
+            ["teh", "van der Berg"],
+        )
+
+    def test_update_preferences_ignored_rules_stored(self):
+        response = json_post(
+            self.client,
+            "/api/user/preferences/update/",
+            {"grammar_check_ignored_rules": ["EN_REPEATEDWORDS"]},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.user.refresh_from_db()
+        self.assertEqual(
+            self.user.preferences["grammar_check_ignored_rules"],
+            ["EN_REPEATEDWORDS"],
+        )
+
+    def test_update_preferences_replaces_whole_list(self):
+        self.user.preferences = {"grammar_check_ignored_words": ["teh"]}
+        self.user.save()
+        response = json_post(
+            self.client,
+            "/api/user/preferences/update/",
+            {"grammar_check_ignored_words": ["fwtoolkit"]},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.user.refresh_from_db()
+        self.assertEqual(
+            self.user.preferences["grammar_check_ignored_words"],
+            ["fwtoolkit"],
+        )
+
+    def test_update_preferences_ignored_words_rejects_invalid_shapes(self):
+        for invalid in (
+            "teh",  # not a list
+            ["teh", 42],  # non-string entry
+            [""],  # empty after strip
+            [" " * 201],  # over-length entry
+            ["x"] * 5001,  # over the list cap
+        ):
+            response = json_post(
+                self.client,
+                "/api/user/preferences/update/",
+                {"grammar_check_ignored_words": invalid},
+            )
+            self.assertEqual(response.status_code, 400, invalid)
+        # Nothing was stored
+        self.user.refresh_from_db()
+        self.assertNotIn("grammar_check_ignored_words", self.user.preferences)
+
+    def test_update_preferences_ignored_rules_rejects_invalid_shapes(self):
+        for invalid in ("R_1", ["R_1", None], ["x"] * 501):
+            response = json_post(
+                self.client,
+                "/api/user/preferences/update/",
+                {"grammar_check_ignored_rules": invalid},
+            )
+            self.assertEqual(response.status_code, 400, invalid)
+        self.user.refresh_from_db()
+        self.assertNotIn("grammar_check_ignored_rules", self.user.preferences)
+
 
 # ---------------------------------------------------------------------------
 # has_encryption_keys view

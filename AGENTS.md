@@ -460,7 +460,7 @@ See also the `translate_all.py` management command (`fiduswriter/devel/managemen
 
 This repository is part of a larger set of Fidus Writer repositories that are
 normally checked out next to one another: `fwtoolkit/`, `fiduswriter-document-ts/`,
-`fiduswriter-books-plugin-ts/`, `fiduswriter-cli-ts/`,
+`fiduswriter-books-ts/`, `fiduswriter-cli-ts/`,
 `fiduswriter-editor-ts/`, and
 `fiduswriter-bibliography-manager-ts/`. The exact parent directory varies by
 developer. See the `AGENTS.md` file in the sibling directory that contains all

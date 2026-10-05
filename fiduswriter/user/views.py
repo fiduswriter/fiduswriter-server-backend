@@ -966,6 +966,31 @@ def update_preferences(request):
         if key in request.JSON:
             preferences[key] = request.JSON[key]
 
+    # Spell-checker ignore lists: lists of strings with per-entry and
+    # per-list limits (kept in sync with the editor's
+    # normalizeIgnoredList). The whole list is replaced on every update.
+    ignored_list_limits = {
+        "grammar_check_ignored_words": 5000,
+        "grammar_check_ignored_rules": 500,
+    }
+    for key, max_entries in ignored_list_limits.items():
+        if key in request.JSON:
+            entries = request.JSON[key]
+            if (
+                not isinstance(entries, list)
+                or len(entries) > max_entries
+                or not all(
+                    isinstance(entry, str)
+                    and 0 < len(entry.strip()) <= 200
+                    for entry in entries
+                )
+            ):
+                return JsonResponse(
+                    {"errors": [_(f"Invalid value for {key}.")]},
+                    status=400,
+                )
+            preferences[key] = [entry.strip() for entry in entries]
+
     user.preferences = preferences
     user.save()
 
