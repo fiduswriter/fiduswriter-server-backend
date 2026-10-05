@@ -30,6 +30,818 @@ msgstr "Belge Şablonları"
 msgid "Templates"
 msgstr "Şablonlar"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "Kitap erişim verileri yüklenemiyor."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "Kişi ekle veya yeni kullanıcı davet et"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "Kişi ekle"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "Gönder"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "Kitabınızı başkalarıyla paylaşın"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "Yazma"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "Okuma"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "Erişim hakları kaydedilemiyor."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "Erişim hakları kaydedildi"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "Davet Et"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "Kişilerim"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "Kişiler"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "İş birlikçilerim"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "İş birlikçiler"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "Haklar"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "Sil"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "Temel bilgi"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "Temel kitap bilgisi"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "Bölümler"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "Bölüm olarak atanan belgeler"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "Kaynakça"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "Kaynakça ile ilgili ayarlar"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Epub ile ilgili ayarlar"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "DOCX ile ilgili ayarlar"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "ODT ile ilgili ayarlar"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "Yazdır/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "Yazdırma ile ilgili ayarlar"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "Kontrol"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "Kitap üzerinde kontrol yap"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "Kitap silinemedi"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "Kitap silindi"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "Silmeyi onayla"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "Aşağıdaki kitapları gerçekten silmek istiyor musunuz?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "Aşağıdaki kitabı gerçekten silmek istiyor musunuz?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "Başlıksız"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "Bölümü Düzenle"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "Kitap kaydedilemedi"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "Kopyası"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "Kitap kopyalanamadı"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "Bölümler şifrelenmiş (E2EE) belgeler olarak içe aktarılacak."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "Bölümleri şifrelenmiş (E2EE) belgeler olarak içe aktar"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "Bir kitap içe aktar"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr "Bir .fidusbook dosyası seçin:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "İçe Aktar"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "Dosya çok büyük"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "Kitap Oluştur"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "Kitabı Düzenle"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr ""
+"Bu kitap şifrelenmiş bölümler içeriyor. Bu kitabı dışa aktarmak veya kontrol"
+" yapmak için kişisel bir parola gerekli."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "Kitap kaydı oluşturulamadı."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "Yanlış parola. Lütfen tekrar deneyin."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "Kitap Genel Bakış"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "Kullanılabilir kitap yok"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "Kitap bulunamadı"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "Başlık"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "Oluşturulma"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "Son değişiklik"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "Sahip"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "Kitapların verileri yüklenemiyor."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "Çevrimdışıyken kitapları silemezsiniz."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr ""
+"Boş bir klasör bırakılırsa silinecektir. Bu klasörü gerçekten silmek istiyor"
+" musunuz?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "Kitap"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "Dışa aktarma"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "Dışa aktarma tamamlandı."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "Kitap dışa aktarımı başarısız oldu."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "Yeni kitap oluştur"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "Yeni klasör oluştur"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Fidusbook dosyasından kitap içe aktar"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "Kitapları ara"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "Seçileni taşı"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "Seçilen kitapları taşı."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "Kitapları taşı"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "Kitabı taşı"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "Kitap taşındı"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "Kitap taşınamadı"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "Seçileni sil"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "Seçilen kitapları sil."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "Diğer kullanıcıların kitaplarını silemezsiniz."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "Seçileni paylaş"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "Seçilen kitapları paylaş."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "Diğer kullanıcıların kitaplarını paylaşamazsınız."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "Seçileni kopyala"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "Seçilen kitapları kopyala."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "Seçileni BITS olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "Seçilen kitapları BITS olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "Seçileni Epub olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "Seçilen kitapları Epub olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "Seçileni HTML olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "Seçilen kitapları HTML olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "Seçileni Birleşik HTML olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "Seçilen kitapları tek dosya HTML olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "Seçileni LaTeX olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "Seçilen kitapları LaTeX olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "Seçileni DOCX olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "Seçilen kitapları DOCX olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "Bu kitabın bir DOCX şablonu yok."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "Seçileni ODT olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "Seçilen kitapları ODT olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "Bu kitabın bir ODT şablonu yok."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "Seçileni Yazdır/PDF olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "Seçilen kitapları yazdırma iletişim kutusuna aktar."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "Seçileni Fidusbook olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr ""
+"Seçilen kitapları .fidusbook dosyaları olarak dışa aktar (başka bir sunucuya"
+" taşımak için)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "BITS olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "Kitabı Book Interchange Tag Set (BITS) olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Epub olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "Kitabı Epub olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "HTML olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "Kitabı HTML olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Birleşik HTML olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "Kitabı tek dosya HTML olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "LaTeX olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "Kitabı LaTeX olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "DOCX olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "Kitabı DOCX olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "ODT olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "Kitabı ODT olarak dışa aktar."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "Yazdır/PDF olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "Kitabı yazdırma iletişim kutusuna aktar."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Fidusbook olarak dışa aktar"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr ""
+"Kitabı .fidusbook dosyası olarak dışa aktar (başka bir sunucuya taşımak "
+"için)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "Bölüm"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "Çözülmemiş izlenen değişiklikler"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "Hedefi olmayan iç bağlantılar"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "Çözülmemiş yorumlar"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "Hedefi olmayan çapraz referanslar"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "Kitap hiç bölüm içermiyor."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "Erişim yok"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "Bölüm başlığı yok"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "Herhangi bir sorun bulunamadı:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "Kitap bölümler içeriyor."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "Her bölümün bir başlığı var."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "Çözülmemiş izlenen değişiklik yok."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "Çözülmemiş yorum yok."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "Tüm çapraz referansların çalışan hedefleri var."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "Tüm iç bağlantıların çalışan hedefleri var."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"Bu kitap şifrelenmiş bölümler içermektedir. Akıl sağlığı kontrolünü "
+"gerçekleştirmek için kişisel bir parola gerekir. Lütfen profil ayarlarınızda"
+" kişisel parolanızı oluşturun veya kilidini açın."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr ""
+"Bir veya daha fazla şifrelenmiş bölümün şifresi çözülemedi. Ayrıntılar için "
+"hata bildirimlerine bakın."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "Yazar"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "Alt başlık"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Sürüm"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "Dil"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "Dil seçin"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "Yayımcı"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "Telif hakkı bildirimi"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "Virgülle ayrılmış anahtar kelimeler"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "Anahtar kelimeler"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "Tanım"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "Örn: 2024 veya Ocak 2024"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "Yayınlanma tarihi"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "Örn: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "Seri başlığı"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "Seri konumu"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "Alıntı stili"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "Kitap için alıntı stili seçin"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 × 12 inç)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Quarto (12 × 9 inç)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 × 6 inç)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "Kitap stili"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "Kitap için stil sayfası seçin"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "Kâğıt boyutu"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "Kitap için kâğıt boyutu seçin"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "Kapak görseli"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "Bir kapak görseli seçin"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "Görsel Seç"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "Kapak görselini kaldır"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "Görseli Kaldır"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT Şablonu"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "Bir ODT şablon dosyası seçin"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "ODT şablon dosyasını seçin"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "ODT şablon dosyasını kaldır"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX Şablonu"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "Bir DOCX şablon dosyası seçin"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "DOCX şablon dosyasını seçin"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "DOCX şablon dosyasını kaldır"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "Kontrol yap"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "Belgelerim"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "Kitap bölümleri"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "Sırala"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "Şifreli belge"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "Kitap kısmı"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr ""
+"Bu bölüm kitabın bir kısmını başlatıyorsa, o kısmın başlığını buraya "
+"belirtin"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "Kitap kısmı başlığı"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "kitapları oluştur"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "Kitaplar"
+
 #~ msgid "Improve text with LLM"
 #~ msgstr "LLM ile metni iyileştirin"
 
@@ -483,14 +1295,8 @@ msgstr "Şablonlar"
 #~ msgid "OK"
 #~ msgstr "TAMAM"
 
-#~ msgid "Untitled"
-#~ msgstr "İsimsiz"
-
 #~ msgid "New folder"
 #~ msgstr "Yeni klasör"
-
-#~ msgid "Submit"
-#~ msgstr "Gönder"
 
 #~ msgid "Create folder"
 #~ msgstr "Klasör oluştur"
@@ -512,9 +1318,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Site navigation"
 #~ msgstr "Sitede gezinme"
-
-#~ msgid "Contacts"
-#~ msgstr "Kişiler"
 
 #~ msgid "Log out"
 #~ msgstr "Oturumu kapat"
@@ -606,9 +1409,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Log in"
 #~ msgstr "Giriş yapmak"
-
-#~ msgid "Select language"
-#~ msgstr "Dil seçin"
 
 #~ msgid "Update"
 #~ msgstr "Güncelle"
@@ -748,9 +1548,6 @@ msgstr "Şablonlar"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "Kaynakça içe aktarmayla ilgili bir sorun oluştu"
 
-#~ msgid "Import"
-#~ msgstr "İçe Aktar"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "Kaynakçayı içe aktarma"
 
@@ -777,26 +1574,14 @@ msgstr "Şablonlar"
 #~ msgid "Sourcetype"
 #~ msgstr "Kaynak türü"
 
-#~ msgid "Author"
-#~ msgstr "Yazar"
-
 #~ msgid "Published"
 #~ msgstr "Yayınlandı"
 
 #~ msgid "Edit Categories"
 #~ msgstr "Kategorileri Düzenle"
 
-#~ msgid "Delete"
-#~ msgstr "Sil"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Silmeyi onayla"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "Kaynakça öğelerini sil"
-
-#~ msgid "Delete selected"
-#~ msgstr "Seçileni sil"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "Seçili kaynakça girişlerini silin."
@@ -929,9 +1714,6 @@ msgstr "Şablonlar"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "Tüm yazarlar (basit)"
-
-#~ msgid "Keywords"
-#~ msgstr "Anahtar Kelimeler"
 
 #~ msgid "Bibliography block"
 #~ msgstr "Kaynakça bloğu"
@@ -1145,9 +1927,6 @@ msgstr "Şablonlar"
 #~ msgid "None"
 #~ msgstr "Hiçbiri"
 
-#~ msgid "Subtitle"
-#~ msgstr "Alt başlık"
-
 #~ msgid "Title (translated)"
 #~ msgstr "Başlık (çevrilmiş)"
 
@@ -1177,9 +1956,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Allowed headings"
 #~ msgstr "İzin verilen başlıklar"
-
-#~ msgid "Language"
-#~ msgstr "Dil"
 
 #~ msgid "Document language"
 #~ msgstr "Belge dili"
@@ -1345,9 +2121,6 @@ msgstr "Şablonlar"
 #~ msgid "Basic access rights"
 #~ msgstr "Temel erişim hakları"
 
-#~ msgid "Write"
-#~ msgstr "Yazmak"
-
 #~ msgid "Write tracked"
 #~ msgstr "Takip edileni yaz"
 
@@ -1356,9 +2129,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Comment"
 #~ msgstr "Yorum"
-
-#~ msgid "Read"
-#~ msgstr "Okumak"
 
 #~ msgid "Review"
 #~ msgstr "Gözden geçirmek"
@@ -1405,17 +2175,8 @@ msgstr "Şablonlar"
 #~ msgid "Could not revoke share link."
 #~ msgstr "Paylaşım bağlantısı iptal edilemedi."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "Erişim hakları kaydedildi"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "Erişim hakları kaydedilemedi"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "Kişi ekleyin veya yeni kullanıcı davet edin"
-
-#~ msgid "Add contact"
-#~ msgstr "Kişi ekle"
 
 #~ msgid "Share your document with others"
 #~ msgstr "Belgenizi başkalarıyla paylaşın"
@@ -1425,18 +2186,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Share link"
 #~ msgstr "Bağlantıyı paylaş"
-
-#~ msgid "My contacts"
-#~ msgstr "Kişilerim"
-
-#~ msgid "My collaborators"
-#~ msgstr "işbirlikçilerim"
-
-#~ msgid "Collaborators"
-#~ msgstr "İşbirlikçiler"
-
-#~ msgid "Rights"
-#~ msgstr "Haklar"
 
 #~ msgid "Create new share link"
 #~ msgstr "Yeni paylaşım bağlantısı oluştur"
@@ -1485,9 +2234,6 @@ msgstr "Şablonlar"
 #~ "Şifreyi yukarıya girerseniz, bağlantıya eklenecektir (# işaretinden sonra). "
 #~ "Bağlantıya sahip olan herkes belgeyi açabilir. Bu tür bağlantıları yalnızca "
 #~ "güvenli kanallar aracılığıyla paylaşın."
-
-#~ msgid "Invite"
-#~ msgstr "Davet etmek"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "Şifreli Belge"
@@ -1547,9 +2293,6 @@ msgstr "Şablonlar"
 #~ msgid "Import a document"
 #~ msgstr "Bir belgeyi içe aktar"
 
-#~ msgid "File too large"
-#~ msgstr "Dosya çok büyük"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "ZIP'te içe aktarılabilir dosya bulunamadı"
 
@@ -1595,13 +2338,6 @@ msgstr "Şablonlar"
 #~ msgid "Document Overview"
 #~ msgstr "Belgeye Genel Bakış"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr ""
-#~ "Boş bir klasör bırakmak onu siler. Bu klasörü gerçekten silmek istiyor "
-#~ "musunuz?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "Çevrimdışıyken bir belgeyi açamazsınız."
 
@@ -1613,15 +2349,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Revisions"
 #~ msgstr "Revizyonlar"
-
-#~ msgid "Created"
-#~ msgstr "Oluşturuldu"
-
-#~ msgid "Last changed"
-#~ msgstr "Son değişiklik"
-
-#~ msgid "Owner"
-#~ msgstr "Mal sahibi"
 
 #~ msgid "Undefined"
 #~ msgstr "Tanımlanmamış"
@@ -1720,9 +2447,6 @@ msgstr "Şablonlar"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "Parola ayarlanamadı:"
 
-#~ msgid "Move selected"
-#~ msgstr "Seçileni taşı"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "Seçilen belgeleri taşıyın."
 
@@ -1738,35 +2462,20 @@ msgstr "Şablonlar"
 #~ msgid "Could not move document"
 #~ msgstr "Belge taşınamadı"
 
-#~ msgid "Share selected"
-#~ msgstr "Seçileni paylaş"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "Seçilen belgeleri paylaşın."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "Diğer kullanıcıların belgelerini paylaşamazsınız"
 
-#~ msgid "Copy selected"
-#~ msgstr "Seçileni kopyala"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "Seçilen belgeleri kopyalayın."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Epub olarak seçilen dışa aktarma"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "Seçilen belgeleri Epub dosyaları olarak dışa aktarın."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "Seçileni HTML olarak dışa aktar"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "Seçilen belgeleri HTML dosyaları olarak dışa aktarın."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "Dışa aktarma LaTeX olarak seçildi"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "Seçilen belgeleri LaTeX dosyaları olarak dışa aktarın."
@@ -1776,9 +2485,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "Seçilen belgeleri JATS dosyaları olarak dışa aktarın."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "BITS olarak seçilen dışa aktarma"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "Seçilen belgeleri BITS dosyaları olarak dışa aktarın."
@@ -1811,9 +2517,6 @@ msgstr "Şablonlar"
 #~ msgid "Create new document"
 #~ msgstr "Yeni belge oluştur"
 
-#~ msgid "Create new folder"
-#~ msgstr "Yeni klasör oluştur"
-
 #~ msgid "Import document"
 #~ msgstr "Belgeyi içe aktar"
 
@@ -1838,9 +2541,6 @@ msgstr "Şablonlar"
 #~ msgid "Time"
 #~ msgstr "Zaman"
 
-#~ msgid "Description"
-#~ msgstr "Tanım"
-
 #~ msgid "Recreate"
 #~ msgstr "Yeniden oluştur"
 
@@ -1855,9 +2555,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "Alıntı kaynaklarındaki değişiklikler takip edilmiyor!"
-
-#~ msgid "Bibliography"
-#~ msgstr "Kaynakça"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[Şifrelenmiş mesaj - şifre çözme başarısız oldu]"
@@ -2960,9 +3657,6 @@ msgstr "Şablonlar"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "Belgeyi şablonuyla birlikte bir FIDUS dosyası olarak dışa aktarın."
 
-#~ msgid "Print/PDF"
-#~ msgstr "Yazdır/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr ""
 #~ "Tarayıcınızın yazdırma iletişim kutusunu kullanarak yazdırın veya PDF "
@@ -3005,9 +3699,6 @@ msgstr "Şablonlar"
 #~ msgid "The current password is incorrect."
 #~ msgstr "Mevcut şifre yanlış."
 
-#~ msgid "Export"
-#~ msgstr "Dışa Aktar"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "Belge içeriğini dışa aktarma"
 
@@ -3016,9 +3707,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "Belgeyi bir HTML dosyasına aktarın."
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "Belgeyi bir Epub elektronik okuyucu dosyasına aktarın."
@@ -3452,9 +4140,6 @@ msgstr "Şablonlar"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "Boşluklu karakterler"
-
-#~ msgid "Copy of"
-#~ msgstr "Kopyası"
 
 #~ msgid " successfully copied."
 #~ msgstr "başarıyla kopyalandı."

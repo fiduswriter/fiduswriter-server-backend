@@ -1,0 +1,1070 @@
+import time
+import os
+import sys
+from tempfile import mkdtemp
+from urllib.parse import urlparse
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from testing.live_server import ChannelsLiveServerTestCase
+from testing.selenium_helper import SeleniumHelper
+
+from django.conf import settings
+from django.test.utils import skipUnless
+
+
+@skipUnless("book" in settings.INSTALLED_APPS, "book app not installed")
+class BookTest(SeleniumHelper, ChannelsLiveServerTestCase):
+    fixtures = [
+        "initial_documenttemplates.json",
+        "initial_styles.json",
+        "initial_book_data.json",
+    ]
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.base_url = cls.live_server_url
+        cls.download_dir = mkdtemp()
+        driver_data = cls.get_drivers(1, cls.download_dir)
+        cls.driver = driver_data["drivers"][0]
+        cls.client = driver_data["clients"][0]
+        cls.driver.implicitly_wait(driver_data["wait_time"])
+        cls.wait_time = driver_data["wait_time"]
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+        os.rmdir(cls.download_dir)
+        super().tearDownClass()
+
+    def setUp(self):
+        self.user = self.create_user(
+            username="Yeti", email="yeti@snowman.com", passtext="otter1"
+        )
+        self.user2 = self.create_user(
+            username="Yeti2", email="yeti2@snowman.com", passtext="otter1"
+        )
+        self.user3 = self.create_user(
+            username="Yeti3", email="yeti3@snowman.com", passtext="otter1"
+        )
+
+    def tearDown(self):
+        super().tearDown()
+        if "coverage" in sys.modules.keys():
+            # Cool down
+            time.sleep(self.wait_time / 3)
+
+    def test_books(self):
+        self.login_user(self.user, self.driver, self.client)
+        self.driver.get(self.base_url + "/")
+        # Create chapter one doc
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Chapter 1"
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Create chapter two doc
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Chapter 2"
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Create chapter three doc
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Chapter 3"
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Add users 2+3 as contacts
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.ID, "preferences-btn"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Contacts"]'
+        ).click()
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".contacts-table .entry-select"
+                )
+            ),
+            0,
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "button[title='Invite contact (Alt-i)']"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.ID, "new-contact-user-string"))
+        )
+        self.driver.find_element(By.ID, "new-contact-user-string").send_keys(
+            "yeti2@snowman.com"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            '[aria-describedby="add-new-contact"] button.fw-dark',
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".contacts-table .entry-select"
+                )
+            ),
+            1,
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "button[title='Invite contact (Alt-i)']"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.ID, "new-contact-user-string"))
+        )
+        self.driver.find_element(By.ID, "new-contact-user-string").send_keys(
+            "Yeti3"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            '[aria-describedby="add-new-contact"] button.fw-dark',
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".contacts-table .entry-select"
+                )
+            ),
+            2,
+        )
+        # Go to book section
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'a[href="/books/"]')
+            )
+        ).click()
+        # Create a new book
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'button[title="Create new book (Alt-n)"]'
+        ).click()
+        self.driver.find_element(By.ID, "book-title").send_keys("My book")
+        self.driver.find_element(By.ID, "book-metadata-author").send_keys(
+            "Author 1"
+        )
+        self.driver.find_element(By.ID, "book-metadata-subtitle").send_keys(
+            "My very first book"
+        )
+        self.driver.find_element(By.ID, "book-metadata-publisher").send_keys(
+            "Publishers United"
+        )
+        self.driver.find_element(By.ID, "book-metadata-copyright").send_keys(
+            "Publishers United, 2000"
+        )
+        self.driver.find_element(By.ID, "book-metadata-keywords").send_keys(
+            "Fishing, Testing, Heating"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab1"]'
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#book-document-list .fw-file .fw-file-name"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#book-document-list .fw-file:nth-child(2) .fw-file-name",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#book-document-list .fw-file:nth-child(3) .fw-file-name",
+        ).click()
+        self.driver.find_element(By.ID, "add-chapter").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab3"]'
+        ).click()
+        self.driver.find_element(By.ID, "select-cover-image-button").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "button > i.fa-plus-circle"
+        ).click()
+        image_path = os.path.join(
+            settings.PROJECT_PATH, "book/tests/uploads/image.png"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#editimage input.fw-media-file-input"
+        ).send_keys(image_path)
+        self.driver.find_element(
+            By.XPATH,
+            '//*[contains(@class, "fw-button") and normalize-space()="Upload"]',
+        ).click()
+        time.sleep(1)
+        self.driver.find_element(
+            By.XPATH,
+            (
+                '//*[contains(@class, "fw-button") '
+                'and normalize-space()="Use image"]'
+            ),
+        ).click()
+        # Wait for any success alert to disappear so it does not intercept
+        # the following Submit button click.
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.invisibility_of_element_located(
+                (By.CSS_SELECTOR, ".alerts-success.fw-visible")
+            )
+        )
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+        self.driver.refresh()
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+        # Accept invite for user 3
+        self.login_user(self.user3, self.driver, self.client)
+        self.driver.refresh()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Go to contacts"]'
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "button.respond-invite"
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Accept invite"]'
+        ).click()
+        time.sleep(1)
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Books"]'
+        ).click()
+        time.sleep(1)
+        self.logout_user(self.driver, self.client)
+        # Login as user 1 again.
+        self.login_user(self.user, self.driver, self.client)
+        self.driver.refresh()
+        time.sleep(1)
+        # Add DOCX template
+        self.driver.find_element(By.CSS_SELECTOR, ".book-title").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab4"]'
+        ).click()
+        docx_path = os.path.join(
+            settings.PROJECT_PATH, "book/tests/uploads/template.docx"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#input-docx-template"
+        ).send_keys(docx_path)
+        time.sleep(1)
+
+        # Add ODT template
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab5"]'
+        ).click()
+        odt_path = os.path.join(
+            settings.PROJECT_PATH, "book/tests/uploads/template.odt"
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#input-odt-template"
+        ).send_keys(odt_path)
+        time.sleep(1)
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+
+        # Add access rights for user 2 (write) + 3 (read)
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            ".fw-owned-by-user .fw-icon-access-right.icon-access-write",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#my-contacts tr .fw-checkable"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#my-contacts tr:nth-child(2) .fw-checkable"
+        ).click()
+        self.driver.find_element(By.ID, "add-share-contact").click()
+        self.driver.find_elements(
+            By.CSS_SELECTOR, ".fa-caret-down.edit-right"
+        )[1].click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Write"]'
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        # Check that access rights are listed
+        self.driver.refresh()
+        time.sleep(1)
+        self.driver.find_element(
+            By.CSS_SELECTOR, ".fw-icon-access-right.icon-access-write"
+        ).click()
+        # Wait for the async API call to complete and the dialog to render
+        # collaborator rows before asserting (find_elements won't trigger
+        # implicit wait, so we need an explicit wait here).
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "tr.fw-collaborator-tr")
+            )
+        )
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    'tr.fw-collaborator-tr[data-rights="write"]',
+                )
+            ),
+            1,
+        )
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    'tr.fw-collaborator-tr[data-rights="read"]',
+                )
+            ),
+            1,
+        )
+        self.driver.find_element(
+            By.XPATH,
+            '//*[contains(@class, "fw-button") and normalize-space()="Close"]',
+        ).click()
+        # Login as user 2 and check that write access is there and usable
+        self.login_user(self.user2, self.driver, self.client)
+        self.driver.refresh()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Go to contacts"]'
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "button.respond-invite"
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Accept invite"]'
+        ).click()
+        # Wait for the layout to settle (webfonts) and retry: the SPA header
+        # can briefly overlap the nav items while fonts load.
+        self.driver.set_script_timeout(30)
+        self.driver.execute_async_script(
+            "document.fonts.ready.then(() => "
+            "arguments[arguments.length - 1]())"
+        )
+        for _attempt in range(5):
+            books_link = self.driver.find_element(
+                By.XPATH, '//*[normalize-space()="Books"]'
+            )
+            try:
+                books_link.click()
+                break
+            except ElementClickInterceptedException:
+                time.sleep(1)
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+        # check write access
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".fw-icon-access-right.icon-access-write"
+                )
+            ),
+            1,
+        )
+        # check that user cannot change access rights
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    ".fw-owned-by-user .fw-icon-access-right.icon-access-write",
+                )
+            ),
+            0,
+        )
+
+        # Edit title
+        self.driver.find_element(By.CSS_SELECTOR, ".book-title").click()
+        # Move focus
+        self.driver.find_element(By.CSS_SELECTOR, ".fw-tablerow-title").click()
+        self.driver.find_element(By.ID, "book-title").send_keys(" EXTRA")
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab1"]'
+        ).click()
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, ".fw-ar-container:nth-child(3) tr .fw-inline"
+            ).text,
+            "1 Chapter 1",
+        )
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR,
+                ".fw-ar-container:nth-child(3) tr:nth-child(2) .fw-inline",
+            ).text,
+            "2 Chapter 2",
+        )
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR,
+                ".fw-ar-container:nth-child(3) tr:nth-child(3) .fw-inline",
+            ).text,
+            "3 Chapter 3",
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, ".fw-ar-container:nth-child(3) tr .book-sort-down"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            ".fw-ar-container:nth-child(3) tr:nth-child(3) .book-sort-up",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            ".fw-ar-container:nth-child(3) tr:nth-child(2) .book-sort-up",
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            self.driver.find_element(By.CSS_SELECTOR, ".book-title").text,
+            "My book EXTRA",
+        )
+        self.driver.refresh()
+        time.sleep(1)
+        self.assertEqual(
+            self.driver.find_element(By.CSS_SELECTOR, ".book-title").text,
+            "My book EXTRA",
+        )
+        # Login as user 3 and check that read access are there and usable
+        self.login_user(self.user3, self.driver, self.client)
+        self.driver.refresh()
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+        # check read access
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".fw-icon-access-right.icon-access-read"
+                )
+            ),
+            1,
+        )
+        # Check that the user cannot change the book
+        self.driver.find_element(By.CSS_SELECTOR, ".book-title").click()
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, "#book-title[disabled]"
+                )
+            ),
+            1,
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab1"]'
+        ).click()
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, ".fw-ar-container tr .fw-inline"
+            ).text,
+            "1 Chapter 3",
+        )
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, ".fw-ar-container tr:nth-child(2) .fw-inline"
+            ).text,
+            "2 Chapter 2",
+        )
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, ".fw-ar-container tr:nth-child(3) .fw-inline"
+            ).text,
+            "3 Chapter 1",
+        )
+        self.driver.find_element(
+            By.XPATH,
+            '//*[contains(@class, "fw-button") and normalize-space()="Close"]',
+        ).click()
+
+        # We export the book
+        # Epub
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Export selected as Epub"]'
+        ).click()
+        time.sleep(3)
+        assert os.path.isfile(
+            os.path.join(self.download_dir, "my-book-extra.epub")
+        )
+        os.remove(os.path.join(self.download_dir, "my-book-extra.epub"))
+        # HTML
+        self.driver.refresh()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Export selected as HTML"]'
+        ).click()
+        time.sleep(1)
+        assert os.path.isfile(
+            os.path.join(self.download_dir, "my-book-extra.html.zip")
+        )
+        os.remove(os.path.join(self.download_dir, "my-book-extra.html.zip"))
+        # LaTeX
+        self.driver.refresh()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Export selected as LaTeX"]'
+        ).click()
+        time.sleep(1)
+        assert os.path.isfile(
+            os.path.join(self.download_dir, "my-book-extra.latex.zip")
+        )
+        os.remove(os.path.join(self.download_dir, "my-book-extra.latex.zip"))
+
+        # DOCX
+        self.driver.refresh()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Export selected as DOCX"]'
+        ).click()
+        time.sleep(3)
+        assert os.path.isfile(
+            os.path.join(self.download_dir, "my-book-extra.docx")
+        )
+        os.remove(os.path.join(self.download_dir, "my-book-extra.docx"))
+
+        # ODT
+        self.driver.refresh()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Export selected as ODT"]'
+        ).click()
+        time.sleep(3)
+        assert os.path.isfile(
+            os.path.join(self.download_dir, "my-book-extra.odt")
+        )
+        os.remove(os.path.join(self.download_dir, "my-book-extra.odt"))
+
+        # Copy document
+        self.driver.refresh()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(1) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Copy selected"]'
+        ).click()
+        # Check access rights for new instance
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    ".fw-owned-by-user .fw-icon-access-right.icon-access-write",
+                )
+            ),
+            1,
+        )
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 2
+        )
+        self.assertEqual(
+            self.driver.find_elements(By.CSS_SELECTOR, ".book-title")[0].text,
+            "My book EXTRA",
+        )
+        self.assertEqual(
+            self.driver.find_elements(By.CSS_SELECTOR, ".book-title")[1].text,
+            "Copy of My book EXTRA",
+        )
+        # Delete the second book
+        self.driver.find_element(By.CSS_SELECTOR, ".delete-book i").click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Delete"]'
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+        self.driver.refresh()
+        self.assertEqual(
+            len(self.driver.find_elements(By.CSS_SELECTOR, ".book-title")), 1
+        )
+
+    def test_path(self):
+        self.login_user(self.user, self.driver, self.client)
+        self.driver.get(self.base_url + "/books/")
+        # Create a new book
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, 'button[title="Create new book (Alt-n)"]')
+            )
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, "#book-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, "#book-title").send_keys(
+            "Book 1"
+        )
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR,
+                    ".fw-contents tbody tr .fw-data-table-title",
+                )
+            ),
+            1,
+        )
+        # Create new folder 'Releases' and enter
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'button[title="Create new folder (Alt-f)"]'
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, "#new-folder-name").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#new-folder-name"
+        ).send_keys("Releases")
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Create folder"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        trs = self.driver.find_elements(
+            By.CSS_SELECTOR, ".fw-contents tbody tr .fw-data-table-title"
+        )
+        self.assertEqual(len(trs), 1)
+        self.assertEqual(trs[0].text, "..")
+        self.assertEqual(
+            urlparse(self.driver.current_url).path, "/books/Releases/"
+        )
+        self.assertEqual(
+            self.driver.find_element(By.CSS_SELECTOR, ".fw-contents h1").text,
+            "/Releases/",
+        )
+        # Create second book inside of Releases folder
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, 'button[title="Create new book (Alt-n)"]')
+            )
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, "#book-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, "#book-title").send_keys(
+            "Book 2"
+        )
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        trs = self.driver.find_elements(
+            By.CSS_SELECTOR, ".fw-contents tbody tr .fw-data-table-title"
+        )
+        self.assertEqual(len(trs), 2)
+        self.assertEqual(trs[0].text, "..")
+        self.assertEqual(trs[1].text, "Book 2")
+        # Go to top folder
+        trs[0].click()
+        time.sleep(1)
+        trs = self.driver.find_elements(
+            By.CSS_SELECTOR, ".fw-contents tbody tr .fw-data-table-title"
+        )
+        self.assertEqual(len(trs), 2)
+        self.assertEqual(trs[0].text, "Releases")
+        self.assertEqual(trs[1].text, "Book 1")
+        # Move Book 1 into Releases folder.
+        self.driver.find_element(
+            By.CSS_SELECTOR, "tr:nth-child(2) > td > label"
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, ".dt-bulk-dropdown"))
+        ).click()
+        self.driver.find_element(
+            By.XPATH, '//*[normalize-space()="Move selected"]'
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, 'input[placeholder="Insert path"]'
+            ).get_attribute("value"),
+            "/Book 1",
+        )
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#move-dialog .fw-folder-content .fw-folder-name"
+        ).click()
+        time.sleep(1)
+        self.assertEqual(
+            self.driver.find_element(
+                By.CSS_SELECTOR, 'input[placeholder="Insert path"]'
+            ).get_attribute("value"),
+            "/Releases/Book 1",
+        )
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    '(//div[contains(@class,"fw-dialog")])[last()]//button[contains(@class,"fw-dark") and normalize-space()="Submit"]',
+                )
+            )
+        ).click()
+        time.sleep(1)
+        trs = self.driver.find_elements(
+            By.CSS_SELECTOR, ".fw-contents tbody tr .fw-data-table-title"
+        )
+        self.assertEqual(len(trs), 1)
+        self.assertEqual(trs[0].text, "Releases")
+        trs[0].click()
+        time.sleep(1)
+        trs = self.driver.find_elements(
+            By.CSS_SELECTOR, ".fw-contents tbody tr .fw-data-table-title"
+        )
+        time.sleep(1)
+        self.assertEqual(len(trs), 3)
+        self.assertEqual(trs[0].text, "..")
+        self.assertEqual(trs[1].text, "Book 1")
+        self.assertEqual(trs[2].text, "Book 2")
+
+    def test_sanity_check(self):
+        self.login_user(self.user, self.driver, self.client)
+        self.driver.get(self.base_url + "/")
+        # Create chapter one doc - with a leftover track change and comment
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Chapter 1"
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys(
+            "Some content"
+        )
+        # Add a comment
+        ActionChains(self.driver).key_down(Keys.SHIFT).send_keys(
+            Keys.LEFT
+        ).send_keys(Keys.LEFT).send_keys(Keys.LEFT).send_keys(
+            Keys.LEFT
+        ).key_up(
+            Keys.SHIFT
+        ).perform()
+        self.driver.find_element(By.CSS_SELECTOR, "button .fa-comment").click()
+        ActionChains(self.driver).send_keys(
+            "This needs to be reviewed!"
+        ).perform()
+        self.driver.find_element(
+            By.CSS_SELECTOR, ".comment-btns .submit"
+        ).click()
+        time.sleep(1)
+        self.driver.find_element(
+            By.CSS_SELECTOR, ".header-menu:nth-child(5) > .header-nav-item"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "li:nth-child(1) > .fw-pulldown-item"
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys(
+            "\nTracked content"
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Create chapter two doc - with an internal link and reference with
+        # a missing target.
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-title").send_keys(
+            "Chapter 2"
+        )
+        # We enable the abstract
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#header-navigation > div:nth-child(3) > span"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            (
+                "#header-navigation > div:nth-child(3) > div "
+                "> ul > li:nth-child(1) > span"
+            ),
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            (
+                "#header-navigation > div:nth-child(3) > div "
+                "> ul > li:nth-child(1) > div > ul > li:nth-child(3) > span"
+            ),
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
+        ActionChains(self.driver).send_keys(Keys.LEFT).send_keys(
+            "An abstract title"
+        ).perform()
+        time.sleep(1)
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#toolbar > div > div > div:nth-child(3) > div"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            (
+                "#toolbar > div > div > div:nth-child(3) > div > div > "
+                "ul > li:nth-child(4) > span > label"
+            ),
+        ).click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys(
+            "Some content\n"
+        )
+        # We add a cross reference for the heading
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#toolbar > div > div > div:nth-child(9) > button > span > i",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#edit-link > div:nth-child(2) > select"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#edit-link > div:nth-child(2) > select > option:nth-child(2)",
+        ).click()
+        self.driver.find_element(
+            By.XPATH,
+            '//*[contains(@class, "fw-button") and normalize-space()="Insert"]',
+        ).click()
+        cross_reference = self.driver.find_element(
+            By.CSS_SELECTOR, ".doc-body .cross-reference"
+        )
+        assert cross_reference.text == "An abstract title"
+        # We add an internal link
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#toolbar > div > div > div:nth-child(9) > button > span > i",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#edit-link > div:nth-child(5) > select"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#edit-link > div:nth-child(5) > select > option:nth-child(2)",
+        ).click()
+        self.driver.find_element(
+            By.XPATH,
+            '//*[contains(@class, "fw-button") and normalize-space()="Insert"]',
+        ).click()
+        internal_link = self.driver.find_element(
+            By.CSS_SELECTOR, ".doc-body a"
+        )
+        assert internal_link.text == "An abstract title"
+        # We delete the contents from the heading
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-abstract h3").click()
+        ActionChains(self.driver).send_keys(Keys.BACKSPACE).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(Keys.BACKSPACE).send_keys(Keys.BACKSPACE).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).send_keys(
+            Keys.BACKSPACE
+        ).perform()
+        cross_reference = self.driver.find_element(
+            By.CSS_SELECTOR, ".doc-body .cross-reference.missing-target"
+        )
+        assert cross_reference.text == "MISSING TARGET"
+        internal_link = self.driver.find_element(
+            By.CSS_SELECTOR, ".doc-body a.missing-target"
+        )
+        assert internal_link.get_attribute("title") == "Missing target"
+        self.assertEqual(
+            len(
+                self.driver.find_elements(
+                    By.CSS_SELECTOR, ".margin-box.fw-warning"
+                )
+            ),
+            2,
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Create chapter three doc - without a title
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, ".new_document button")
+            )
+        ).click()
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "editor-toolbar"))
+        )
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".doc-body").send_keys(
+            "Chapter 3"
+        )
+        time.sleep(1)
+        self.driver.find_element(By.ID, "close-document-top").click()
+        # Create a book with these three chapters and run the sanity check.
+        WebDriverWait(self.driver, self.wait_time).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, 'a[href="/books/"]')
+            )
+        ).click()
+        # Create a new book
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'button[title="Create new book (Alt-n)"]'
+        ).click()
+        self.driver.find_element(By.ID, "book-title").send_keys("My book")
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab1"]'
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#book-document-list .fw-file .fw-file-name"
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#book-document-list .fw-file:nth-child(2) .fw-file-name",
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR,
+            "#book-document-list .fw-file:nth-child(3) .fw-file-name",
+        ).click()
+        self.driver.find_element(By.ID, "add-chapter").click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, 'a[href="#optionTab7"]'
+        ).click()
+        self.driver.find_element(
+            By.CSS_SELECTOR, "#perform-sanity-check-button"
+        ).click()
+        warnings = self.driver.find_elements(
+            By.CSS_SELECTOR, "#sanity-check-output li"
+        )
+        self.assertEqual(len(warnings), 5)
+        self.assertEqual(
+            warnings[0].text, "Unresolved comments (Chapter 1, /Chapter 1)"
+        )
+        self.assertEqual(
+            warnings[1].text,
+            "Unresolved tracked changes (Chapter 1, /Chapter 1)",
+        )
+        self.assertEqual(
+            warnings[2].text,
+            "Cross references without targets (Chapter 2, /Chapter 2)",
+        )
+        self.assertEqual(
+            warnings[3].text,
+            "Internal links without target (Chapter 2, /Chapter 2)",
+        )
+        self.assertEqual(
+            warnings[4].text, "No chapter title (Chapter 3, /Untitled)"
+        )

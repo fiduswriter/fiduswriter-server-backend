@@ -611,6 +611,24 @@ msgstr "Bilden är för stor"
 msgid "No file uploaded"
 msgstr "Ingen fil laddad upp"
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "Bok"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "Redaktör"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "Få åtkomst till böcker"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "Bok delad: %(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

@@ -48,8 +48,13 @@ _KNOWN_TS_PACKAGES = {
     "fiduswriter-document-template-editor-ts": (
         "@fiduswriter/document-template-editor"
     ),
-    "fiduswriter-books-plugin-ts": "@fiduswriter/books-document",
+    "fiduswriter-books-ts": "@fiduswriter/books-document",
     "fiduswriter-cli-ts": "@fiduswriter/cli",
+    # The desktop application keeps its own catalogue, generated from its own
+    # sources by `npm run extract-i18n` there. Its strings must not go into the
+    # editor's catalogues: those are regenerated from the editor's sources, so
+    # msgids added here would be dropped on the next extraction.
+    "fiduswriter-desktop": "@fiduswriter/desktop",
 }
 
 

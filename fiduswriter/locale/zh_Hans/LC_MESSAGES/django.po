@@ -594,6 +594,24 @@ msgstr "图片太大"
 msgid "No file uploaded"
 msgstr "没有上传文件"
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "书籍"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "编辑"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "访问书籍"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "已共享书籍：%(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

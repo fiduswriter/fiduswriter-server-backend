@@ -611,6 +611,24 @@ msgstr "Obraz jest za duży"
 msgid "No file uploaded"
 msgstr "Nie przesłano pliku"
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "Książka"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "Redaktor"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "Dostęp do książek"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "Udostępniona książka: %(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

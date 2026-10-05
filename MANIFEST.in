@@ -18,7 +18,6 @@ prune fiduswriter/static-libs
 prune fiduswriter/venv
 prune fiduswriter/.direnv
 prune fiduswriter/media
-prune fiduswriter/book
 prune fiduswriter/citation_api_import
 prune fiduswriter/gitrepo_export
 prune fiduswriter/pandoc

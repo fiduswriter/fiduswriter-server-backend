@@ -30,6 +30,805 @@ msgstr "문서 템플릿"
 msgid "Templates"
 msgstr "템플릿"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "책 접근 데이터를 불러올 수 없습니다."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "연락처 추가 또는 새 사용자 초대"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "연락처 추가"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "제출"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "다른 사람과 책 공유하기"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "쓰기"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "읽기"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "접근 권한을 저장할 수 없습니다."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "접근 권한이 저장되었습니다"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "초대"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "내 연락처"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "연락처"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "내 공동 작업자"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "공동 작업자"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "권한"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "삭제"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "기본 정보"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "기본 책 정보"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "장"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "장으로 할당된 문서"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "참고문헌"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "참고문헌 관련 설정"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Epub 관련 설정"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "DOCX 관련 설정"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "ODT 관련 설정"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "인쇄/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "인쇄 관련 설정"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "무결성 검사"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "책 무결성 검사 수행"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "책을 삭제할 수 없습니다"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "책이 삭제되었습니다"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "삭제 확인"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "다음 책을 정말 삭제하시겠습니까?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "다음 책을 정말 삭제하시겠습니까?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "제목 없음"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "장 편집"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "책을 저장할 수 없습니다"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "의 사본"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "책을 복사할 수 없습니다"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "장은 암호화(E2EE) 문서로 가져옵니다."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "장을 암호화(E2EE) 문서로 가져오기"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "책 가져오기"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr ".fidusbook 파일 선택:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "가져오기"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "파일이 너무 큽니다"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "책 만들기"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "책 편집"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "내보내기"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr "이 책에는 암호화된 장이 포함되어 있습니다. 이 책을 내보내거나 무결성 검사를 실행하려면 개인 암호가 필요합니다."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "도서 기록을 생성할 수 없습니다."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "암호가 잘못되었습니다. 다시 시도해 주세요."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "책 개요"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "사용 가능한 책이 없습니다"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "책을 찾을 수 없습니다"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "제목"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "생성일"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "마지막 변경"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "소유자"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "책 데이터를 불러올 수 없습니다."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "오프라인 상태에서는 책을 삭제할 수 없습니다."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr "빈 폴더를 그대로 두면 삭제됩니다. 이 폴더를 정말 삭제하시겠습니까?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "책"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "내보내기"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "내보내기가 완료되었습니다."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "도서 내보내기에 실패했습니다."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "새 책 만들기"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "새 폴더 만들기"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Fidusbook 파일에서 책 가져오기"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "책 검색"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "선택 항목 이동"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "선택된 책을 이동합니다."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "책 이동"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "책 이동"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "책이 이동되었습니다"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "책을 이동할 수 없습니다"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "선택 항목 삭제"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "선택한 책을 삭제합니다."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "다른 사용자의 책은 삭제할 수 없습니다."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "선택 항목 공유"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "선택한 책을 공유합니다."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "다른 사용자의 책은 공유할 수 없습니다."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "선택 항목 복사"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "선택한 책을 복사합니다."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "선택 항목을 BITS로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "선택한 책을 BITS로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "선택 항목을 Epub으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "선택한 책을 Epub으로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "선택 항목을 HTML로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "선택한 책을 HTML로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "선택 항목을 Unified HTML로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "선택한 책을 단일 파일 HTML로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "선택 항목을 LaTeX으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "선택한 책을 LaTeX으로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "선택 항목을 DOCX로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "선택한 책을 DOCX로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "이 책에는 DOCX 템플릿이 없습니다."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "선택 항목을 ODT로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "선택한 책을 ODT로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "이 책에는 ODT 템플릿이 없습니다."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "선택 항목을 인쇄/PDF로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "선택한 책을 인쇄 대화상자로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "선택 항목을 Fidusbook으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr "선택한 책을 .fidusbook 파일로 내보내기 (다른 서버로 이동)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "BITS로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "책을 Book Interchange Tag Set으로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Epub으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "책을 Epub으로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "HTML로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "책을 HTML로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Unified HTML로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "책을 단일 파일 HTML로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "LaTeX으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "책을 LaTeX으로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "DOCX로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "책을 DOCX로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "ODT로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "책을 ODT로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "인쇄/PDF로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "책을 인쇄 대화상자로 내보냅니다."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Fidusbook으로 내보내기"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr "책을 .fidusbook 파일로 내보내기 (다른 서버로 이동)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "장"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "해결되지 않은 변경 추적"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "대상이 없는 내부 링크"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "해결되지 않은 댓글"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "대상이 없는 상호 참조"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "책에 장이 포함되어 있지 않습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "접근 불가"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "장 제목 없음"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "문제가 발견되지 않았습니다:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "책에 장이 포함되어 있습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "각 장에 제목이 있습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "해결되지 않은 변경 추적이 없습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "해결되지 않은 댓글이 없습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "모든 상호 참조에 유효한 대상이 있습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "모든 내부 링크에 유효한 대상이 있습니다."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"이 책에는 암호화된 장이 포함되어 있습니다. 상태 확인을 수행하려면 개인 암호가 필요합니다. 프로필 설정에서 개인 암호를 설정하거나 잠금"
+" 해제하세요."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr "하나 이상의 암호화된 챕터를 해독할 수 없습니다. 자세한 내용은 오류 알림을 참조하세요."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "저자"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "부제목"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "버전"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "언어"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "언어 선택"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "출판사"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "저작권 표시"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "쉼표로 구분된 키워드"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "키워드"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "설명"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "예: 2024년 또는 2024년 1월"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "출판일"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "예: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "시리즈 제목"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "시리즈 위치"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "인용 스타일"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "책의 인용 스타일 선택"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 × 12인치)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Quarto (12 × 9인치)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 × 6인치)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "책 스타일"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "책의 스타일시트 선택"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "용지 크기"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "책의 용지 크기 선택"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "표지 이미지"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "표지 이미지 선택"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "이미지 선택"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "표지 이미지 제거"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "이미지 제거"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT 템플릿"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "ODT 템플릿 파일 선택"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "ODT 템플릿 파일 선택"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "ODT 템플릿 파일 제거"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX 템플릿"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "DOCX 템플릿 파일을 선택하세요"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "DOCX 템플릿 파일 선택"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "DOCX 템플릿 파일 제거"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "무결성 검사 수행"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "내 문서"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "책 장"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "정렬"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "암호화된 문서"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "책 부문"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr "이 장이 책의 한 부문을 시작하는 경우, 해당 부문의 제목을 여기에 지정하세요"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "부문 제목"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "책 구성"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "책"
+
 #~ msgid "Improve"
 #~ msgstr "개선하다"
 
@@ -182,14 +981,8 @@ msgstr "템플릿"
 #~ msgid "OK"
 #~ msgstr "확인"
 
-#~ msgid "Untitled"
-#~ msgstr "제목 없음"
-
 #~ msgid "New folder"
 #~ msgstr "새 폴더"
-
-#~ msgid "Submit"
-#~ msgstr "제출"
 
 #~ msgid "Create folder"
 #~ msgstr "폴더 생성"
@@ -211,9 +1004,6 @@ msgstr "템플릿"
 
 #~ msgid "Site navigation"
 #~ msgstr "사이트 탐색"
-
-#~ msgid "Contacts"
-#~ msgstr "연락처"
 
 #~ msgid "Log out"
 #~ msgstr "로그아웃"
@@ -303,9 +1093,6 @@ msgstr "템플릿"
 
 #~ msgid "Log in"
 #~ msgstr "로그인"
-
-#~ msgid "Select language"
-#~ msgstr "언어 선택"
 
 #~ msgid "Update"
 #~ msgstr "업데이트"
@@ -441,9 +1228,6 @@ msgstr "템플릿"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "참고문헌 가져오기에 문제가 발생했습니다."
 
-#~ msgid "Import"
-#~ msgstr "가져오기"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "참고문헌 가져오기"
 
@@ -469,26 +1253,14 @@ msgstr "템플릿"
 #~ msgid "Sourcetype"
 #~ msgstr "소스 유형"
 
-#~ msgid "Author"
-#~ msgstr "저자"
-
 #~ msgid "Published"
 #~ msgstr "게시됨"
 
 #~ msgid "Edit Categories"
 #~ msgstr "카테고리 편집"
 
-#~ msgid "Delete"
-#~ msgstr "삭제"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "삭제 확인"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "참고문헌 항목 삭제"
-
-#~ msgid "Delete selected"
-#~ msgstr "선택 항목 삭제"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "선택한 참고문헌 항목을 삭제합니다."
@@ -621,9 +1393,6 @@ msgstr "템플릿"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "모든 작성자(간단)"
-
-#~ msgid "Keywords"
-#~ msgstr "키워드"
 
 #~ msgid "Bibliography block"
 #~ msgstr "참고문헌 블록"
@@ -837,9 +1606,6 @@ msgstr "템플릿"
 #~ msgid "None"
 #~ msgstr "없음"
 
-#~ msgid "Subtitle"
-#~ msgstr "부제"
-
 #~ msgid "Title (translated)"
 #~ msgstr "제목(번역됨)"
 
@@ -869,9 +1635,6 @@ msgstr "템플릿"
 
 #~ msgid "Allowed headings"
 #~ msgstr "허용되는 제목"
-
-#~ msgid "Language"
-#~ msgstr "언어"
 
 #~ msgid "Document language"
 #~ msgstr "문서 언어"
@@ -1035,9 +1798,6 @@ msgstr "템플릿"
 #~ msgid "Basic access rights"
 #~ msgstr "기본 접근권한"
 
-#~ msgid "Write"
-#~ msgstr "쓰기"
-
 #~ msgid "Write tracked"
 #~ msgstr "추적된 쓰기"
 
@@ -1046,9 +1806,6 @@ msgstr "템플릿"
 
 #~ msgid "Comment"
 #~ msgstr "댓글"
-
-#~ msgid "Read"
-#~ msgstr "읽기"
 
 #~ msgid "Review"
 #~ msgstr "검토"
@@ -1092,17 +1849,8 @@ msgstr "템플릿"
 #~ msgid "Could not revoke share link."
 #~ msgstr "공유 링크를 취소할 수 없습니다."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "접근 권한이 저장되었습니다"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "액세스 권한을 저장할 수 없습니다."
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "연락처 추가 또는 새 사용자 초대"
-
-#~ msgid "Add contact"
-#~ msgstr "연락처 추가"
 
 #~ msgid "Share your document with others"
 #~ msgstr "다른 사람과 문서 공유"
@@ -1112,18 +1860,6 @@ msgstr "템플릿"
 
 #~ msgid "Share link"
 #~ msgstr "링크 공유"
-
-#~ msgid "My contacts"
-#~ msgstr "내 연락처"
-
-#~ msgid "My collaborators"
-#~ msgstr "내 공동작업자"
-
-#~ msgid "Collaborators"
-#~ msgstr "협력자"
-
-#~ msgid "Rights"
-#~ msgstr "권한"
 
 #~ msgid "Create new share link"
 #~ msgstr "새 공유 링크 만들기"
@@ -1171,9 +1907,6 @@ msgstr "템플릿"
 #~ msgstr ""
 #~ "위의 비밀번호를 입력하시면 링크(#뒤)에 비밀번호가 삽입됩니다. 링크가 있는 사람은 누구나 문서를 열 수 있습니다. 이러한 링크는 보안 "
 #~ "채널을 통해서만 공유하십시오."
-
-#~ msgid "Invite"
-#~ msgstr "초대"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "암호화된 문서"
@@ -1229,9 +1962,6 @@ msgstr "템플릿"
 #~ msgid "Import a document"
 #~ msgstr "문서 가져오기"
 
-#~ msgid "File too large"
-#~ msgstr "파일이 너무 큼"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "ZIP에 가져올 수 있는 파일이 없습니다."
 
@@ -1275,11 +2005,6 @@ msgstr "템플릿"
 #~ msgid "Document Overview"
 #~ msgstr "문서 개요"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr "빈 폴더를 남겨두면 삭제됩니다. 정말로 이 폴더를 삭제하시겠습니까?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "오프라인 상태에서는 문서를 열 수 없습니다."
 
@@ -1291,15 +2016,6 @@ msgstr "템플릿"
 
 #~ msgid "Revisions"
 #~ msgstr "개정"
-
-#~ msgid "Created"
-#~ msgstr "생성됨"
-
-#~ msgid "Last changed"
-#~ msgstr "마지막으로 변경됨"
-
-#~ msgid "Owner"
-#~ msgstr "소유자"
 
 #~ msgid "Undefined"
 #~ msgstr "한정되지 않은"
@@ -1384,9 +2100,6 @@ msgstr "템플릿"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "암호를 설정하지 못했습니다:"
 
-#~ msgid "Move selected"
-#~ msgstr "선택 항목 이동"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "선택한 문서를 이동합니다."
 
@@ -1402,35 +2115,20 @@ msgstr "템플릿"
 #~ msgid "Could not move document"
 #~ msgstr "문서를 이동할 수 없습니다."
 
-#~ msgid "Share selected"
-#~ msgstr "선택 공유"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "선택한 문서를 공유하세요."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "다른 사용자의 문서는 공유할 수 없습니다"
 
-#~ msgid "Copy selected"
-#~ msgstr "선택 항목 복사"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "선택한 문서를 복사하세요."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Epub으로 내보내기가 선택됨"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "선택한 문서를 Epub 파일로 내보내세요."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "선택한 항목을 HTML로 내보내기"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "선택한 문서를 HTML 파일로 내보내세요."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "LaTeX로 내보내기가 선택되었습니다."
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "선택한 문서를 LaTeX 파일로 내보내세요."
@@ -1440,9 +2138,6 @@ msgstr "템플릿"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "선택한 문서를 JATS 파일로 내보내세요."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "BITS로 내보내기가 선택되었습니다."
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "선택한 문서를 BITS 파일로 내보내세요."
@@ -1472,9 +2167,6 @@ msgstr "템플릿"
 #~ msgid "Create new document"
 #~ msgstr "새 문서 만들기"
 
-#~ msgid "Create new folder"
-#~ msgstr "새 폴더 만들기"
-
 #~ msgid "Import document"
 #~ msgstr "문서 가져오기"
 
@@ -1499,9 +2191,6 @@ msgstr "템플릿"
 #~ msgid "Time"
 #~ msgstr "시간"
 
-#~ msgid "Description"
-#~ msgstr "설명"
-
 #~ msgid "Recreate"
 #~ msgstr "재창조"
 
@@ -1516,9 +2205,6 @@ msgstr "템플릿"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "인용 출처에 대한 변경 사항이 추적되지 않습니다!"
-
-#~ msgid "Bibliography"
-#~ msgstr "참고문헌"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[암호화된 메시지 - 복호화 실패]"
@@ -2537,9 +3223,6 @@ msgstr "템플릿"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "템플릿을 포함하여 문서를 FIDUS 파일로 내보내세요."
 
-#~ msgid "Print/PDF"
-#~ msgstr "인쇄/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr "브라우저 인쇄 대화 상자를 사용하여 PDF를 인쇄하거나 생성하세요."
 
@@ -2574,9 +3257,6 @@ msgstr "템플릿"
 #~ msgid "The current password is incorrect."
 #~ msgstr "현재 비밀번호가 올바르지 않습니다."
 
-#~ msgid "Export"
-#~ msgstr "내보내기"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "문서 내용 내보내기"
 
@@ -2585,9 +3265,6 @@ msgstr "템플릿"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "문서를 HTML 파일로 내보내세요."
-
-#~ msgid "Epub"
-#~ msgstr "이펍"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "문서를 Epub 전자책 파일로 내보내세요."
@@ -3017,9 +3694,6 @@ msgstr "템플릿"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "공백이 있는 문자"
-
-#~ msgid "Copy of"
-#~ msgstr "사본"
 
 #~ msgid " successfully copied."
 #~ msgstr "성공적으로 복사되었습니다."

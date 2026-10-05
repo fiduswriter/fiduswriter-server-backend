@@ -98,7 +98,6 @@ setup(
             "fiduswriter/media/*",
             "fiduswriter/static-transpile/*",
             "fiduswriter/static-libs/*",
-            "fiduswriter/book/*",
             "fiduswriter/citation-api-import/*",
             "fiduswriter/languagetool/*",
             "fiduswriter/npm_mjs/*",

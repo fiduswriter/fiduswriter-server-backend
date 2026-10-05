@@ -29,12 +29,23 @@
             // are enumerated explicitly.
             "@fiduswriter/document": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/index.d.ts"],
             "@fiduswriter/document/citeproc-plus": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/citeproc_plus.d.ts"],
+            // The schema/ and exporter/ subtrees are addressed by directory
+            // index, so a plain "dist/*" mapping would not resolve them.
+            "@fiduswriter/document/schema/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/schema/*"],
+            "@fiduswriter/document/exporter/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document/dist/exporter/*"],
+            "@fiduswriter/books-document": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/index.d.ts"],
+            "@fiduswriter/books-document/schema": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/schema/index.d.ts"],
+            "@fiduswriter/books-document/i18n": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/i18n.d.ts"],
+            "@fiduswriter/books-document/importer/native": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/importer/native/index.d.ts"],
+            "@fiduswriter/books-document/exporter/tools": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/exporter/tools.d.ts"],
+            "@fiduswriter/books-document/exporter/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/books-document/dist/exporter/*"],
             "@fiduswriter/bibliography-manager": ["./fiduswriter/.transpile/node_modules/@fiduswriter/bibliography-manager/dist/index.d.ts"],
             "@fiduswriter/bibliography-manager/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/bibliography-manager/dist/*"],
             "@fiduswriter/image-manager": ["./fiduswriter/.transpile/node_modules/@fiduswriter/image-manager/dist/index.d.ts"],
             "@fiduswriter/image-manager/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/image-manager/dist/*"],
             "@fiduswriter/document-template-editor": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document-template-editor/dist/index.d.ts"],
             "@fiduswriter/document-template-editor/*": ["./fiduswriter/.transpile/node_modules/@fiduswriter/document-template-editor/dist/*"],
+            "prosemirror-model": ["./fiduswriter/.transpile/node_modules/prosemirror-model"],
             "prosemirror-state": ["./fiduswriter/.transpile/node_modules/prosemirror-state"],
             "prosemirror-view": ["./fiduswriter/.transpile/node_modules/prosemirror-view"]
         }
@@ -44,9 +55,9 @@
     ],
     // Optional Django plugins are symlinked into fiduswriter/ at runtime
     // (see .gitignore). They are separate repositories and are not part of
-    // this repository's type checking.
+    // this repository's type checking. Bundled apps such as "book" and
+    // "user_template_manager" are deliberately absent from this list.
     "exclude": [
-        "fiduswriter/book",
         "fiduswriter/citation_api_import",
         "fiduswriter/gitrepo_export",
         "fiduswriter/languagetool",

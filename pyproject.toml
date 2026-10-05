@@ -33,7 +33,6 @@ homepage = "https://www.fiduswriter.org"
 repository = "https://git.fiduswriter.org/fiduswriter/fiduswriter-server-backend"
 
 [project.optional-dependencies]
-books = ["fiduswriter-books ~= 4.1.5"]
 citation-api-import = ["fiduswriter-citation-api-import ~= 4.1.1"]
 ojs = ["fiduswriter-ojs ~= 4.1.0"]
 pandoc = ["fiduswriter-pandoc ~= 4.1.6"]

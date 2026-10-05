@@ -598,6 +598,24 @@ msgstr "画像が大きすぎます"
 msgid "No file uploaded"
 msgstr "ファイルがアップロードされていません"
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "本"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "編集者"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "本にアクセス"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "共有された本: %(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

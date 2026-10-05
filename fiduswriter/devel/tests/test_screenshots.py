@@ -18,11 +18,15 @@ from testing.mail import get_outbox, empty_outbox
 from document.models import Document, DocumentTemplate
 from bibliography.models import Entry
 from usermedia.models import Image, UserImage
-from book.models import Book
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 
-# Optional plugin models are only available when their apps are enabled.
+# Bundled/optional app models are only available when their apps are enabled.
+try:
+    from book.models import Book
+except RuntimeError:
+    Book = None  # type: ignore
+
 try:
     from ojs.models import Journal
 except RuntimeError:
@@ -116,6 +120,8 @@ class ScreenshotCollector(SeleniumHelper, ChannelsLiveServerTestCase):
             doc.save()
 
     def create_test_book(self):
+        if Book is None:
+            return None
         return Book.objects.create(owner=self.user, title="Sample book")
 
     def create_test_bibliography(self):
@@ -592,6 +598,8 @@ class ScreenshotCollector(SeleniumHelper, ChannelsLiveServerTestCase):
             self.capture("08-templates", "05-editor")
 
     def capture_books(self):
+        if Book is None or self.book is None:
+            return
         self.navigate("/books/")
         self.wait_for(".fw-contents", timeout=10)
         self.capture("09-books", "01-overview")

@@ -153,7 +153,10 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.soundcloud',
     # 'allauth.socialaccount.providers.stackexchange',
     # "devel",
-    "user_template_manager",
+    # Bundled but optional apps. Both ship with Fidus Writer itself; remove the
+    # line to disable the feature (and its frontend routes and API endpoints).
+    "user_template_manager",  # document template manager
+    "book",  # book composer, chapter management and book export
 ]
 
 # A list of apps to remove from the default installation

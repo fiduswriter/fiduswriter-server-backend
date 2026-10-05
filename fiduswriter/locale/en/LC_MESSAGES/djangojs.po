@@ -28,6 +28,815 @@ msgstr "Document Templates"
 msgid "Templates"
 msgstr "Templates"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "Cannot load book access data."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "Add contact or invite new user"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "Add contact"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "Submit"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "Share your book with others"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "Write"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "Read"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "Cannot save access rights."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "Access rights have been saved"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "Invite"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "My contacts"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "Contacts"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "My collaborators"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "Collaborators"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "Rights"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "Delete"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "Basic info"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "Basic book information"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "Chapters"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "Documents assigned as chapters"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "Bibliography"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "Bibliography related settings"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Epub related settings"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "DOCX related settings"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "ODT related settings"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "Print/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "Print related settings"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "Sanity check"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "Perform sanity check on book"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "Could not delete book"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "Book has been deleted"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "Confirm deletion"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "Do you really want to delete the following books?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "Do you really want to delete the following book?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "Untitled"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "Edit Chapter"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "The book could not be saved"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "Copy of"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "The book could not be copied"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "Chapters will be imported as encrypted (E2EE) documents."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "Import chapters as encrypted (E2EE) documents"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "Import a book"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr "Select a .fidusbook file:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "Import"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "File too large"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "Create Book"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "Edit Book"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "Export"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "Could not create book record."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "Wrong passphrase. Please try again."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "Book Overview"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "No books available"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "No books found"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "Title"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "Created"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "Last changed"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "Owner"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "Cannot load data of books."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "You cannot delete books while you are offline."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "Book"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "Exporting"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "Export complete."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "Book export failed."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "Create new book"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "Create new folder"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Import book from Fidusbook file"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "Search books"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "Move selected"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "Move the books that have been selected."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "Move books"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "Move book"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "Book has been moved"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "Could not move book"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "Delete selected"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "Delete selected books."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "You cannot delete books of other users."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "Share selected"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "Share selected books."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "You cannot share books of other users."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "Copy selected"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "Copy selected books."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "Export selected as BITS"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "Export selected books as BITS."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "Export selected as Epub"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "Export selected books as Epub."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "Export selected as HTML"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "Export selected books as HTML."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "Export selected as Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "Export selected books as Single-file HTML."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "Export selected as LaTeX"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "Export selected books as LaTeX."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "Export selected as DOCX"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "Export selected books as DOCX."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "This book does not have a DOCX template."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "Export selected as ODT"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "Export selected books as ODT."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "This book does not have an ODT template."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "Export selected to Print/PDF"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "Export selected books to the print dialog."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "Export selected as Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr ""
+"Export selected books as .fidusbook files (for moving to another server)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "Export as BITS"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "Export book as Book Interchange Tag Set."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Export as Epub"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "Export book as Epub."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "Export as HTML"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "Export book as HTML."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Export as Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "Export book as Single-file HTML."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "Export as LaTeX"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "Export book as LaTeX."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "Export as DOCX"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "Export book as DOCX."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "Export as ODT"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "Export book as ODT."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "Export to Print/PDF"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "Export book to the print dialog."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Export as Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr "Export book as a .fidusbook file (for moving to another server)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "Chapter"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "Unresolved tracked changes"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "Internal links without target"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "Unresolved comments"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "Cross references without targets"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "The book contains no chapters."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "No access"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "No chapter title"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "No issues were found:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "The book contains chapters."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "Each chapter has a title."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "There are no unresolved tracked changes."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "There are no unresolved comments."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "All cross references have working targets."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "All internal links have working targets."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "Author"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "Subtitle"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Version"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "Language"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "Select language"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "Publisher"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "Copyright notice"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "Comma separated keywords"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "Keywords"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "Description"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "E.g.: 2024 or January 2024"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "Publication date"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "E.g.: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "Series title"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "Series position"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "Citation style"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "Select citation style for the book"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 x 12 inch)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Quarto (12 × 9 inch)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 x 6 inch)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "Book style"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "Select stylesheet for the book"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "Paper size"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "Select paper size for the book"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "Cover image"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "Select a cover image"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "Select Image"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "Remove cover image"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "Remove Image"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT Template"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "Select an ODT template file"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "Select ODT template file"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "Remove ODT template file"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX Template"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "Select an DOCX template file"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "Select DOCX template file"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "Remove DOCX template file"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "Perform sanity check"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "My documents"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "Book chapters"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "Sort"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "Encrypted document"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "Book part"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "Book part title"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "compose books"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "Books"
+
 #~ msgid "Improve text with LLM"
 #~ msgstr "Improve text with LLM"
 
@@ -471,14 +1280,8 @@ msgstr "Templates"
 #~ msgid "OK"
 #~ msgstr "OK"
 
-#~ msgid "Untitled"
-#~ msgstr "Untitled"
-
 #~ msgid "New folder"
 #~ msgstr "New folder"
-
-#~ msgid "Submit"
-#~ msgstr "Submit"
 
 #~ msgid "Create folder"
 #~ msgstr "Create folder"
@@ -500,9 +1303,6 @@ msgstr "Templates"
 
 #~ msgid "Site navigation"
 #~ msgstr "Site navigation"
-
-#~ msgid "Contacts"
-#~ msgstr "Contacts"
 
 #~ msgid "Log out"
 #~ msgstr "Log out"
@@ -596,9 +1396,6 @@ msgstr "Templates"
 
 #~ msgid "Log in"
 #~ msgstr "Log in"
-
-#~ msgid "Select language"
-#~ msgstr "Select language"
 
 #~ msgid "Update"
 #~ msgstr "Update"
@@ -736,9 +1533,6 @@ msgstr "Templates"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "There was an issue with the bibliography import"
 
-#~ msgid "Import"
-#~ msgstr "Import"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "Import a bibliography"
 
@@ -764,26 +1558,14 @@ msgstr "Templates"
 #~ msgid "Sourcetype"
 #~ msgstr "Sourcetype"
 
-#~ msgid "Author"
-#~ msgstr "Author"
-
 #~ msgid "Published"
 #~ msgstr "Published"
 
 #~ msgid "Edit Categories"
 #~ msgstr "Edit Categories"
 
-#~ msgid "Delete"
-#~ msgstr "Delete"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Confirm deletion"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "Delete the bibliography item(s)"
-
-#~ msgid "Delete selected"
-#~ msgstr "Delete selected"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "Delete selected bibliography entries."
@@ -916,9 +1698,6 @@ msgstr "Templates"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "All authors (simple)"
-
-#~ msgid "Keywords"
-#~ msgstr "Keywords"
 
 #~ msgid "Bibliography block"
 #~ msgstr "Bibliography block"
@@ -1133,9 +1912,6 @@ msgstr "Templates"
 #~ msgid "None"
 #~ msgstr "None"
 
-#~ msgid "Subtitle"
-#~ msgstr "Subtitle"
-
 #~ msgid "Title (translated)"
 #~ msgstr "Title (translated)"
 
@@ -1165,9 +1941,6 @@ msgstr "Templates"
 
 #~ msgid "Allowed headings"
 #~ msgstr "Allowed headings"
-
-#~ msgid "Language"
-#~ msgstr "Language"
 
 #~ msgid "Document language"
 #~ msgstr "Document language"
@@ -1333,9 +2106,6 @@ msgstr "Templates"
 #~ msgid "Basic access rights"
 #~ msgstr "Basic access rights"
 
-#~ msgid "Write"
-#~ msgstr "Write"
-
 #~ msgid "Write tracked"
 #~ msgstr "Write tracked"
 
@@ -1344,9 +2114,6 @@ msgstr "Templates"
 
 #~ msgid "Comment"
 #~ msgstr "Comment"
-
-#~ msgid "Read"
-#~ msgstr "Read"
 
 #~ msgid "Review"
 #~ msgstr "Review"
@@ -1390,17 +2157,8 @@ msgstr "Templates"
 #~ msgid "Could not revoke share link."
 #~ msgstr "Could not revoke share link."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "Access rights have been saved"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "Access rights could not be saved"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "Add contact or invite new user"
-
-#~ msgid "Add contact"
-#~ msgstr "Add contact"
 
 #~ msgid "Share your document with others"
 #~ msgstr "Share your document with others"
@@ -1410,18 +2168,6 @@ msgstr "Templates"
 
 #~ msgid "Share link"
 #~ msgstr "Share link"
-
-#~ msgid "My contacts"
-#~ msgstr "My contacts"
-
-#~ msgid "My collaborators"
-#~ msgstr "My collaborators"
-
-#~ msgid "Collaborators"
-#~ msgstr "Collaborators"
-
-#~ msgid "Rights"
-#~ msgstr "Rights"
 
 #~ msgid "Create new share link"
 #~ msgstr "Create new share link"
@@ -1470,9 +2216,6 @@ msgstr "Templates"
 #~ "If you enter the password above, it will be embedded in the link (after #). "
 #~ "Anyone with the link can open the document. Only share such links through "
 #~ "secure channels."
-
-#~ msgid "Invite"
-#~ msgstr "Invite"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "Encrypted Document"
@@ -1531,9 +2274,6 @@ msgstr "Templates"
 #~ msgid "Import a document"
 #~ msgstr "Import a document"
 
-#~ msgid "File too large"
-#~ msgstr "File too large"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "No importable files found in ZIP"
 
@@ -1578,13 +2318,6 @@ msgstr "Templates"
 #~ msgid "Document Overview"
 #~ msgstr "Document Overview"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "You cannot open a document while you are offline."
 
@@ -1596,15 +2329,6 @@ msgstr "Templates"
 
 #~ msgid "Revisions"
 #~ msgstr "Revisions"
-
-#~ msgid "Created"
-#~ msgstr "Created"
-
-#~ msgid "Last changed"
-#~ msgstr "Last changed"
-
-#~ msgid "Owner"
-#~ msgstr "Owner"
 
 #~ msgid "Undefined"
 #~ msgstr "Undefined"
@@ -1698,9 +2422,6 @@ msgstr "Templates"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "Failed to set up passphrase:"
 
-#~ msgid "Move selected"
-#~ msgstr "Move selected"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "Move the documents that have been selected."
 
@@ -1716,35 +2437,20 @@ msgstr "Templates"
 #~ msgid "Could not move document"
 #~ msgstr "Could not move document"
 
-#~ msgid "Share selected"
-#~ msgstr "Share selected"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "Share the documents that have been selected."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "You cannot share documents of other users"
 
-#~ msgid "Copy selected"
-#~ msgstr "Copy selected"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "Copy the documents that have been selected."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Export selected as Epub"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "Export the documents that have been selected as Epub files."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "Export selected as HTML"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "Export the documents that have been selected as HTML files."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "Export selected as LaTeX"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "Export the documents that have been selected as LaTeX files."
@@ -1754,9 +2460,6 @@ msgstr "Templates"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "Export the documents that have been selected as JATS files."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "Export selected as BITS"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "Export the documents that have been selected as BITS files."
@@ -1790,9 +2493,6 @@ msgstr "Templates"
 #~ msgid "Create new document"
 #~ msgstr "Create new document"
 
-#~ msgid "Create new folder"
-#~ msgstr "Create new folder"
-
 #~ msgid "Import document"
 #~ msgstr "Import document"
 
@@ -1817,9 +2517,6 @@ msgstr "Templates"
 #~ msgid "Time"
 #~ msgstr "Time"
 
-#~ msgid "Description"
-#~ msgstr "Description"
-
 #~ msgid "Recreate"
 #~ msgstr "Recreate"
 
@@ -1834,9 +2531,6 @@ msgstr "Templates"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "Changes to citation sources are not being tracked!"
-
-#~ msgid "Bibliography"
-#~ msgstr "Bibliography"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[Encrypted message - decryption failed]"
@@ -2930,9 +3624,6 @@ msgstr "Templates"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "Export the document as a FIDUS file including its template."
 
-#~ msgid "Print/PDF"
-#~ msgstr "Print/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr "Either print or create a PDF using your browser print dialog."
 
@@ -2973,9 +3664,6 @@ msgstr "Templates"
 #~ msgid "The current password is incorrect."
 #~ msgstr "The current password is incorrect."
 
-#~ msgid "Export"
-#~ msgstr "Export"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "Export of the document contents"
 
@@ -2984,9 +3672,6 @@ msgstr "Templates"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "Export the document to an HTML file."
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "Export the document to an Epub electronic reader file."
@@ -3419,9 +4104,6 @@ msgstr "Templates"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "Characters with blanks"
-
-#~ msgid "Copy of"
-#~ msgstr "Copy of"
 
 #~ msgid " successfully copied."
 #~ msgstr "successfully copied."

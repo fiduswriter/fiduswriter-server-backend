@@ -26,6 +26,816 @@ msgstr "Шаблони за документи"
 msgid "Templates"
 msgstr "Templates"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "Данните за достъп до книга не могат да се заредят."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "Добавете контакт или поканете нов потребител"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "Добави контакт"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "Изпрати"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "Сподели твоята книга с други"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "Напиши"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "Прочети"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "Правата за достъп не могат да се запазят."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "Правата за достъп бяха запазени"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "Поканете"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "Моите контакти"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "Контакти"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "Моите приноси"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "Сътрудници"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "Права"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "Изтрий"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "Основна информация"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "Основна информация за книгата"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "Глави"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "Документи, определени като глави"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "Библиография"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "Настройки, свързани с библиографията"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Настройки, свързани с Epub"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "Настройки, свързани с DOCX"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "Настройки, свързани с ODT"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "Печат/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "Настройки за печат"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "Проверка на здравия разум"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "Извършете проверка на здравословното състояние на книгата"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "Книгата не можа да бъде изтрита"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "Книгата е изтрита"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "Потвърди изтриването"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "Наистина ли искате да изтриете следните книги?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "Наистина ли искате да изтриете следната книга?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "Неозаглавен"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "Редактирай глава"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "Книгата не можа да бъде запазена"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "Копие на"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "Книгата не можа да бъде копирана"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "Главите ще бъдат импортирани като криптирани (E2EE) документи."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "Импортиране на глави като криптирани (E2EE) документи"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "Импортиране на книга"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr "Изберете .fidusbook файл:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "Импортиране"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "Файлът е твърде голям"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "Създайте книга"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "Редактиране на книга"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "Износ"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr ""
+"Тази книга съдържа криптирани глави. Необходима е лична парола за "
+"експортиране или извършване на проверка на книгата."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "Записът на книгата не можа да бъде създаден."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "Грешна парола. Моля, опитайте отново."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "Преглед на книгите"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "Няма налични книги"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "Няма намерени книги"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "Заглавие"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "Създаден"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "Последна промяна"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "собственик"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "Данните за книги не могат да се заредят."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "Не можете да изтривате книги, докато сте офлайн."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr ""
+"Ако оставите празна папка, ще я изтриете. Наистина ли искате да изтриете "
+"тази папка?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "книга"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "Експортиране"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "Експортирането е завършено."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "Неуспешно експортиране на книгата."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "Създайте нова книга"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "Създайте нова папка"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Импортиране на книга от Fidusbook файл"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "Търсене на книги"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "Преместване на избраното"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "Преместете избраните книги."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "Преместване на книги"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "Преместване на книга"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "Книгата е преместена"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "Книгата не можа да се премести"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "Изтрий избраното"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "Изтрийте избраните книги."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "Не можете да изтриете книги от други потребители."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "Споделянето е избрано"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "Споделете избрани книги."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "Не можете да споделяте книги на други потребители."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "Копиране избрано"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "Копирайте избрани книги."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "Експортиране на избраните като BITS"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "Експортиране на избраните книги като BITS."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "Износът е избран като Epub"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "Експортирайте избрани книги като Epub."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "Експортът е избран като HTML"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "Експортирайте избрани книги като HTML."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "Експортиране е избрано като Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "Експортирайте избраните книги като HTML с един файл."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "Експортът е избран като LaTeX"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "Експортирайте избрани книги като LaTeX."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "Експортиране на избраните като DOCX"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "Експортиране на избраните книги като DOCX."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "Тази книга няма DOCX шаблон."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "Експортиране на избраните като ODT"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "Експортиране на избраните книги като ODT."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "Тази книга няма ODT шаблон."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "Износът е избран за печат / PDF"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "Експортирайте избрани книги в диалоговия прозорец за печат."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "Експортиране на избраните като Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr ""
+"Експортиране на избраните книги като .fidusbook файлове (за преместване на "
+"друг сървър)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "Експортиране като BITS"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "Експортиране на книга като Book Interchange Tag Set."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Експортиране като Epub"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "Експортиране на книга като Epub."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "Експортиране като HTML"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "Експортиране на книга като HTML."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Експортиране като Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "Експортирайте книгата като еднофайлов HTML."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "Експортирайте като LaTeX"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "Експортирайте книга като LaTeX."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "Експортиране като DOCX"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "Експортиране на книга като DOCX."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "Експортиране като ODT"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "Експортиране на книга като ODT."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "Експортиране в печат / PDF"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "Експортирайте книга в диалоговия прозорец за печат."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Експортиране като Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr ""
+"Експортиране на книга като .fidusbook файл (за преместване на друг сървър)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "Глава"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "Нерешени проследени промени"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "Вътрешни връзки без цел"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "Нерешени коментари"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "Кръстосани референции без цели"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "Книгата не съдържа глави."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "Няма достъп"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "Няма заглавие на глава"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "Не бяха открити проблеми:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "Книгата съдържа глави."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "Всяка глава има заглавие."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "Няма неразрешени проследени промени."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "Няма нерешени коментари."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "Всички кръстосани препратки имат работещи цели."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "Всички вътрешни връзки имат работещи цели."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"Тази книга съдържа криптирани глави. Необходима е лична парола за извършване"
+" на проверка за разумност. Моля, настройте или отключете вашата лична парола"
+" в настройките на вашия профил."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr ""
+"Една или повече криптирани глави не могат да бъдат декриптирани. Вижте "
+"известията за грешки за подробности."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "Автор"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "Подзаглавие"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Версия"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "Език"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "Изберете език"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "Издател"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "Бележка за Авторските Права"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "Ключови думи разделени със запетаи"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "Ключови думи"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "Описание"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "Например: 2024 г. или януари 2024 г"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "Дата на публикуване"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "Например: 2024 г"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "Заглавие на сериала"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "Серийна позиция"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "Стил на цитатите"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "Изберете стил на цитиране за книгата"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 x 12 inch)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Quarto (12 × 9 inch)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 x 6 inch)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "Книжен стил"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "Изберете таблицата със стилове за книгата"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "Размер на листите"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "Изберете размер на хартията за книгата"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "Изображение за корица"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "Изберете изображение на корицата"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "Избор на изображение"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "Премахване на изображението на корицата"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "Изтрий изображение:"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT шаблон"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "Изберете ODT шаблонен файл"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "Изберете ODT шаблонен файл"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "Премахнете ODT шаблонния файл"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX шаблон"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "Изберете DOCX шаблонен файл"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "Изберете DOCX шаблонен файл"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "Премахнете DOCX шаблонния файл"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "Извършете проверка на здравословното състояние"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "Моите документи"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "Глави на книгата"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "Сортиране"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "Криптиран документ"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "Част от Книгата"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr ""
+"Ако тази глава започва част от книга, въведете заглавието на тази част тук"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "Заглавие на част от книгата"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "съставя книги"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "Книги"
+
 #~ msgid "Improve"
 #~ msgstr "Подобрете"
 
@@ -183,14 +993,8 @@ msgstr "Templates"
 #~ msgid "OK"
 #~ msgstr "ОК"
 
-#~ msgid "Untitled"
-#~ msgstr "Неозаглавен"
-
 #~ msgid "New folder"
 #~ msgstr "Нова папка"
-
-#~ msgid "Submit"
-#~ msgstr "Изпрати"
 
 #~ msgid "Create folder"
 #~ msgstr "Създай папка"
@@ -212,9 +1016,6 @@ msgstr "Templates"
 
 #~ msgid "Site navigation"
 #~ msgstr "Навигация на сайта"
-
-#~ msgid "Contacts"
-#~ msgstr "Контакти"
 
 #~ msgid "Log out"
 #~ msgstr "Изход"
@@ -309,9 +1110,6 @@ msgstr "Templates"
 
 #~ msgid "Log in"
 #~ msgstr "Влез"
-
-#~ msgid "Select language"
-#~ msgstr "Избери език"
 
 #~ msgid "Update"
 #~ msgstr "Обновяване"
@@ -450,9 +1248,6 @@ msgstr "Templates"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "Имаше проблем с импортирането на библиографията"
 
-#~ msgid "Import"
-#~ msgstr "Импортиране"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "Импортиране на библиография"
 
@@ -478,26 +1273,14 @@ msgstr "Templates"
 #~ msgid "Sourcetype"
 #~ msgstr "Тип на източника"
 
-#~ msgid "Author"
-#~ msgstr "Автор"
-
 #~ msgid "Published"
 #~ msgstr "Публикувани"
 
 #~ msgid "Edit Categories"
 #~ msgstr "Редактирай категории"
 
-#~ msgid "Delete"
-#~ msgstr "Изтрий"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Потвърди изтриването"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "Изтриване на библиграфски запис(и)"
-
-#~ msgid "Delete selected"
-#~ msgstr "Изтрий избраните"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "Изтрийте избраните записи от библиографията."
@@ -631,9 +1414,6 @@ msgstr "Templates"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "Всички автори (прости)"
-
-#~ msgid "Keywords"
-#~ msgstr "Ключови думи"
 
 #~ msgid "Bibliography block"
 #~ msgstr "Библиографски блок"
@@ -847,9 +1627,6 @@ msgstr "Templates"
 #~ msgid "None"
 #~ msgstr "Нито един"
 
-#~ msgid "Subtitle"
-#~ msgstr "Подзаглавие"
-
 #~ msgid "Title (translated)"
 #~ msgstr "Заглавие (преведено)"
 
@@ -879,9 +1656,6 @@ msgstr "Templates"
 
 #~ msgid "Allowed headings"
 #~ msgstr "Разрешени заглавия"
-
-#~ msgid "Language"
-#~ msgstr "език"
 
 #~ msgid "Document language"
 #~ msgstr "Език на документа"
@@ -1046,9 +1820,6 @@ msgstr "Templates"
 #~ msgid "Basic access rights"
 #~ msgstr "Основни права за достъп"
 
-#~ msgid "Write"
-#~ msgstr "Напиши"
-
 #~ msgid "Write tracked"
 #~ msgstr "Пишете проследено"
 
@@ -1057,9 +1828,6 @@ msgstr "Templates"
 
 #~ msgid "Comment"
 #~ msgstr "коментар"
-
-#~ msgid "Read"
-#~ msgstr "Прочети"
 
 #~ msgid "Review"
 #~ msgstr "преглед"
@@ -1104,17 +1872,8 @@ msgstr "Templates"
 #~ msgid "Could not revoke share link."
 #~ msgstr "Връзката за споделяне не можа да бъде отменена."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "Правата за достъп бяха запазени"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "Правата за достъп не можаха да бъдат запазени"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "Добавете контакт или поканете нов потребител"
-
-#~ msgid "Add contact"
-#~ msgstr "Добави контакт"
 
 #~ msgid "Share your document with others"
 #~ msgstr "Сподели документа с други потребители"
@@ -1124,18 +1883,6 @@ msgstr "Templates"
 
 #~ msgid "Share link"
 #~ msgstr "Споделете връзка"
-
-#~ msgid "My contacts"
-#~ msgstr "Моите контати"
-
-#~ msgid "My collaborators"
-#~ msgstr "Моите приноси"
-
-#~ msgid "Collaborators"
-#~ msgstr "Сътрудници"
-
-#~ msgid "Rights"
-#~ msgstr "Права"
 
 #~ msgid "Create new share link"
 #~ msgstr "Създайте нова връзка за споделяне"
@@ -1184,9 +1931,6 @@ msgstr "Templates"
 #~ "Ако въведете паролата по-горе, тя ще бъде вградена във връзката (след #). "
 #~ "Всеки с връзката може да отвори документа. Споделяйте такива връзки само "
 #~ "през защитени канали."
-
-#~ msgid "Invite"
-#~ msgstr "каня"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "Криптиран документ"
@@ -1245,9 +1989,6 @@ msgstr "Templates"
 #~ msgid "Import a document"
 #~ msgstr "Импортирайте документ"
 
-#~ msgid "File too large"
-#~ msgstr "Файлът е твърде голям"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "Няма намерени импортируеми файлове в ZIP"
 
@@ -1295,13 +2036,6 @@ msgstr "Templates"
 #~ msgid "Document Overview"
 #~ msgstr "Преглед на документа"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr ""
-#~ "Ако оставите празна папка, ще я изтриете. Наистина ли искате да изтриете "
-#~ "тази папка?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "Не можете да отворите документ, докато сте офлайн."
 
@@ -1313,15 +2047,6 @@ msgstr "Templates"
 
 #~ msgid "Revisions"
 #~ msgstr "Ревизиите"
-
-#~ msgid "Created"
-#~ msgstr "Създаден"
-
-#~ msgid "Last changed"
-#~ msgstr "Последна промяна"
-
-#~ msgid "Owner"
-#~ msgstr "Собственик"
 
 #~ msgid "Undefined"
 #~ msgstr "неопределен"
@@ -1422,9 +2147,6 @@ msgstr "Templates"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "Неуспешно настройване на парола:"
 
-#~ msgid "Move selected"
-#~ msgstr "Преместване на избраното"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "Преместете избраните документи."
 
@@ -1440,35 +2162,20 @@ msgstr "Templates"
 #~ msgid "Could not move document"
 #~ msgstr "Документът не можа да се премести"
 
-#~ msgid "Share selected"
-#~ msgstr "Сподели избраните"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "Споделете избраните документи."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "Не можете да споделяте документи на други потребители"
 
-#~ msgid "Copy selected"
-#~ msgstr "Копирай избраните"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "Копирайте избраните документи."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Експортирай избраните като Epub"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "Експортирайте документите, които са избрани като Epub файлове."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "Експортирай избраните като HTML"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "Експортирайте документите, които са избрани като HTML файлове."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "Експортирай избраните като LaTeX"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "Експортирайте документите, които са избрани като LaTeX файлове."
@@ -1478,9 +2185,6 @@ msgstr "Templates"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "Експортирайте документите, които са избрани като JATS файлове."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "Износът е избран като BITS"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "Експортирайте документите, които са избрани като BITS файлове."
@@ -1514,9 +2218,6 @@ msgstr "Templates"
 #~ msgid "Create new document"
 #~ msgstr "Създайте нов документ"
 
-#~ msgid "Create new folder"
-#~ msgstr "Създайте нова папка"
-
 #~ msgid "Import document"
 #~ msgstr "Импортиране на документ"
 
@@ -1541,9 +2242,6 @@ msgstr "Templates"
 #~ msgid "Time"
 #~ msgstr "път"
 
-#~ msgid "Description"
-#~ msgstr "описание"
-
 #~ msgid "Recreate"
 #~ msgstr "Recreate"
 
@@ -1558,9 +2256,6 @@ msgstr "Templates"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "Промените в източниците на цитиране не се проследяват!"
-
-#~ msgid "Bibliography"
-#~ msgstr "Библиография"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[Шифровано съобщение - неуспешно дешифриране]"
@@ -2665,9 +3360,6 @@ msgstr "Templates"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "Експортирайте документа като файл FIDUS, включително неговия шаблон."
 
-#~ msgid "Print/PDF"
-#~ msgstr "Печат/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr ""
 #~ "Или отпечатайте, или създайте PDF, използвайки диалоговия прозорец за печат "
@@ -2709,9 +3401,6 @@ msgstr "Templates"
 #~ msgid "The current password is incorrect."
 #~ msgstr "Текущата парола е неправилна."
 
-#~ msgid "Export"
-#~ msgstr "Експортиране"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "Експортирай съдаржанието на документа"
 
@@ -2720,9 +3409,6 @@ msgstr "Templates"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "Експортирайте документа в HTML файл."
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "Експортирай документа като Epub електронна книга"
@@ -3157,9 +3843,6 @@ msgstr "Templates"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "Знаци (с интервали)"
-
-#~ msgid "Copy of"
-#~ msgstr "Копие на"
 
 #~ msgid " successfully copied."
 #~ msgstr " успешно копиран"
@@ -4181,9 +4864,6 @@ msgstr "Templates"
 #~ msgid "Author(s) of a commentary"
 #~ msgstr "Автор(и) на коментара"
 
-#~ msgid "Publication date"
-#~ msgstr "Дата на публикуване"
-
 #~ msgid "Digital Object Identifier"
 #~ msgstr "Дигитален идентификатор"
 
@@ -4252,9 +4932,6 @@ msgstr "Templates"
 
 #~ msgid "ISAN"
 #~ msgstr "ISAN"
-
-#~ msgid "ISBN"
-#~ msgstr "ISBN"
 
 #~ msgid "ISMN"
 #~ msgstr "ISMN"
@@ -4376,9 +5053,6 @@ msgstr "Templates"
 #~ msgid "Location of a conference"
 #~ msgstr "Място на провеждане на конференцията"
 
-#~ msgid "Version"
-#~ msgstr "Версия"
-
 #~ msgid "Volume"
 #~ msgstr "Том"
 
@@ -4404,9 +5078,6 @@ msgstr "Templates"
 
 #~ msgid "Article"
 #~ msgstr "Статия"
-
-#~ msgid "Book"
-#~ msgstr "Книга"
 
 #~ msgid "Multi-volume book"
 #~ msgstr "Многотомник"
@@ -4807,74 +5478,8 @@ msgstr "Templates"
 #~ msgid "Import from database"
 #~ msgstr "Импортиране от база данни"
 
-#~ msgid "Books"
-#~ msgstr "Книги"
-
 #~ msgid "Import from Database"
 #~ msgstr "Импортиране от база данни"
-
-#~ msgid "Cannot load book access data."
-#~ msgstr "Данните за достъп до книгата не могат да се заредят."
-
-#~ msgid "Share your book with others"
-#~ msgstr "Споделете книгата си с други"
-
-#~ msgid "Basic info"
-#~ msgstr "Основна информация"
-
-#~ msgid "Basic book information"
-#~ msgstr "Основна информация за книгата"
-
-#~ msgid "Chapters"
-#~ msgstr "глави"
-
-#~ msgid "Documents assigned as chapters"
-#~ msgstr "Документи, определени като глави"
-
-#~ msgid "Bibliography related settings"
-#~ msgstr "Настройки, свързани с библиографията"
-
-#~ msgid "ODT related settings"
-#~ msgstr "Настройки, свързани с ODT"
-
-#~ msgid "Could not delete book"
-#~ msgstr "Книгата не можа да бъде изтрита"
-
-#~ msgid "Book has been deleted"
-#~ msgstr "Книгата е изтрита"
-
-#~ msgid "Do you really want to delete the following books?"
-#~ msgstr "Наистина ли искате да изтриете следните книги?"
-
-#~ msgid "Do you really want to delete the following book?"
-#~ msgstr "Наистина ли искате да изтриете следната книга?"
-
-#~ msgid "Edit Chapter"
-#~ msgstr "Редактиране на глава"
-
-#~ msgid "The book could not be saved"
-#~ msgstr "Книгата не можа да бъде запазена"
-
-#~ msgid "Create Book"
-#~ msgstr "Създаване на книга"
-
-#~ msgid "Edit Book"
-#~ msgstr "Редактиране на книга"
-
-#~ msgid "Book Overview"
-#~ msgstr "Преглед на книгата"
-
-#~ msgid "No books available"
-#~ msgstr "Няма налични книги"
-
-#~ msgid "No books found"
-#~ msgstr "Няма намерени книги"
-
-#~ msgid "You cannot delete books while you are offline."
-#~ msgstr "Не можете да изтривате книги, докато сте офлайн."
-
-#~ msgid "Search books"
-#~ msgstr "Търсене на книги"
 
 #~ msgid "Epub export has been initiated."
 #~ msgstr "Започнат бе Epub експорт."
@@ -4899,192 +5504,6 @@ msgstr "Templates"
 
 #~ msgid "Print has been initiated."
 #~ msgstr "Отпечатването е започнато."
-
-#~ msgid "Move the books that have been selected."
-#~ msgstr "Преместване на избраните книги."
-
-#~ msgid "Move book"
-#~ msgstr "Преместете книгата"
-
-#~ msgid "Book has been moved"
-#~ msgstr "Книгата е преместена"
-
-#~ msgid "Delete selected books."
-#~ msgstr "Изтриване на избраните книги."
-
-#~ msgid "You cannot delete books of other users."
-#~ msgstr "Не можете да изтривате книги на други потребители."
-
-#~ msgid "Share selected books."
-#~ msgstr "Споделете избрани книги."
-
-#~ msgid "You cannot share books of other users."
-#~ msgstr "Не можете да споделяте книги на други потребители."
-
-#~ msgid "Copy selected books."
-#~ msgstr "Копиране на избрани книги."
-
-#~ msgid "Export selected books as BITS."
-#~ msgstr "Експортиране на избрани книги като BITS."
-
-#~ msgid "Export selected books as Epub."
-#~ msgstr "Експортирайте избраните книги като Epub."
-
-#~ msgid "Export selected books as HTML."
-#~ msgstr "Експортирайте избраните книги като HTML."
-
-#~ msgid "Export selected as Unified HTML"
-#~ msgstr "Експортиране избрано като Unified HTML"
-
-#~ msgid "Export selected books as Single-file HTML."
-#~ msgstr "Експортирайте избраните книги като еднофайлов HTML."
-
-#~ msgid "Export selected books as LaTeX."
-#~ msgstr "Експортиране на избрани книги като LaTeX."
-
-#~ msgid "Export selected as DOCX"
-#~ msgstr "Експортиране избрано като DOCX"
-
-#~ msgid "Export selected books as DOCX."
-#~ msgstr "Експортирайте избраните книги като DOCX."
-
-#~ msgid "Export selected as ODT"
-#~ msgstr "Експортиране избрано като ODT"
-
-#~ msgid "Export selected books as ODT."
-#~ msgstr "Експортиране на избрани книги като ODT."
-
-#~ msgid "Export selected to Print/PDF"
-#~ msgstr "Експортирайте избраното за печат/PDF"
-
-#~ msgid "Export selected books to the print dialog."
-#~ msgstr "Експортирайте избрани книги в диалоговия прозорец за печат."
-
-#~ msgid "Export as BITS"
-#~ msgstr "Експортиране като BITS"
-
-#~ msgid "Export book as Book Interchange Tag Set."
-#~ msgstr "Експортиране на книга като набор от етикети за обмен на книги."
-
-#~ msgid "Export as Epub"
-#~ msgstr "Експортиране като Epub"
-
-#~ msgid "Export book as Epub."
-#~ msgstr "Експортиране на книга като Epub."
-
-#~ msgid "Export as HTML"
-#~ msgstr "Експортиране като HTML"
-
-#~ msgid "Export book as HTML."
-#~ msgstr "Експортирайте книгата като HTML."
-
-#~ msgid "Export as Unified HTML"
-#~ msgstr "Експортиране като Unified HTML"
-
-#~ msgid "Export as LaTeX"
-#~ msgstr "Експортиране като LaTeX"
-
-#~ msgid "Export book as LaTeX."
-#~ msgstr "Експортиране на книга като LaTeX."
-
-#~ msgid "Export as DOCX"
-#~ msgstr "Експортиране като DOCX"
-
-#~ msgid "Export as ODT"
-#~ msgstr "Експортиране като ODT"
-
-#~ msgid "Export to Print/PDF"
-#~ msgstr "Експортиране в печат/PDF"
-
-#~ msgid "Unresolved tracked changes"
-#~ msgstr "Неразрешени проследени промени"
-
-#~ msgid "Internal links without target"
-#~ msgstr "Вътрешни връзки без цел"
-
-#~ msgid "Unresolved comments"
-#~ msgstr "Неразрешени коментари"
-
-#~ msgid "No chapter title"
-#~ msgstr "Няма заглавие на глава"
-
-#~ msgid "No issues were found:"
-#~ msgstr "Не бяха намерени проблеми:"
-
-#~ msgid "Each chapter has a title."
-#~ msgstr "Всяка глава има заглавие."
-
-#~ msgid "There are no unresolved tracked changes."
-#~ msgstr "Няма неразрешени проследени промени."
-
-#~ msgid "There are no unresolved comments."
-#~ msgstr "Няма нерешени коментари."
-
-#~ msgid "All cross references have working targets."
-#~ msgstr "Всички кръстосани препратки имат работещи цели."
-
-#~ msgid "All internal links have working targets."
-#~ msgstr "Всички вътрешни връзки имат работещи цели."
-
-#~ msgid "Publisher"
-#~ msgstr "Издател"
-
-#~ msgid "Citation style"
-#~ msgstr "Стил на цитиране"
-
-#~ msgid "Select citation style for the book"
-#~ msgstr "Изберете стил на цитиране за книгата"
-
-#~ msgid "Book style"
-#~ msgstr "Книжен стил"
-
-#~ msgid "Paper size"
-#~ msgstr "Размер на хартията"
-
-#~ msgid "Cover image"
-#~ msgstr "Изображение на корицата"
-
-#~ msgid "Select a cover image"
-#~ msgstr "Изберете изображение на корицата"
-
-#~ msgid "Remove Image"
-#~ msgstr "Премахване на изображение"
-
-#~ msgid "ODT Template"
-#~ msgstr "ODT шаблон"
-
-#~ msgid "Select an ODT template file"
-#~ msgstr "Изберете ODT шаблонен файл"
-
-#~ msgid "Select ODT template file"
-#~ msgstr "Изберете ODT шаблонен файл"
-
-#~ msgid "Remove ODT template file"
-#~ msgstr "Премахнете ODT шаблонния файл"
-
-#~ msgid "DOCX Template"
-#~ msgstr "DOCX шаблон"
-
-#~ msgid "Select an DOCX template file"
-#~ msgstr "Изберете DOCX шаблонен файл"
-
-#~ msgid "Select DOCX template file"
-#~ msgstr "Изберете DOCX шаблонен файл"
-
-#~ msgid "Remove DOCX template file"
-#~ msgstr "Премахнете DOCX шаблонния файл"
-
-#~ msgid "My documents"
-#~ msgstr "Моите документи"
-
-#~ msgid "Book chapters"
-#~ msgstr "Глави в книгата"
-
-#~ msgid "Book part"
-#~ msgstr "Книжна част"
-
-#~ msgid "Book part title"
-#~ msgstr "Заглавие на част от книгата"
 
 #~ msgid "Export selected to Git repository."
 #~ msgstr "Експортирайте избраното в Git хранилище."

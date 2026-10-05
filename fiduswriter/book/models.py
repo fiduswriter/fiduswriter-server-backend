@@ -1,0 +1,156 @@
+from django.db import models
+from django.utils import timezone
+from django.conf import settings as django_settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
+from document.models import Document
+from usermedia.models import Image
+
+
+def export_template_filename(instance, filename):
+    instance.title = filename.split(".")[0]
+    return "/".join(["book-export-template-files", filename])
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=128)
+    path = models.TextField(default="", blank=True)
+    metadata = models.JSONField(default=dict, blank=True)
+    settings = models.JSONField(default=dict, blank=True)
+    cover_image = models.ForeignKey(
+        Image,
+        blank=True,
+        null=True,
+        default=None,
+        on_delete=models.deletion.CASCADE,
+    )
+    docx_template = models.FileField(
+        upload_to=export_template_filename, blank=True, null=True
+    )
+    odt_template = models.FileField(
+        upload_to=export_template_filename, blank=True, null=True
+    )
+    chapters = models.ManyToManyField(
+        Document, through="Chapter", blank=True, default=None
+    )
+    owner = models.ForeignKey(
+        django_settings.AUTH_USER_MODEL, on_delete=models.deletion.CASCADE
+    )
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def from_db(cls, db, field_names, values):
+        instance = super().from_db(db, field_names, values)
+        instance._loaded_values = dict(zip(field_names, values))
+        return instance
+
+    def has_changed(self):
+        if (
+            self._loaded_values["title"] != self.title
+            or self._loaded_values["metadata"] != self.metadata
+            or self._loaded_values["settings"] != self.settings
+            or self._loaded_values["cover_image_id"] != self.cover_image_id
+            or self._loaded_values["owner_id"] != self.owner_id
+        ):
+            return True
+        else:
+            return False
+
+    def save(self, *args, **kwargs):
+        if ("force_update" in kwargs and kwargs["force_update"]) or (
+            not self._state.adding and self.has_changed()
+        ):
+            self.updated = timezone.now()
+        return super().save(*args, **kwargs)
+
+
+class Chapter(models.Model):
+    text = models.ForeignKey(Document, on_delete=models.deletion.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.deletion.CASCADE)
+    number = models.IntegerField()
+    part = models.CharField(max_length=128, blank=True, default="")
+
+
+RIGHTS_CHOICES = (
+    ("read", "Reader"),
+    ("write", "Writer"),
+)
+
+
+class BookAccessRight(models.Model):
+    path = models.TextField(default="", blank=True)
+    book = models.ForeignKey(Book, on_delete=models.deletion.CASCADE)
+    holder_choices = models.Q(app_label="user", model="user") | models.Q(
+        app_label="user", model="userinvite"
+    )
+    holder_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, limit_choices_to=holder_choices
+    )
+    holder_id = models.PositiveIntegerField()
+    holder_obj = GenericForeignKey("holder_type", "holder_id")
+    rights = models.CharField(
+        max_length=5, choices=RIGHTS_CHOICES, blank=False
+    )
+
+    class Meta:
+        unique_together = (("book", "holder_id", "holder_type"),)
+
+    def __str__(self):
+        if self.holder_obj:
+            return f"{self.holder_obj.readable_name} {self.rights} on {self.book.title}"
+        else:
+            return f"{self.holder_type.model} {self.holder_id} {self.rights} on {self.book.title}"
+
+
+class BookStyle(models.Model):
+    title = models.CharField(
+        max_length=128,
+        help_text="The human readable title.",
+        default="Default",
+    )
+    slug = models.SlugField(
+        max_length=20,
+        help_text="The base of the filenames the style occupies.",
+        default="default",
+        unique=True,
+    )
+    contents = models.TextField(
+        help_text="The CSS style definiton.", default=""
+    )
+
+    def __str__(self):
+        return self.title
+
+
+def bookstylefile_location(instance, filename):
+    # preserve the original filename
+    instance.filename = filename
+    return "/".join(["book-style-files", filename])
+
+
+class BookStyleFile(models.Model):
+    file = models.FileField(
+        upload_to=bookstylefile_location,
+        help_text=(
+            "A file references in the style. The filename will be replaced "
+            "with the final url of the file in the style."
+        ),
+    )
+    filename = models.CharField(
+        max_length=255, help_text="The original filename."
+    )
+    style = models.ForeignKey("BookStyle", on_delete=models.deletion.CASCADE)
+
+    def __str__(self):
+        return f"{self.filename} of {self.style.title}"
+
+    def natural_key(self):
+        return (self.file.url, self.filename)
+
+    class Meta:
+        unique_together = (("filename", "style"),)

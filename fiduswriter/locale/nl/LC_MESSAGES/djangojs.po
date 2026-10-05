@@ -27,6 +27,819 @@ msgstr "Documentsjablonen"
 msgid "Templates"
 msgstr "Sjablonen"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "Boektoegangsgegevens kunnen niet worden geladen."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "Contact toevoegen of nieuwe gebruiker uitnodigen"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "Contact toevoegen"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "Verzenden"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "Deel je boek met anderen"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "Schrijven"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "Lezen"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "Toegangsrechten kunnen niet worden opgeslagen."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "Toegangsrechten zijn opgeslagen"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "Uitnodigen"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "Mijn contacten"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "Contacten"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "Mijn medewerkers"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "Medewerkers"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "Rechten"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "Basisgegevens"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "Algemene boekinformatie"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "Hoofdstukken"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "Documenten toegewezen als hoofdstukken"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "Bibliografie"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "Bibliografie gerelateerde instellingen"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Epub-gerelateerde instellingen"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "DOCX-gerelateerde instellingen"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "ODT-gerelateerde instellingen"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "Afdruk/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "Afdruk gerelateerde instellingen"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "Validatie"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "Voer validatie uit op boek"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "Boek kon niet worden verwijderd"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "Boek is verwijderd"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "Verwijdering bevestigen"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "Wilt u de volgende boeken echt verwijderen?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "Wilt u het volgende boek echt verwijderen?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "Naamloos"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "Hoofdstuk bewerken"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "Het boek kon niet worden opgeslagen"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "Kopie van"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "Het boek kon niet worden gekopieerd"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "Hoofdstukken worden geïmporteerd als versleutelde (E2EE) documenten."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "Hoofdstukken importeren als versleutelde (E2EE) documenten"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "Een boek importeren"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr "Selecteer een .fidusbook-bestand:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "Importeren"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "Bestand te groot"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "Boek aanmaken"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "Boek bewerken"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "Exporteren"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr ""
+"Dit boek bevat versleutelde hoofdstukken. Er is een persoonlijke "
+"wachtwoordzin vereist om dit boek te exporteren of een validatie uit te "
+"voeren."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "Boekrecord kon niet worden aangemaakt."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "Onjuiste wachtwoordzin. Probeer het opnieuw."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "Boekoverzicht"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "Geen boeken beschikbaar"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "Geen boeken gevonden"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "Titel"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "Laatst gewijzigd"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "Eigenaar"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "Gegevens van boeken kunnen niet worden geladen."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "U kunt geen boeken verwijderen terwijl u offline bent."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr ""
+"Als u een lege map verlaat, wordt deze verwijderd. Wilt u deze map echt "
+"verwijderen?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "Boek"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "Exporteren"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "Exporteren voltooid."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "Het exporteren van boeken is mislukt."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "Nieuw boek aanmaken"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "Nieuwe map aanmaken"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Boek importeren uit Fidusbook-bestand"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "Boeken zoeken"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "Geselecteerde verplaatsen"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "Verplaats de geselecteerde boeken."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "Boeken verplaatsen"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "Boek verplaatsen"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "Boek is verplaatst"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "Boek kon niet worden verplaatst"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "Geselecteerde verwijderen"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "Geselecteerde boeken verwijderen."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "U kunt geen boeken van andere gebruikers verwijderen."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "Geselecteerde delen"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "Geselecteerde boeken delen."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "U kunt geen boeken van andere gebruikers delen."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "Geselecteerde kopiëren"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "Geselecteerde boeken kopiëren."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "Geselecteerde exporteren als BITS"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "Geselecteerde boeken exporteren als BITS."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "Geselecteerde exporteren als Epub"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "Geselecteerde boeken exporteren als Epub."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "Geselecteerde exporteren als HTML"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "Geselecteerde boeken exporteren als HTML."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "Geselecteerde exporteren als Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "Geselecteerde boeken exporteren als HTML in één bestand."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "Geselecteerde exporteren als LaTeX"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "Geselecteerde boeken exporteren als LaTeX."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "Geselecteerde exporteren als DOCX"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "Geselecteerde boeken exporteren als DOCX."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "Dit boek heeft geen DOCX-sjabloon."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "Geselecteerde exporteren als ODT"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "Geselecteerde boeken exporteren als ODT."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "Dit boek heeft geen ODT-sjabloon."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "Geselecteerde exporteren naar afdruk/PDF"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "Geselecteerde boeken exporteren naar het afdrukdialoogvenster."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "Geselecteerde exporteren als Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr ""
+"Geselecteerde boeken exporteren als .fidusbook-bestanden (voor verplaatsing "
+"naar een andere server)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "Exporteren als BITS"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "Boek exporteren als Book Interchange Tag Set."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Exporteren als Epub"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "Boek exporteren als Epub."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "Exporteren als HTML"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "Boek exporteren als HTML."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Exporteren als Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "Boek exporteren als HTML in één bestand."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "Exporteren als LaTeX"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "Boek exporteren als LaTeX."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "Exporteren als DOCX"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "Boek exporteren als DOCX."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "Exporteren als ODT"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "Boek exporteren als ODT."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "Exporteren naar afdruk/PDF"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "Boek exporteren naar het afdrukdialoogvenster."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Exporteren als Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr ""
+"Boek exporteren als .fidusbook-bestand (voor verplaatsing naar een andere "
+"server)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "Hoofdstuk"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "Onopgeloste bijgehouden wijzigingen"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "Interne koppelingen zonder doel"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "Onopgeloste opmerkingen"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "Kruisverwijzingen zonder doelen"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "Het boek bevat geen hoofdstukken."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "Geen toegang"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "Geen hoofdstuktitel"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "Er zijn geen problemen gevonden:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "Het boek bevat hoofdstukken."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "Elk hoofdstuk heeft een titel."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "Er zijn geen onopgeloste bijgehouden wijzigingen."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "Er zijn geen onopgeloste opmerkingen."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "Alle kruisverwijzingen hebben werkende doelen."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "Alle interne koppelingen hebben werkende doelen."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"Dit boek bevat gecodeerde hoofdstukken. Voor het uitvoeren van een "
+"gezondheidscheck is een persoonlijke wachtwoordzin vereist. Stel uw "
+"persoonlijke wachtwoordzin in of ontgrendel deze in uw profielinstellingen."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr ""
+"Een of meer gecodeerde hoofdstukken konden niet worden gedecodeerd. Zie de "
+"foutmeldingen voor details."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "Auteur"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "Ondertitel"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Versie"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "Taal"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "Selecteer taal"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "Uitgever"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "Auteursrechtmelding"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "Komma gescheiden trefwoorden"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "Trefwoorden"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "Beschrijving"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN-nummer"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "Bijvoorbeeld: 2024 of januari 2024"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "Publicatiedatum"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "Bijvoorbeeld: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "Serie titel"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "Serie positie"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "Citatiestijl"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "Selecteer citatiestijl voor het boek"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 x 12 inch)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Kwarto (12 × 9 inch)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 x 6 inch)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "Boekstijl"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "Selecteer stylesheet voor het boek"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "Papierformaat"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "Selecteer papierformaat voor het boek"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "Omslagafbeelding"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "Selecteer een omslagafbeelding"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "Afbeelding selecteren"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "Omslagafbeelding verwijderen"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "Afbeelding verwijderen"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT-sjabloon"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "Selecteer een ODT-sjabloonbestand"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "Selecteer ODT-sjabloonbestand"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "ODT-sjabloonbestand verwijderen"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX-sjabloon"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "Selecteer een DOCX-sjabloonbestand"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "Selecteer DOCX-sjabloonbestand"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "Verwijder het DOCX-sjabloonbestand"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "Validatie uitvoeren"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "Mijn documenten"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "Boekhoofdstukken"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "Sorteren"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "Gecodeerd document"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "Boekdeel"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr ""
+"Als dit hoofdstuk een deel van het boek begint, specificeer dan hier de "
+"titel van dat deel"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "Titel boekdeel"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "boeken samenstellen"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "Boeken"
+
 #~ msgid "Improve"
 #~ msgstr "Verbeteren"
 
@@ -181,14 +994,8 @@ msgstr "Sjablonen"
 #~ msgid "OK"
 #~ msgstr "OK"
 
-#~ msgid "Untitled"
-#~ msgstr "Zonder titel"
-
 #~ msgid "New folder"
 #~ msgstr "Nieuwe map"
-
-#~ msgid "Submit"
-#~ msgstr "Indienen"
 
 #~ msgid "Create folder"
 #~ msgstr "Map maken"
@@ -210,9 +1017,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Site navigation"
 #~ msgstr "Sitenavigatie"
-
-#~ msgid "Contacts"
-#~ msgstr "Contacten"
 
 #~ msgid "Log out"
 #~ msgstr "Uitloggen"
@@ -307,9 +1111,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Log in"
 #~ msgstr "Inloggen"
-
-#~ msgid "Select language"
-#~ msgstr "Selecteer taal"
 
 #~ msgid "Update"
 #~ msgstr "Update"
@@ -451,9 +1252,6 @@ msgstr "Sjablonen"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "Er is een probleem opgetreden bij het importeren van de bibliografie"
 
-#~ msgid "Import"
-#~ msgstr "Importeren"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "Importeer een bibliografie"
 
@@ -479,26 +1277,14 @@ msgstr "Sjablonen"
 #~ msgid "Sourcetype"
 #~ msgstr "Brontype"
 
-#~ msgid "Author"
-#~ msgstr "Auteur"
-
 #~ msgid "Published"
 #~ msgstr "Gepubliceerd"
 
 #~ msgid "Edit Categories"
 #~ msgstr "Categorieën bewerken"
 
-#~ msgid "Delete"
-#~ msgstr "Verwijderen"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Bevestig het verwijderen"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "Verwijder de bibliografie-item(s)"
-
-#~ msgid "Delete selected"
-#~ msgstr "Geselecteerde verwijderen"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "Geselecteerde bibliografiegegevens verwijderen."
@@ -633,9 +1419,6 @@ msgstr "Sjablonen"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "Alle auteurs (eenvoudig)"
-
-#~ msgid "Keywords"
-#~ msgstr "Trefwoorden"
 
 #~ msgid "Bibliography block"
 #~ msgstr "Bibliografie blok"
@@ -852,9 +1635,6 @@ msgstr "Sjablonen"
 #~ msgid "None"
 #~ msgstr "Geen"
 
-#~ msgid "Subtitle"
-#~ msgstr "Ondertitel"
-
 #~ msgid "Title (translated)"
 #~ msgstr "Titel (vertaald)"
 
@@ -884,9 +1664,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Allowed headings"
 #~ msgstr "Toegestane koppen"
-
-#~ msgid "Language"
-#~ msgstr "Taal"
 
 #~ msgid "Document language"
 #~ msgstr "Documenttaal"
@@ -1052,9 +1829,6 @@ msgstr "Sjablonen"
 #~ msgid "Basic access rights"
 #~ msgstr "Basistoegangsrechten"
 
-#~ msgid "Write"
-#~ msgstr "Schrijven"
-
 #~ msgid "Write tracked"
 #~ msgstr "Schrijf bijgehouden"
 
@@ -1063,9 +1837,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Comment"
 #~ msgstr "Opmerking"
-
-#~ msgid "Read"
-#~ msgstr "Lezen"
 
 #~ msgid "Review"
 #~ msgstr "Beoordeling"
@@ -1111,17 +1882,8 @@ msgstr "Sjablonen"
 #~ msgid "Could not revoke share link."
 #~ msgstr "Kan de deellink niet intrekken."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "Toegangsrechten zijn opgeslagen"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "Toegangsrechten konden niet worden opgeslagen"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "Contact toevoegen of nieuwe gebruiker uitnodigen"
-
-#~ msgid "Add contact"
-#~ msgstr "Contactpersoon toevoegen"
 
 #~ msgid "Share your document with others"
 #~ msgstr "Deel uw document met anderen"
@@ -1131,18 +1893,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Share link"
 #~ msgstr "Deel link"
-
-#~ msgid "My contacts"
-#~ msgstr "Mijn contacten"
-
-#~ msgid "My collaborators"
-#~ msgstr "Mijn medewerkers"
-
-#~ msgid "Collaborators"
-#~ msgstr "Medewerkers"
-
-#~ msgid "Rights"
-#~ msgstr "Rechten"
 
 #~ msgid "Create new share link"
 #~ msgstr "Maak een nieuwe deellink"
@@ -1191,9 +1941,6 @@ msgstr "Sjablonen"
 #~ "Als u hierboven het wachtwoord invoert, wordt dit in de link ingesloten (na "
 #~ "#). Iedereen met de link kan het document openen. Deel dergelijke links "
 #~ "alleen via beveiligde kanalen."
-
-#~ msgid "Invite"
-#~ msgstr "Uitnodiging"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "Gecodeerd document"
@@ -1253,9 +2000,6 @@ msgstr "Sjablonen"
 #~ msgid "Import a document"
 #~ msgstr "Importeer een document"
 
-#~ msgid "File too large"
-#~ msgstr "Bestand te groot"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "Geen importeerbare bestanden gevonden in ZIP"
 
@@ -1302,13 +2046,6 @@ msgstr "Sjablonen"
 #~ msgid "Document Overview"
 #~ msgstr "Documentoverzicht"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr ""
-#~ "Als u een lege map achterlaat, wordt deze verwijderd. Wilt u deze map echt "
-#~ "verwijderen?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "U kunt een document niet openen terwijl u offline bent."
 
@@ -1320,15 +2057,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Revisions"
 #~ msgstr "Revisies"
-
-#~ msgid "Created"
-#~ msgstr "Gemaakt"
-
-#~ msgid "Last changed"
-#~ msgstr "Laatst gewijzigd"
-
-#~ msgid "Owner"
-#~ msgstr "Eigenaar"
 
 #~ msgid "Undefined"
 #~ msgstr "Ongedefinieerd"
@@ -1431,9 +2159,6 @@ msgstr "Sjablonen"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "Kan de wachtwoordzin niet instellen:"
 
-#~ msgid "Move selected"
-#~ msgstr "Verplaats geselecteerd"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "Verplaats de geselecteerde documenten."
 
@@ -1449,35 +2174,20 @@ msgstr "Sjablonen"
 #~ msgid "Could not move document"
 #~ msgstr "Kan document niet verplaatsen"
 
-#~ msgid "Share selected"
-#~ msgstr "Delen geselecteerd"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "Deel de documenten die zijn geselecteerd."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "U kunt geen documenten van andere gebruikers delen"
 
-#~ msgid "Copy selected"
-#~ msgstr "Kopieer geselecteerd"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "Kopieer de geselecteerde documenten."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Exporteren geselecteerd als Epub"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "Exporteer de documenten die zijn geselecteerd als Epub-bestanden."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "Geselecteerde export als HTML"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "Exporteer de documenten die zijn geselecteerd als HTML-bestanden."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "Exporteren geselecteerd als LaTeX"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "Exporteer de documenten die zijn geselecteerd als LaTeX-bestanden."
@@ -1487,9 +2197,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "Exporteer de documenten die zijn geselecteerd als JATS-bestanden."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "Exporteren geselecteerd als BITS"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "Exporteer de documenten die zijn geselecteerd als BITS-bestanden."
@@ -1523,9 +2230,6 @@ msgstr "Sjablonen"
 #~ msgid "Create new document"
 #~ msgstr "Nieuw document maken"
 
-#~ msgid "Create new folder"
-#~ msgstr "Maak een nieuwe map"
-
 #~ msgid "Import document"
 #~ msgstr "Document importeren"
 
@@ -1550,9 +2254,6 @@ msgstr "Sjablonen"
 #~ msgid "Time"
 #~ msgstr "Tijd"
 
-#~ msgid "Description"
-#~ msgstr "Beschrijving"
-
 #~ msgid "Recreate"
 #~ msgstr "Herscheppen"
 
@@ -1567,9 +2268,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "Wijzigingen in citatiebronnen worden niet bijgehouden!"
-
-#~ msgid "Bibliography"
-#~ msgstr "Bibliografie"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[Gecodeerd bericht - decodering mislukt]"
@@ -2686,9 +3384,6 @@ msgstr "Sjablonen"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "Exporteer het document als FIDUS-bestand inclusief het sjabloon."
 
-#~ msgid "Print/PDF"
-#~ msgstr "Afdrukken/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr ""
 #~ "Druk af of maak een PDF met behulp van het afdrukvenster van uw browser."
@@ -2730,9 +3425,6 @@ msgstr "Sjablonen"
 #~ msgid "The current password is incorrect."
 #~ msgstr "Het huidige wachtwoord is onjuist."
 
-#~ msgid "Export"
-#~ msgstr "Exporteren"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "Exporteren van de documentinhoud"
 
@@ -2741,9 +3433,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "Exporteer het document naar een HTML-bestand."
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "Exporteer het document naar een elektronisch Epub-lezerbestand."
@@ -3184,9 +3873,6 @@ msgstr "Sjablonen"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "Tekens met spaties"
-
-#~ msgid "Copy of"
-#~ msgstr "Kopie van"
 
 #~ msgid " successfully copied."
 #~ msgstr "succesvol gekopieerd."

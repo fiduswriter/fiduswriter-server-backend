@@ -602,6 +602,24 @@ msgstr "이미지가 너무 큼"
 msgid "No file uploaded"
 msgstr "업로드된 파일이 없습니다."
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "책"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "편집자"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "책에 접근"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "공유된 책: %(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

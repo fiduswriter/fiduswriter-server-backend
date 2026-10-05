@@ -27,6 +27,804 @@ msgstr "ドキュメントテンプレート"
 msgid "Templates"
 msgstr "テンプレート"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "本のアクセスデータを読み込めません。"
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "連絡先を追加または新しいユーザーを招待"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "連絡先を追加"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "送信"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "他のユーザーと本を共有する"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "書き込み"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "読み取り"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "アクセス権限を保存できません。"
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "アクセス権限が保存されました"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "招待"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "自分の連絡先"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "連絡先"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "自分の共同作業者"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "共同作業者"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "権限"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "削除"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "基本情報"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "基本の本の情報"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "章"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "章として割り当てられたドキュメント"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "参考文献"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "参考文献関連の設定"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Epub関連の設定"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "DOCX関連の設定"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "ODT関連の設定"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "印刷/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "印刷関連の設定"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "整合性チェック"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "本の整合性チェックを実行"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "本を削除できませんでした"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "本が削除されました"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "削除の確認"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "次の本を本当に削除しますか？"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "次の本を本当に削除しますか？"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "無題"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "章を編集"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "本を保存できませんでした"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "のコピー"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "本をコピーできませんでした"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "章は暗号化（E2EE）ドキュメントとしてインポートされます。"
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "章を暗号化（E2EE）ドキュメントとしてインポート"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "本をインポート"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr ".fidusbookファイルを選択："
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "インポート"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "ファイルが大きすぎます"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "本を作成"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "本を編集"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "エクスポート"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr "この本には暗号化された章が含まれています。この本をエクスポートまたは整合性チェックを実行するには、個人用パスフレーズが必要です。"
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "帳簿を作成できませんでした。"
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "パスフレーズが間違っています。もう一度お試しください。"
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "本の概要"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "利用可能な本はありません"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "本が見つかりません"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "タイトル"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "作成日"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "最終変更日"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "所有者"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "本のデータを読み込めません。"
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "オフライン中は本を削除できません。"
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr "空のフォルダを残すと削除されます。このフォルダを本当に削除しますか？"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "本"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "輸出中"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "エクスポートが完了しました。"
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "書籍のエクスポートに失敗しました。"
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "新しい本を作成"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "新しいフォルダを作成"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Fidusbookファイルから本をインポート"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "本を検索"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "選択項目を移動"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "選択された本を移動します。"
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "本を移動"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "本を移動"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "本が移動されました"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "本を移動できませんでした"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "選択項目を削除"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "選択した本を削除します。"
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "他のユーザーの本は削除できません。"
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "選択項目を共有"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "選択した本を共有します。"
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "他のユーザーの本は共有できません。"
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "選択項目をコピー"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "選択した本をコピーします。"
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "選択項目をBITSとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "選択した本をBITSとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "選択項目をEpubとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "選択した本をEpubとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "選択項目をHTMLとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "選択した本をHTMLとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "選択項目をUnified HTMLとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "選択した本を単一ファイルHTMLとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "選択項目をLaTeXとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "選択した本をLaTeXとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "選択項目をDOCXとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "選択した本をDOCXとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "この本にはDOCXテンプレートがありません。"
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "選択項目をODTとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "選択した本をODTとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "この本にはODTテンプレートがありません。"
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "選択項目を印刷/PDFにエクスポート"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "選択した本を印刷ダイアログにエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "選択項目をFidusbookとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr "選択した本を.fidusbookファイルとしてエクスポート（別のサーバーに移動するため）。"
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "BITSとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "本をBook Interchange Tag Setとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Epubとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "本をEpubとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "HTMLとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "本をHTMLとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Unified HTMLとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "本を単一ファイルHTMLとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "LaTeXとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "本をLaTeXとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "DOCXとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "本をDOCXとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "ODTとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "本をODTとしてエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "印刷/PDFにエクスポート"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "本を印刷ダイアログにエクスポートします。"
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Fidusbookとしてエクスポート"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr "本を.fidusbookファイルとしてエクスポート（別のサーバーに移動するため）。"
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "章"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "未解決の変更履歴"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "ターゲットのない内部リンク"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "未解決のコメント"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "ターゲットのない相互参照"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "本に章が含まれていません。"
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "アクセス不可"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "章のタイトルなし"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "問題は見つかりませんでした："
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "本に章が含まれています。"
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "各章にタイトルがあります。"
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "未解決の変更履歴はありません。"
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "未解決のコメントはありません。"
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "すべての相互参照に有効なターゲットがあります。"
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "すべての内部リンクに有効なターゲットがあります。"
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"この本には暗号化された章が含まれています。健全性チェックを実行するには、個人のパスフレーズが必要です。プロファイル設定で個人パスフレーズを設定またはロック解除してください。"
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr "1 つ以上の暗号化されたチャプターを復号化できませんでした。詳細については、エラー通知を参照してください。"
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "著者"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "サブタイトル"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "バージョン"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "言語"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "言語を選択してください"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "出版社"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "著作権表示"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "カンマ区切りのキーワード"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "キーワード"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "説明"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "例: 2024 年または 2024 年 1 月"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "発行日"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "例: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "シリーズタイトル"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "シリーズ順位"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "引用スタイル"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "本の引用スタイルを選択"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "フォリオ（15×12インチ）"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "クォート（12×9インチ）"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "オクターボ（9×6インチ）"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "本のスタイル"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "本のスタイルシートを選択"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "用紙サイズ"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "本の用紙サイズを選択"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "表紙画像"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "表紙画像を選択"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "画像を選択"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "表紙画像を削除"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "画像を削除"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT テンプレート"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "ODT テンプレート ファイルを選択します"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "ODTテンプレートファイルの選択"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "ODTテンプレートファイルを削除します"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "DOCX テンプレート"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "DOCX テンプレート ファイルを選択します"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "DOCXテンプレートファイルを選択します"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "DOCXテンプレートファイルを削除します"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "整合性チェックを実行"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "自分のドキュメント"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "本の章"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "並べ替え"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "暗号化された文書"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "本の部"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr "この章が本の一部の始まりの場合は、その部のタイトルをここに指定してください"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "部のタイトル"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "本を作成"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "本"
+
 #~ msgid "Improve"
 #~ msgstr "改善する"
 
@@ -179,14 +977,8 @@ msgstr "テンプレート"
 #~ msgid "OK"
 #~ msgstr "OK"
 
-#~ msgid "Untitled"
-#~ msgstr "無題"
-
 #~ msgid "New folder"
 #~ msgstr "新しいフォルダー"
-
-#~ msgid "Submit"
-#~ msgstr "提出"
 
 #~ msgid "Create folder"
 #~ msgstr "フォルダーの作成"
@@ -208,9 +1000,6 @@ msgstr "テンプレート"
 
 #~ msgid "Site navigation"
 #~ msgstr "サイトナビゲーション"
-
-#~ msgid "Contacts"
-#~ msgstr "連絡先"
 
 #~ msgid "Log out"
 #~ msgstr "ログアウト"
@@ -300,9 +1089,6 @@ msgstr "テンプレート"
 
 #~ msgid "Log in"
 #~ msgstr "ログイン"
-
-#~ msgid "Select language"
-#~ msgstr "言語を選択してください"
 
 #~ msgid "Update"
 #~ msgstr "アップデート"
@@ -438,9 +1224,6 @@ msgstr "テンプレート"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "参考文献のインポートで問題が発生しました"
 
-#~ msgid "Import"
-#~ msgstr "インポート"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "参考文献をインポート"
 
@@ -466,26 +1249,14 @@ msgstr "テンプレート"
 #~ msgid "Sourcetype"
 #~ msgstr "ソースタイプ"
 
-#~ msgid "Author"
-#~ msgstr "著者"
-
 #~ msgid "Published"
 #~ msgstr "発行済み"
 
 #~ msgid "Edit Categories"
 #~ msgstr "カテゴリの編集"
 
-#~ msgid "Delete"
-#~ msgstr "削除"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "削除の確認"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "参考文献項目を削除します"
-
-#~ msgid "Delete selected"
-#~ msgstr "選択したものを削除"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "選択した参考文献エントリを削除します。"
@@ -618,9 +1389,6 @@ msgstr "テンプレート"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "すべての著者 (単純)"
-
-#~ msgid "Keywords"
-#~ msgstr "キーワード"
 
 #~ msgid "Bibliography block"
 #~ msgstr "参考文献ブロック"
@@ -834,9 +1602,6 @@ msgstr "テンプレート"
 #~ msgid "None"
 #~ msgstr "なし"
 
-#~ msgid "Subtitle"
-#~ msgstr "副題"
-
 #~ msgid "Title (translated)"
 #~ msgstr "タイトル（翻訳）"
 
@@ -866,9 +1631,6 @@ msgstr "テンプレート"
 
 #~ msgid "Allowed headings"
 #~ msgstr "許可される見出し"
-
-#~ msgid "Language"
-#~ msgstr "言語"
 
 #~ msgid "Document language"
 #~ msgstr "文書言語"
@@ -1032,9 +1794,6 @@ msgstr "テンプレート"
 #~ msgid "Basic access rights"
 #~ msgstr "基本的なアクセス権"
 
-#~ msgid "Write"
-#~ msgstr "編集"
-
 #~ msgid "Write tracked"
 #~ msgstr "変更履歴付き編集"
 
@@ -1043,9 +1802,6 @@ msgstr "テンプレート"
 
 #~ msgid "Comment"
 #~ msgstr "コメント"
-
-#~ msgid "Read"
-#~ msgstr "閲覧"
 
 #~ msgid "Review"
 #~ msgstr "レビュー"
@@ -1089,17 +1845,8 @@ msgstr "テンプレート"
 #~ msgid "Could not revoke share link."
 #~ msgstr "共有リンクを取り消すことができませんでした。"
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "アクセス権が保存されました"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "アクセス権を保存できませんでした"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "連絡先を追加するか、新しいユーザーを招待します"
-
-#~ msgid "Add contact"
-#~ msgstr "連絡先を追加"
 
 #~ msgid "Share your document with others"
 #~ msgstr "ドキュメントを他の人と共有"
@@ -1109,18 +1856,6 @@ msgstr "テンプレート"
 
 #~ msgid "Share link"
 #~ msgstr "リンクを共有"
-
-#~ msgid "My contacts"
-#~ msgstr "私の連絡先"
-
-#~ msgid "My collaborators"
-#~ msgstr "私の共同編集者"
-
-#~ msgid "Collaborators"
-#~ msgstr "共同編集者"
-
-#~ msgid "Rights"
-#~ msgstr "権利"
 
 #~ msgid "Create new share link"
 #~ msgstr "新しい共有リンクを作成"
@@ -1167,9 +1902,6 @@ msgstr "テンプレート"
 #~ "secure channels."
 #~ msgstr ""
 #~ "上記のパスワードを入力すると、リンク(#以降)にパスワードが埋め込まれます。リンクを知っている人は誰でもドキュメントを開くことができます。このようなリンクは安全なチャネルを通じてのみ共有してください。"
-
-#~ msgid "Invite"
-#~ msgstr "招待"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "暗号化された文書"
@@ -1225,9 +1957,6 @@ msgstr "テンプレート"
 #~ msgid "Import a document"
 #~ msgstr "ドキュメントをインポート"
 
-#~ msgid "File too large"
-#~ msgstr "ファイルが大きすぎます"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "ZIP 内にインポート可能なファイルが見つかりません"
 
@@ -1271,11 +2000,6 @@ msgstr "テンプレート"
 #~ msgid "Document Overview"
 #~ msgstr "文書の概要"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr "空のフォルダーを放置しておくと削除されます。本当にこのフォルダを削除してもよろしいですか?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "オフラインではドキュメントを開くことはできません。"
 
@@ -1287,15 +2011,6 @@ msgstr "テンプレート"
 
 #~ msgid "Revisions"
 #~ msgstr "リビジョン"
-
-#~ msgid "Created"
-#~ msgstr "作成されました"
-
-#~ msgid "Last changed"
-#~ msgstr "最後に変更されました"
-
-#~ msgid "Owner"
-#~ msgstr "所有者"
 
 #~ msgid "Undefined"
 #~ msgstr "未定義"
@@ -1381,9 +2096,6 @@ msgstr "テンプレート"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "パスフレーズの設定に失敗しました:"
 
-#~ msgid "Move selected"
-#~ msgstr "選択したものを移動"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "選択した文書を移動します。"
 
@@ -1399,35 +2111,20 @@ msgstr "テンプレート"
 #~ msgid "Could not move document"
 #~ msgstr "ドキュメントを移動できませんでした"
 
-#~ msgid "Share selected"
-#~ msgstr "選択した共有"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "選択したドキュメントを共有します。"
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "他のユーザーのドキュメントを共有することはできません"
 
-#~ msgid "Copy selected"
-#~ msgstr "選択したものをコピー"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "選択した文書をコピーします。"
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Epub としてエクスポートを選択"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "選択したドキュメントを Epub ファイルとしてエクスポートします。"
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "選択した内容を HTML としてエクスポート"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "選択したドキュメントを HTML ファイルとしてエクスポートします。"
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "LaTeX としてエクスポートを選択"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "選択した文書を LaTeX ファイルとしてエクスポートします。"
@@ -1437,9 +2134,6 @@ msgstr "テンプレート"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "選択したドキュメントを JATS ファイルとしてエクスポートします。"
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "BITS として選択されたエクスポート"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "選択したドキュメントを BITS ファイルとしてエクスポートします。"
@@ -1469,9 +2163,6 @@ msgstr "テンプレート"
 #~ msgid "Create new document"
 #~ msgstr "新しいドキュメントを作成"
 
-#~ msgid "Create new folder"
-#~ msgstr "新しいフォルダーを作成"
-
 #~ msgid "Import document"
 #~ msgstr "ドキュメントをインポート"
 
@@ -1496,9 +2187,6 @@ msgstr "テンプレート"
 #~ msgid "Time"
 #~ msgstr "時間"
 
-#~ msgid "Description"
-#~ msgstr "説明"
-
 #~ msgid "Recreate"
 #~ msgstr "再作成"
 
@@ -1513,9 +2201,6 @@ msgstr "テンプレート"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "引用元への変更は追跡されません。"
-
-#~ msgid "Bibliography"
-#~ msgstr "参考文献"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[暗号化されたメッセージ - 復号化に失敗しました]"
@@ -2530,9 +3215,6 @@ msgstr "テンプレート"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "ドキュメントをテンプレートを含む FIDUS ファイルとしてエクスポートします。"
 
-#~ msgid "Print/PDF"
-#~ msgstr "印刷/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr "印刷するか、ブラウザの印刷ダイアログを使用して PDF を作成します。"
 
@@ -2567,9 +3249,6 @@ msgstr "テンプレート"
 #~ msgid "The current password is incorrect."
 #~ msgstr "現在のパスワードが間違っています。"
 
-#~ msgid "Export"
-#~ msgstr "エクスポート"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "ドキュメントコンテンツのエクスポート"
 
@@ -2578,9 +3257,6 @@ msgstr "テンプレート"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "ドキュメントを HTML ファイルにエクスポートします。"
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "ドキュメントを Epub 電子リーダー ファイルにエクスポートします。"
@@ -3010,9 +3686,6 @@ msgstr "テンプレート"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "空白を含む文字"
-
-#~ msgid "Copy of"
-#~ msgstr "のコピー"
 
 #~ msgid " successfully copied."
 #~ msgstr "正常にコピーされました。"

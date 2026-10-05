@@ -73,7 +73,6 @@ debian/*-stamp
 /fiduswriter/static-collected/
 /fiduswriter/static-transpile/
 /fiduswriter/static-libs/
-/fiduswriter/book
 /fiduswriter/citation_api_import
 /fiduswriter/languagetool
 /fiduswriter/llm

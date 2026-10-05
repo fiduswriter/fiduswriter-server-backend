@@ -613,6 +613,24 @@ msgstr "Afbeelding te groot"
 msgid "No file uploaded"
 msgstr "Geen bestand geüpload"
 
+#: book/emails.py:99
+msgid "Book"
+msgstr "Boek"
+
+#: book/emails.py:101
+msgid "Editor"
+msgstr "Redacteur"
+
+#: book/emails.py:106
+msgid "Access books"
+msgstr "Toegang tot boeken"
+
+#: book/emails.py:109
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "Boek gedeeld: %(book_title)s"
+
+
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."

@@ -54,15 +54,42 @@ fiduswriter/
 │   ├── user/                       # User management
 │   ├── usermedia/                  # User-uploaded media
 │   ├── style/                      # Document styles
+│   ├── book/                       # Book composer (bundled but optional)
+│   ├── user_template_manager/      # Document template manager (bundled but optional)
 │   ├── .transpile/                 # Transpiled JavaScript (auto-generated)
 │   ├── static-transpile/           # Transpiled output directory
 │   ├── static-libs/                # Third-party static libraries
+│   ├── locale/                     # Translations (django + djangojs catalogs)
 │   ├── manage.py                   # Django management script
 │   ├── configuration.py            # User configuration (not in git)
 │   └── configuration-default.py    # Default configuration template
 ├── README.md
 └── setup.py                        # Package setup for pip installation
 ```
+
+### Bundled but optional apps
+
+Two apps ship inside this repository but are **not** part of
+`BASE_INSTALLED_APPS`. They are enabled by listing them in `INSTALLED_APPS` in
+the site's `configuration.py` (and, by default, in
+`configuration-default.py`):
+
+| App | Feature |
+|-----|---------|
+| `user_template_manager` | The user-facing document template manager (`/templates/`) |
+| `book` | The book composer: grouping documents into books, ordering chapters, exporting books (`/books/`, `/api/book/…`) |
+
+Removing an app from `INSTALLED_APPS` disables it completely: its models and
+migrations are skipped, its `/api/<app>/…` endpoints disappear (both
+`root_urls.py` and `routing.py` iterate `INSTALLED_APPS`), and its admin
+entries vanish. The frontend code stays in the bundle either way —
+`django-npm-mjs` compiles every `fiduswriter/*/assets/js` folder — but the
+`App` class filters the discovered plugins by `settings.APPS`, so the pages and
+menu entries are only registered when the app is installed.
+
+`book` was merged here from the retired `fiduswriter-books-plugin` repository in
+Fidus Writer 5.0. Its book export/import logic lives in
+`@fiduswriter/books-document`.
 
 ## JavaScript Build System
 
@@ -101,10 +128,19 @@ Notes:
   `import("...")` type expressions to refer to package types there.
 
 ### Cross-app JavaScript imports
-The `transpile` management command merges `assets/js/modules/` and `assets/ts/modules/` directories from all installed Django apps into a single output tree. This means modules in one app can import from another app using relative paths as if they lived in the same directory.
+The `transpile` management command merges the `assets/js/` folders of all
+`fiduswriter/*` apps into a single output tree, preserving each app's
+subdirectory structure. This means modules in one app can import from another
+app using relative paths as if they lived in the same directory.
 
-For example, from a file in `gitrepo_export/assets/js/modules/gitrepo_export/`:
-- `../../books/assets/js/modules/...` and `../../document/assets/...` resolve inside the other app's asset folders
+Because the merge preserves paths relative to each app's `assets/js/` folder,
+the `modules/` and `plugins/` subtrees of all apps end up as siblings. For
+example, `fiduswriter/pandoc/assets/js/plugins/books_overview/pandoc.ts`
+imports the bundled book app's chapter loader as
+`../../modules/books/adapters/chapter-loader`. The plugin aggregators in
+`plugins/<type>/` are generated at build time; import them with an explicit
+`/index.js` suffix so the ambient wildcard module in
+`base/assets/js/modules/globals.d.ts` matches.
 
 All apps' `js/modules` folders are overlaid, so cross-app imports work transparently without needing absolute or package-style paths.
 
@@ -424,7 +460,7 @@ See also the `translate_all.py` management command (`fiduswriter/devel/managemen
 
 This repository is part of a larger set of Fidus Writer repositories that are
 normally checked out next to one another: `fwtoolkit/`, `fiduswriter-document-ts/`,
-`fiduswriter-books-plugin-ts/`, `fiduswriter-cli-ts/`, `fiduswriter-books-plugin/`,
+`fiduswriter-books-plugin-ts/`, `fiduswriter-cli-ts/`,
 `fiduswriter-editor-ts/`, and
 `fiduswriter-bibliography-manager-ts/`. The exact parent directory varies by
 developer. See the `AGENTS.md` file in the sibling directory that contains all

@@ -27,6 +27,7 @@ if args.debug_mode:
 
 INSTALLED_APPS = [
     "user_template_manager",
+    "book",
 ]
 
 # Disable axes for testing to reduce console output and avoid lockout issues

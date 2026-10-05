@@ -30,6 +30,814 @@ msgstr "Šablony dokumentů"
 msgid "Templates"
 msgstr "Šablony"
 
+#: book/assets/js/modules/books/accessrights/index.js:31
+msgid "Cannot load book access data."
+msgstr "Nelze načíst data přístupu ke knize."
+
+#: book/assets/js/modules/books/accessrights/index.js:68
+msgid "Add contact or invite new user"
+msgstr "Přidat kontakt nebo pozvat nového uživatele"
+
+#: book/assets/js/modules/books/accessrights/index.js:69
+msgid "Add contact"
+msgstr "Přidat kontakt"
+
+#: book/assets/js/modules/books/accessrights/index.js:120
+#: book/assets/js/modules/books/actions.js:196
+#: book/assets/js/modules/books/actions.js:498
+msgid "Submit"
+msgstr "Odeslat"
+
+#: book/assets/js/modules/books/accessrights/index.js:151
+msgid "Share your book with others"
+msgstr "Sdílet svou knihu s ostatními"
+
+#: book/assets/js/modules/books/accessrights/index.js:277
+#: book/assets/js/modules/books/accessrights/index.js:279
+msgid "Write"
+msgstr "Zapisovat"
+
+#: book/assets/js/modules/books/accessrights/index.js:287
+#: book/assets/js/modules/books/accessrights/index.js:289
+msgid "Read"
+msgstr "Číst"
+
+#: book/assets/js/modules/books/accessrights/index.js:305
+msgid "Cannot save access rights."
+msgstr "Nelze uložit přístupová práva."
+
+#: book/assets/js/modules/books/accessrights/index.js:309
+msgid "Access rights have been saved"
+msgstr "Přístupová práva byla uložena"
+
+#: book/assets/js/modules/books/accessrights/templates.js:19
+#: book/assets/js/modules/books/accessrights/templates.js:51
+msgid "Invite"
+msgstr "Pozvat"
+
+#: book/assets/js/modules/books/accessrights/templates.js:65
+msgid "My contacts"
+msgstr "Moje kontakty"
+
+#: book/assets/js/modules/books/accessrights/templates.js:69
+msgid "Contacts"
+msgstr "Kontakty"
+
+#: book/assets/js/modules/books/accessrights/templates.js:81
+msgid "My collaborators"
+msgstr "Moji spolupracovníci"
+
+#: book/assets/js/modules/books/accessrights/templates.js:84
+msgid "Collaborators"
+msgstr "Spolupracovníci"
+
+#: book/assets/js/modules/books/accessrights/templates.js:85
+#: book/assets/js/modules/books/index.js:241
+msgid "Rights"
+msgstr "Práva"
+
+#: book/assets/js/modules/books/accessrights/templates.js:86
+#: book/assets/js/modules/books/actions.js:149
+#: book/assets/js/modules/books/index.js:587
+msgid "Delete"
+msgstr "Smazat"
+
+#: book/assets/js/modules/books/actions.js:65
+msgid "Basic info"
+msgstr "Základní informace"
+
+#: book/assets/js/modules/books/actions.js:66
+msgid "Basic book information"
+msgstr "Základní informace o knize"
+
+#: book/assets/js/modules/books/actions.js:70
+msgid "Chapters"
+msgstr "Kapitoly"
+
+#: book/assets/js/modules/books/actions.js:71
+msgid "Documents assigned as chapters"
+msgstr "Dokumenty přiřazené jako kapitoly"
+
+#: book/assets/js/modules/books/actions.js:75
+#: book/assets/js/modules/books/actions.js:438
+msgid "Bibliography"
+msgstr "Bibliografie"
+
+#: book/assets/js/modules/books/actions.js:76
+msgid "Bibliography related settings"
+msgstr "Nastavení související s bibliografií"
+
+#: book/assets/js/modules/books/actions.js:80
+msgid "Epub"
+msgstr "Epub"
+
+#: book/assets/js/modules/books/actions.js:81
+msgid "Epub related settings"
+msgstr "Nastavení související s Epub"
+
+#: book/assets/js/modules/books/actions.js:85
+msgid "DOCX"
+msgstr "DOCX"
+
+#: book/assets/js/modules/books/actions.js:86
+msgid "DOCX related settings"
+msgstr "Nastavení související s DOCX"
+
+#: book/assets/js/modules/books/actions.js:90
+msgid "ODT"
+msgstr "ODT"
+
+#: book/assets/js/modules/books/actions.js:91
+msgid "ODT related settings"
+msgstr "Nastavení související s ODT"
+
+#: book/assets/js/modules/books/actions.js:95
+msgid "Print/PDF"
+msgstr "Tisk/PDF"
+
+#: book/assets/js/modules/books/actions.js:96
+msgid "Print related settings"
+msgstr "Nastavení související s tiskem"
+
+#: book/assets/js/modules/books/actions.js:100
+msgid "Sanity check"
+msgstr "Kontrola správnosti"
+
+#: book/assets/js/modules/books/actions.js:101
+msgid "Perform sanity check on book"
+msgstr "Provést kontrolu správnosti knihy"
+
+#: book/assets/js/modules/books/actions.js:117
+msgid "Could not delete book"
+msgstr "Knihu nelze smazat"
+
+#: book/assets/js/modules/books/actions.js:127
+msgid "Book has been deleted"
+msgstr "Kniha byla smazána"
+
+#: book/assets/js/modules/books/actions.js:161
+#: book/assets/js/modules/books/index.js:577
+msgid "Confirm deletion"
+msgstr "Potvrdit smazání"
+
+#: book/assets/js/modules/books/actions.js:168
+msgid "Do you really want to delete the following books?"
+msgstr "Opravdu chcete smazat následující knihy?"
+
+#: book/assets/js/modules/books/actions.js:171
+msgid "Do you really want to delete the following book?"
+msgstr "Opravdu chcete smazat následující knihu?"
+
+#: book/assets/js/modules/books/actions.js:188
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:19
+#: book/assets/js/modules/books/templates.js:610
+msgid "Untitled"
+msgstr "Bez názvu"
+
+#: book/assets/js/modules/books/actions.js:212
+msgid "Edit Chapter"
+msgstr "Upravit kapitolu"
+
+#: book/assets/js/modules/books/actions.js:269
+msgid "The book could not be saved"
+msgstr "Knihu nelze uložit"
+
+#: book/assets/js/modules/books/actions.js:298
+msgid "Copy of"
+msgstr "Kopie"
+
+#: book/assets/js/modules/books/actions.js:302
+msgid "The book could not be copied"
+msgstr "Knihu nelze zkopírovat"
+
+#: book/assets/js/modules/books/actions.js:328
+msgid "Chapters will be imported as encrypted (E2EE) documents."
+msgstr "Kapitoly budou importovány jako šifrované (E2EE) dokumenty."
+
+#: book/assets/js/modules/books/actions.js:335
+msgid "Import chapters as encrypted (E2EE) documents"
+msgstr "Importujte kapitoly jako šifrované (E2EE) dokumenty"
+
+#: book/assets/js/modules/books/actions.js:342
+msgid "Import a book"
+msgstr "Importujte knihu"
+
+#: book/assets/js/modules/books/actions.js:345
+msgid "Select a .fidusbook file:"
+msgstr "Vyberte soubor .fidusbook:"
+
+#: book/assets/js/modules/books/actions.js:359
+msgid "Import"
+msgstr "Importovat"
+
+#: book/assets/js/modules/books/actions.js:370
+msgid "File too large"
+msgstr "Soubor je příliš velký"
+
+#: book/assets/js/modules/books/actions.js:428
+msgid "Create Book"
+msgstr "Vytvořit knihu"
+
+#: book/assets/js/modules/books/actions.js:463
+msgid "Edit Book"
+msgstr "Upravit knihu"
+
+#: book/assets/js/modules/books/actions.js:479
+msgid "Export"
+msgstr "Vývozní"
+
+#: book/assets/js/modules/books/actions.js:650
+#: book/assets/js/modules/books/templates.js:570
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"export or run a sanity check on this book."
+msgstr ""
+"Tato kniha obsahuje zašifrované kapitoly. Chcete-li exportovat nebo spustit "
+"kontrolu této knihy, je vyžadována osobní přístupová fráze."
+
+#: book/assets/js/modules/books/adapters/book-importer-backend.js:37
+msgid "Could not create book record."
+msgstr "Nelze vytvořit záznam knihy."
+
+#: book/assets/js/modules/books/adapters/e2ee-strategy.js:43
+msgid "Wrong passphrase. Please try again."
+msgstr "Nesprávná přístupová fráze. Zkuste to prosím znovu."
+
+#: book/assets/js/modules/books/index.js:114
+msgid "Book Overview"
+msgstr "Přehled knihy"
+
+#: book/assets/js/modules/books/index.js:230
+msgid "No books available"
+msgstr "Žádné dostupné knihy"
+
+#: book/assets/js/modules/books/index.js:231
+msgid "No books found"
+msgstr "Nebyly nalezeny žádné knihy"
+
+#: book/assets/js/modules/books/index.js:237
+#: book/assets/js/modules/books/templates.js:10
+#: book/assets/js/modules/books/templates.js:554
+msgid "Title"
+msgstr "Název"
+
+#: book/assets/js/modules/books/index.js:238
+msgid "Created"
+msgstr "Vytvořeno"
+
+#: book/assets/js/modules/books/index.js:239
+msgid "Last changed"
+msgstr "Poslední změna"
+
+#: book/assets/js/modules/books/index.js:240
+msgid "Owner"
+msgstr "Vlastník"
+
+#: book/assets/js/modules/books/index.js:413
+msgid "Cannot load data of books."
+msgstr "Nelze načíst data knih."
+
+#: book/assets/js/modules/books/index.js:531
+#: book/assets/js/modules/books/index.js:545
+msgid "You cannot delete books while you are offline."
+msgstr "Nemůžete mazat knihy, když jste offline."
+
+#: book/assets/js/modules/books/index.js:580
+msgid ""
+"Leaving an empty folder will delete it. Do you really want to delete this "
+"folder?"
+msgstr ""
+"Pokud ponecháte prázdnou složku, smaže se. Opravdu chcete smazat tuto "
+"složku?"
+
+#: book/assets/js/modules/books/menu.js:39
+msgid "Book"
+msgstr "Rezervovat"
+
+#: book/assets/js/modules/books/menu.js:42
+msgid "Exporting"
+msgstr "Export"
+
+#: book/assets/js/modules/books/menu.js:61
+msgid "Export complete."
+msgstr "Export dokončen."
+
+#: book/assets/js/modules/books/menu.js:69
+msgid "Book export failed."
+msgstr "Export knihy se nezdařil."
+
+#: book/assets/js/modules/books/menu.js:77
+msgid "Create new book"
+msgstr "Vytvořit novou knihu"
+
+#: book/assets/js/modules/books/menu.js:88
+msgid "Create new folder"
+msgstr "Vytvořit novou složku"
+
+#: book/assets/js/modules/books/menu.js:102
+msgid "Import book from Fidusbook file"
+msgstr "Importujte knihu ze souboru Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:112
+msgid "Search books"
+msgstr "Hledat knihy"
+
+#: book/assets/js/modules/books/menu.js:246
+msgid "Move selected"
+msgstr "Přesunout vybrané"
+
+#: book/assets/js/modules/books/menu.js:247
+msgid "Move the books that have been selected."
+msgstr "Přesunout vybrané knihy."
+
+#: book/assets/js/modules/books/menu.js:257
+msgid "Move books"
+msgstr "Přesunout knihy"
+
+#: book/assets/js/modules/books/menu.js:258
+msgid "Move book"
+msgstr "Přesunout knihu"
+
+#: book/assets/js/modules/books/menu.js:262
+msgid "Book has been moved"
+msgstr "Kniha byla přesunuta"
+
+#: book/assets/js/modules/books/menu.js:263
+msgid "Could not move book"
+msgstr "Knihu nelze přesunout"
+
+#: book/assets/js/modules/books/menu.js:274
+msgid "Delete selected"
+msgstr "Smazat vybrané"
+
+#: book/assets/js/modules/books/menu.js:275
+msgid "Delete selected books."
+msgstr "Smazat vybrané knihy."
+
+#: book/assets/js/modules/books/menu.js:285
+msgid "You cannot delete books of other users."
+msgstr "Nemůžete mazat knihy ostatních uživatelů."
+
+#: book/assets/js/modules/books/menu.js:295
+msgid "Share selected"
+msgstr "Sdílet vybrané"
+
+#: book/assets/js/modules/books/menu.js:296
+msgid "Share selected books."
+msgstr "Sdílet vybrané knihy."
+
+#: book/assets/js/modules/books/menu.js:306
+msgid "You cannot share books of other users."
+msgstr "Nemůžete sdílet knihy ostatních uživatelů."
+
+#: book/assets/js/modules/books/menu.js:321
+msgid "Copy selected"
+msgstr "Kopírovat vybrané"
+
+#: book/assets/js/modules/books/menu.js:322
+msgid "Copy selected books."
+msgstr "Kopírovat vybrané knihy."
+
+#: book/assets/js/modules/books/menu.js:334
+msgid "Export selected as BITS"
+msgstr "Export vybrán jako BITS"
+
+#: book/assets/js/modules/books/menu.js:335
+msgid "Export selected books as BITS."
+msgstr "Export vybraných knih jako BITS."
+
+#: book/assets/js/modules/books/menu.js:346
+msgid "Export selected as Epub"
+msgstr "Exportovat vybrané jako Epub"
+
+#: book/assets/js/modules/books/menu.js:347
+msgid "Export selected books as Epub."
+msgstr "Exportovat vybrané knihy jako Epub."
+
+#: book/assets/js/modules/books/menu.js:358
+msgid "Export selected as HTML"
+msgstr "Exportovat vybrané jako HTML"
+
+#: book/assets/js/modules/books/menu.js:359
+msgid "Export selected books as HTML."
+msgstr "Exportovat vybrané knihy jako HTML."
+
+#: book/assets/js/modules/books/menu.js:370
+msgid "Export selected as Unified HTML"
+msgstr "Export je vybrán jako Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:371
+msgid "Export selected books as Single-file HTML."
+msgstr "Exportujte vybrané knihy jako jeden soubor HTML."
+
+#: book/assets/js/modules/books/menu.js:382
+msgid "Export selected as LaTeX"
+msgstr "Exportovat vybrané jako LaTeX"
+
+#: book/assets/js/modules/books/menu.js:383
+msgid "Export selected books as LaTeX."
+msgstr "Exportovat vybrané knihy jako LaTeX."
+
+#: book/assets/js/modules/books/menu.js:394
+msgid "Export selected as DOCX"
+msgstr "Export vybrán jako DOCX"
+
+#: book/assets/js/modules/books/menu.js:395
+msgid "Export selected books as DOCX."
+msgstr "Export vybraných knih jako DOCX."
+
+#: book/assets/js/modules/books/menu.js:408
+msgid "This book does not have a DOCX template."
+msgstr "Tato kniha nemá šablonu DOCX."
+
+#: book/assets/js/modules/books/menu.js:417
+msgid "Export selected as ODT"
+msgstr "Export vybrán jako ODT"
+
+#: book/assets/js/modules/books/menu.js:418
+msgid "Export selected books as ODT."
+msgstr "Export vybraných knih jako ODT."
+
+#: book/assets/js/modules/books/menu.js:431
+msgid "This book does not have an ODT template."
+msgstr "Tato kniha nemá šablonu ODT."
+
+#: book/assets/js/modules/books/menu.js:440
+msgid "Export selected to Print/PDF"
+msgstr "Exportovat vybrané pro tisk/PDF"
+
+#: book/assets/js/modules/books/menu.js:441
+msgid "Export selected books to the print dialog."
+msgstr "Exportovat vybrané knihy do tiskového dialogu."
+
+#: book/assets/js/modules/books/menu.js:452
+msgid "Export selected as Fidusbook"
+msgstr "Export vybrán jako Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:454
+msgid ""
+"Export selected books as .fidusbook files (for moving to another server)."
+msgstr ""
+"Exportujte vybrané knihy jako soubory .fidusbook (pro přesun na jiný "
+"server)."
+
+#: book/assets/js/modules/books/menu.js:472
+msgid "Export as BITS"
+msgstr "Exportovat jako BITS"
+
+#: book/assets/js/modules/books/menu.js:473
+msgid "Export book as Book Interchange Tag Set."
+msgstr "Exportujte knihu jako sadu značek pro výměnu knih."
+
+#: book/assets/js/modules/books/menu.js:480
+msgid "Export as Epub"
+msgstr "Exportovat jako Epub"
+
+#: book/assets/js/modules/books/menu.js:481
+msgid "Export book as Epub."
+msgstr "Exportovat knihu jako Epub."
+
+#: book/assets/js/modules/books/menu.js:488
+msgid "Export as HTML"
+msgstr "Exportovat jako HTML"
+
+#: book/assets/js/modules/books/menu.js:489
+msgid "Export book as HTML."
+msgstr "Exportovat knihu jako HTML."
+
+#: book/assets/js/modules/books/menu.js:496
+msgid "Export as Unified HTML"
+msgstr "Exportovat jako Unified HTML"
+
+#: book/assets/js/modules/books/menu.js:497
+msgid "Export book as Single-file HTML."
+msgstr "Exportujte knihu jako jeden soubor HTML."
+
+#: book/assets/js/modules/books/menu.js:504
+msgid "Export as LaTeX"
+msgstr "Exportovat jako LaTeX"
+
+#: book/assets/js/modules/books/menu.js:505
+msgid "Export book as LaTeX."
+msgstr "Exportovat knihu jako LaTeX."
+
+#: book/assets/js/modules/books/menu.js:512
+msgid "Export as DOCX"
+msgstr "Exportovat jako DOCX"
+
+#: book/assets/js/modules/books/menu.js:513
+msgid "Export book as DOCX."
+msgstr "Exportovat knihu jako DOCX."
+
+#: book/assets/js/modules/books/menu.js:522
+msgid "Export as ODT"
+msgstr "Exportovat jako ODT"
+
+#: book/assets/js/modules/books/menu.js:523
+msgid "Export book as ODT."
+msgstr "Exportovat knihu jako ODT."
+
+#: book/assets/js/modules/books/menu.js:531
+msgid "Export to Print/PDF"
+msgstr "Exportovat pro tisk/PDF"
+
+#: book/assets/js/modules/books/menu.js:532
+msgid "Export book to the print dialog."
+msgstr "Exportovat knihu do tiskového dialogu."
+
+#: book/assets/js/modules/books/menu.js:539
+msgid "Export as Fidusbook"
+msgstr "Exportovat jako Fidusbook"
+
+#: book/assets/js/modules/books/menu.js:541
+msgid "Export book as a .fidusbook file (for moving to another server)."
+msgstr "Exportujte knihu jako soubor .fidusbook (pro přesun na jiný server)."
+
+#: book/assets/js/modules/books/sanity_check.js:8
+msgid "Chapter"
+msgstr "Kapitola"
+
+#: book/assets/js/modules/books/sanity_check.js:16
+#: book/assets/js/modules/books/sanity_check.js:44
+msgid "Unresolved tracked changes"
+msgstr "Nevyřešené sledované změny"
+
+#: book/assets/js/modules/books/sanity_check.js:27
+msgid "Internal links without target"
+msgstr "Interní odkazy bez cíle"
+
+#: book/assets/js/modules/books/sanity_check.js:37
+msgid "Unresolved comments"
+msgstr "Nevyřešené komentáře"
+
+#: book/assets/js/modules/books/sanity_check.js:54
+msgid "Cross references without targets"
+msgstr "Křížové odkazy bez cílů"
+
+#: book/assets/js/modules/books/sanity_check.js:72
+msgid "The book contains no chapters."
+msgstr "Kniha neobsahuje žádné kapitoly."
+
+#: book/assets/js/modules/books/sanity_check.js:90
+#: book/assets/js/modules/books/templates.js:611
+msgid "No access"
+msgstr "Žádný přístup"
+
+#: book/assets/js/modules/books/sanity_check.js:96
+msgid "No chapter title"
+msgstr "Žádný název kapitoly"
+
+#: book/assets/js/modules/books/sanity_check.js:105
+msgid "No issues were found:"
+msgstr "Nebyly nalezeny žádné problémy:"
+
+#: book/assets/js/modules/books/sanity_check.js:106
+msgid "The book contains chapters."
+msgstr "Kniha obsahuje kapitoly."
+
+#: book/assets/js/modules/books/sanity_check.js:107
+msgid "Each chapter has a title."
+msgstr "Každá kapitola má název."
+
+#: book/assets/js/modules/books/sanity_check.js:108
+msgid "There are no unresolved tracked changes."
+msgstr "Neexistují žádné nevyřešené sledované změny."
+
+#: book/assets/js/modules/books/sanity_check.js:109
+msgid "There are no unresolved comments."
+msgstr "Nejsou zde žádné nevyřešené komentáře."
+
+#: book/assets/js/modules/books/sanity_check.js:110
+msgid "All cross references have working targets."
+msgstr "Všechny křížové odkazy mají pracovní cíle."
+
+#: book/assets/js/modules/books/sanity_check.js:112
+msgid "All internal links have working targets."
+msgstr "Všechny interní odkazy mají pracovní cíle."
+
+#: book/assets/js/modules/books/sanity_check.js:129
+msgid ""
+"This book contains encrypted chapters. A personal passphrase is required to "
+"perform a sanity check. Please set up or unlock your personal passphrase in "
+"your profile settings."
+msgstr ""
+"Tato kniha obsahuje zašifrované kapitoly. K provedení kontroly příčetnosti "
+"je vyžadována osobní přístupová fráze. Nastavte nebo odemkněte svou osobní "
+"přístupovou frázi v nastavení svého profilu."
+
+#: book/assets/js/modules/books/sanity_check.js:135
+msgid ""
+"One or more encrypted chapters could not be decrypted. See the error "
+"notifications for details."
+msgstr ""
+"Jednu nebo více zašifrovaných kapitol nebylo možné dešifrovat. Podrobnosti "
+"naleznete v upozorněních na chyby."
+
+#: book/assets/js/modules/books/templates.js:25
+msgid "Author"
+msgstr "Autor"
+
+#: book/assets/js/modules/books/templates.js:40
+msgid "Subtitle"
+msgstr "Podtitul"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Verze"
+
+#: book/assets/js/modules/books/templates.js:70
+msgid "Language"
+msgstr "Jazyk"
+
+#: book/assets/js/modules/books/templates.js:75
+msgid "Select language"
+msgstr "Vyberte jazyk"
+
+#: book/assets/js/modules/books/templates.js:103
+msgid "Publisher"
+msgstr "Vydavatel"
+
+#: book/assets/js/modules/books/templates.js:118
+msgid "Copyright notice"
+msgstr "Informace o autorských právech"
+
+#: book/assets/js/modules/books/templates.js:134
+msgid "Comma separated keywords"
+msgstr "Klíčová slova oddělená čárkami"
+
+#: book/assets/js/modules/books/templates.js:136
+msgid "Keywords"
+msgstr "Klíčová slova"
+
+#: book/assets/js/modules/books/templates.js:152
+msgid "Description"
+msgstr "Popis"
+
+#: book/assets/js/modules/books/templates.js:162
+msgid "ISBN"
+msgstr "ISBN"
+
+#: book/assets/js/modules/books/templates.js:173
+msgid "E.g.: 2024 or January 2024"
+msgstr "Např.: 2024 nebo leden 2024"
+
+#: book/assets/js/modules/books/templates.js:174
+msgid "Publication date"
+msgstr "Datum zveřejnění"
+
+#: book/assets/js/modules/books/templates.js:180
+msgid "E.g.: 2024"
+msgstr "Např.: 2024"
+
+#: book/assets/js/modules/books/templates.js:187
+msgid "Series title"
+msgstr "Název seriálu"
+
+#: book/assets/js/modules/books/templates.js:198
+msgid "Series position"
+msgstr "Pozice série"
+
+#: book/assets/js/modules/books/templates.js:216
+msgid "Citation style"
+msgstr "Citační styl"
+
+#: book/assets/js/modules/books/templates.js:222
+msgid "Select citation style for the book"
+msgstr "Vyberte citační styl pro knihu"
+
+#: book/assets/js/modules/books/templates.js:252
+msgid "Folio (15 x 12 inch)"
+msgstr "Folio (15 x 12 palců)"
+
+#: book/assets/js/modules/books/templates.js:253
+msgid "Quarto (12 × 9 inch)"
+msgstr "Quarto (12 × 9 palců)"
+
+#: book/assets/js/modules/books/templates.js:254
+msgid "Octavo (9 x 6 inch)"
+msgstr "Octavo (9 x 6 palců)"
+
+#: book/assets/js/modules/books/templates.js:255
+msgid "A5"
+msgstr "A5"
+
+#: book/assets/js/modules/books/templates.js:256
+msgid "A4"
+msgstr "A4"
+
+#: book/assets/js/modules/books/templates.js:265
+msgid "Book style"
+msgstr "Styl knihy"
+
+#: book/assets/js/modules/books/templates.js:271
+msgid "Select stylesheet for the book"
+msgstr "Vyberte styl pro knihu"
+
+#: book/assets/js/modules/books/templates.js:303
+msgid "Paper size"
+msgstr "Velikost papíru"
+
+#: book/assets/js/modules/books/templates.js:309
+msgid "Select paper size for the book"
+msgstr "Vyberte velikost papíru pro knihu"
+
+#: book/assets/js/modules/books/templates.js:341
+#: book/assets/js/modules/books/templates.js:348
+msgid "Cover image"
+msgstr "Obrázek obálky"
+
+#: book/assets/js/modules/books/templates.js:358
+msgid "Select a cover image"
+msgstr "Vyberte obrázek obálky"
+
+#: book/assets/js/modules/books/templates.js:360
+msgid "Select Image"
+msgstr "Vybrat obrázek"
+
+#: book/assets/js/modules/books/templates.js:367
+msgid "Remove cover image"
+msgstr "Odebrat obrázek obálky"
+
+#: book/assets/js/modules/books/templates.js:369
+msgid "Remove Image"
+msgstr "Odebrat obrázek"
+
+#: book/assets/js/modules/books/templates.js:392
+msgid "ODT Template"
+msgstr "ODT šablona"
+
+#: book/assets/js/modules/books/templates.js:409
+msgid "Select an ODT template file"
+msgstr "Vyberte soubor šablony ODT"
+
+#: book/assets/js/modules/books/templates.js:410
+msgid "Select ODT template file"
+msgstr "Vyberte soubor šablony ODT"
+
+#: book/assets/js/modules/books/templates.js:418
+#: book/assets/js/modules/books/templates.js:420
+msgid "Remove ODT template file"
+msgstr "Odstraňte soubor šablony ODT"
+
+#: book/assets/js/modules/books/templates.js:441
+msgid "DOCX Template"
+msgstr "Šablona DOCX"
+
+#: book/assets/js/modules/books/templates.js:458
+msgid "Select an DOCX template file"
+msgstr "Vyberte soubor šablony DOCX"
+
+#: book/assets/js/modules/books/templates.js:459
+msgid "Select DOCX template file"
+msgstr "Vyberte soubor šablony DOCX"
+
+#: book/assets/js/modules/books/templates.js:467
+#: book/assets/js/modules/books/templates.js:469
+msgid "Remove DOCX template file"
+msgstr "Odstraňte soubor šablony DOCX"
+
+#: book/assets/js/modules/books/templates.js:494
+msgid "Perform sanity check"
+msgstr "Proveďte kontrolu zdravého rozumu"
+
+#: book/assets/js/modules/books/templates.js:541
+msgid "My documents"
+msgstr "Moje dokumenty"
+
+#: book/assets/js/modules/books/templates.js:550
+msgid "Book chapters"
+msgstr "Kapitoly knihy"
+
+#: book/assets/js/modules/books/templates.js:555
+msgid "Sort"
+msgstr "Seřadit"
+
+#: book/assets/js/modules/books/templates.js:595
+msgid "Encrypted document"
+msgstr "Šifrovaný dokument"
+
+#: book/assets/js/modules/books/templates.js:599
+msgid "Book part"
+msgstr "Část knihy"
+
+#: book/assets/js/modules/books/templates.js:657
+msgid ""
+"If this chapter starts a part of the book, specify the title of that part "
+"here"
+msgstr "Pokud tato kapitola začíná část knihy, zadejte zde název této části"
+
+#: book/assets/js/modules/books/templates.js:659
+msgid "Book part title"
+msgstr "Název části knihy"
+
+#: book/assets/js/plugins/menu/books.js:11
+msgid "compose books"
+msgstr "sestavovat knihy"
+
+#: book/assets/js/plugins/menu/books.js:13
+msgid "Books"
+msgstr "Knihy"
+
 #~ msgid "Improve"
 #~ msgstr "zlepšit"
 
@@ -184,14 +992,8 @@ msgstr "Šablony"
 #~ msgid "OK"
 #~ msgstr "OK"
 
-#~ msgid "Untitled"
-#~ msgstr "Bez názvu"
-
 #~ msgid "New folder"
 #~ msgstr "Nová složka"
-
-#~ msgid "Submit"
-#~ msgstr "Předložit"
 
 #~ msgid "Create folder"
 #~ msgstr "Vytvořit složku"
@@ -213,9 +1015,6 @@ msgstr "Šablony"
 
 #~ msgid "Site navigation"
 #~ msgstr "Navigace na webu"
-
-#~ msgid "Contacts"
-#~ msgstr "Kontakty"
 
 #~ msgid "Log out"
 #~ msgstr "Odhlaste se"
@@ -305,9 +1104,6 @@ msgstr "Šablony"
 
 #~ msgid "Log in"
 #~ msgstr "Přihlaste se"
-
-#~ msgid "Select language"
-#~ msgstr "Vyberte jazyk"
 
 #~ msgid "Update"
 #~ msgstr "Aktualizovat"
@@ -443,9 +1239,6 @@ msgstr "Šablony"
 #~ msgid "There was an issue with the bibliography import"
 #~ msgstr "Vyskytl se problém s importem bibliografie"
 
-#~ msgid "Import"
-#~ msgstr "Importovat"
-
 #~ msgid "Import a bibliography"
 #~ msgstr "Importujte bibliografii"
 
@@ -471,26 +1264,14 @@ msgstr "Šablony"
 #~ msgid "Sourcetype"
 #~ msgstr "Zdrojový typ"
 
-#~ msgid "Author"
-#~ msgstr "Autor"
-
 #~ msgid "Published"
 #~ msgstr "Publikováno"
 
 #~ msgid "Edit Categories"
 #~ msgstr "Upravit kategorie"
 
-#~ msgid "Delete"
-#~ msgstr "Vymazat"
-
-#~ msgid "Confirm deletion"
-#~ msgstr "Potvrďte smazání"
-
 #~ msgid "Delete the bibliography item(s)"
 #~ msgstr "Smazat položku(y) bibliografie"
-
-#~ msgid "Delete selected"
-#~ msgstr "Smazat vybrané"
 
 #~ msgid "Delete selected bibliography entries."
 #~ msgstr "Smazat vybrané položky bibliografie."
@@ -623,9 +1404,6 @@ msgstr "Šablony"
 
 #~ msgid "All authors (simple)"
 #~ msgstr "Všichni autoři (jednoduché)"
-
-#~ msgid "Keywords"
-#~ msgstr "Klíčová slova"
 
 #~ msgid "Bibliography block"
 #~ msgstr "Blok bibliografie"
@@ -832,9 +1610,6 @@ msgstr "Šablony"
 #~ msgid "None"
 #~ msgstr "Žádný"
 
-#~ msgid "Subtitle"
-#~ msgstr "Podtitul"
-
 #~ msgid "Title (translated)"
 #~ msgstr "Název (přeloženo)"
 
@@ -864,9 +1639,6 @@ msgstr "Šablony"
 
 #~ msgid "Allowed headings"
 #~ msgstr "Povolené nadpisy"
-
-#~ msgid "Language"
-#~ msgstr "Jazyk"
 
 #~ msgid "Document language"
 #~ msgstr "Jazyk dokumentu"
@@ -1032,9 +1804,6 @@ msgstr "Šablony"
 #~ msgid "Basic access rights"
 #~ msgstr "Základní přístupová práva"
 
-#~ msgid "Write"
-#~ msgstr "Napsat"
-
 #~ msgid "Write tracked"
 #~ msgstr "Zápis sledován"
 
@@ -1043,9 +1812,6 @@ msgstr "Šablony"
 
 #~ msgid "Comment"
 #~ msgstr "Komentář"
-
-#~ msgid "Read"
-#~ msgstr "Číst"
 
 #~ msgid "Review"
 #~ msgstr "Recenze"
@@ -1090,17 +1856,8 @@ msgstr "Šablony"
 #~ msgid "Could not revoke share link."
 #~ msgstr "Odkaz na sdílení se nepodařilo zrušit."
 
-#~ msgid "Access rights have been saved"
-#~ msgstr "Přístupová práva byla uložena"
-
 #~ msgid "Access rights could not be saved"
 #~ msgstr "Přístupová práva se nepodařilo uložit"
-
-#~ msgid "Add contact or invite new user"
-#~ msgstr "Přidejte kontakt nebo pozvěte nového uživatele"
-
-#~ msgid "Add contact"
-#~ msgstr "Přidat kontakt"
 
 #~ msgid "Share your document with others"
 #~ msgstr "Sdílejte svůj dokument s ostatními"
@@ -1110,18 +1867,6 @@ msgstr "Šablony"
 
 #~ msgid "Share link"
 #~ msgstr "Sdílejte odkaz"
-
-#~ msgid "My contacts"
-#~ msgstr "Moje kontakty"
-
-#~ msgid "My collaborators"
-#~ msgstr "Moji spolupracovníci"
-
-#~ msgid "Collaborators"
-#~ msgstr "Spolupracovníci"
-
-#~ msgid "Rights"
-#~ msgstr "Práva"
 
 #~ msgid "Create new share link"
 #~ msgstr "Vytvořit nový odkaz pro sdílení"
@@ -1170,9 +1915,6 @@ msgstr "Šablony"
 #~ "Pokud zadáte výše uvedené heslo, bude vloženo do odkazu (za #). Dokument "
 #~ "může otevřít kdokoli, kdo má odkaz. Sdílejte takové odkazy pouze "
 #~ "prostřednictvím zabezpečených kanálů."
-
-#~ msgid "Invite"
-#~ msgstr "Pozvat"
 
 #~ msgid "Encrypted Document"
 #~ msgstr "Šifrovaný dokument"
@@ -1232,9 +1974,6 @@ msgstr "Šablony"
 #~ msgid "Import a document"
 #~ msgstr "Importujte dokument"
 
-#~ msgid "File too large"
-#~ msgstr "Soubor je příliš velký"
-
 #~ msgid "No importable files found in ZIP"
 #~ msgstr "V ZIPu nebyly nalezeny žádné importovatelné soubory"
 
@@ -1279,13 +2018,6 @@ msgstr "Šablony"
 #~ msgid "Document Overview"
 #~ msgstr "Přehled dokumentu"
 
-#~ msgid ""
-#~ "Leaving an empty folder will delete it. Do you really want to delete this "
-#~ "folder?"
-#~ msgstr ""
-#~ "Pokud ponecháte prázdnou složku, smaže se. Opravdu chcete smazat tuto "
-#~ "složku?"
-
 #~ msgid "You cannot open a document while you are offline."
 #~ msgstr "Když jste offline, nemůžete otevřít dokument."
 
@@ -1297,15 +2029,6 @@ msgstr "Šablony"
 
 #~ msgid "Revisions"
 #~ msgstr "Revize"
-
-#~ msgid "Created"
-#~ msgstr "Vytvořeno"
-
-#~ msgid "Last changed"
-#~ msgstr "Naposledy změněno"
-
-#~ msgid "Owner"
-#~ msgstr "Majitel"
 
 #~ msgid "Undefined"
 #~ msgstr "Nedefinováno"
@@ -1403,9 +2126,6 @@ msgstr "Šablony"
 #~ msgid "Failed to set up passphrase: "
 #~ msgstr "Nepodařilo se nastavit přístupovou frázi:"
 
-#~ msgid "Move selected"
-#~ msgstr "Přesunout vybrané"
-
 #~ msgid "Move the documents that have been selected."
 #~ msgstr "Přesuňte dokumenty, které byly vybrány."
 
@@ -1421,35 +2141,20 @@ msgstr "Šablony"
 #~ msgid "Could not move document"
 #~ msgstr "Dokument nelze přesunout"
 
-#~ msgid "Share selected"
-#~ msgstr "Sdílet vybrané"
-
 #~ msgid "Share the documents that have been selected."
 #~ msgstr "Sdílejte dokumenty, které byly vybrány."
 
 #~ msgid "You cannot share documents of other users"
 #~ msgstr "Nemůžete sdílet dokumenty jiných uživatelů"
 
-#~ msgid "Copy selected"
-#~ msgstr "Kopírovat vybrané"
-
 #~ msgid "Copy the documents that have been selected."
 #~ msgstr "Zkopírujte dokumenty, které byly vybrány."
-
-#~ msgid "Export selected as Epub"
-#~ msgstr "Export vybrán jako Epub"
 
 #~ msgid "Export the documents that have been selected as Epub files."
 #~ msgstr "Exportujte dokumenty, které byly vybrány jako soubory Epub."
 
-#~ msgid "Export selected as HTML"
-#~ msgstr "Exportovat vybrané jako HTML"
-
 #~ msgid "Export the documents that have been selected as HTML files."
 #~ msgstr "Exportujte dokumenty, které byly vybrány jako soubory HTML."
-
-#~ msgid "Export selected as LaTeX"
-#~ msgstr "Exportovat vybraný jako LaTeX"
 
 #~ msgid "Export the documents that have been selected as LaTeX files."
 #~ msgstr "Exportujte dokumenty, které byly vybrány jako soubory LaTeX."
@@ -1459,9 +2164,6 @@ msgstr "Šablony"
 
 #~ msgid "Export the documents that have been selected as JATS files."
 #~ msgstr "Exportujte dokumenty, které byly vybrány jako soubory JATS."
-
-#~ msgid "Export selected as BITS"
-#~ msgstr "Export vybrán jako BITS"
 
 #~ msgid "Export the documents that have been selected as BITS files."
 #~ msgstr "Exportujte dokumenty, které byly vybrány jako soubory BITS."
@@ -1495,9 +2197,6 @@ msgstr "Šablony"
 #~ msgid "Create new document"
 #~ msgstr "Vytvořte nový dokument"
 
-#~ msgid "Create new folder"
-#~ msgstr "Vytvořte novou složku"
-
 #~ msgid "Import document"
 #~ msgstr "Importovat dokument"
 
@@ -1522,9 +2221,6 @@ msgstr "Šablony"
 #~ msgid "Time"
 #~ msgstr "Čas"
 
-#~ msgid "Description"
-#~ msgstr "Popis"
-
 #~ msgid "Recreate"
 #~ msgstr "Znovu vytvořit"
 
@@ -1539,9 +2235,6 @@ msgstr "Šablony"
 
 #~ msgid "Changes to citation sources are not being tracked!"
 #~ msgstr "Změny zdrojů citací nejsou sledovány!"
-
-#~ msgid "Bibliography"
-#~ msgstr "Bibliografie"
 
 #~ msgid "[Encrypted message - decryption failed]"
 #~ msgstr "[Zašifrovaná zpráva – dešifrování se nezdařilo]"
@@ -2633,9 +3326,6 @@ msgstr "Šablony"
 #~ msgid "Export the document as a FIDUS file including its template."
 #~ msgstr "Exportujte dokument jako soubor FIDUS včetně jeho šablony."
 
-#~ msgid "Print/PDF"
-#~ msgstr "Tisk/PDF"
-
 #~ msgid "Either print or create a PDF using your browser print dialog."
 #~ msgstr ""
 #~ "Vytiskněte nebo vytvořte PDF pomocí tiskového dialogového okna prohlížeče."
@@ -2677,9 +3367,6 @@ msgstr "Šablony"
 #~ msgid "The current password is incorrect."
 #~ msgstr "Aktuální heslo je nesprávné."
 
-#~ msgid "Export"
-#~ msgstr "Exportovat"
-
 #~ msgid "Export of the document contents"
 #~ msgstr "Export obsahu dokumentu"
 
@@ -2688,9 +3375,6 @@ msgstr "Šablony"
 
 #~ msgid "Export the document to an HTML file."
 #~ msgstr "Exportujte dokument do souboru HTML."
-
-#~ msgid "Epub"
-#~ msgstr "Epub"
 
 #~ msgid "Export the document to an Epub electronic reader file."
 #~ msgstr "Exportujte dokument do souboru elektronické čtečky Epub."
@@ -3122,9 +3806,6 @@ msgstr "Šablony"
 
 #~ msgid "Characters with blanks"
 #~ msgstr "Postavy s mezerami"
-
-#~ msgid "Copy of"
-#~ msgstr "Kopie"
 
 #~ msgid " successfully copied."
 #~ msgstr "úspěšně zkopírováno."
