@@ -53,7 +53,7 @@
         "@fiduswriter/bibliography-manager": "^0.1.35",
         "@fiduswriter/image-manager": "^0.1.28",
         "@fiduswriter/document-template-editor": "^0.1.21",
-        "@fiduswriter/document": "^0.3.28",
+        "@fiduswriter/document": "^0.3.29",
         "@fortawesome/fontawesome-free": "^7.2.0",
         "source-map-loader": "^5.0.0",
         "regenerator-runtime": "^0.14.1",
