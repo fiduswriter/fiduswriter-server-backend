@@ -130,6 +130,33 @@ class SeleniumHelper:
                 count += 1
                 time.sleep(1)
 
+    def js_click(self, driver, selector):
+        """Click an element via JavaScript once it is present in the DOM.
+
+        Items of deeply nested pulldown menus can open below the fold of the
+        fixed-height editor layout, where no scroll container can bring them
+        into view: a native click lands outside the viewport and silently
+        hits nothing. A JS click dispatches on the element itself and works
+        regardless of where the menu renders.
+
+        Menu item selectors often match the wrapping <li> rather than the
+        clickable <span class="fw-pulldown-item"> inside it (a native click
+        would hit the span, a JS click on the li registers as an outside
+        click and closes the menu), so resolve to the item span first.
+        """
+        element = WebDriverWait(driver, self.wait_time).until(
+            EC.presence_of_element_located(selector)
+        )
+        driver.execute_script(
+            "const el = arguments[0];"
+            "const item = el.matches('.fw-pulldown-item')"
+            " ? el"
+            " : el.closest('.fw-pulldown-item')"
+            " || el.querySelector('.fw-pulldown-item');"
+            "(item || el).click();",
+            element,
+        )
+
     def safe_click_element(self, driver, element, retries=3):
         """Click an element, falling back to a JS click if it is not interactable."""
         for attempt in range(retries):
