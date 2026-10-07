@@ -599,6 +599,7 @@ ASGI_APPLICATION = "base.routing.application"
 # 'required'  - Only E2EE documents are allowed. EXPERIMENTAL
 E2EE_MODE = "disabled"  # Default: disabled for backward compatibility
 
+
 # PRINT_ENGINE selects the pagination engine used for printing and PDF
 # export:
 #   "paginate-for-print"  - paginate-for-print (LGPL-3.0), the default. Works
@@ -622,5 +623,7 @@ def _vivliostyle_extra_installed() -> bool:
 
 
 PRINT_ENGINE = (
-    "vivliostyle-pdf" if _vivliostyle_extra_installed() else "paginate-for-print"
+    "vivliostyle-pdf"
+    if _vivliostyle_extra_installed()
+    else "paginate-for-print"
 )

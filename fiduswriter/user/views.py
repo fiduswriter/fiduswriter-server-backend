@@ -980,8 +980,7 @@ def update_preferences(request):
                 not isinstance(entries, list)
                 or len(entries) > max_entries
                 or not all(
-                    isinstance(entry, str)
-                    and 0 < len(entry.strip()) <= 200
+                    isinstance(entry, str) and 0 < len(entry.strip()) <= 200
                     for entry in entries
                 )
             ):

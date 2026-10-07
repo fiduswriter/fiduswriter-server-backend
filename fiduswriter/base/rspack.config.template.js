@@ -129,8 +129,8 @@ module.exports = {
                 // Language data packs (~200 MB) must not be precached; the
                 // grammar checker fetches each pack individually on demand.
                 url => !url.includes("lingotweaker-packs/")
-            ).map(
-                url => {
+            )
+                .map(url => {
                     if (url.includes("/fonts/")) {
                         return {url, revision: transpile.VERSION.toString()}
                     } else {
@@ -139,13 +139,13 @@ module.exports = {
                             revision: null
                         }
                     }
-                }
-            ).concat(
-                ["/", "/api/jsi18n/", "/manifest.json"].map(url => ({
-                    url,
-                    revision: transpile.VERSION.toString()
-                }))
-            )
+                })
+                .concat(
+                    ["/", "/api/jsi18n/", "/manifest.json"].map(url => ({
+                        url,
+                        revision: transpile.VERSION.toString()
+                    }))
+                )
         })
     ],
     entry: transpile.ENTRIES
