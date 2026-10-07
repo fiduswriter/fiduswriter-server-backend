@@ -2,7 +2,7 @@
     dependencies: {
         "@fiduswriter/books-document": "^0.1.29",
         "@fiduswriter/document": "^0.3.32",
-        "@fiduswriter/frontend": "^0.1.63",
+        "@fiduswriter/frontend": "^0.1.64",
         "@fiduswriter/image-manager": "^0.1.28",
         "downloadjs": "^1.4.7",
         "fast-deep-equal": "^3.1.3"

@@ -45,7 +45,7 @@
     license: "AGPL",
     private: true,
     dependencies: {
-        "@fiduswriter/frontend": "^0.1.63",
+        "@fiduswriter/frontend": "^0.1.64",
         "fwtoolkit": "^0.2.26",
         // Remaining dependencies are listed here to ensure they are hoisted to
         // to the top as static files need to be copied from them (see above)
