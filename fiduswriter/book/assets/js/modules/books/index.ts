@@ -139,8 +139,8 @@ export class BookOverview {
 
     render(): void {
         ensureCSS([
-            staticUrl("css/add_remove_dialog.css"),
-            staticUrl("css/access_rights_dialog.css"),
+            staticUrl("css/fwtoolkit/add_remove_dialog.css"),
+            staticUrl("css/editor/access_rights_dialog.css"),
             staticUrl("css/book_dialog.css")
         ])
         this.dom = document.createElement("body")
