@@ -5,7 +5,7 @@ hypothesis-based Django test modules:
 
 | Module | Target | Key invariants |
 |--------|--------|----------------|
-| `document/tests/test_fuzz_steps.py` | the ProseMirror step engine (`document/prosemirror.py` + the rust backend) — every websocket diff passes through it | valid step sequences apply and match the generating transform, **python and rust backends produce identical documents**, malformed step JSONs take the designed "unfixable" path instead of raising |
+| `document/tests/test_fuzz_steps.py` | the ProseMirror step engine (`document/prosemirror.py` + the rust backend, the production default) — every websocket diff passes through it | valid step sequences apply and match the generating transform, **python and rust backends produce identical documents** (including after rejected garbage), malformed step JSONs take the designed "unfixable" path instead of raising on *both* backends, and a failed batch rolls the rust editor back atomically |
 | `document/tests/test_fuzz_views.py` | AJAX endpoints (`import/create`, `import`, `save`, `upload_revision`, `bibliography/save`, `book/save`, `user_template_manager/create`, `style/save_document_style`, …) with malformed payloads and non-dict JSON bodies | no view returns 500 — malformed shapes degrade to 4xx |
 | `usermedia/tests/test_fuzz_images.py` | image upload + Pillow thumbnail path with truncated/spoofed/hostile images | rejections below 500; valid images still upload |
 
@@ -36,6 +36,14 @@ designed `unfixable()` + `reset_collaboration()` flow.
    instead of triggering `reset_collaboration`). The check now uses
    `step_result.failed`, and `Step.from_json`/`apply` exceptions on
    malformed input return `False` (the designed unfixable path).
+1b. **The rust backend leaked raw exceptions on malformed steps** —
+   `prosemirror_rs.apply()` had no error handling: the Rust serde
+   deserializer's `ValueError`s ("unknown variant", "invalid type", …)
+   escaped straight into the websocket handler. Since
+   `PROSEMIRROR_BACKEND` *defaults to* `"rust"`, this was the
+   production-default behavior. `Editor.apply_steps` now converts those
+   exceptions to `False`, matching the python backend's contract; the
+   atomic-rollback and garbage-then-valid differential tests pin this.
 2. **Malformed API payloads produced 500s** — views index
    `request.JSON["key"]` directly; missing keys (`import_id`, `bibs`,
    `book`, `ids`, …), wrong types, non-dict JSON bodies and unparseable

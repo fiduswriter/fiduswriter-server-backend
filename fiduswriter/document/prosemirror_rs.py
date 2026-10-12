@@ -65,8 +65,17 @@ class Editor:
         Returns ``True`` if every step applied; ``False`` if any step failed,
         in which case the document and version counter are rolled back entirely
         by Rust — no Python-side snapshot is required.
+
+        Malformed step JSON (unknown step types, wrong field types, unknown
+        node/mark types) surfaces as a ValueError from the Rust serde
+        deserializer. It is converted to ``False`` here so that callers get
+        the same designed "unfixable" path as with the python backend,
+        instead of the exception escaping into the websocket handler.
         """
-        result = self._inner.apply_steps_json(json.dumps(steps))
+        try:
+            result = self._inner.apply_steps_json(json.dumps(steps))
+        except (ValueError, KeyError, TypeError, AttributeError):
+            return False
         if result:
             return result
         return False
