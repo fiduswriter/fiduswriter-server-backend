@@ -241,6 +241,17 @@ confirmation before overwriting it unless `--noinput` is passed.
 - **Browser Testing**: Selenium WebDriver
 - **Test Requirements**: Install with `pip install -r test-requirements.txt`
 
+### Fuzz tests
+Hypothesis-based fuzz tests cover the untrusted-input surfaces (see
+`FUZZING.md`): `document.tests.test_fuzz_steps` (ProseMirror step engine,
+python vs rust differential), `document.tests.test_fuzz_views` (AJAX view
+payload handling) and `usermedia.tests.test_fuzz_images` (image upload /
+Pillow). Run them like any other test module, e.g.
+`python manage.py test document.tests.test_fuzz_steps --noinput`. After
+changing the step engine, the JSON middleware or upload endpoints, run the
+relevant module — hypothesis prints a reproducible failing example on
+failure.
+
 ## API Request/Response Pattern
 
 All AJAX endpoints in Fidus Writer accept **JSON request bodies** instead of classic HTML form data.

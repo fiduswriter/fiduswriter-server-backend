@@ -24,9 +24,19 @@ def from_json(json):
 
 def apply(steps, node):
     for step_obj in steps:
-        step = Step.from_json(schema, step_obj)
-        step_result = step.apply(node)
-        if step_result.ok:
+        try:
+            step = Step.from_json(schema, step_obj)
+            step_result = step.apply(node)
+        except (ValueError, KeyError, TypeError, AttributeError):
+            # Malformed step JSON from a websocket client: return False so
+            # the consumer takes the designed "unfixable" path
+            # (reset_collaboration) instead of dying mid-handler.
+            return False
+        # StepResult.failed is None on success and holds an error message
+        # otherwise. (.ok is a classmethod factory, not a property —
+        # checking it as a truthy attribute made every step look
+        # successful and replaced the node with None on failure.)
+        if not step_result.failed:
             node = step_result.doc
         else:
             return False
