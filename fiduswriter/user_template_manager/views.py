@@ -106,7 +106,9 @@ def create(request):
     if not isinstance(title, str) or not title:
         # Client-supplied JSON: a missing or non-string title would
         # otherwise hit the NOT NULL constraint as a 500.
-        return JsonResponse({"error": _("Missing template title.")}, status=400)
+        return JsonResponse(
+            {"error": _("Missing template title.")}, status=400
+        )
     if document_styles is None:
         document_styles = []
     if export_templates is None:

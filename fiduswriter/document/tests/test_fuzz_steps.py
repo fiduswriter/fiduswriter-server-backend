@@ -39,29 +39,28 @@ BASE_DOC = {
                     "type": "paragraph",
                     "content": [
                         {"type": "text", "text": "Hello brave new world"}
-                    ]
+                    ],
                 },
                 {
                     "type": "paragraph",
                     "content": [
                         {"type": "text", "text": "Second paragraph 😀 ünïcode"}
-                    ]
+                    ],
                 },
                 {
                     "type": "bullet_list",
                     "content": [
                         {
                             "type": "list_item",
-                            "content": [
-                                {"type": "paragraph", "content": []}
-                            ]
+                            "content": [{"type": "paragraph", "content": []}],
                         }
-                    ]
-                }
-            ]
-        }
-    ]
+                    ],
+                },
+            ],
+        },
+    ],
 }
+
 
 def base_node():
     return prosemirror.from_json(json.loads(json.dumps(BASE_DOC)))
@@ -150,12 +149,16 @@ class StepEngineFuzzTest(SimpleTestCase):
         # python backend
         py_node = base_node()
         py_result = prosemirror.apply(steps, py_node)
-        self.assertFalse(py_result is False, "valid steps failed on python backend")
+        self.assertFalse(
+            py_result is False, "valid steps failed on python backend"
+        )
         py_doc = prosemirror.to_content(py_result)
         # rust backend (apply mutates the editor in place)
         rs_editor = prosemirror_rs.from_json(json.loads(json.dumps(BASE_DOC)))
         rs_result = prosemirror_rs.apply(steps, rs_editor)
-        self.assertFalse(rs_result is False, "valid steps failed on rust backend")
+        self.assertFalse(
+            rs_result is False, "valid steps failed on rust backend"
+        )
         rs_doc = json.loads(prosemirror_rs.to_content(rs_editor))
         # The two backends serialize document attrs differently (the python
         # to_content keeps all doc attrs, the rust doc_json skips
@@ -184,9 +187,7 @@ class StepEngineFuzzTest(SimpleTestCase):
         from prosemirror.transform import Transform
 
         tr = Transform(node)
-        tr.replace_with(
-            2, 2, prosemirror.schema.text("seed")
-        )
+        tr.replace_with(2, 2, prosemirror.schema.text("seed"))
         step_json = tr.steps[0].to_json()
 
         mutations = [
@@ -195,7 +196,10 @@ class StepEngineFuzzTest(SimpleTestCase):
             {**step_json, "stepType": rnd.choice(["bogus", "", 42, None])},
             {**step_json, "slice": rnd.choice([None, {}, {"content": "x"}])},
             {**step_json, "param": {"pos": rnd.choice([-1, 10**9])}},
-            {"stepType": "addMark", "mark": rnd.choice([None, {}, {"type": "nope"}])},
+            {
+                "stepType": "addMark",
+                "mark": rnd.choice([None, {}, {"type": "nope"}]),
+            },
             {"stepType": "replace", "from": 1, "to": 0},
             {},
             rnd.choice([None, 42, "string", [], True]),
@@ -226,6 +230,7 @@ class StepEngineFuzzTest(SimpleTestCase):
             result is False or hasattr(result, "content"),
             f"apply returned an unexpected value for {mutated!r}",
         )
+
 
 try:
     from document import prosemirror_rs as _prosemirror_rs
@@ -258,13 +263,15 @@ class StepEngineRustFuzzTest(SimpleTestCase):
             {**step_json, "to": rnd.choice([-3, 10**9, None, []])},
             {**step_json, "stepType": rnd.choice(["bogus", "", 42, None])},
             {**step_json, "slice": rnd.choice([None, {}, {"content": "x"}])},
-            {"stepType": "addMark", "mark": rnd.choice([None, {"type": "nope"}])},
+            {
+                "stepType": "addMark",
+                "mark": rnd.choice([None, {"type": "nope"}]),
+            },
             {"stepType": "replace", "from": 1, "to": 0},
             {},
             rnd.choice([None, 42, "string", [], True]),
         ]
         return mutations[rnd.randint(0, len(mutations) - 1)]
-
 
     def _fresh_editor(self):
         return _prosemirror_rs.from_json(json.loads(json.dumps(BASE_DOC)))
@@ -344,7 +351,9 @@ class StepEngineRustFuzzTest(SimpleTestCase):
                 _prosemirror_rs.apply([mutated], rs_editor) is not False
             )
         rs_result = _prosemirror_rs.apply(steps, rs_editor)
-        self.assertFalse(rs_result is False, "valid steps failed after garbage")
+        self.assertFalse(
+            rs_result is False, "valid steps failed after garbage"
+        )
         rs_doc = json.loads(_prosemirror_rs.to_content(rs_editor))
         self.assertEqual(
             json.dumps(py_doc["content"], sort_keys=True),

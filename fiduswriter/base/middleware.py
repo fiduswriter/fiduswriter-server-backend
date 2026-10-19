@@ -80,9 +80,7 @@ class JsonToPostMiddleware:
             )
             from django.http import JsonResponse
 
-            return JsonResponse(
-                {"error": "Invalid request data."}, status=400
-            )
+            return JsonResponse({"error": "Invalid request data."}, status=400)
         return None
 
     def _process_request(self, request):
