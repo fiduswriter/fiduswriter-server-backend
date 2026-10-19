@@ -2,7 +2,7 @@
  * App-specific types for the book overview.
  *
  * The book record, chapter and document-list shapes come from
- * `@fiduswriter/books-document` (they are what the exporters consume). This
+ * `@fiduswriter/books` (they are what the exporters consume). This
  * module only adds the pieces that exist solely in the Django backend's
  * /api/book/ payloads: the contact list, the access-right payloads and the
  * book overview's own mutable state.
@@ -18,7 +18,7 @@ import type {
     BookStyles,
     Chapter,
     DocumentListEntry
-} from "@fiduswriter/books-document"
+} from "@fiduswriter/books"
 import type {App} from "@fiduswriter/frontend/app"
 import type {
     DatatableBulk,

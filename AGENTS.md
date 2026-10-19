@@ -89,7 +89,7 @@ menu entries are only registered when the app is installed.
 
 `book` was merged here from the retired `fiduswriter-books-plugin` repository in
 Fidus Writer 5.0. Its book export/import logic lives in
-`@fiduswriter/books-document`.
+`@fiduswriter/books`.
 
 ## JavaScript Build System
 

@@ -1,4 +1,4 @@
-import type {Chapter, DocumentListEntry} from "@fiduswriter/books-document"
+import type {Chapter, DocumentListEntry} from "@fiduswriter/books"
 import {LANGUAGES} from "@fiduswriter/document/schema/const"
 import {escapeText, localizeDate, longFilePath} from "fwtoolkit"
 import type {Book, BookDialogInfo, BookStyle} from "./types"

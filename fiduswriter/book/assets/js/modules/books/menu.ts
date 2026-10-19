@@ -1,13 +1,13 @@
-import type {Book} from "@fiduswriter/books-document"
-import {BITSBookExporter} from "@fiduswriter/books-document/exporter/bits"
-import {DOCXBookExporter} from "@fiduswriter/books-document/exporter/docx"
-import {EpubBookExporter} from "@fiduswriter/books-document/exporter/epub"
-import {HTMLBookExporter} from "@fiduswriter/books-document/exporter/html"
-import {LatexBookExporter} from "@fiduswriter/books-document/exporter/latex"
-import {NativeBookExporter} from "@fiduswriter/books-document/exporter/native"
-import {ODTBookExporter} from "@fiduswriter/books-document/exporter/odt"
-import {PrintBookExporter} from "@fiduswriter/books-document/exporter/print"
-import {getMissingChapterData} from "@fiduswriter/books-document/exporter/tools"
+import type {Book} from "@fiduswriter/books"
+import {BITSBookExporter} from "@fiduswriter/books/exporter/bits"
+import {DOCXBookExporter} from "@fiduswriter/books/exporter/docx"
+import {EpubBookExporter} from "@fiduswriter/books/exporter/epub"
+import {HTMLBookExporter} from "@fiduswriter/books/exporter/html"
+import {LatexBookExporter} from "@fiduswriter/books/exporter/latex"
+import {NativeBookExporter} from "@fiduswriter/books/exporter/native"
+import {ODTBookExporter} from "@fiduswriter/books/exporter/odt"
+import {PrintBookExporter} from "@fiduswriter/books/exporter/print"
+import {getMissingChapterData} from "@fiduswriter/books/exporter/tools"
 import type {CSL, User} from "@fiduswriter/document"
 import {saveFile} from "@fiduswriter/document/exporter/save"
 import type {ProgressCallback} from "@fiduswriter/document/exporter/tools/progress"
@@ -29,7 +29,7 @@ let currentlySearching = false
 
 /**
  * The subset of a book exporter this module needs. Every exporter of
- * `@fiduswriter/books-document` exposes these members; the declared return
+ * `@fiduswriter/books` exposes these members; the declared return
  * type of `init()` differs slightly between them (some return `false`, some
  * `void`, instead of a Blob), so it is kept loose here. `mimeType` likewise
  * only exists on the DOCX/ODT exporters, which read it off the instance.
@@ -77,7 +77,7 @@ type ExportMenuModel = ContentMenuInit
  * chapters), run the given exporter, then trigger a browser download of the
  * resulting Blob.
  *
- * The @fiduswriter/books-document exporters are environment-agnostic: they
+ * The @fiduswriter/books exporters are environment-agnostic: they
  * load chapter data through injected strategies (defaulting to no-ops) and
  * their base `download()` simply returns the produced Blob. In the browser we
  * therefore pre-load the chapter data with the core-backed adapters — after

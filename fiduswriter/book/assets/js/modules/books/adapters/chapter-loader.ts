@@ -1,7 +1,7 @@
 import type {
     ChapterLoader,
     DocumentListEntry
-} from "@fiduswriter/books-document"
+} from "@fiduswriter/books"
 import {getMissingDocumentListData} from "@fiduswriter/frontend/documents/tools"
 import type {Schema} from "prosemirror-model"
 import type {FrontendApp} from "../types"
@@ -9,7 +9,7 @@ import type {FrontendApp} from "../types"
 /**
  * Browser `ChapterLoader` adapter.
  *
- * Implements the `ChapterLoader` interface from `@fiduswriter/books-document`
+ * Implements the `ChapterLoader` interface from `@fiduswriter/books`
  * by delegating to the Fidus Writer core `getMissingDocumentListData` fetch
  * helper, which lazily loads a chapter's content, comments, bibliography and
  * images from the server and updates the document list entries in place.

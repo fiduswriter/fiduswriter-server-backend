@@ -3,9 +3,9 @@ import type {
     BookMetadata,
     BookSettings,
     Chapter
-} from "@fiduswriter/books-document"
-import type {NativeBookImporterOptions} from "@fiduswriter/books-document/importer/native"
-import {NativeBookImporter} from "@fiduswriter/books-document/importer/native"
+} from "@fiduswriter/books"
+import type {NativeBookImporterOptions} from "@fiduswriter/books/importer/native"
+import {NativeBookImporter} from "@fiduswriter/books/importer/native"
 import {createNativeImporterBackend} from "@fiduswriter/frontend/documents/importer/native/import"
 import type {ImageDB} from "@fiduswriter/image-manager"
 import {ImageSelectionDialog} from "@fiduswriter/image-manager"

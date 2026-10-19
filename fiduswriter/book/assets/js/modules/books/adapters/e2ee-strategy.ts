@@ -1,4 +1,4 @@
-import type {E2EEStrategy} from "@fiduswriter/books-document"
+import type {E2EEStrategy} from "@fiduswriter/books"
 import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {enterPassphraseDialog} from "fwtoolkit/e2ee/passphrase-dialog"
@@ -7,7 +7,7 @@ import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
 /**
  * Browser `E2EEStrategy` adapter.
  *
- * Implements the `E2EEStrategy` interface from `@fiduswriter/books-document`
+ * Implements the `E2EEStrategy` interface from `@fiduswriter/books`
  * using the Fidus Writer core end-to-end-encryption helpers. It is injected
  * into `getMissingChapterData` so that encrypted book chapters can be
  * decrypted before an export or sanity check runs.

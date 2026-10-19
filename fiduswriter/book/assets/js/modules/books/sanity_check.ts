@@ -1,5 +1,5 @@
-import type {Chapter, DocumentListEntry} from "@fiduswriter/books-document"
-import {getMissingChapterData} from "@fiduswriter/books-document/exporter/tools"
+import type {Chapter, DocumentListEntry} from "@fiduswriter/books"
+import {getMissingChapterData} from "@fiduswriter/books/exporter/tools"
 import {longFilePath} from "fwtoolkit"
 import type {Schema} from "prosemirror-model"
 

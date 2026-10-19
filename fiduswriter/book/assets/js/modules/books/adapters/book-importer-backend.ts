@@ -3,14 +3,14 @@ import type {
     BookImporterBackend,
     BookMetadata,
     BookSettings
-} from "@fiduswriter/books-document"
+} from "@fiduswriter/books"
 import {addAlert, postJson} from "fwtoolkit"
 
 /**
  * Browser `BookImporterBackend` factory.
  *
  * Implements the `BookImporterBackend` interface from
- * `@fiduswriter/books-document` by posting the imported book record to the
+ * `@fiduswriter/books` by posting the imported book record to the
  * Fidus Writer server `/api/book/save/` endpoint. The chapter documents have
  * already been created on the server by `NativeImporter` (via the native
  * importer backend), so this only needs to persist the book itself.
