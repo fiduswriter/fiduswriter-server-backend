@@ -1,7 +1,4 @@
-import type {
-    ChapterLoader,
-    DocumentListEntry
-} from "@fiduswriter/books"
+import type {ChapterLoader, DocumentListEntry} from "@fiduswriter/books"
 import {getMissingDocumentListData} from "@fiduswriter/frontend/documents/tools"
 import type {Schema} from "prosemirror-model"
 import type {FrontendApp} from "../types"
