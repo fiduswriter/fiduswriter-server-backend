@@ -469,8 +469,10 @@ export class DjangoAuthApi implements AuthApi {
         )
     }
 
-    twoFactorDisable(): Promise<TwoFactorVerifyResponse> {
-        return postJson("/api/user/two-factor/disable/").then(
+    twoFactorDisable(
+        data: Record<string, unknown>
+    ): Promise<TwoFactorVerifyResponse> {
+        return postJson("/api/user/two-factor/disable/", data).then(
             ({json}) => json as TwoFactorVerifyResponse
         )
     }
