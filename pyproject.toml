@@ -18,6 +18,8 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
   "Topic :: Scientific/Engineering",
   "Topic :: Text Editors :: Word Processors",
   "Topic :: Text Processing",
@@ -43,9 +45,13 @@ website = ["fiduswriter-website ~= 4.1.0"]
 vivliostyle = ["fiduswriter-vivliostyle ~= 5.0.0"]
 mysql = ["mysqlclient"]
 postgresql = ["psycopg2"]
-prosemirror-rust = ["prosemirror-rs"]
-prosemirror-python = ["prosemirror"]
-orjson = ["orjson"]
+# The Rust extensions have no PyPy wheels. On CPython they are installed by
+# default (see fiduswriter/requirements.txt); on PyPy the pure-Python
+# ProseMirror engine and the standard library JSON implementation are used.
+rust = [
+  "prosemirror-rs==0.5.2; platform_python_implementation != 'PyPy'",
+  "orjson==3.13.0; platform_python_implementation != 'PyPy'",
+]
 
 
 [project.scripts]

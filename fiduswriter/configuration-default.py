@@ -52,10 +52,22 @@ PORTS = [4386]
 # LOCAL_PORTS = [4386]
 
 # ProseMirror backend used by the document WebSocket consumer.
-# "python" - pure-Python prosemirror package (default).
-# "rust"   - prosemirror-rs Rust extension (requires `pip install prosemirror-rs`). EXPERIMENTAL
-#            Keeps document state in Rust memory; avoids Python object tree overhead.
-PROSEMIRROR_BACKEND = "python"
+# "auto"   - use the Rust engine (prosemirror-rs) when it is installed, the
+#            pure-Python engine otherwise (default). This is what makes a
+#            PyPy installation work: prosemirror-rs has no PyPy wheels.
+# "rust"   - always use the Rust engine. Falls back to the pure-Python engine
+#            (with a warning) if prosemirror-rs is not installed.
+# "python" - always use the pure-Python engine. Deprecated, will be removed in
+#            6.0.
+#
+# The PROSEMIRROR_BACKEND environment variable overrides this setting.
+PROSEMIRROR_BACKEND = "auto"
+
+# How often (in seconds) the document consumer re-reads the access rights of
+# a participant from the database. 0 means the rights are re-read before
+# every mutating frame, so a revocation takes effect immediately. A positive
+# value caches the rights for that many seconds.
+AUTHORIZATION_REFRESH_INTERVAL = 0
 
 # Allow the server to listen to all network interfaces (0.0.0.0) instead of just localhost
 # SECURITY WARNING: Setting this to True in production environments could expose your server
@@ -179,7 +191,24 @@ ALLOWED_HOSTS = [
 
 # The maximum size of user uploaded images in bytes. If you use NGINX, note
 # that also it needs to support at least this size.
-MEDIA_MAX_SIZE = False
+MEDIA_MAX_SIZE = 10 * 1024 * 1024
+
+# The maximum size of a request body (in bytes). Note that the "direct" save
+# mode posts the whole document as JSON, so this needs to be larger than the
+# largest document you expect to edit.
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+
+# Static file serving. In development the Django middleware serves static
+# files from the app directories, so changes are picked up without re-running
+# collectstatic. In production the ASGI server (Granian) serves /static
+# directly from STATIC_ROOT.
+SERVESTATIC_USE_FINDERS = DEBUG
+SERVESTATIC_AUTOREFRESH = DEBUG
+
+# Whether the ASGI server should serve the collected static files from
+# STATIC_ROOT. By default this is the case in production (DEBUG off); set it
+# to True or False to override.
+# SERVE_STATIC_FROM_GRANIAN = not DEBUG
 
 # Create URLs in https (required for social media login)
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

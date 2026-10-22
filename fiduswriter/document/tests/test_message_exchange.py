@@ -1,3 +1,14 @@
+"""Tests in which one user works on the document and simulates loss of
+socket messages.
+
+This module is currently disabled in CI (it is commented out in the test
+matrix of fiduswriter/.github/workflows/main.yml). It inspects the "doc_data"
+WebSocket message, which no longer exists: the document content is now
+fetched through the /api/document/get_doc_data/ REST endpoint instead (see
+document/views.py, get_doc_data). The test has to be rewritten against the
+current protocol before it can be enabled again.
+"""
+
 from testing.live_server import ChannelsLiveServerTestCase
 from .editor_helper import EditorHelper
 from document.consumers import WebsocketConsumer

@@ -29,10 +29,39 @@
 
 ### Key Dependencies
 - `django-npm-mjs==5.0.0` - Handles JavaScript transpilation and npm integration
-- `prosemirror==0.5.0` - Python bindings for ProseMirror
+- `prosemirror==0.6.1` - Pure-Python ProseMirror implementation (the fallback engine)
+- `prosemirror-rs==0.5.2` - Rust ProseMirror implementation (not installed on PyPy)
+- `orjson==3.13.0` - Rust JSON implementation (not installed on PyPy)
 - `channels==4.3.2` - WebSocket support for real-time collaboration
-- `Pillow==11.3.0` - Image processing
-- `bleach==6.1.0` - HTML sanitization
+- `Pillow==13.0.0` - Image processing
+- `bleach==6.4.0` - HTML sanitization
+
+### The ProseMirror engine
+
+The document WebSocket can run the ProseMirror step engine either in Rust
+(`prosemirror-rs`, the default when it is installed) or in pure Python
+(`prosemirror`). The engine is resolved in `document/backend.py`; the
+`PROSEMIRROR_BACKEND` setting (or the environment variable of the same name)
+selects it:
+
+- `"auto"` (default) - Rust when `prosemirror-rs` is importable, pure Python otherwise
+- `"rust"` - always Rust, falling back to pure Python with a warning if the extension is missing
+- `"python"` - always pure Python (deprecated, to be removed in 6.0)
+
+Both engines produce the same document content. `document/tests/test_fuzz_steps.py`
+asserts that (differential fuzz test), and the CI runs the collaboration
+tests with both engines.
+
+Two rules apply when working with the Rust engine:
+
+- The `content` column is written **only** by the raw `UPDATE` in
+  `Document.save_content_str`/`asave_content_str`, which does not refresh
+  `doc.content` in memory. A save that has no engine-managed content
+  available must not write the content column through the ORM
+  (`document/helpers/document_store.py`, `_content_update_fields`).
+- The document attributes are serialized differently: the Python engine writes
+  all document level attributes, the Rust engine omits the ones with their
+  default value. The content tree is the contract.
 
 ## Project Structure
 

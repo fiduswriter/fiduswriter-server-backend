@@ -192,10 +192,14 @@ class Command(RunserverCommand):
 
         root_path = getattr(settings, "FORCE_SCRIPT_NAME", "") or ""
         if root_path:
-            cmd += ["--base-path", root_path]
+            cmd += ["--url-path-prefix", root_path]
 
         if self.http_timeout:
-            cmd += ["--read-timeout", str(self.http_timeout)]
+            # Granian expects the header read timeout in milliseconds.
+            cmd += [
+                "--http1-header-read-timeout",
+                str(self.http_timeout * 1000),
+            ]
 
         # Serve media files via Granian's built-in static file server.
         # Django's settings are fully loaded by this point (we're inside
@@ -209,10 +213,38 @@ class Command(RunserverCommand):
                 media_root,
             ]
 
+        # Serve the collected static files from the Rust web server too, so
+        # that static requests are answered without involving Django at all.
+        static_root = getattr(settings, "STATIC_ROOT", None)
+        if (
+            static_root
+            and self._serve_static_from_server()
+            and os.path.isdir(static_root)
+            and os.listdir(static_root)
+        ):
+            cmd += [
+                "--static-path-route",
+                "/static",
+                "--static-path-mount",
+                static_root,
+            ]
+
         # Use the production ASGI entry point; it handles its own Django
         # settings bootstrap via asgi.py.
         cmd.append("fiduswriter.asgi:application")
         return cmd
+
+    def _serve_static_from_server(self):
+        """Whether the ASGI server should serve the collected static files.
+
+        This is the case in production (DEBUG off) once the static files
+        have been collected. It can be forced with the
+        SERVE_STATIC_FROM_GRANIAN setting.
+        """
+        setting = getattr(settings, "SERVE_STATIC_FROM_GRANIAN", None)
+        if setting is None:
+            setting = not getattr(settings, "DEBUG", False)
+        return bool(setting)
 
     def inner_run(self, *args, **options):
         # Determine the address to bind to

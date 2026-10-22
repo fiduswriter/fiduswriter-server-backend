@@ -6,6 +6,7 @@ import logging
 import gc
 import asyncio
 import multiprocessing
+import time
 from copy import deepcopy
 from dataclasses import dataclass
 
@@ -13,10 +14,10 @@ from asgiref.sync import sync_to_async
 from django.conf import settings
 
 from base.helpers.ws import get_url_base
+from document.backend import get_backend
 from document.helpers.session_user_info import SessionUserInfo
-from django.conf import settings as _pm_settings
 
-if getattr(_pm_settings, "PROSEMIRROR_BACKEND", "rust") == "rust":
+if get_backend() == "rust":
     from document import prosemirror_rs as prosemirror
 else:
     from document import prosemirror
@@ -60,6 +61,8 @@ class WebsocketConsumer(BaseWebsocketConsumer):
     snapshot_sessions = dict()
     snapshot_manager = None
     history_length = 1000  # Only keep the last 1000 diffs
+    # Monotonic timestamp of the last access rights check (per connection).
+    _rights_checked_at = None
 
     @classmethod
     def get_session(cls, document_id):
@@ -452,15 +455,41 @@ class WebsocketConsumer(BaseWebsocketConsumer):
         the connection if it no longer authorizes."""
         if not hasattr(self, "user_info"):
             return
-        still_ok = await self.refresh_authorization()
+        # Always re-read: an explicit notification must not be served from
+        # the cache.
+        still_ok = await self.refresh_authorization(force=True)
         if not still_ok:
             await self.access_denied()
 
-    async def refresh_authorization(self):
+    def _rights_are_fresh(self):
+        """Whether the cached access rights may still be used.
+
+        Only relevant when AUTHORIZATION_REFRESH_INTERVAL is set to a
+        positive number of seconds. The default (0) means the rights are
+        re-read from the database before every mutating frame.
+        """
+        interval = getattr(settings, "AUTHORIZATION_REFRESH_INTERVAL", 0)
+        if not interval:
+            return False
+        checked_at = getattr(self, "_rights_checked_at", None)
+        if checked_at is None:
+            return False
+        return (time.monotonic() - checked_at) < interval
+
+    async def refresh_authorization(self, force=False):
         """Re-read current rights from the database. Returns False when
-        access was revoked."""
+        access was revoked.
+
+        With AUTHORIZATION_REFRESH_INTERVAL set to a positive number of
+        seconds, the rights are re-read at most that often. A revocation is
+        then enforced after at most that many seconds instead of
+        immediately. The default (0) re-reads the rights before every
+        mutating frame.
+        """
         if not hasattr(self, "user_info"):
             return False
+        if not force and self._rights_are_fresh():
+            return True
         user = self.user
         document_id = self.user_info.document_id
         if isinstance(user, GuestUser):
@@ -469,6 +498,7 @@ class WebsocketConsumer(BaseWebsocketConsumer):
                 return False
             self.user_info.access_rights = rights
             user.token_rights = rights
+            self._rights_checked_at = time.monotonic()
             return True
         if not user.is_authenticated:
             return False
@@ -481,6 +511,7 @@ class WebsocketConsumer(BaseWebsocketConsumer):
                 # Token revoked; fall back to direct rights below if any.
                 token_rights = None
         if getattr(self.user_info, "is_owner", False):
+            self._rights_checked_at = time.monotonic()
             return True
         access_right = await AccessRight.objects.filter(
             document_id=document_id, user=user
@@ -492,6 +523,7 @@ class WebsocketConsumer(BaseWebsocketConsumer):
             if token_rights is None:
                 return False
             self.user_info.access_rights = token_rights
+            self._rights_checked_at = time.monotonic()
             return True
         rights = access_right.rights
         if token_rights:
@@ -509,6 +541,7 @@ class WebsocketConsumer(BaseWebsocketConsumer):
         self.user_info.access_rights = rights
         self.user_info.path_object = access_right
         self.user_info.path = access_right.path
+        self._rights_checked_at = time.monotonic()
         return True
 
     async def handle_message(self, message):

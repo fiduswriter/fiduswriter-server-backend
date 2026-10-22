@@ -3,22 +3,39 @@ from copy import deepcopy
 
 from asgiref.sync import sync_to_async
 from django.db.utils import DatabaseError, IntegrityError
-from django.conf import settings as _pm_settings
 from usermedia.models import Image, DocumentImage, UserImage
 
-if getattr(_pm_settings, "PROSEMIRROR_BACKEND", "rust") == "rust":
+from document.backend import get_backend
+
+_USE_RUST = get_backend() == "rust"
+
+if _USE_RUST:
 
     def to_content(node):  # Not used in rust mode
         return node
 
-    _USE_RUST = True
 else:
     from document.prosemirror import to_content
 
-    _USE_RUST = False
-
 
 logger = logging.getLogger(__name__)
+
+
+def _content_update_fields(doc, update_fields):
+    """Return the fields to write through the ORM.
+
+    In Rust mode the ``content`` column is written exclusively by the raw
+    ``UPDATE`` in ``save_content_str``/``asave_content_str``. That method
+    does not refresh ``doc.content`` in memory, so writing the column through
+    the ORM would persist the content as it was when the session was opened,
+    silently reverting newer edits.
+
+    E2EE documents are exempt: their content is an opaque ciphertext managed
+    by Django (not by the engine), so the in-memory value is authoritative.
+    """
+    if _USE_RUST and not doc.e2ee:
+        return [f for f in update_fields if f != "content"]
+    return update_fields
 
 
 async def initialize_document_content(doc):
@@ -35,7 +52,9 @@ async def initialize_document_content(doc):
             doc.content["type"] = "doc"
         if "content" not in doc.content:
             doc.content["content"] = [{"type": "title"}]
-        await doc.asave()
+        # Only write the content column: a full save would write back the
+        # other columns of this (possibly stale) model instance.
+        await doc.asave(update_fields=["content", "updated"])
         return True
     return False
 
@@ -116,6 +135,12 @@ async def save_document_async(
             return True
         else:
             doc.content = to_content(node)
+    else:
+        # No engine-managed content for this save. In Rust mode the content
+        # column must not be written through the ORM (see
+        # _content_update_fields), otherwise the content as it was when the
+        # session was opened would overwrite newer edits.
+        update_fields = _content_update_fields(doc, update_fields)
 
     try:
         # this try block is to avoid a db exception
@@ -191,6 +216,11 @@ def save_document(doc, node=None, force=False, last_saved_version=None):
             return True
         else:
             doc.content = to_content(node)
+    else:
+        # See save_document_async: in Rust mode the content column must not
+        # be written through the ORM when no engine-managed content is
+        # available.
+        update_fields = _content_update_fields(doc, update_fields)
 
     try:
         doc.save(update_fields=update_fields)

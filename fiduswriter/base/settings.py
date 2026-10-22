@@ -70,11 +70,21 @@ DOC_SAVE_INTERVAL = 30
 EDITOR_SAVE_MODE = "collaborative"
 
 # ProseMirror backend used by the document WebSocket consumer.
-# "python" - pure-Python prosemirror package (default).
-# "rust"   - prosemirror-rs Rust extension (requires `pip install prosemirror-rs`). EXPERIMENTAL
+# "auto"   - use the Rust engine (prosemirror-rs) when it is installed,
+#            the pure-Python engine otherwise (default).
+# "rust"   - prosemirror-rs Rust extension (requires `pip install prosemirror-rs`).
 #            Keeps document state in Rust memory; avoids Python object tree overhead.
+# "python" - pure-Python prosemirror package. Deprecated, will be removed in 6.0.
 #
-PROSEMIRROR_BACKEND = "python"
+# The PROSEMIRROR_BACKEND environment variable overrides this setting.
+PROSEMIRROR_BACKEND = "auto"
+
+# How often (in seconds) the document consumer re-reads the access rights of a
+# participant from the database. 0 (default) means the rights are re-read
+# before every mutating frame, so a revocation takes effect immediately. A
+# positive value caches the rights for that many seconds, which trades a
+# small delay in revocation enforcement for fewer database queries.
+AUTHORIZATION_REFRESH_INTERVAL = 0
 
 ADMINS = (("Your Name", "your_email@example.com"),)
 
@@ -182,8 +192,13 @@ MEDIA_URL = "/media/"
 APP_STORAGE_ROOT = os.path.join(PROJECT_PATH, "app-data/")
 
 # The maximum size of user uploaded images in bytes. If you use NGINX, note
-# that also it needs to support at least this size.
+# that also it needs to support at least this size. False means no limit;
+# configuration-default.py sets a limit for new installations.
 MEDIA_MAX_SIZE = False
+# The maximum size of a request body (in bytes) that Django will accept.
+# None means no limit; configuration-default.py sets a limit for new
+# installations. Note that the "direct" save mode posts the whole document
+# as JSON, so this needs to be larger than the largest document.
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 
 # Absolute path to the directory static files should be collected to.
@@ -259,9 +274,13 @@ AXES_BASE_MIDDLEWARE = [
 
 MIDDLEWARE = []
 
+# Static file serving. In development the middleware serves static files
+# from the app directories and picks up changes without a restart. In
+# production the ASGI server (Granian) serves /static directly from
+# STATIC_ROOT, so the middleware does not have to look anything up;
+# configuration-default.py switches these off for production installations.
 SERVESTATIC_USE_FINDERS = True
 SERVESTATIC_AUTOREFRESH = True
-
 
 # The location of the top urls.py file inside the base folder.
 # You only need to change this in very advanced setups.
@@ -486,6 +505,13 @@ LOGGING = {
         },
     },
     "loggers": {
+        # One line at startup, telling which ProseMirror engine and JSON
+        # implementation the installation uses.
+        "base.apps": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
         "django.request": {
             "handlers": ["mail_admins"],
             "level": "ERROR",
@@ -522,8 +548,6 @@ AVATAR_DEFAULT_SIZE = 80
 AVATAR_MAX_AVATARS_PER_USER = 1
 AVATAR_CACHE_ENABLED = True
 
-
-WEBSOCKET_PING_INTERVAL = 55
 
 ADMIN_SITE_TITLE = gettext("Fidus Writer Admin")
 ADMIN_SITE_HEADER = gettext("Fidus Writer Administration Site")

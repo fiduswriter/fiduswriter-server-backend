@@ -63,4 +63,15 @@ else:
 
 json.JSONDecodeError = JSONDecodeError
 
-__all__ = ["json", "JSONDecodeError"]
+
+def backend_name() -> str:
+    """Return the name of the JSON implementation in use.
+
+    Either ``"orjson"`` (the Rust implementation) or ``"json"`` (the
+    standard library). Logged at startup so that a site can tell which
+    implementation it runs with.
+    """
+    return "orjson" if _HAS_ORJSON else "json"
+
+
+__all__ = ["json", "JSONDecodeError", "backend_name"]
