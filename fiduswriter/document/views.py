@@ -23,7 +23,7 @@ from django.contrib.auth import get_user_model
 
 from datetime import datetime
 
-from asgiref.sync import async_to_sync
+from asgiref.sync import async_to_sync, sync_to_async
 from channels.layers import get_channel_layer
 
 from django.utils import timezone
@@ -308,18 +308,71 @@ def holder_type_id_matches_user(holder_type):
 
 def notify_access_change(document_id):
     """Tell live WebSocket participants of a document that their
-    access rights were changed so they (re-)evaluate immediately."""
+    access rights were changed so they (re-)evaluate immediately.
+
+    The notification reaches:
+    * the local Python consumers, through the channel layer group;
+    * the local native websockets service (and any other relay
+      connection authenticated as a Fidus Writer server), through the
+      system message relay clients of this process;
+    * the native services and consumers of the other servers, through
+      their stored broadcast URLs (`base.views.send_to_server`).
+    """
+    payload = {"type": "access_changed", "document_id": document_id}
+
+    async def _publish():
+        try:
+            channel_layer = get_channel_layer()
+        except Exception:
+            channel_layer = None
+        if channel_layer:
+            await channel_layer.group_send(
+                f"document_{document_id}",
+                {"type": "access.changed"},
+            )
+
+        # The local relay clients: the native websockets service and the
+        # other servers' relay connections attached to this process. They
+        # receive the usual system message envelope.
+        from base.consumers import SystemMessageConsumer
+
+        envelope = {"type": "system_message", "message": payload}
+        for client in list(SystemMessageConsumer.clients):
+            if not getattr(client, "is_broadcast_relay", False):
+                continue
+            try:
+                await client.send_message(envelope)
+            except Exception:
+                logger.warning(
+                    "Could not notify a local relay of the access "
+                    f"change of document {document_id}"
+                )
+
+        # The other servers.
+        from base.helpers.ws import broadcast_url_is_safe
+        from base.models import Presence
+        from base.views import _relay_origin_header, send_to_server
+
+        def _server_urls():
+            return set(
+                Presence.objects.values_list("server_url", flat=True).distinct()
+            )
+
+        for server_url in await sync_to_async(_server_urls)():
+            if not broadcast_url_is_safe(server_url):
+                logger.warning(
+                    f"Removed presence with unsafe server_url: {server_url}"
+                )
+                await sync_to_async(
+                    Presence.objects.filter(server_url=server_url).delete
+                )()
+                continue
+            await sync_to_async(send_to_server)(
+                server_url, payload, _relay_origin_header(server_url)
+            )
+
     try:
-        channel_layer = get_channel_layer()
-    except Exception:
-        channel_layer = None
-    if not channel_layer:
-        return
-    try:
-        async_to_sync(channel_layer.group_send)(
-            f"document_{document_id}",
-            {"type": "access.changed"},
-        )
+        async_to_sync(_publish)()
     except Exception:
         logger.warning(
             f"Could not publish access change for document {document_id}"

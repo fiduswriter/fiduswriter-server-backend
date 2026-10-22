@@ -1,0 +1,53 @@
+[package]
+name = "fiduswriter-native"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Native websockets route for the Fidus Writer collaboration protocol, served by Granian"
+license = "AGPL-3.0-or-later"
+
+[lib]
+name = "fiduswriter_native"
+crate-type = ["cdylib"]
+
+[[bin]]
+name = "wsload"
+path = "src/bin/wsload.rs"
+
+# The granian and prosemirror dependencies are fetched from the fiduswriter
+# forks on GitHub (the committed state). For development against local
+# checkouts, run dev-scripts/switch-local-deps.sh local in the fiduswriter
+# repo (it rewrites this section to path dependencies); run it with "npm"
+# to switch back before committing.
+[dependencies]
+futures = "0.3"
+granian = { git = "https://github.com/fiduswriter/granian", branch = "combined-patches", package = "granian", default-features = false }
+http-body-util = "0.1"
+log = "0.4"
+hyper = { version = "1.12", features = ["http1", "http2", "server"] }
+prosemirror = { git = "https://github.com/fiduswriter/prosemirror-rs", branch = "main" }
+pyo3 = { version = "0.30", features = ["extension-module"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", features = ["preserve_order"] }
+tokio = { version = "1.51", features = ["full"] }
+tokio-tungstenite = "0.30"
+clap = { version = "4", features = ["derive"] }
+url = "2"
+base64 = "0.22"
+serde-pickle = "1.2"
+uuid = { version = "1", features = ["v4", "v5"] }
+sha2 = "0.10"
+hmac = "0.12"
+miniz_oxide = "0.8"
+sqlx = { version = "0.8", default-features = false, features = [
+    "runtime-tokio",
+    "sqlite",
+    "postgres",
+    "mysql",
+    "json",
+] }
+
+# A thin LTO keeps the link time of the extension module low, while Granian
+# itself is not recompiled (it is cached as a library dependency).
+[profile.release]
+lto = false

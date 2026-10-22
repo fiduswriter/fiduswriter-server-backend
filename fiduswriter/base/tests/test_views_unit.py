@@ -163,3 +163,86 @@ class FrontendSettingsHookTest(TestCase):
         self.assertIn("LLM_URL", frontend_settings)
         self.assertIn("LLM_MODEL", frontend_settings)
         self.assertIn("LLM_API_KEY_CONFIGURED", frontend_settings)
+
+
+# ---------------------------------------------------------------------------
+# access change notification fan-out
+# ---------------------------------------------------------------------------
+
+
+class NotifyAccessChangeTest(TestCase):
+    """notify_access_change fans the access_changed payload out to the
+    local relay clients (the native websockets service) and the other
+    servers, beside the channel layer group."""
+
+    def test_fanout_reaches_local_relays_and_other_servers(self):
+        from types import SimpleNamespace
+        from unittest.mock import AsyncMock, patch
+
+        from base.models import Presence
+        from document.views import notify_access_change
+
+        user = User.objects.create_user(username="notify-user")
+        Presence.objects.create(
+            user=user,
+            server_url="ws://127.0.0.1:9999/ws/base/",
+        )
+
+        relay = SimpleNamespace(
+            is_broadcast_relay=True, send_message=AsyncMock()
+        )
+        browser = SimpleNamespace(
+            is_broadcast_relay=False, send_message=AsyncMock()
+        )
+        with patch(
+            "base.consumers.SystemMessageConsumer.clients", [relay, browser]
+        ):
+            with patch("base.views.send_to_server") as send_to_server:
+                notify_access_change(42)
+
+        # The local relay clients receive the system message envelope.
+        relay.send_message.assert_awaited_once()
+        envelope = relay.send_message.await_args.args[0]
+        self.assertEqual(envelope["type"], "system_message")
+        self.assertEqual(
+            envelope["message"],
+            {"type": "access_changed", "document_id": 42},
+        )
+        # Plain browser connections are not relay clients: no fan-out.
+        browser.send_message.assert_not_awaited()
+        # The other servers receive the payload through send_to_server.
+        send_to_server.assert_called_once()
+        args = send_to_server.call_args.args
+        self.assertEqual(args[0], "ws://127.0.0.1:9999/ws/base/")
+        self.assertEqual(
+            args[1], {"type": "access_changed", "document_id": 42}
+        )
+
+    def test_presence_with_unsafe_url_is_dropped(self):
+        from unittest.mock import AsyncMock, patch
+        from types import SimpleNamespace
+
+        from base.models import Presence
+        from document.views import notify_access_change
+
+        user = User.objects.create_user(username="notify-user-2")
+        Presence.objects.create(
+            user=user,
+            server_url="ws://evil.example.org/ws/base/",
+        )
+        relay = SimpleNamespace(
+            is_broadcast_relay=True, send_message=AsyncMock()
+        )
+        with patch(
+            "base.consumers.SystemMessageConsumer.clients", [relay]
+        ):
+            with patch("base.views.send_to_server") as send_to_server:
+                notify_access_change(43)
+
+        send_to_server.assert_not_called()
+        self.assertEqual(
+            Presence.objects.filter(
+                server_url="ws://evil.example.org/ws/base/"
+            ).count(),
+            0,
+        )

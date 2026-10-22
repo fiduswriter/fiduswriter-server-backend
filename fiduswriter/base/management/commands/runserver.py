@@ -138,6 +138,18 @@ class Command(RunserverCommand):
                 "(default: no timeout)"
             ),
         )
+        parser.add_argument(
+            "--workers_kill_timeout",
+            action="store",
+            dest="workers_kill_timeout",
+            type=int,
+            default=30,
+            help=(
+                "Seconds to wait for a worker to stop before killing it "
+                "(default: 30; the graceful stop can wedge when several "
+                "websocket connections disconnect at once)"
+            ),
+        )
 
     def get_version(self):
         return get_version()
@@ -147,6 +159,7 @@ class Command(RunserverCommand):
             "addrport" in options and options["addrport"] is not None
         )
         self.http_timeout = options.get("http_timeout", None)
+        self.workers_kill_timeout = options.get("workers_kill_timeout", 30)
         # Check Channels is installed right
         if not hasattr(settings, "ASGI_APPLICATION"):
             raise CommandError(
@@ -200,6 +213,11 @@ class Command(RunserverCommand):
                 "--http1-header-read-timeout",
                 str(self.http_timeout * 1000),
             ]
+
+        if self.workers_kill_timeout:
+            # Bound the graceful stop: the websocket teardown can wedge
+            # when many connections disconnect at once.
+            cmd += ["--workers-kill-timeout", str(self.workers_kill_timeout)]
 
         # Serve media files via Granian's built-in static file server.
         # Django's settings are fully loaded by this point (we're inside

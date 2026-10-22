@@ -40,6 +40,18 @@ async def lifespan_handler(scope, receive, send):
 
             await sync_to_async(WebsocketConsumer.save_all_docs)()
 
+            # The native websockets route keeps its sessions in Rust: flush
+            # them like the Python consumer does. A no-op when the module
+            # is absent (stock Granian, or no native module installed).
+            try:
+                from granian import _granian as native_ws
+
+                native_flush = getattr(native_ws, "flush", None)
+            except ImportError:
+                native_flush = None
+            if native_flush is not None:
+                await sync_to_async(native_flush)()
+
             from base.consumers import remove_all_presences
 
             await sync_to_async(remove_all_presences)()

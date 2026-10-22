@@ -159,6 +159,7 @@ class UserInvite(models.Model):
         user_ct = ContentType.objects.get_for_model(User)
 
         rights_to_transfer = []
+        changed_document_ids = set()
         invite_id = self.id
         should_add_contact = False
 
@@ -167,6 +168,7 @@ class UserInvite(models.Model):
         # FK constraint issues during transaction commit in test scenarios
         # Evaluate QuerySet upfront to avoid issues with lazy evaluation during modification
         for right in list(self.document_rights.all()):
+            changed_document_ids.add(right.document_id)
             # Check if the user already has access rights for this document
             # using explicit ContentType filter to avoid GenericRelation issues
             old_ar = AccessRight.objects.filter(
@@ -230,6 +232,12 @@ class UserInvite(models.Model):
 
         self._apply = True
         self.delete()
+
+        if changed_document_ids:
+            from document.views import notify_access_change
+
+            for document_id in changed_document_ids:
+                notify_access_change(document_id)
 
     def __str__(self):
         return f"{self.to or self.username} by {self.by}"

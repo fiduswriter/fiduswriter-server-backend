@@ -97,3 +97,6 @@ screenshots/
 # Generated from debian/changelog.in by build-deb.sh
 debian/changelog
 node_modules/
+
+# Rust native websockets crate
+native/target/

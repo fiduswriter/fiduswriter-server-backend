@@ -562,6 +562,23 @@ def delete_contacts(request):
     former_contacts = request.JSON["contacts"]
     for former_contact in former_contacts:
         if former_contact["type"] == "user":
+            from django.contrib.contenttypes.models import ContentType
+
+            user_ct = ContentType.objects.get(app_label="user", model="user")
+            # The documents whose access rights are about to change.
+            affected_document_ids = set(
+                AccessRight.objects.filter(
+                    holder_type=user_ct,
+                    holder_id=former_contact["id"],
+                    document__owner=request.user,
+                ).values_list("document_id", flat=True)
+            ) | set(
+                AccessRight.objects.filter(
+                    holder_type=user_ct,
+                    holder_id=request.user.id,
+                    document__owner_id=former_contact["id"],
+                ).values_list("document_id", flat=True)
+            )
             # Revoke all permissions given to this user
             AccessRight.objects.filter(
                 user__id=former_contact["id"], document__owner=request.user
@@ -583,6 +600,10 @@ def delete_contacts(request):
             request.user.contacts.remove(
                 request.user.contacts.filter(id=former_contact["id"]).first()
             )
+            from document.views import notify_access_change
+
+            for document_id in affected_document_ids:
+                notify_access_change(document_id)
         elif former_contact["type"] == "userinvite":
             # Delete the userinvite. All connected access rights will be
             # deleted automatically.

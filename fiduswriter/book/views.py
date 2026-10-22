@@ -219,6 +219,7 @@ def list(request):
 
 def set_chapters(book, chapters, user):
     changed = False
+    changed_document_ids = set()
     current_chapters = book.chapter_set.all().order_by("number")
     if len(current_chapters) != len(chapters):
         changed = True
@@ -261,6 +262,7 @@ def set_chapters(book, chapters, user):
                         holder_type=bar.holder_type,
                         rights="read",
                     )
+                    changed_document_ids.add(new_chapter.text.id)
             if (
                 user != book.owner
                 and len(
@@ -273,7 +275,13 @@ def set_chapters(book, chapters, user):
                     user_id=book.owner.id,
                     rights="read",
                 )
+                changed_document_ids.add(new_chapter.text.id)
         book.save(force_update=True)
+    if changed_document_ids:
+        from document.views import notify_access_change
+
+        for document_id in changed_document_ids:
+            notify_access_change(document_id)
     return
 
 
@@ -556,6 +564,7 @@ def save_access_rights(request):
                             False,
                         )
                 access_right.save()
+                changed_document_ids = set()
                 for text in book.chapters.all():
                     # If one shares a book with another user and that user
                     # has no access rights on the chapters that belong to
@@ -574,5 +583,11 @@ def save_access_rights(request):
                             holder_type=access_right.holder_type,
                             rights="read",
                         )
+                        changed_document_ids.add(text.id)
+                if changed_document_ids:
+                    from document.views import notify_access_change
+
+                    for document_id in changed_document_ids:
+                        notify_access_change(document_id)
     status = 201
     return JsonResponse(response, status=status)
