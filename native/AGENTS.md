@@ -1,10 +1,9 @@
 # AGENTS.md — fiduswriter-native
 
 Native Rust websockets route for the Fidus Writer collaboration protocol,
-served by the maintainer's Granian fork through its "native routes" feature.
-Replaces the Django Channels path (`/ws/document/<id>/`) on deployments that
-run Granian; a no-op everywhere else. See `HANDOFF.md` in this directory for
-the full picture (design, benchmarks, traps).
+served by Granian's native routes. Replaces the Django Channels path
+(`/ws/document/<id>/`) on deployments that run Granian; a no-op everywhere
+else.
 
 ## Layout
 
@@ -60,10 +59,12 @@ python bench/differential.py   # same load through both backends, DB state compa
 Installing the module into the benchmark venv:
 `python install.py target/release/libfiduswriter_native.so`.
 
-## Environment and traps (short list — HANDOFF §7 has the full one)
+## Environment and traps
 
 - The bench environments live in `/tmp/kilo` (gone after a reboot; recreate
-  per HANDOFF §7.1).
+  with `bench/install-pypy.sh` for PyPy and by installing
+  `fiduswriter-server-backend/fiduswriter/requirements.txt` plus
+  `pip install --no-build-isolation /path/to/granian` for CPython).
 - Granian sets `SO_REUSEPORT`: stale benchmark servers keep load-balancing
   the port. `bench/run.sh` kills them before/after a run; never mix a
   `pkill -f <pattern>` with a server start in one shell command (the pattern
@@ -74,8 +75,54 @@ Installing the module into the benchmark venv:
   the sessions load the document from the database, and a stale version
   breaks the load generator's catch-up.
 - The load generator and the h2 probes must wait for the `connections`
-  bootstrap frame and echo the server counter from *every* received frame.
+  bootstrap frame and echo the server counter from *every* received frame;
+  an h2 handshake read must keep `DataReceived` events (the first websocket
+  frames arrive with the response headers).
 - Django session rows are `signing.dumps` payloads (HMAC, optional zlib), not
   base64 pickles.
 - Stock Granian modules for the "python" arm: `/tmp/kilo/granian-{cpython,pypy}.so`
   (rebuild after pulling the fork).
+- Unthrottled `wsload` with several clients is a worst-case robustness test,
+  not a throughput test: sibling diffs collide by design, both arms livelock,
+  and clients recover only via `refetch_doc` (wsload reconnects). Use
+  `RATE=10` (human-shaped) for any multi-client numbers.
+- **Saves are coalesced on purpose** (one pending per session): at high
+  throughput the fsync-bound SQLite queue grew without bound, throttled the
+  collaboration, and could leave an older snapshot as the last writer. Do
+  not remove the `save_pending` flag.
+- The shutdown flush (`granian._granian.flush()`, called from the lifespan
+  handler in `base/routing.py`) waits for in-flight saves before writing, so
+  it must be the last writer.
+- Worker RSS of ~1 GB after short bursts on a 24-core box is glibc malloc
+  arenas across the tokio threads, most likely; revisit with an allocator or
+  `MALLOC_ARENA_MAX` before shipping.
+- PyPy is 2.4–2.6× slower than CPython for this workload (no orjson, no Rust
+  ProseMirror engine); the native route removes the question entirely.
+
+## Benchmarks (24-core shared box, load avg 2–8, medians)
+
+| arm | clients | frames/s | p50 | p99 |
+|---|---|---|---|---|
+| native | 1 | 27 000–52 000 | 15–28 µs | 66–500 µs |
+| python (Channels) | 1 | 1 200–2 200 | ~180 µs | 10–19 ms |
+| native vs python | 5, 10 diffs/s/client | 105 vs 3 confirmed under load | | |
+
+Single client is ~15–25× native. At 500 idle connections the python arm
+spends ~100 ms CPU per accepted connection (~20 cores just to accept), the
+native one ~7 ms. The periodic save dominates the Python consumer (5.4×
+throughput when disabled); the coalesced Rust save is free on the hot path.
+Python's p99 is the save: it runs before `confirm_diff`, so every 30th
+keystroke waits for it.
+
+## Known gaps
+
+- E2EE documents stay on the Python consumer (`E2EE_MODE != "disabled"`
+  disables the whole route).
+- Image updates (`iu`) are not persisted (usermedia stays with Django).
+- Participant avatars are sent as empty strings (usermedia lookup).
+- Port pinning / `redirect` (multi-entry `PORTS`) is not implemented.
+- The Postgres/MySQL store arms compile but are only exercised against
+  SQLite.
+- The Python consumer's teardown can deadlock under many simultaneous
+  websocket disconnects (pre-existing); bounded by
+  `--workers-kill-timeout` (wired into the `runserver` command, default 30s).
