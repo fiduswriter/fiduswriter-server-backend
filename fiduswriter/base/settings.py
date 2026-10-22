@@ -276,7 +276,7 @@ MIDDLEWARE = []
 
 # Static file serving. In development the middleware serves static files
 # from the app directories and picks up changes without a restart. In
-# production the ASGI server (Granian) serves /static directly from
+# production the ASGI server (Aethonan) serves /static directly from
 # STATIC_ROOT, so the middleware does not have to look anything up;
 # configuration-default.py switches these off for production installations.
 SERVESTATIC_USE_FINDERS = True

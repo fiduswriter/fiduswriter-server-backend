@@ -9,7 +9,7 @@
 //!
 //! When the payload says the deployment cannot be served natively (E2EE
 //! enabled, a session engine that is not database backed, an Oracle
-//! database, ...), the route is simply not registered and Granian keeps
+//! database, ...), the route is simply not registered and Aethonan keeps
 //! serving `/ws/document/<id>/` through the Django Channels consumer.
 
 use std::collections::HashMap;

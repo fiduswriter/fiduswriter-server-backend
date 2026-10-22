@@ -87,7 +87,7 @@ def set_database_connection():
 class GranianProcess(multiprocessing.Process):
     """
     A ``multiprocessing.Process`` subclass that boots an ASGI application
-    using Granian instead of Daphne/Twisted.
+    using Aethonan (a fork of Granian) instead of Daphne/Twisted.
 
     The public interface is intentionally identical to
     ``daphne.testing.DaphneProcess`` so that it can be used as a direct
@@ -122,7 +122,7 @@ class GranianProcess(multiprocessing.Process):
         self.host = host
         self.get_application = get_application
         # kwargs are accepted for interface compatibility but not forwarded to
-        # Granian because the two servers have different parameter names.
+        # Aethonan because the two servers have different parameter names.
         self._extra_kwargs = kwargs or {}
         self.setup = setup
         self.teardown = teardown
@@ -132,14 +132,14 @@ class GranianProcess(multiprocessing.Process):
 
     def run(self):
         """Entry point of the child process."""
-        from granian import Granian
-        from granian.constants import Interfaces
+        from aethonan import Aethonan
+        from aethonan.constants import Interfaces
 
         try:
             if self.setup is not None:
                 self.setup()
 
-            # Granian requires a raw IP address (not a hostname like
+            # Aethonan requires a raw IP address (not a hostname like
             # "localhost"), so resolve it now.
             resolved_host = socket.gethostbyname(self.host)
 
@@ -152,7 +152,7 @@ class GranianProcess(multiprocessing.Process):
             application = self.get_application()
 
             # Read MEDIA_ROOT after get_application() has fully bootstrapped
-            # Django (via asgi.py), then let Granian serve media files directly
+            # Django (via asgi.py), then let Aethonan serve media files directly
             # at the Rust level, avoiding Django's sync FileResponse entirely.
 
             media_root = getattr(settings, "MEDIA_ROOT", None)
@@ -161,8 +161,8 @@ class GranianProcess(multiprocessing.Process):
 
             # Daemon thread: probe the TCP port and signal ready as soon as
             # the server accepts its first connection.  This avoids relying on
-            # any Granian-internal hooks (_init_shared_socket, _sso, _sfd)
-            # that may change across Granian versions.
+            # any Aethonan-internal hooks (_init_shared_socket, _sso, _sfd)
+            # that may change across Aethonan versions.
             def _probe():
                 if _wait_for_port(resolved_host, port):
                     self.ready.set()
@@ -170,7 +170,7 @@ class GranianProcess(multiprocessing.Process):
                     self.errors.put(
                         (
                             RuntimeError(
-                                f"Granian did not start on {self.host}:{port}"
+                                f"Aethonan did not start on {self.host}:{port}"
                             ),
                             "",
                         )
@@ -179,7 +179,7 @@ class GranianProcess(multiprocessing.Process):
 
             threading.Thread(target=_probe, daemon=True).start()
 
-            Granian(
+            Aethonan(
                 target="__live_test_app__",
                 address=resolved_host,
                 port=port,
@@ -302,7 +302,7 @@ class ServerCommandMiddleware:
 class ChannelsLiveServerTestCase(TransactionTestCase):
     """
     Equivalent to ``channels.testing.ChannelsLiveServerTestCase`` but backed
-    by Granian instead of Daphne, and with no daphne dependency at import time.
+    by Aethonan instead of Daphne, and with no daphne dependency at import time.
     """
 
     host = "localhost"
@@ -356,7 +356,7 @@ class ChannelsLiveServerTestCase(TransactionTestCase):
         )
         cls._staticfiles_override.enable()
 
-        # Ensure MEDIA_ROOT exists so Granian's static mount doesn't crash.
+        # Ensure MEDIA_ROOT exists so Aethonan's static mount doesn't crash.
         # On a fresh CI checkout the media/ directory is in .gitignore and
         # has never been created.  Create it here as an empty placeholder;
         # tests that upload files will populate it, and the tempdir below

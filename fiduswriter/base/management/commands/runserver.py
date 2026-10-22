@@ -1,6 +1,6 @@
 # Origin: https://github.com/django/daphne/blob/2b13b74ce266fedf1cad9122314a2a3579cee576/daphne/management/commands/runserver.py
 # With Fidus Writer specific adjustments.
-# Daphne replaced with Granian (Rust-based ASGI server).
+# Daphne replaced with Aethonan (a fork of Granian, the Rust-based ASGI server).
 
 import datetime
 import logging
@@ -134,7 +134,7 @@ class Command(RunserverCommand):
             type=int,
             default=None,
             help=(
-                "Specify the granian read_timeout interval in seconds "
+                "Specify the aethonan read_timeout interval in seconds "
                 "(default: no timeout)"
             ),
         )
@@ -170,7 +170,7 @@ class Command(RunserverCommand):
 
     def _build_granian_env(self):
         """
-        Build the subprocess environment for Granian.
+        Build the subprocess environment for Aethonan.
 
         Ensures the directory containing the 'fiduswriter' package is on
         PYTHONPATH so that 'fiduswriter.asgi:application' is always importable,
@@ -186,11 +186,11 @@ class Command(RunserverCommand):
         return env
 
     def _build_granian_cmd(self, port, options):
-        """Return the Granian CLI invocation for a single port."""
+        """Return the Aethonan CLI invocation for a single port."""
         cmd = [
             sys.executable,
             "-m",
-            "granian",
+            "aethonan",
             "--interface",
             "asgi",
             "--host",
@@ -208,7 +208,7 @@ class Command(RunserverCommand):
             cmd += ["--url-path-prefix", root_path]
 
         if self.http_timeout:
-            # Granian expects the header read timeout in milliseconds.
+            # Aethonan expects the header read timeout in milliseconds.
             cmd += [
                 "--http1-header-read-timeout",
                 str(self.http_timeout * 1000),
@@ -219,7 +219,7 @@ class Command(RunserverCommand):
             # when many connections disconnect at once.
             cmd += ["--workers-kill-timeout", str(self.workers_kill_timeout)]
 
-        # Serve media files via Granian's built-in static file server.
+        # Serve media files via Aethonan's built-in static file server.
         # Django's settings are fully loaded by this point (we're inside
         # inner_run which runs after Django is configured).
         media_root = getattr(settings, "MEDIA_ROOT", None)
@@ -297,7 +297,7 @@ class Command(RunserverCommand):
                 )
 
         # Kill any stale processes still holding the target ports from a
-        # previous run (common during auto-reload when old Granian workers
+        # previous run (common during auto-reload when old Aethonan workers
         # haven't released their sockets yet).
         _free_ports(ports)
 
@@ -362,7 +362,7 @@ class Command(RunserverCommand):
             )
             observer.start()
 
-        # Launch one Granian subprocess per port
+        # Launch one Aethonan subprocess per port
         granian_env = self._build_granian_env()
         processes = []
         for port in ports:
@@ -377,7 +377,7 @@ class Command(RunserverCommand):
                     ret = proc.poll()
                     if ret is not None:
                         logger.error(
-                            "Granian worker on port %s exited with code %s",
+                            "Aethonan worker on port %s exited with code %s",
                             ports[processes.index(proc)],
                             ret,
                         )

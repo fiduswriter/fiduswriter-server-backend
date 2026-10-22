@@ -44,6 +44,43 @@ dependencies = [
 ]
 
 [[package]]
+name = "aethonan"
+version = "2.8.5"
+source = "git+https://github.com/fiduswriter/granian?branch=aethonan#4cbd9a8e567522f43d815db0efafd9ce33e2816b"
+dependencies = [
+ "anyhow",
+ "bytes",
+ "ciborium",
+ "crossbeam-channel",
+ "encoding_rs",
+ "futures",
+ "futures-util",
+ "http-body-util",
+ "hyper",
+ "hyper-util",
+ "interprocess",
+ "itertools",
+ "log",
+ "mime_guess",
+ "pem",
+ "percent-encoding",
+ "pin-project-lite",
+ "pkcs8 0.11.0",
+ "pyo3",
+ "pyo3-build-config",
+ "pyo3-log",
+ "rustls-pemfile",
+ "serde",
+ "socket2",
+ "sysinfo",
+ "tls-listener",
+ "tokio",
+ "tokio-stream",
+ "tokio-tungstenite",
+ "tokio-util",
+]
+
+[[package]]
 name = "allocator-api2"
 version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -621,10 +658,10 @@ dependencies = [
 name = "fiduswriter-native"
 version = "0.1.0"
 dependencies = [
+ "aethonan",
  "base64",
  "clap",
  "futures",
- "granian",
  "hmac 0.12.1",
  "http-body-util",
  "hyper",
@@ -826,43 +863,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2eecf2d5dc9b66b732b97707a0210906b1d30523eb773193ab777c0c84b3e8d5"
 dependencies = [
  "polyval",
-]
-
-[[package]]
-name = "granian"
-version = "2.8.5"
-source = "git+https://github.com/fiduswriter/granian?branch=combined-patches#8fb919f0a50457dce20d36bc7880d1d29bfdf75a"
-dependencies = [
- "anyhow",
- "bytes",
- "ciborium",
- "crossbeam-channel",
- "encoding_rs",
- "futures",
- "futures-util",
- "http-body-util",
- "hyper",
- "hyper-util",
- "interprocess",
- "itertools",
- "log",
- "mime_guess",
- "pem",
- "percent-encoding",
- "pin-project-lite",
- "pkcs8 0.11.0",
- "pyo3",
- "pyo3-build-config",
- "pyo3-log",
- "rustls-pemfile",
- "serde",
- "socket2",
- "sysinfo",
- "tls-listener",
- "tokio",
- "tokio-stream",
- "tokio-tungstenite",
- "tokio-util",
 ]
 
 [[package]]

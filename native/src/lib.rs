@@ -1,29 +1,30 @@
 //! Native websockets route for the Fidus Writer collaboration protocol.
 //!
-//! The crate embeds [Granian](https://github.com/emmett-framework/granian) as
+//! The crate embeds [Aethonan](https://github.com/fiduswriter/granian) — a
+//! fork of [Granian](https://github.com/emmett-framework/granian) — as
 //! a library and registers a native route serving the document websockets
 //! path. The requests matching the route are handled entirely in Rust: the
 //! message protocol, the authentication, the access rights, the ProseMirror
 //! step engine and the fan-out to the participants never reach the Python
 //! interpreter.
 //!
-//! The Python side is entirely stock Granian: this crate provides the
-//! `granian._granian` extension module, which replaces the one shipped with
-//! the Granian package.
+//! The Python side is entirely stock Aethonan: this crate provides the
+//! `aethonan._aethonan` extension module, which replaces the one shipped
+//! with the Aethonan package.
 //!
 //! The route is registered by the `configure(json)` call, which the Django
 //! application (`fiduswriter/asgi.py`) makes once after `django.setup()`.
 //! Deployments that cannot be served natively (E2EE enabled, a session
 //! engine that is not database backed, an Oracle database) simply never
-//! register the route, and Granian keeps serving the path through the
-//! Django Channels consumer — an advantage where Granian is used, a no-op
+//! register the route, and Aethonan keeps serving the path through the
+//! Django Channels consumer — an advantage where Aethonan is used, a no-op
 //! everywhere else.
 
 use std::sync::OnceLock;
 
 use futures::future::BoxFuture;
 use http_body_util::BodyExt;
-use granian::{HTTPRequest, HTTPResponse, NativeContext, NativeRouteKind};
+use aethonan::{HTTPRequest, HTTPResponse, NativeContext, NativeRouteKind};
 use pyo3::prelude::*;
 
 mod auth;
@@ -44,7 +45,7 @@ pub fn runtime() -> Option<&'static tokio::runtime::Runtime> {
     RUNTIME.get()
 }
 
-/// A minimal stderr logger: Granian routes its own logs to Python, but the
+/// A minimal stderr logger: Aethonan routes its own logs to Python, but the
 /// native route's `log` crate output would otherwise be silently dropped.
 struct StderrLogger;
 
@@ -64,10 +65,10 @@ impl log::Log for StderrLogger {
 pub const WS_ROUTE: &str = "/ws/document";
 
 #[pyo3::pymodule(gil_used = false)]
-fn _granian(py: Python, module: &Bound<PyModule>) -> PyResult<()> {
-    // Initialise the Granian module: this provides the workers, the callback
+fn _aethonan(py: Python, module: &Bound<PyModule>) -> PyResult<()> {
+    // Initialise the Aethonan module: this provides the workers, the callback
     // scheduler and everything else the Python side expects to find.
-    granian::init_py_module(py, module)?;
+    aethonan::init_py_module(py, module)?;
 
     // The native route is registered by `configure(json)`, once the Django
     // application has decided that this deployment can be served natively.
@@ -229,7 +230,7 @@ fn setup(parsed: config::Config) -> bool {
 
     // Register the native route: from here on, the document websockets are
     // served by the Rust side, without ever reaching the Python application.
-    granian::register_native_route(WS_ROUTE, NativeRouteKind::Websocket, ws_handler);
+    aethonan::register_native_route(WS_ROUTE, NativeRouteKind::Websocket, ws_handler);
     log::info!("The native websockets route serves {WS_ROUTE}/");
     true
 }
@@ -244,8 +245,8 @@ fn ws_handler(req: HTTPRequest, ctx: NativeContext) -> BoxFuture<'static, HTTPRe
     Box::pin(async move {
         let mut req = req;
         // HTTP/1.1 upgrades and HTTP/2 extended CONNECT (RFC 8441) are both
-        // recognised by Granian.
-        if !granian::ws::is_upgrade_request(&req) {
+        // recognised by Aethonan.
+        if !aethonan::ws::is_upgrade_request(&req) {
             return response_400();
         }
 
@@ -264,7 +265,7 @@ fn ws_handler(req: HTTPRequest, ctx: NativeContext) -> BoxFuture<'static, HTTPRe
             .map(str::to_string);
         let query = req.uri().query().unwrap_or_default().to_string();
 
-        match granian::ws::upgrade_intent(&mut req, None) {
+        match aethonan::ws::upgrade_intent(&mut req, None) {
             Ok((builder, ws)) => {
                 ctx.rt.spawn(async move {
                     match ws.await {
@@ -277,7 +278,7 @@ fn ws_handler(req: HTTPRequest, ctx: NativeContext) -> BoxFuture<'static, HTTPRe
                     }
                 });
 
-                builder.body(granian::http::empty_body()).unwrap()
+                builder.body(aethonan::http::empty_body()).unwrap()
             }
             Err(err) => {
                 log::info!("Native websockets handshake failed with {err:?}");
@@ -342,7 +343,7 @@ fn document_id_from_path(path: &str) -> i64 {
 fn response_400() -> HTTPResponse {
     let mut builder = hyper::Response::builder().status(400);
     let headers = builder.headers_mut().unwrap();
-    headers.insert(hyper::header::SERVER, hyper::header::HeaderValue::from_static("granian"));
+    headers.insert(hyper::header::SERVER, hyper::header::HeaderValue::from_static("aethonan"));
     builder
         .body(
             http_body_util::Full::new("Bad request".into())

@@ -9,7 +9,7 @@
 use std::sync::{Arc, Mutex};
 
 use futures::{SinkExt, StreamExt};
-use granian::ws::WSStream;
+use aethonan::ws::WSStream;
 use serde_json::{Value, json};
 use tokio::sync::mpsc;
 use tokio_tungstenite::tungstenite::Message;

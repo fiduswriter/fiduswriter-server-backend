@@ -12,7 +12,7 @@
 
 ### Backend
 - **Framework**: Django 6.0.4
-- **ASGI Server**: Granian 2.7+
+- **ASGI Server**: Aethonan 2.7+ (the Fidus Writer fork of Granian)
 - **WebSockets**: Django Channels 4.3.2
 - **Python Version**: Python 3.x
 - **Database**: SQLite (default), with support for PostgreSQL and MySQL
@@ -62,6 +62,21 @@ Two rules apply when working with the Rust engine:
 - The document attributes are serialized differently: the Python engine writes
   all document level attributes, the Rust engine omits the ones with their
   default value. The content tree is the contract.
+
+### The native websockets route
+
+`native/` holds the Rust crate that serves `/ws/document/<id>/` directly
+through Aethonan's native routes (replacing the Django Channels consumer) when
+the aethonan fork is installed. It is optional: with stock Aethonan the guarded
+`configure(json)` call in `fiduswriter/asgi.py` is a no-op and the Python
+consumer keeps serving the path. See `native/AGENTS.md` for the crate's
+rules, benchmarks and traps. CI covers both paths: the regular matrix runs
+the Python consumer, and the `test-native-ws` job (in the fiduswriter repo's
+`.github/workflows/main.yml`) builds the crate and runs the
+collaboration-critical suites through the native route, with
+`FIDUSWRITER_REQUIRE_NATIVE_WS=1` hard-failing the job if the route fails to
+activate. E2EE suites keep running against stock Aethonan, as the native
+route refuses encrypted documents.
 
 ## Project Structure
 

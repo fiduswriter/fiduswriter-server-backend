@@ -161,7 +161,7 @@ class WebsocketConsumer(BaseWebsocketConsumer):
             return False
         server = self.scope.get("server")
         if not server or len(server) < 2:
-            # Granian (and some other ASGI servers) may not populate
+            # Aethonan/Granian (and some other ASGI servers) may not populate
             # scope["server"] for WebSocket connections. Without a known
             # actual port we cannot verify routing, so assume correct.
             return False

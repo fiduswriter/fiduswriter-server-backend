@@ -191,7 +191,7 @@ class MemoryLeakTest(EditorHelper, ChannelsLiveServerTestCase):
         # Measure current process
         main_process = self.process.memory_info().rss
 
-        # Also measure child processes (Granian server processes),
+        # Also measure child processes (Aethonan server processes),
         # but skip browser and browser-driver processes.
         child_processes = 0
         for child in self.process.children(recursive=True):

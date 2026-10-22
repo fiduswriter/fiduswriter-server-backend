@@ -3,7 +3,7 @@
 #
 # Usage: bench/run.sh <arm> [clients] [duration]
 #
-#   arm: python   the Django Channels consumer (the stock Granian)
+#   arm: python   the Django Channels consumer (the stock Aethonan)
 #        native   the native Rust websockets route
 #
 # The script starts the server, runs the load generator and prints the
@@ -60,32 +60,32 @@ Document.objects.filter(pk=int(os.environ["DOCUMENT_ID"])).update(
 if [ "$ARM" = "native" ]; then
     (cd "$ROOT" && "$VENV/bin/python" install.py target/release/libfiduswriter_native.so > /dev/null)
 else
-    # The stock Granian module: the websockets are served by Django.
-    STOCK=/tmp/kilo/granian-cpython.so
+    # The stock Aethonan module: the websockets are served by Django.
+    STOCK=/tmp/kilo/aethonan-cpython.so
     case "$VENV" in
-        *pypy*) STOCK=/tmp/kilo/granian-pypy.so ;;
+        *pypy*) STOCK=/tmp/kilo/aethonan-pypy.so ;;
     esac
-    for target in "$VENV"/lib/python*/site-packages/granian/_granian*.so; do
+    for target in "$VENV"/lib/python*/site-packages/aethonan/_aethonan*.so; do
         [ -f "$target" ] || continue
         cp "$STOCK" "$target"
     done
 fi
 
 # The server. Stale benchmark servers would keep listening on the port
-# (Granian sets SO_REUSEPORT) and the connections would be load balanced
+# (Aethonan sets SO_REUSEPORT) and the connections would be load balanced
 # between them: kill them first.
-pkill -f "$VENV/bin/python -m granian" 2>/dev/null
+pkill -f "$VENV/bin/python -m aethonan" 2>/dev/null
 sleep 0.5
 cd "$APP"
 PATH="$VENV/bin:$PATH" \
 PYTHONPATH="$(dirname "$APP")" \
 PROJECT_PATH="$APP" \
 FIDUSWRITER_SCHEMA_PATH="$APP/static-libs/json/schema.json" \
-"$VENV/bin/python" -m granian --interface asgi --host 127.0.0.1 --port "$PORT" \
+"$VENV/bin/python" -m aethonan --interface asgi --host 127.0.0.1 --port "$PORT" \
     --workers-kill-timeout 10 \
     fiduswriter.asgi:application > /tmp/kilo/bench-server.log 2>&1 &
 SERVER_PID=$!
-trap 'kill $SERVER_PID 2>/dev/null; pkill -f "$VENV/bin/python -m granian" 2>/dev/null' EXIT
+trap 'kill $SERVER_PID 2>/dev/null; pkill -f "$VENV/bin/python -m aethonan" 2>/dev/null' EXIT
 
 # Wait for the server
 for _ in $(seq 1 40); do
@@ -135,6 +135,6 @@ for _ in $(seq 1 20); do
     fi
     sleep 0.5
 done
-pkill -9 -f "$VENV/bin/python -m granian" 2>/dev/null
+pkill -9 -f "$VENV/bin/python -m aethonan" 2>/dev/null
 wait $SERVER_PID 2>/dev/null
 exit 0

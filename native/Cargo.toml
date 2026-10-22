@@ -3,7 +3,7 @@ name = "fiduswriter-native"
 version = "0.1.0"
 edition = "2024"
 publish = false
-description = "Native websockets route for the Fidus Writer collaboration protocol, served by Granian"
+description = "Native websockets route for the Fidus Writer collaboration protocol, served by Aethonan (a fork of Granian)"
 license = "AGPL-3.0-or-later"
 
 [lib]
@@ -14,14 +14,15 @@ crate-type = ["cdylib"]
 name = "wsload"
 path = "src/bin/wsload.rs"
 
-# The granian and prosemirror dependencies are fetched from the fiduswriter
-# forks on GitHub (the committed state). For development against local
-# checkouts, run dev-scripts/switch-local-deps.sh local in the fiduswriter
-# repo (it rewrites this section to path dependencies); run it with "npm"
-# to switch back before committing.
+# The aethonan (fiduswriter's fork of granian, checked out in a directory
+# still named "granian") and prosemirror dependencies are fetched from the
+# fiduswriter forks on GitHub (the committed state, aethonan branch). For
+# development against local checkouts, run dev-scripts/switch-local-deps.sh
+# local in the fiduswriter repo (it rewrites this section to path
+# dependencies); run it with "npm" to switch back before committing.
 [dependencies]
 futures = "0.3"
-granian = { git = "https://github.com/fiduswriter/granian", branch = "combined-patches", package = "granian", default-features = false }
+aethonan = { git = "https://github.com/fiduswriter/granian", branch = "aethonan", package = "aethonan", default-features = false }
 http-body-util = "0.1"
 log = "0.4"
 hyper = { version = "1.12", features = ["http1", "http2", "server"] }
@@ -47,7 +48,7 @@ sqlx = { version = "0.8", default-features = false, features = [
     "json",
 ] }
 
-# A thin LTO keeps the link time of the extension module low, while Granian
+# A thin LTO keeps the link time of the extension module low, while Aethonan
 # itself is not recompiled (it is cached as a library dependency).
 [profile.release]
 lto = false

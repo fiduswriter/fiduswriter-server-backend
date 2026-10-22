@@ -246,3 +246,49 @@ class NotifyAccessChangeTest(TestCase):
             ).count(),
             0,
         )
+
+
+# ---------------------------------------------------------------------------
+# native websockets route activation
+# ---------------------------------------------------------------------------
+
+
+class NativeWebsocketsActivationTest(TestCase):
+    """Assert that the native websockets route actually configured itself.
+
+    Only active when FIDUSWRITER_REQUIRE_NATIVE_WS=1, which the native CI
+    job sets after installing the Rust module; everywhere else the test
+    skips. The check runs in a subprocess because importing
+    ``fiduswriter.asgi`` configures Django from scratch.
+    """
+
+    def test_native_websockets_route_activates(self):
+        import os
+        import subprocess
+        import sys
+
+        if os.environ.get("FIDUSWRITER_REQUIRE_NATIVE_WS") != "1":
+            self.skipTest("set FIDUSWRITER_REQUIRE_NATIVE_WS=1 to check")
+        src_path = os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        backend_root = os.path.dirname(src_path)
+        env = dict(os.environ)
+        env["PYTHONPATH"] = backend_root + os.pathsep + env.get(
+            "PYTHONPATH", ""
+        )
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                "import fiduswriter.asgi as app; "
+                "assert app.NATIVE_WS_ENABLED, "
+                "'the native websockets route did not configure'",
+            ],
+            cwd=src_path,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)

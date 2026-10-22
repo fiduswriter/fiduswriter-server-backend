@@ -20,8 +20,10 @@ REQUIREMENTS=/home/johannes/src/fiduswriter/fiduswriter-server-backend/fiduswrit
 "$PYPY" -m venv "$VENV"
 "$VENV/bin/pip" install -q --upgrade pip
 
-# Django 5.2 instead of 6.0, and autobahn without its dependencies.
-grep -v -e '^autobahn' -e '^prosemirror' "$REQUIREMENTS" \
+# Django 5.2 instead of 6.0, and autobahn without its dependencies. The
+# aethonan line is excluded too: it is installed from the local checkout
+# below (same as the other arms).
+grep -v -e '^autobahn' -e '^prosemirror' -e '^aethonan' "$REQUIREMENTS" \
     | sed 's/^Django==6.0.8/Django==5.2.7/' > /tmp/kilo/requirements-pypy311.txt
 "$VENV/bin/pip" install -q -r /tmp/kilo/requirements-pypy311.txt
 "$VENV/bin/pip" install -q --no-deps prosemirror==0.6.1
@@ -29,8 +31,8 @@ grep -v -e '^autobahn' -e '^prosemirror' "$REQUIREMENTS" \
 "$VENV/bin/pip" install -q cffi cryptography hyperlink txaio ujson msgpack
 "$VENV/bin/pip" install -q --no-deps autobahn==26.7.1
 
-# The same Granian as the other arms (the local build with the native route
-# support), built for PyPy.
+# The same Aethonan (the fiduswriter fork of granian) as the other arms,
+# built for PyPy from the local checkout (still named "granian").
 "$VENV/bin/pip" install -q maturin
 cd /home/johannes/src/granian
 PATH="$VENV/bin:$PATH" PYO3_PYTHON="$VENV/bin/python" \

@@ -200,7 +200,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 
 # Static file serving. In development the Django middleware serves static
 # files from the app directories, so changes are picked up without re-running
-# collectstatic. In production the ASGI server (Granian) serves /static
+# collectstatic. In production the ASGI server (Aethonan) serves /static
 # directly from STATIC_ROOT.
 SERVESTATIC_USE_FINDERS = DEBUG
 SERVESTATIC_AUTOREFRESH = DEBUG

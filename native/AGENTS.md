@@ -1,15 +1,16 @@
 # AGENTS.md — fiduswriter-native
 
 Native Rust websockets route for the Fidus Writer collaboration protocol,
-served by Granian's native routes. Replaces the Django Channels path
-(`/ws/document/<id>/`) on deployments that run Granian; a no-op everywhere
+served by Aethonan's native routes (Aethonan is the Fidus Writer fork of
+Granian). Replaces the Django Channels path
+(`/ws/document/<id>/`) on deployments that run Aethonan; a no-op everywhere
 else.
 
 ## Layout
 
 | Path | What |
 |---|---|
-| `src/lib.rs` | The `granian._granian` extension module: `configure(json)`, the runtime, the logger, the route handler |
+| `src/lib.rs` | The `aethonan._aethonan` extension module: `configure(json)`, the runtime, the logger, the route handler |
 | `src/config.rs` | The `configure(json)` payload (database, session, tables, intervals, relay, secrets) |
 | `src/connection.rs` | The websocket protocol: counters, subscribe, auth/rights wiring, diff/chat/fan-out |
 | `src/protocol.rs` | The per-connection `c`/`s` counters and the 10-entry resend ring buffer |
@@ -20,7 +21,7 @@ else.
 | `src/relay.rs` | The `/ws/base/` relay client and the periodic rights re-read |
 | `src/bin/wsload.rs` | The load generator |
 | `bench/` | run.sh, matrix.sh, final.sh, h2_probe.py, h2_full.py, differential.py, setup_document.py |
-| `install.py` | Installs the built `.so` over Granian's `_granian` (atomic rename) |
+| `install.py` | Installs the built `.so` over Aethonan's `_aethonan` (atomic rename) |
 
 ## Hard rules (invariants)
 
@@ -36,11 +37,11 @@ else.
   `base/base_consumer.py` + `document/consumers.py` (counters, ring buffer,
   message types). The frontend must not need changes; the Python consumer
   stays the reference implementation and stays covered by CI.
-- **Keep the rlib model**: Granian is an rlib dependency; a handler change
-  relinks the small crate (incremental ~1.65 s). Do not recompile Granian
+- **Keep the rlib model**: Aethonan is an rlib dependency; a handler change
+  relinks the small crate (incremental ~1.65 s). Do not recompile Aethonan
   for handler changes; do not introduce a dlopen plugin.
 - The committed dependencies are the git forks on GitHub
-  (`fiduswriter/granian` branch `combined-patches`,
+  (`fiduswriter/granian` branch `aethonan`,
   `fiduswriter/prosemirror-rs` branch `main`). For development against
   local checkouts, run `dev-scripts/switch-local-deps.sh local` in the
   fiduswriter repo (it rewrites `Cargo.toml` to path dependencies on the
@@ -64,12 +65,13 @@ Installing the module into the benchmark venv:
 - The bench environments live in `/tmp/kilo` (gone after a reboot; recreate
   with `bench/install-pypy.sh` for PyPy and by installing
   `fiduswriter-server-backend/fiduswriter/requirements.txt` plus
-  `pip install --no-build-isolation /path/to/granian` for CPython).
-- Granian sets `SO_REUSEPORT`: stale benchmark servers keep load-balancing
+  `pip install --no-build-isolation /path/to/aethonan` (the local checkout,
+  still named `granian`) for CPython).
+- Aethonan sets `SO_REUSEPORT`: stale benchmark servers keep load-balancing
   the port. `bench/run.sh` kills them before/after a run; never mix a
   `pkill -f <pattern>` with a server start in one shell command (the pattern
   matches the shell's own command line).
-- Never overwrite a loaded `_granian.so` in place (SIGBUS); `install.py`
+- Never overwrite a loaded `_aethonan.so` in place (SIGBUS); `install.py`
   renames atomically.
 - `bench/run.sh` resets the benchmark document to version 0 before each run:
   the sessions load the document from the database, and a stale version
@@ -80,7 +82,7 @@ Installing the module into the benchmark venv:
   frames arrive with the response headers).
 - Django session rows are `signing.dumps` payloads (HMAC, optional zlib), not
   base64 pickles.
-- Stock Granian modules for the "python" arm: `/tmp/kilo/granian-{cpython,pypy}.so`
+- Stock Aethonan modules for the "python" arm: `/tmp/kilo/aethonan-{cpython,pypy}.so`
   (rebuild after pulling the fork).
 - Unthrottled `wsload` with several clients is a worst-case robustness test,
   not a throughput test: sibling diffs collide by design, both arms livelock,
@@ -90,7 +92,7 @@ Installing the module into the benchmark venv:
   throughput the fsync-bound SQLite queue grew without bound, throttled the
   collaboration, and could leave an older snapshot as the last writer. Do
   not remove the `save_pending` flag.
-- The shutdown flush (`granian._granian.flush()`, called from the lifespan
+- The shutdown flush (`aethonan._aethonan.flush()`, called from the lifespan
   handler in `base/routing.py`) waits for in-flight saves before writing, so
   it must be the last writer.
 - Worker RSS of ~1 GB after short bursts on a 24-core box is glibc malloc
@@ -126,3 +128,16 @@ keystroke waits for it.
 - The Python consumer's teardown can deadlock under many simultaneous
   websocket disconnects (pre-existing); bounded by
   `--workers-kill-timeout` (wired into the `runserver` command, default 30s).
+
+## CI
+
+The `test-native-ws` job in `fiduswriter/.github/workflows/main.yml` builds
+this crate, installs the module over the aethonan fork, and runs the
+collaboration-critical Django suites through the native route (the live test
+server runs aethonan, so the browser websockets hit the Rust path). It sets
+`FIDUSWRITER_REQUIRE_NATIVE_WS=1`, which makes
+`base.tests.test_views_unit.NativeWebsocketsActivationTest` hard-fail the job
+if the route does not configure — a silent fallback to the Python consumer
+would otherwise pass unnoticed. E2EE suites then run with stock aethonan
+restored (the native route refuses encrypted documents). The regular test
+matrix keeps covering the Python consumer unchanged.

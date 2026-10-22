@@ -28,7 +28,7 @@ async def lifespan_handler(scope, receive, send):
     ASGI Lifespan handler for server startup/shutdown lifecycle events.
 
     On shutdown, saves all open documents and removes all Presence records
-    before confirming completion so that Granian waits until the flush is
+    before confirming completion so that Aethonan waits until the flush is
     done before terminating the process.
     """
     while True:
@@ -42,9 +42,9 @@ async def lifespan_handler(scope, receive, send):
 
             # The native websockets route keeps its sessions in Rust: flush
             # them like the Python consumer does. A no-op when the module
-            # is absent (stock Granian, or no native module installed).
+            # is absent (stock aethonan, or no native module installed).
             try:
-                from granian import _granian as native_ws
+                from aethonan import _aethonan as native_ws
 
                 native_flush = getattr(native_ws, "flush", None)
             except ImportError:

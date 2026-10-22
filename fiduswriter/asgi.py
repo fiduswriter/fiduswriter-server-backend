@@ -108,18 +108,22 @@ django.setup()
 
 def _configure_native_websockets():
     """Hand the configuration to the native websockets route, when the
-    Granian extension module provides one.
+    aethonan extension module provides one.
 
     The native route replaces the Django Channels consumer for
-    /ws/document/<id>/ on deployments that run Granian. It is strictly
-    optional: when the module is absent (stock Granian, or another ASGI
+    /ws/document/<id>/ on deployments that run Aethonan. It is strictly
+    optional: when the module is absent (stock aethonan, or another ASGI
     server entirely) this is a no-op, and when the deployment cannot be
     served natively (E2EE enabled, a session engine that is not database
     backed, an Oracle database) the route is not registered and the Python
     consumer keeps serving the path unchanged.
+
+    Sets ``NATIVE_WS_ENABLED`` so tests (and CI) can assert whether the
+    route actually configured itself.
     """
+    global NATIVE_WS_ENABLED
     try:
-        native_module = import_module("granian._granian")
+        native_module = import_module("aethonan._aethonan")
     except ImportError:
         return
     configure = getattr(native_module, "configure", None)
@@ -127,10 +131,13 @@ def _configure_native_websockets():
         return
     try:
         payload = _native_websockets_payload()
-        configure(jsonlib.dumps(payload))
+        NATIVE_WS_ENABLED = bool(configure(jsonlib.dumps(payload)))
     except Exception:
         # The native route must never break the application startup.
         logger.exception("Could not configure the native websockets route.")
+
+
+NATIVE_WS_ENABLED = False
 
 
 def _native_websockets_payload():
