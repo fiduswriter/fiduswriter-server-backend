@@ -978,8 +978,12 @@ class EditorTest(SeleniumHelper, ChannelsLiveServerTestCase):
         self.driver.find_element(
             By.CSS_SELECTOR, ".header-menu:nth-child(1) > .header-nav-item"
         ).click()
+        # Select by exact menu text: the "Create copy as ..." entry
+        # (order 3.5) shifted the positional selector away from
+        # "Create copy" (order 3).
         self.driver.find_element(
-            By.CSS_SELECTOR, "li:nth-child(4) > .fw-pulldown-item"
+            By.XPATH,
+            '//*[contains(@class, "fw-pulldown-item") and normalize-space()="Create copy"]',
         ).click()
         # Check whether user now has write access.
         # Creating a copy involves 2 HTTP round-trips (createDoc + saveDocument)

@@ -487,7 +487,7 @@ def save_access_rights(request):
                         rights=right["rights"],
                         path=path,
                     )
-                    if right["holder"]["id"] == "user":
+                    if right["holder"]["type"] == "user":
                         collaborator_name = holder.readable_name
                         collaborator_email = holder.email
                         emails.send_share_notification(
