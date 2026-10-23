@@ -107,7 +107,7 @@ async fn listen(connection: Ws) {
             Some("ping") => {
                 let _ = sink.send(Message::Text("{\"type\": \"pong\"}".into())).await;
             }
-            Some("system_message") => {
+            Some("relay_message") | Some("system_message") => {
                 let Some(payload) = frame.get("message") else {
                     continue;
                 };

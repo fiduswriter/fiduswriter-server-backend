@@ -136,6 +136,23 @@ class SystemMessageConsumer(BaseWebsocketConsumer):
                 return
             for client in SystemMessageConsumer.clients:
                 await client.send_message(message)
+        elif message["type"] == "relay_message":
+            # Server-internal traffic (e.g. access_changed): never
+            # user-facing, so it must not reach the browser connections
+            # that listen on /ws/base/ for notifications. Only relay
+            # clients (other servers' services, the native websockets
+            # service) receive it.
+            allowed = getattr(self, "is_broadcast_relay", False)
+            if not allowed:
+                logger.warning(
+                    f"Rejected relay_message fan-out from unauthorized "
+                    f"source. URL:{self.endpoint} User:{self.user.id} "
+                    f"ParticipantID:{self.id}"
+                )
+                return
+            for client in SystemMessageConsumer.clients:
+                if getattr(client, "is_broadcast_relay", False):
+                    await client.send_message(message)
 
 
 def remove_all_presences():

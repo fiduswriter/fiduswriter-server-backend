@@ -310,6 +310,28 @@ def send_to_server(server_url, message, origin_header):
         )
 
 
+def send_relay_to_server(server_url, message, origin_header):
+    """Like :func:`send_to_server`, but wraps the payload in a
+    ``relay_message`` envelope that the receiving server fans out only
+    to its relay clients (other servers' services, the native
+    websockets service) — never to browsers, which receive
+    ``system_message`` envelopes as user-facing notifications."""
+
+    with connect_ws(
+        server_url,
+        headers={
+            "Origin": origin_header,
+            "Authorization": f"Bearer {get_broadcast_secret()}",
+            "User-Agent": "Fidus Writer",
+        },
+    ) as websocket:
+        websocket.send_text(
+            json.dumps(
+                {"type": "relay_message", "message": message, "s": 1, "c": 1}
+            )
+        )
+
+
 def _safe_is_same_domain(host, pattern):
     from django.utils.http import is_same_domain
 

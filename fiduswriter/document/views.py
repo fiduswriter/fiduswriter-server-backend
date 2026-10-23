@@ -313,10 +313,11 @@ def notify_access_change(document_id):
     The notification reaches:
     * the local Python consumers, through the channel layer group;
     * the local native websockets service (and any other relay
-      connection authenticated as a Fidus Writer server), through the
-      system message relay clients of this process;
+      connection authenticated as a Fidus Writer server), through a
+      relay-only envelope the system message consumer never forwards
+      to browser connections;
     * the native services and consumers of the other servers, through
-      their stored broadcast URLs (`base.views.send_to_server`).
+      their stored broadcast URLs (`base.views.send_relay_to_server`).
     """
     payload = {"type": "access_changed", "document_id": document_id}
 
@@ -333,10 +334,12 @@ def notify_access_change(document_id):
 
         # The local relay clients: the native websockets service and the
         # other servers' relay connections attached to this process. They
-        # receive the usual system message envelope.
+        # receive a relay envelope, which is never fanned out to the
+        # browser /ws/base/ connections (those render system_message
+        # envelopes as user-facing notifications).
         from base.consumers import SystemMessageConsumer
 
-        envelope = {"type": "system_message", "message": payload}
+        envelope = {"type": "relay_message", "message": payload}
         for client in list(SystemMessageConsumer.clients):
             if not getattr(client, "is_broadcast_relay", False):
                 continue
@@ -351,7 +354,7 @@ def notify_access_change(document_id):
         # The other servers.
         from base.helpers.ws import broadcast_url_is_safe
         from base.models import Presence
-        from base.views import _relay_origin_header, send_to_server
+        from base.views import _relay_origin_header, send_relay_to_server
 
         def _server_urls():
             return set(
@@ -367,7 +370,7 @@ def notify_access_change(document_id):
                     Presence.objects.filter(server_url=server_url).delete
                 )()
                 continue
-            await sync_to_async(send_to_server)(
+            await sync_to_async(send_relay_to_server)(
                 server_url, payload, _relay_origin_header(server_url)
             )
 

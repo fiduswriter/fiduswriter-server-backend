@@ -197,13 +197,13 @@ class NotifyAccessChangeTest(TestCase):
         with patch(
             "base.consumers.SystemMessageConsumer.clients", [relay, browser]
         ):
-            with patch("base.views.send_to_server") as send_to_server:
+            with patch("base.views.send_relay_to_server") as send_to_server:
                 notify_access_change(42)
 
-        # The local relay clients receive the system message envelope.
+        # The local relay clients receive the relay-only envelope.
         relay.send_message.assert_awaited_once()
         envelope = relay.send_message.await_args.args[0]
-        self.assertEqual(envelope["type"], "system_message")
+        self.assertEqual(envelope["type"], "relay_message")
         self.assertEqual(
             envelope["message"],
             {"type": "access_changed", "document_id": 42},
