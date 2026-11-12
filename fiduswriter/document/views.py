@@ -358,7 +358,9 @@ def notify_access_change(document_id):
 
         def _server_urls():
             return set(
-                Presence.objects.values_list("server_url", flat=True).distinct()
+                Presence.objects.values_list(
+                    "server_url", flat=True
+                ).distinct()
             )
 
         for server_url in await sync_to_async(_server_urls)():

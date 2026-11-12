@@ -8,13 +8,11 @@ Usage (with a server running on 8099):
     python bench/h2_full.py
 """
 
-import asyncio
 import json
 import os
 import socket
 import struct
 import subprocess
-import sys
 
 from h2.config import H2Configuration
 from h2.connection import H2Connection
@@ -68,7 +66,9 @@ def bench_env():
 
 def client_frame(payload: bytes, opcode: int = OPCODE_TEXT) -> bytes:
     mask = os.urandom(4)
-    masked = bytes(byte ^ mask[index % 4] for index, byte in enumerate(payload))
+    masked = bytes(
+        byte ^ mask[index % 4] for index, byte in enumerate(payload)
+    )
     length = len(payload)
     header = bytes([0x80 | opcode])
     if length < 126:
@@ -106,7 +106,11 @@ class H2Ws:
     """One websocket connection inside an HTTP/2 stream."""
 
     def __init__(self, host, port, path, cookie):
-        self.host, self.port, self.path = host, port, self.path = host, port, path
+        self.host, self.port, self.path = host, port, self.path = (
+            host,
+            port,
+            path,
+        )
         self.cookie = cookie
         self.connection = H2Connection(
             config=H2Configuration(client_side=True, header_encoding=None)
@@ -160,15 +164,13 @@ class H2Ws:
             if self.incoming:
                 return self.incoming.pop(0)
             frames, self.buffer = server_frames(self.buffer)
-            self.incoming.extend(
-                json.loads(frame) for frame in frames
-            )
+            self.incoming.extend(json.loads(frame) for frame in frames)
             if self.incoming:
                 return self.incoming.pop(0)
             self.sock.settimeout(timeout)
             try:
                 data = self.sock.recv(65536)
-            except (TimeoutError, socket.timeout):
+            except TimeoutError:
                 return None
             if not data:
                 return None

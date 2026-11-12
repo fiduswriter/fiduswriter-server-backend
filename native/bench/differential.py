@@ -10,8 +10,6 @@ Usage:
     python bench/differential.py [clients] [duration]
 """
 
-import hashlib
-import json
 import os
 import subprocess
 import sys
@@ -23,7 +21,7 @@ APP = os.path.realpath(
 VENV = os.environ.get("VENV", "/tmp/kilo/bench-venv")
 VENV_PYTHON = os.path.join(VENV, "bin", "python")
 
-RESET_AND_SNAPSHOT = r'''
+RESET_AND_SNAPSHOT = r"""
 import hashlib
 import json
 import os
@@ -91,7 +89,7 @@ elif mode == "snapshot":
     print(f"STATE_DIGEST={digest}")
     print(f"STATE_PARITY={state['content_parity']}")
     print(f"STATE_DIFFS={len(state['normalized_diffs'])}")
-'''
+"""
 
 
 def run(mode):
@@ -135,7 +133,13 @@ def main():
         run("reset")
         print(f"=== arm: {arm} ===")
         subprocess.run(
-            ["bash", os.path.join(NATIVE, "bench", "run.sh"), arm, clients, duration],
+            [
+                "bash",
+                os.path.join(NATIVE, "bench", "run.sh"),
+                arm,
+                clients,
+                duration,
+            ],
             check=True,
         )
         outcomes[arm] = run("snapshot")
@@ -143,7 +147,9 @@ def main():
             print(f"{arm} {key}={value}")
 
     if outcomes["native"] == outcomes["python"]:
-        print("DIFFERENTIAL: OK — both backends produced the same database state.")
+        print(
+            "DIFFERENTIAL: OK — both backends produced the same database state."
+        )
     else:
         print("DIFFERENTIAL: MISMATCH")
         for key in outcomes["native"]:

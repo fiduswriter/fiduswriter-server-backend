@@ -8,7 +8,6 @@ Usage (with a server running on 8099):
     python bench/h2_probe.py /ws/document/3/ '{"type":"subscribe","c":1,"s":1,"connection":0,"v":0}'
 """
 
-import json
 import os
 import socket
 import struct
@@ -27,7 +26,7 @@ def bench_cookie() -> str:
         with open("/tmp/kilo/bench-env") as handle:
             for line in handle:
                 if line.startswith("COOKIE="):
-                    return line.strip()[len("COOKIE="):]
+                    return line.strip()[len("COOKIE=") :]
     except OSError:
         pass
     return ""
@@ -36,7 +35,9 @@ def bench_cookie() -> str:
 def client_frame(payload: bytes, opcode: int = OPCODE_TEXT) -> bytes:
     """A masked client frame (RFC 6455)."""
     mask = os.urandom(4)
-    masked = bytes(byte ^ mask[index % 4] for index, byte in enumerate(payload))
+    masked = bytes(
+        byte ^ mask[index % 4] for index, byte in enumerate(payload)
+    )
     length = len(payload)
     header = bytes([0x80 | opcode])
     if length < 126:
@@ -120,7 +121,9 @@ def main() -> None:
                 buffer += event.data
     print("handshake status:", status)
 
-    connection.send_data(stream_id, client_frame(payload.encode()), end_stream=False)
+    connection.send_data(
+        stream_id, client_frame(payload.encode()), end_stream=False
+    )
     sock.sendall(connection.data_to_send())
 
     sock.settimeout(5)

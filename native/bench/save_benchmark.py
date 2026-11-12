@@ -11,14 +11,13 @@ Usage:
     python bench/save_benchmark.py
 """
 
-import json
 import os
 import sys
-import time
+
 
 sys.path.insert(0, os.getcwd())
 
-from manage import inner
+from manage import inner  # noqa: E402
 
 BENCHMARK = """
 import json

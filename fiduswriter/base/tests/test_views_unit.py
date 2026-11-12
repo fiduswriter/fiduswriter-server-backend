@@ -233,9 +233,7 @@ class NotifyAccessChangeTest(TestCase):
         relay = SimpleNamespace(
             is_broadcast_relay=True, send_message=AsyncMock()
         )
-        with patch(
-            "base.consumers.SystemMessageConsumer.clients", [relay]
-        ):
+        with patch("base.consumers.SystemMessageConsumer.clients", [relay]):
             with patch("base.views.send_to_server") as send_to_server:
                 notify_access_change(43)
 
@@ -274,8 +272,8 @@ class NativeWebsocketsActivationTest(TestCase):
         )
         backend_root = os.path.dirname(src_path)
         env = dict(os.environ)
-        env["PYTHONPATH"] = backend_root + os.pathsep + env.get(
-            "PYTHONPATH", ""
+        env["PYTHONPATH"] = (
+            backend_root + os.pathsep + env.get("PYTHONPATH", "")
         )
         result = subprocess.run(
             [

@@ -161,7 +161,10 @@ def _native_websockets_payload():
         db_alias = router.db_for_read(Document) or DEFAULT_DB_ALIAS
     except Exception:
         pass
-    db_settings = settings.DATABASES.get(db_alias) or settings.DATABASES[DEFAULT_DB_ALIAS]
+    db_settings = (
+        settings.DATABASES.get(db_alias)
+        or settings.DATABASES[DEFAULT_DB_ALIAS]
+    )
     options = {
         key: value
         for key, value in (db_settings.get("OPTIONS") or {}).items()
@@ -177,7 +180,9 @@ def _native_websockets_payload():
         "options": options,
     }
 
-    session_backend = getattr(settings, "SESSION_ENGINE", "django.contrib.sessions.backends.db")
+    session_backend = getattr(
+        settings, "SESSION_ENGINE", "django.contrib.sessions.backends.db"
+    )
     session_table = "django_session"
     if session_backend == "django.contrib.sessions.backends.db":
         try:
@@ -202,7 +207,11 @@ def _native_websockets_payload():
     relay_url = None
     template = getattr(settings, "INTERNAL_WS_BROADCAST_URL", None)
     port = None
-    ports = getattr(settings, "LOCAL_PORTS", None) or getattr(settings, "PORTS", []) or []
+    ports = (
+        getattr(settings, "LOCAL_PORTS", None)
+        or getattr(settings, "PORTS", [])
+        or []
+    )
     if len(ports) == 1:
         first = ports[0]
         if isinstance(first, dict):
@@ -262,7 +271,9 @@ def _native_websockets_payload():
         "relay_url": relay_url,
         "relay_origin": relay_origin or "http://localhost",
         "schema_path": schema_path,
-        "allowed_hosts": [str(host) for host in getattr(settings, "ALLOWED_HOSTS", [])],
+        "allowed_hosts": [
+            str(host) for host in getattr(settings, "ALLOWED_HOSTS", [])
+        ],
         "fw_document_version": fw_document_version,
     }
 

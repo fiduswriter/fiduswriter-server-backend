@@ -13,7 +13,7 @@ import sys
 
 sys.path.insert(0, os.getcwd())
 
-from manage import inner
+from manage import inner  # noqa: E402
 
 SETUP = """
 from django.contrib.auth import get_user_model
