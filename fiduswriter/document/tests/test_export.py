@@ -471,15 +471,15 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         # DOCX and ODT exports are provided by the pandoc plugin and are
         # covered by the pandoc plugin tests.
 
-        # Save a revision
+        # Save a snapshot
         self.driver.find_element(
             By.CSS_SELECTOR, '.header-nav-item[title="File handling"]'
         ).click()
         self.driver.find_element(
-            By.XPATH, '//*[normalize-space()="Save revision"]'
+            By.XPATH, '//*[normalize-space()="Save snapshot"]'
         ).click()
         self.driver.find_element(By.CSS_SELECTOR, ".revision-note").send_keys(
-            "First revision"
+            "First snapshot"
         )
         self.driver.find_element(
             By.XPATH, '//*[normalize-space()="Save"]'
@@ -587,7 +587,7 @@ class ExportTest(SeleniumHelper, ChannelsLiveServerTestCase):
         assert os.path.isfile(path)
         os.remove(path)
 
-        # Revision
+        # Snapshot
         self.driver.find_element(By.CSS_SELECTOR, ".revisions").click()
         self.driver.find_element(By.CSS_SELECTOR, ".download-revision").click()
         path = os.path.join(self.download_dir, "title.fidus")

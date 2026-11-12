@@ -1183,7 +1183,7 @@ def upload_revision(request):
         # Revision archives contain plaintext document state.
         # Uploading them for an encrypted document would declassify it.
         response["error"] = (
-            "Revisions are not available for encrypted documents"
+            "Snapshots are not available for encrypted documents"
         )
         return JsonResponse(response, status=403)
     if document and not e2ee_write_guard(document):
