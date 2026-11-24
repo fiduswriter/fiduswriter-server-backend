@@ -173,6 +173,10 @@ INSTALLED_APPS = [
     # line to disable the feature (and its frontend routes and API endpoints).
     "user_template_manager",  # document template manager
     "book",  # book composer, chapter management and book export
+    "synology",  # Synology DSM (Docker bridge) SSO integration; see
+    # fiduswriter-synology. Also requires
+    # MIDDLEWARE += ["synology.middleware.SynologyBridgeAuthMiddleware"] and
+    # SYNOLOGY_BRIDGE_AUTH = True in this file.
 ]
 
 # A list of apps to remove from the default installation
