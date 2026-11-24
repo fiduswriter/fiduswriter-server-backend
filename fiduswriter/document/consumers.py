@@ -742,7 +742,9 @@ class WebsocketConsumer(BaseWebsocketConsumer):
     # Checks if the diff only contains changes to comments.
     # title/bibliography/image updates are sidecar changes to
     # the document and are never comment-only. For non-E2EE documents a
-    # diff without document steps is not comment-only either.
+    # diff without document steps only carries comment updates (for
+    # example global comments, which have no mark to attach to the
+    # document) and is comment-only as well.
     def only_comments(self, message, e2ee=False):
         allowed_operations = ["addMark", "removeMark"]
         if "ti" in message or "bu" in message or "iu" in message:
@@ -750,7 +752,10 @@ class WebsocketConsumer(BaseWebsocketConsumer):
         if e2ee:
             return True
         if "ds" not in message:
-            return False
+            # Without document steps only comment updates remain (for
+            # example global comments, which have no mark in the
+            # document) — and those are allowed for comment-only roles.
+            return "cu" in message
         for step in message["ds"]:
             if not (
                 step.get("stepType") in allowed_operations
@@ -770,14 +775,14 @@ class WebsocketConsumer(BaseWebsocketConsumer):
 
     def owns_comment_updates(self, comment_updates):
         """all comment update operations must reference only
-        the caller's own user id (top level and answers)."""
+        the caller's own comments (top level and answers)."""
         my_id = str(self.user_info.user.id)
         for entry in comment_updates:
             if not isinstance(entry, dict):
                 return False
+            if not self.can_manage_comment(entry.get("id")):
+                return False
             if entry.get("type") == "delete":
-                if not self.can_manage_comment(entry.get("id")):
-                    return False
                 continue
             if str(entry.get("user")) != my_id:
                 return False
@@ -817,6 +822,10 @@ class WebsocketConsumer(BaseWebsocketConsumer):
                 f"collaborator.Discarding URL:{self.endpoint} "
                 f"User:{self.user.id} ParticipantID:{self.id}"
             )
+            # Tell the client its diff was rejected so it can drop the
+            # unconfirmed diff and recover instead of waiting for a
+            # confirm that will never come.
+            await self.reject_message(message)
             return
         if (
             self.user_info.access_rights in OWN_COMMENTS_ONLY_RIGHTS
@@ -829,6 +838,10 @@ class WebsocketConsumer(BaseWebsocketConsumer):
                 f"collaborator. Discarding URL:{self.endpoint} "
                 f"User:{self.user.id} ParticipantID:{self.id}"
             )
+            # Tell the client its diff was rejected so it can drop the
+            # unconfirmed diff and recover instead of waiting for a
+            # confirm that will never come.
+            await self.reject_message(message)
             return
         if pv == dv:
             if self.session["doc"].e2ee:

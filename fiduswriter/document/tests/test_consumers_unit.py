@@ -464,6 +464,185 @@ class CommentOnlyRightsTest(TransactionTestCase):
         self.doc.refresh_from_db()
         self.assertEqual(self.doc.version, 0)
 
+    def test_logged_in_review_user_sequential_comments_are_saved(self):
+        """A logged-in user with review rights must be able to save
+        more than one comment: the first comment works, later ones must
+        not be silently dropped. Regression test for
+        https://github.com/fiduswriter/fiduswriter/issues/1425"""
+        self.doc.content = {
+            "type": "doc",
+            "attrs": {"template": "T"},
+            "content": [
+                {
+                    "type": "title",
+                    "content": [{"type": "text", "text": "Title"}],
+                },
+                {
+                    "type": "richtext_part",
+                    "attrs": {"id": "body", "title": "Body"},
+                    "content": [
+                        {
+                            "type": "paragraph",
+                            "content": [{"type": "text", "text": "Hello world"}],
+                        }
+                    ],
+                },
+            ],
+        }
+        self.doc.save()
+        reviewer = User.objects.create_user(
+            username="co-reviewer", password="pass"
+        )
+        AccessRight.objects.create(
+            document=self.doc, holder_obj=reviewer, rights="review"
+        )
+        guest = self._communicator(reviewer)
+
+        def comment_diff(c, rid, version, comment_id):
+            return {
+                "type": "diff",
+                "c": c,
+                "s": 9999,
+                "rid": rid,
+                "v": version,
+                "ds": [
+                    {
+                        "stepType": "addMark",
+                        "mark": {
+                            "type": "comment",
+                            "attrs": {"id": comment_id},
+                        },
+                        "from": 9,
+                        "to": 20,
+                    }
+                ],
+                "cu": [
+                    {
+                        "id": comment_id,
+                        "type": "create",
+                        "user": reviewer.id,
+                        "username": "Reviewer",
+                        "assignedUser": None,
+                        "assignedUsername": None,
+                        "date": 0,
+                        "comment": [comment_id],
+                        "isMajor": False,
+                        "resolved": False,
+                    }
+                ],
+            }
+
+        async def run():
+            owner = await self._open_owner()
+            connected, _ = await guest.connect()
+            assert connected
+            await guest.receive_from(5)
+            await guest.send_json_to(
+                {
+                    "type": "subscribe",
+                    "c": 1,
+                    "s": 1,
+                    "connection": 1,
+                    "v": self.doc.version,
+                }
+            )
+            await self._drain_until(guest, "access_right")
+            start_version = self.doc.version
+            # First comment.
+            await guest.send_json_to(comment_diff(2, "r1", start_version, "c1"))
+            confirm = await self._drain_until(guest, "confirm_diff")
+            self.assertEqual(confirm["rid"], "r1")
+            # Second comment — the client has confirmed the first diff
+            # and advances its version by one.
+            await guest.send_json_to(
+                comment_diff(3, "r2", start_version + 1, "c2")
+            )
+            confirm = await self._drain_until(guest, "confirm_diff")
+            self.assertEqual(confirm["rid"], "r2")
+            try:
+                await guest.disconnect()
+            except TimeoutError:
+                pass
+            try:
+                await owner.disconnect()
+            except TimeoutError:
+                pass
+
+        async_to_sync(run)()
+        self.doc.refresh_from_db()
+        self.assertEqual(self.doc.version, 2)
+        self.assertIn("c1", self.doc.comments)
+        self.assertIn("c2", self.doc.comments)
+
+    def test_review_global_comment_is_saved(self):
+        """Global comments travel as comment updates without document
+        steps and must not be discarded for comment-only roles.
+        Regression test for
+        https://github.com/fiduswriter/fiduswriter/issues/1425"""
+        reviewer = User.objects.create_user(
+            username="co-reviewer-global", password="pass"
+        )
+        AccessRight.objects.create(
+            document=self.doc, holder_obj=reviewer, rights="review"
+        )
+        guest = self._communicator(reviewer)
+
+        async def run():
+            owner = await self._open_owner()
+            connected, _ = await guest.connect()
+            assert connected
+            await guest.receive_from(5)
+            await guest.send_json_to(
+                {
+                    "type": "subscribe",
+                    "c": 1,
+                    "s": 1,
+                    "connection": 1,
+                    "v": self.doc.version,
+                }
+            )
+            await self._drain_until(guest, "access_right")
+            # A global comment: comment update only, no document steps.
+            await guest.send_json_to(
+                {
+                    "type": "diff",
+                    "c": 2,
+                    "s": 9999,
+                    "rid": "r1",
+                    "v": self.doc.version,
+                    "cu": [
+                        {
+                            "id": "global-1",
+                            "type": "create",
+                            "user": reviewer.id,
+                            "username": "Reviewer",
+                            "assignedUser": None,
+                            "assignedUsername": None,
+                            "date": 0,
+                            "comment": ["a global comment"],
+                            "isMajor": False,
+                            "resolved": False,
+                            "isGlobal": True,
+                        }
+                    ],
+                }
+            )
+            confirm = await self._drain_until(guest, "confirm_diff")
+            self.assertEqual(confirm["rid"], "r1")
+            try:
+                await guest.disconnect()
+            except TimeoutError:
+                pass
+            try:
+                await owner.disconnect()
+            except TimeoutError:
+                pass
+
+        async_to_sync(run)()
+        self.doc.refresh_from_db()
+        self.assertIn("global-1", self.doc.comments)
+        self.assertTrue(self.doc.comments["global-1"]["isGlobal"])
+
     def test_review_touching_foreign_comment_is_discarded(self):
         # A comment by the writer exists; the review guest tries to edit it.
         self.doc.comments = {
