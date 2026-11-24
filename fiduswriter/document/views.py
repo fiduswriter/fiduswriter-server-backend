@@ -2030,15 +2030,24 @@ def request_access(request):
     """
     Allow a logged-in user to request access to a document.
     This is called when a user accesses a document via a share link and
-    wants to be added as a collaborator.
+    wants to be added as a collaborator, or when a collaborator wants to
+    request an upgrade of their access rights.
     """
 
+    # Requestable access rights, ordered from lowest to highest. This has
+    # to match the order of REQUESTABLE_RIGHTS in the access request
+    # dialog in fiduswriter-editor-ts.
+    rights_order = ["read", "comment", "review", "write-tracked", "write"]
+
     document_id = request.JSON.get("document_id")
+    try:
+        document_id = int(document_id)
+    except (TypeError, ValueError):
+        # Don't reveal whether a document with this ID exists.
+        document_id = None
     requested_rights = request.JSON.get("rights", "read")
 
-    # Only allow upgrade requests (only 'write' makes sense as upgrade from read/comment)
-    valid_rights = ["write", "write-tracked", "comment", "review", "read"]
-    if requested_rights not in valid_rights:
+    if requested_rights not in rights_order:
         return JsonResponse({"error": "Invalid access rights"}, status=400)
 
     document = (
@@ -2048,14 +2057,26 @@ def request_access(request):
         # Don't reveal whether a document with this ID exists.
         return JsonResponse({"success": True}, status=201)
 
-    # Don't reveal whether the user is the owner or already has access.
+    # Don't reveal whether the user is the owner.
     if document.owner == request.user:
         return JsonResponse({"success": True}, status=201)
 
-    if AccessRight.objects.filter(
+    user_access = AccessRight.objects.filter(
         document=document, user=request.user
-    ).exists():
-        return JsonResponse({"success": True}, status=201)
+    ).first()
+    if user_access:
+        # The user already has access. Only forward genuine upgrade
+        # requests to the owner; respond with success either way so the
+        # current access level is not revealed. Rights not covered by
+        # rights_order cannot be compared and any request is allowed.
+        try:
+            current_index = rights_order.index(user_access.rights)
+            requested_index = rights_order.index(requested_rights)
+        except ValueError:
+            current_index = -1
+            requested_index = 0
+        if current_index >= 0 and requested_index <= current_index:
+            return JsonResponse({"success": True}, status=201)
 
     # Send notification to the document owner
     owner = document.owner

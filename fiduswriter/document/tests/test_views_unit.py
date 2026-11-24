@@ -1047,10 +1047,14 @@ class RequestAccessViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.owner = User.objects.create_user(
-            username="raowner", password="pass"
+            username="raowner",
+            password="pass",
+            email="raowner@example.com",
         )
         self.requester = User.objects.create_user(
-            username="rarequester", password="pass"
+            username="rarequester",
+            password="pass",
+            email="rarequester@example.com",
         )
         self.template = DocumentTemplate.objects.create(
             title="Default Template", content={}
@@ -1128,6 +1132,81 @@ class RequestAccessViewTest(TestCase):
             {"document_id": self.doc.id, "rights": "admin"},
         )
         self.assertEqual(response.status_code, 400)
+
+    def _give_access(self, rights):
+        from django.contrib.contenttypes.models import ContentType
+
+        user_type = ContentType.objects.get_for_model(User)
+        AccessRight.objects.create(
+            document=self.doc,
+            holder_type=user_type,
+            holder_id=self.requester.id,
+            rights=rights,
+        )
+
+    def test_upgrade_request_notifies_owner(self):
+        from django.core import mail
+
+        self._give_access("read")
+        self.client.force_login(self.requester)
+        response = json_post(
+            self.client,
+            "/api/document/request_access/",
+            {"document_id": self.doc.id, "rights": "write"},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn(self.owner.email, mail.outbox[0].to)
+        self.assertIn("write", mail.outbox[0].body)
+
+    def test_request_of_same_or_lower_rights_sends_no_notification(self):
+        from django.core import mail
+
+        self._give_access("write")
+        self.client.force_login(self.requester)
+        response = json_post(
+            self.client,
+            "/api/document/request_access/",
+            {"document_id": self.doc.id, "rights": "read"},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_request_of_same_rights_sends_no_notification(self):
+        from django.core import mail
+
+        self._give_access("read")
+        self.client.force_login(self.requester)
+        response = json_post(
+            self.client,
+            "/api/document/request_access/",
+            {"document_id": self.doc.id, "rights": "read"},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_upgrade_from_unknown_rights_notifies_owner(self):
+        from django.core import mail
+
+        self._give_access("read-without-comments")
+        self.client.force_login(self.requester)
+        response = json_post(
+            self.client,
+            "/api/document/request_access/",
+            {"document_id": self.doc.id, "rights": "read"},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(mail.outbox), 1)
+
+    def test_noninteger_document_id_does_not_error(self):
+        self.client.force_login(self.requester)
+        response = json_post(
+            self.client,
+            "/api/document/request_access/",
+            {"document_id": "not-a-number", "rights": "write"},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(response.json()["success"])
 
 
 class ImportCreateViewTest(TestCase):
