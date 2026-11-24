@@ -130,6 +130,59 @@ class ConfigurationViewTest(TestCase):
 
 
 # ---------------------------------------------------------------------------
+# OpenID Connect login providers (e.g. LDAP via a Dex/Keycloak bridge)
+# ---------------------------------------------------------------------------
+
+
+class OpenIDConnectProviderTest(TestCase):
+    """The generic allauth openid_connect provider must be configurable
+    through SOCIALACCOUNT_PROVIDERS alone (no database SocialApp needed),
+    so that institutions can point Fidus Writer at an OIDC bridge to
+    their LDAP directory. See docs/configuration/login-providers.md."""
+
+    OIDC_APPS = list(settings.BASE_INSTALLED_APPS) + [
+        "allauth.socialaccount.providers.openid_connect",
+    ]
+
+    def test_settings_configured_oidc_server_is_listed(self):
+        from django.test import override_settings, RequestFactory
+
+        from allauth.socialaccount.adapter import get_adapter
+        from allauth.socialaccount.providers import registry
+
+        with override_settings(
+            INSTALLED_APPS=self.OIDC_APPS,
+            SOCIALACCOUNT_PROVIDERS={
+                "openid_connect": {
+                    "APPS": [
+                        {
+                            "provider_id": "dex",
+                            "name": "University SSO",
+                            "server_url": "https://sso.example.edu",
+                            "client_id": "fidus",
+                            "secret": "s3cret",
+                        }
+                    ]
+                }
+            },
+        ):
+            # The provider registry is a process-wide singleton that is
+            # populated on first access. Reload it so the provider added
+            # via INSTALLED_APPS above registers.
+            registry.loaded = False
+            registry.provider_map.clear()
+            try:
+                request = RequestFactory().get("/")
+                providers = get_adapter(request).list_providers(request)
+                listed = {p.id: p.name for p in providers}
+                self.assertIn("openid_connect", listed)
+                self.assertEqual(listed["openid_connect"], "University SSO")
+            finally:
+                registry.loaded = False
+                registry.provider_map.clear()
+
+
+# ---------------------------------------------------------------------------
 # frontend settings hook
 # ---------------------------------------------------------------------------
 

@@ -155,12 +155,16 @@ INSTALLED_APPS = [
     # If you want to enable one or several of the social network login options
     # below, make sure you add the authorization keys at:
     # http://SERVER.COM/admin/socialaccount/socialapp/
+    # The openid_connect provider is a generic OpenID Connect client that
+    # also covers LDAP through an OIDC bridge (Dex, Keycloak, authentik,
+    # ...). See docs/configuration/login-providers.md.
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     # 'allauth.socialaccount.providers.twitter',
     # 'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.openid',
+    # 'allauth.socialaccount.providers.openid_connect',
     # 'allauth.socialaccount.providers.persona',
     # 'allauth.socialaccount.providers.soundcloud',
     # 'allauth.socialaccount.providers.stackexchange',
