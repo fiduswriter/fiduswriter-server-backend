@@ -38,6 +38,15 @@ def _discover_languages(locale_dir):
 
 # Known TypeScript package directories (checked out next to the monorepo).
 # Maps directory name → human-readable label.
+#
+# Repositories deliberately not listed here:
+# - fiduswriter-dav-ts: contains no gettext() calls, so there is nothing to
+#   extract or translate.
+# - fiduswriter-nextcloud: its locale/ directory is build output copied from
+#   @fiduswriter/editor (see scripts/build.js there); translating it here
+#   would only edit generated files.
+# (fiduswriter-cli-ts is listed for completeness; it has no locale/
+# directory yet, so it is skipped during discovery.)
 _KNOWN_TS_PACKAGES = {
     "fwtoolkit": "fwtoolkit",
     "fiduswriter-frontend-ts": "@fiduswriter/frontend",
@@ -50,6 +59,7 @@ _KNOWN_TS_PACKAGES = {
     ),
     "fiduswriter-books-ts": "@fiduswriter/books",
     "fiduswriter-cli-ts": "@fiduswriter/cli",
+    "fiduswriter-pandoc-plugin-ts": "@fiduswriter/pandoc",
     # The desktop application keeps its own catalogue, generated from its own
     # sources by `npm run extract-i18n` there. Its strings must not go into the
     # editor's catalogues: those are regenerated from the editor's sources, so
@@ -131,6 +141,30 @@ class Command(BaseCommand):
             action="store_true",
             help="Skip translation of TypeScript package locales.",
         )
+        parser.add_argument(
+            "--no-extract",
+            action="store_true",
+            help=(
+                "Skip running the TypeScript packages' gettext extraction "
+                "scripts before translation."
+            ),
+        )
+        parser.add_argument(
+            "--no-compile",
+            action="store_true",
+            help=(
+                "Skip regenerating the TypeScript packages' messages.json "
+                "files after translation."
+            ),
+        )
+        parser.add_argument(
+            "--extract-only",
+            action="store_true",
+            help=(
+                "Only extract message catalogs (makemessages + TypeScript "
+                "package extraction); do not translate or compile."
+            ),
+        )
 
     def handle(self, *args, **options):
         locale_dir = os.path.join(settings.SRC_PATH, "locale")
@@ -187,11 +221,13 @@ class Command(BaseCommand):
         ts_package_locales = []
         if not options["no_ts_packages"]:
             ts_package_locales = _discover_typescript_package_locales()
-            for locale_dir, label in ts_package_locales:
+            # NB: do not name this loop variable "locale_dir" — that would
+            # shadow the main app's locale directory used further down.
+            for pkg_locale_dir, label in ts_package_locales:
                 self.stdout.write(
                     self.style.NOTICE(
                         f"Auto-discovered TS package locale: "
-                        f"{locale_dir} ({label})"
+                        f"{pkg_locale_dir} ({label})"
                     )
                 )
             if not ts_package_locales:
@@ -202,10 +238,6 @@ class Command(BaseCommand):
             self.stdout.write(
                 "Skipping TypeScript packages (--no-ts-packages)."
             )
-
-        # ---- warn about stale TS package POT files ---------------------------------
-        if ts_package_locales:
-            self._warn_stale_ts_templates(ts_package_locales, languages)
 
         domains = options["domain"]
         skip_fuzzy = options["no_fuzzy"]
@@ -248,6 +280,37 @@ class Command(BaseCommand):
             )
         else:
             self.stdout.write("Skipping makemessages (--no-makemessages)")
+
+        # ---- extract fresh msgids for the TypeScript packages ----------------
+        # Each TS package ships its own extraction script
+        # (scripts/extract-i18n.js or scripts/extract-i18n-generic.js) that
+        # scans the package's src/ for gettext() calls and rewrites
+        # locale/<lang>/LC_MESSAGES/messages.po, seeded with translations
+        # from the main app's djangojs.po.  Running it here guarantees the
+        # catalogs are up to date before translation, also for newly added
+        # packages.
+        if ts_package_locales:
+            if not options["no_extract"]:
+                self.stdout.write(
+                    self.style.NOTICE(
+                        "\n--- Extracting TypeScript package catalogs ---"
+                    )
+                )
+                self._extract_ts_package_catalogs(ts_package_locales)
+            else:
+                self.stdout.write(
+                    "Skipping TypeScript catalog extraction (--no-extract)"
+                )
+                self._warn_stale_ts_templates(ts_package_locales, languages)
+
+        if options["extract_only"]:
+            self.stdout.write(
+                self.style.SUCCESS(
+                    "\nExtraction only (--extract-only) – stopping before "
+                    "translation."
+                )
+            )
+            return
 
         total_translated = 0
 
@@ -312,6 +375,22 @@ class Command(BaseCommand):
                 f"{'=' * 60}"
             )
         )
+
+        # ---- regenerate the TypeScript packages' messages.json files ---------
+        # The runtime catalogs (messages.json) are compiled from the .po
+        # files, so they must be regenerated after translation.
+        if ts_package_locales:
+            if not options["no_compile"]:
+                self.stdout.write(
+                    self.style.NOTICE(
+                        "\n--- Compiling TypeScript package catalogs ---"
+                    )
+                )
+                self._compile_ts_package_catalogs(ts_package_locales)
+            else:
+                self.stdout.write(
+                    "Skipping TypeScript catalog compilation (--no-compile)"
+                )
 
         # ---- run makemessages after translation to fix formatting ----
         if not options["no_makemessages"]:
@@ -486,6 +565,99 @@ class Command(BaseCommand):
         self.stdout.write(f"  Rate limit pauses: {rate_limit_pauses}")
 
         return translated
+
+    def _find_ts_script(self, locale_root, names):
+        """Return the path of the first existing script in *names* inside the
+        package's scripts/ directory, or None."""
+        package_dir = os.path.dirname(locale_root)
+        for name in names:
+            candidate = os.path.join(package_dir, "scripts", name)
+            if os.path.isfile(candidate):
+                return candidate
+        return None
+
+    def _run_ts_script(self, label, script, args):
+        """Run a node script inside a TypeScript package.  Returns True on
+        success; prints a warning and returns False otherwise."""
+        import shutil
+        import subprocess
+
+        node = shutil.which("node")
+        if not node:
+            self.stdout.write(
+                self.style.WARNING(
+                    "node not found on PATH – skipping TypeScript catalog "
+                    "extraction/compilation."
+                )
+            )
+            return False
+        package_dir = os.path.dirname(os.path.dirname(script))
+        result = subprocess.run(
+            [node, script] + args,
+            cwd=package_dir,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"  {label}: {os.path.basename(script)} failed:\n"
+                    f"{result.stderr.strip() or result.stdout.strip()}"
+                )
+            )
+            return False
+        return True
+
+    def _extract_ts_package_catalogs(self, ts_package_locales):
+        """Run each TypeScript package's gettext extraction script.
+
+        The scripts scan the package's src/ for gettext() calls and rewrite
+        locale/<lang>/LC_MESSAGES/messages.po, preserving translations that
+        are already present and seeding new msgids from the main app's
+        djangojs.po.  Packages without an extraction script are skipped with
+        a warning."""
+        django_locale = os.path.join(settings.SRC_PATH, "locale")
+        for locale_root, label in ts_package_locales:
+            script = self._find_ts_script(
+                locale_root, ("extract-i18n.js", "extract-i18n-generic.js")
+            )
+            if not script:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"  {label}: no extraction script "
+                        f"(scripts/extract-i18n.js) – skipping."
+                    )
+                )
+                continue
+            self.stdout.write(f"  Extracting {label}...")
+            if self._run_ts_script(label, script, [django_locale]):
+                self.stdout.write(self.style.SUCCESS(f"  {label}: done"))
+
+    def _compile_ts_package_catalogs(self, ts_package_locales):
+        """Regenerate each TypeScript package's locale/<lang>/messages.json
+        files from its messages.po files.  These JSON files are what the
+        runtime actually loads (the main app merges them into its
+        JavaScript catalog)."""
+        for locale_root, label in ts_package_locales:
+            script = self._find_ts_script(locale_root, ("compile-i18n.js",))
+            if not script:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"  {label}: no compile script "
+                        f"(scripts/compile-i18n.js) – skipping."
+                    )
+                )
+                continue
+            self.stdout.write(f"  Compiling {label}...")
+            if self._run_ts_script(label, script, []):
+                self.stdout.write(self.style.SUCCESS(f"  {label}: done"))
+            else:
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"  {label}: compilation failed – is gettext-parser "
+                        f"installed? (run the package's install command)"
+                    )
+                )
 
     def _warn_stale_ts_templates(self, ts_package_locales, languages):
         """Warn if a TypeScript package's messages.pot template is newer than

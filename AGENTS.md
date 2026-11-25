@@ -509,7 +509,27 @@ interpolate(gettext('Export selected as %s (via Pandoc)'), [label])
 
 This applies to all JavaScript files across the project and any plugins. The `interpolate()` function is part of Django's JavaScript catalog and is available globally on pages that load JS translations.
 
-See also the `translate_all.py` management command (`fiduswriter/devel/management/commands/translate_all.py`) which automates makemessages + Google Translate for all locale files.
+See also the `translate_all.py` management command (`fiduswriter/devel/management/commands/translate_all.py`) which automates the full translation pipeline (the `devel` app must be enabled in `INSTALLED_APPS`):
+
+1. **Extraction** — runs `makemessages` for the main app and symlinked
+   plugins, then runs each TypeScript package's `scripts/extract-i18n.js`
+   (or `extract-i18n-generic.js`), which scans the package's `src/` for
+   `gettext()` calls and rewrites `locale/<lang>/LC_MESSAGES/messages.po`,
+   preserving existing translations. Skip with `--no-extract`; run only this
+   phase with `--extract-only`.
+2. **Translation** — fills empty and fuzzy entries in all `.po` files (main
+   app, symlinked plugins, TypeScript packages) via Google Translate.
+3. **Compilation** — runs each TypeScript package's `scripts/compile-i18n.js`
+   to regenerate the runtime `locale/<lang>/messages.json` files. Skip with
+   `--no-compile`.
+
+The TypeScript packages are discovered from the hardcoded
+`_KNOWN_TS_PACKAGES` list in `translate_all.py`; a new npm package with
+`gettext()` strings must be added there and ship the two i18n scripts
+(copy them from any sibling package). `fiduswriter-dav-ts` and
+`fiduswriter-cli-ts` have no translatable strings, and
+`fiduswriter-nextcloud`'s `locale/` is build output copied from
+`@fiduswriter/editor`, so none of them are listed.
 
 ## Working with local sibling packages
 

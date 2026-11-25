@@ -3,102 +3,102 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fidus Writer backend\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 07:08+0000\n"
+"POT-Creation-Date: 2026-11-25 16:22+0000\n"
 "Language: pt-br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 
-#: base/settings.py:347
+#: base/settings.py:412
 msgid "Arabic"
 msgstr "árabe"
 
-#: base/settings.py:348
+#: base/settings.py:413
 msgid "Bulgarian"
 msgstr "Búlgaro"
 
-#: base/settings.py:349
+#: base/settings.py:414
 msgid "Czech"
 msgstr "Tcheco"
 
-#: base/settings.py:350
+#: base/settings.py:415
 msgid "Danish"
 msgstr "dinamarquês"
 
-#: base/settings.py:351
+#: base/settings.py:416
 msgid "German"
 msgstr "Alemão"
 
-#: base/settings.py:352
+#: base/settings.py:417
 msgid "English"
 msgstr "Inglês"
 
-#: base/settings.py:353
+#: base/settings.py:418
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: base/settings.py:354
+#: base/settings.py:419
 msgid "French"
 msgstr "Francês"
 
-#: base/settings.py:355
+#: base/settings.py:420
 msgid "Italian"
 msgstr "Italiano"
 
-#: base/settings.py:356
+#: base/settings.py:421
 msgid "Japanese"
 msgstr "japonês"
 
-#: base/settings.py:357
+#: base/settings.py:422
 msgid "Korean"
 msgstr "coreano"
 
-#: base/settings.py:358
+#: base/settings.py:423
 msgid "Norwegian Bokmål"
 msgstr "Bokmål Norueguês"
 
-#: base/settings.py:359
+#: base/settings.py:424
 msgid "Dutch"
 msgstr "Holandês"
 
-#: base/settings.py:360
+#: base/settings.py:425
 msgid "Polish"
 msgstr "polonês"
 
-#: base/settings.py:361
+#: base/settings.py:426
 msgid "Portuguese (Brazil)"
 msgstr "Português (Brasil)"
 
-#: base/settings.py:362
+#: base/settings.py:427
 msgid "Portuguese (Portugal)"
 msgstr "Português (Portugal)"
 
-#: base/settings.py:363
+#: base/settings.py:428
 msgid "Russian"
 msgstr "russo"
 
-#: base/settings.py:364
+#: base/settings.py:429
 msgid "Swedish"
 msgstr "sueco"
 
-#: base/settings.py:365
+#: base/settings.py:430
 msgid "Turkish"
 msgstr "turco"
 
-#: base/settings.py:366
+#: base/settings.py:431
 msgid "Chinese (Simplified)"
 msgstr "Chinês (simplificado)"
 
-#: base/settings.py:482
+#: base/settings.py:552
 msgid "Fidus Writer Admin"
 msgstr "Administração do Fidus Writer"
 
-#: base/settings.py:483
+#: base/settings.py:553
 msgid "Fidus Writer Administration Site"
 msgstr "Site de Administração do Fidus Writer"
 
-#: base/settings.py:484
+#: base/settings.py:554
 msgid "Welcome to the Fidus Writer Administration Site"
 msgstr "Bem Vindo ao site de Administração do Fidus Writer"
 
@@ -114,28 +114,28 @@ msgstr ""
 "Lamentamos, mas ocorreu um erro no servidor. Nossa equipe analisará o "
 "problema em breve."
 
-#: base/templates/admin/console.html:4 base/templates/admin/console.html:21
+#: base/templates/admin/console.html:4 base/templates/admin/console.html:22
 #: base/templates/admin/overview.html:14
 msgid "Admin Console"
 msgstr "Console de Administração"
 
-#: base/templates/admin/console.html:23
+#: base/templates/admin/console.html:24
 msgid "Current number of users:"
 msgstr "Número atual de usuários:"
 
-#: base/templates/admin/console.html:26
+#: base/templates/admin/console.html:27
 msgid "Current number of user sessions:"
 msgstr "Número atual de sessões conectadas:"
 
-#: base/templates/admin/console.html:28
+#: base/templates/admin/console.html:29
 msgid "Send a system message to all connected users:"
 msgstr "Enviar uma mensagem para todos usuários conectados:"
 
-#: base/templates/admin/console.html:32
+#: base/templates/admin/console.html:33
 msgid "Message"
 msgstr "Mensagem"
 
-#: base/templates/admin/console.html:34
+#: base/templates/admin/console.html:35
 msgid ""
 "This system will go offline for scheduled maintenance in 30 minutes. All "
 "your work will be saved automatically and we will be back shortly."
@@ -143,7 +143,7 @@ msgstr ""
 "Em 30 minutos o sistema ira desconectar para fazer manutenção. seu trabalho "
 "será salvo automaticamente e voltará em breve."
 
-#: base/templates/admin/console.html:41
+#: base/templates/admin/console.html:42
 msgid "Send to connected users"
 msgstr "Enviar para usuários conectados"
 
@@ -152,7 +152,7 @@ msgid "Extras"
 msgstr "Extras"
 
 #: base/templates/admin/overview.html:17
-#: document/templates/admin/document/maintenance.html:22
+#: document/templates/admin/document/maintenance.html:23
 msgid "Document Maintenance"
 msgstr "Manutenção de Documentos"
 
@@ -168,13 +168,87 @@ msgstr "Lamentamos, mas esta página não foi encontrada."
 msgid "The all in one solution for collaborative academic writing."
 msgstr "A ferramenta perfeita para escrever textos acadêmicos."
 
-#: base/templates/app.html:87
+#: base/templates/app.html:98
 msgid "JavaScript disabled"
 msgstr "JavaScript desativado"
 
-#: base/templates/app.html:88
+#: base/templates/app.html:99
 msgid "Fidus Writer requires you to enable JavaScript."
 msgstr "O Fidus Writer requer que você ative o JavaScript."
+
+#: book/emails.py:18 document/emails.py:18 document/emails.py:236
+#: document/views.py:1346
+msgid "Untitled"
+msgstr "Sem título"
+
+#: book/emails.py:21
+#, python-format
+msgid ""
+"Hey %(collaborator_name)s,\n"
+"%(owner)s has changed your access rights to %(rights)s on the book "
+"'%(book_title)s'. \n"
+"See books: %(link)s"
+msgstr ""
+"Olá, %(collaborator_name)s,\n"
+"%(owner)s alterou seus direitos de acesso para %(rights)s no livro "
+"'%(book_title)s'. \n"
+"Veja livros: %(link)s"
+
+#: book/emails.py:32
+#, python-format
+msgid ""
+"<p>Hey %(collaborator_name)s,<br>%(owner)s has changed your access rights to "
+"%(rights)s on the book '%(book_title)s'.</p>"
+msgstr ""
+"<p>Olá, %(collaborator_name)s,<br>%(owner)s alterou seus direitos de acesso "
+"para %(rights)s no livro '%(book_title)s'.</p>"
+
+#: book/emails.py:43
+#, python-format
+msgid ""
+"Hey %(collaborator_name)s,\n"
+"%(owner)s has shared the book '%(book_title)s' with you and given you "
+"%(rights)s access rights. \n"
+"Open book: %(link)s"
+msgstr ""
+"Olá, %(collaborator_name)s,\n"
+"%(owner)s compartilhou o livro '%(book_title)s' com você e lhe concedeu "
+"%(rights)s direitos de acesso. \n"
+"Livro aberto: %(link)s"
+
+#: book/emails.py:55
+#, python-format
+msgid ""
+"<p>Hey %(collaborator_name)s,<br>%(owner)s has shared the book "
+"'%(book_title)s' with you and given you %(rights)s access rights.</p>"
+msgstr ""
+"<p>Olá, %(collaborator_name)s,<br>%(owner)s compartilhou o livro "
+"'%(book_title)s' com você e lhe concedeu %(rights)s direitos de acesso.</p>"
+
+#: book/emails.py:89 document/emails.py:89
+msgid "shared"
+msgstr "compartilhado"
+
+#: book/emails.py:91
+msgid "Book"
+msgstr "Livro"
+
+#: book/emails.py:93
+msgid "Editor"
+msgstr "Editor"
+
+#: book/emails.py:95 document/emails.py:95
+msgid "Access Rights"
+msgstr "Direitos de Acesso"
+
+#: book/emails.py:98
+msgid "Access books"
+msgstr "Acessar os livros"
+
+#: book/emails.py:101
+#, python-format
+msgid "Book shared: %(book_title)s"
+msgstr "Livro compartilhado: %(book_title)s"
 
 #: browser_check/templates/browser_check/browser_not_supported.html:4
 #: browser_check/templates/browser_check/browser_not_supported.html:27
@@ -197,30 +271,28 @@ msgstr ""
 "                computador.\n"
 "            "
 
-#: document/admin.py:76
+#: document/admin.py:98
 msgid "Duplicate selected document templates"
 msgstr "Duplicar modelos de documentos selecionados"
-
-#: document/emails.py:18 document/emails.py:236 document/views.py:986
-msgid "Untitled"
-msgstr "Sem título"
 
 #: document/emails.py:21
 #, python-format
 msgid ""
 "Hey %(collaborator_name)s,\n"
-"%(owner)s has changed your access rights to %(rights)s on the document '%(document_title)s'. \n"
+"%(owner)s has changed your access rights to %(rights)s on the document "
+"'%(document_title)s'. \n"
 "Open the document: %(link)s"
 msgstr ""
 "Olá %(collaborator_name)s,\n"
-"%(owner)s alterou seus direitos de acesso para %(rights)s no documento '%(document_title)s'. \n"
+"%(owner)s alterou seus direitos de acesso para %(rights)s no documento "
+"'%(document_title)s'. \n"
 "Abra o documento: %(link)s"
 
 #: document/emails.py:32
 #, python-format
 msgid ""
-"<p>Hey %(collaborator_name)s,<br>%(owner)s has changed your access rights to"
-" %(rights)s on the document '%(document_title)s'.</p>"
+"<p>Hey %(collaborator_name)s,<br>%(owner)s has changed your access rights to "
+"%(rights)s on the document '%(document_title)s'.</p>"
 msgstr ""
 "<p>Olá, %(collaborator_name)s,<br>%(owner)s alterou seus direitos de acesso "
 "para %(rights)s no documento '%(document_title)s'.</p>"
@@ -229,11 +301,13 @@ msgstr ""
 #, python-format
 msgid ""
 "Hey %(collaborator_name)s,\n"
-"%(owner)s has shared the document '%(document_title)s' with you and given you %(rights)s access rights. \n"
+"%(owner)s has shared the document '%(document_title)s' with you and given "
+"you %(rights)s access rights. \n"
 "Open document: %(link)s"
 msgstr ""
 "Olá %(collaborator_name)s,\n"
-"%(owner)s compartilhou o documento '%(document_title)s' com você e lhe concedeu direitos de acesso a %(rights)s. \n"
+"%(owner)s compartilhou o documento '%(document_title)s' com você e lhe "
+"concedeu direitos de acesso a %(rights)s. \n"
 "Abrir documento: %(link)s"
 
 #: document/emails.py:55
@@ -246,10 +320,6 @@ msgstr ""
 "'%(document_title)s' com você e concedeu a você %(rights)s direitos de "
 "acesso.</p>"
 
-#: document/emails.py:89
-msgid "shared"
-msgstr "compartilhado"
-
 #: document/emails.py:91 document/emails.py:207 document/emails.py:286
 msgid "Document"
 msgstr "Documento"
@@ -257,10 +327,6 @@ msgstr "Documento"
 #: document/emails.py:93 document/emails.py:209
 msgid "Author"
 msgstr "Autor"
-
-#: document/emails.py:95
-msgid "Access Rights"
-msgstr "Direitos de Acesso"
 
 #: document/emails.py:98 document/emails.py:214
 msgid "Access the document"
@@ -275,14 +341,16 @@ msgstr "Documento compartilhado: %(document_title)s"
 #, python-format
 msgid ""
 "Hey %(collaborator_name)s,\n"
-"%(commentator)s has mentioned you in a comment in the document '%(document)s':\n"
+"%(commentator)s has mentioned you in a comment in the document "
+"'%(document)s':\n"
 "\n"
 "%(comment_text)s\n"
 "\n"
 "Go to the document here: %(link)s"
 msgstr ""
 "Olá %(collaborator_name)s,\n"
-"%(commentator)s mencionou você em um comentário no documento '%(document)s':\n"
+"%(commentator)s mencionou você em um comentário no documento "
+"'%(document)s':\n"
 "\n"
 "%(comment_text)s\n"
 "\n"
@@ -291,8 +359,8 @@ msgstr ""
 #: document/emails.py:136
 #, python-format
 msgid ""
-"Hey %(collaborator_name)s,<br>%(commentator)s has mentioned you in a comment"
-" in the document '%(document_title)s'."
+"Hey %(collaborator_name)s,<br>%(commentator)s has mentioned you in a comment "
+"in the document '%(document_title)s'."
 msgstr ""
 "Olá %(collaborator_name)s,<br>%(commentator)s mencionou você em um "
 "comentário no documento '%(document_title)s'."
@@ -306,7 +374,8 @@ msgstr "Comentário em: %(document_title)s"
 #, python-format
 msgid ""
 "Hey %(collaborator_name)s,\n"
-"%(commentator)s has assigned you to a comment in the document '%(document)s':\n"
+"%(commentator)s has assigned you to a comment in the document "
+"'%(document)s':\n"
 "\n"
 "%(comment_text)s\n"
 "\n"
@@ -352,21 +421,23 @@ msgstr "Comentário"
 #, python-format
 msgid ""
 "Hey %(owner_name)s,\n"
-"%(requester_name)s has requested %(rights)s access to the document '%(document_title)s'. \n"
+"%(requester_name)s has requested %(rights)s access to the document "
+"'%(document_title)s'. \n"
 "Open the document to grant access: %(link)s"
 msgstr ""
 "Olá %(owner_name)s,\n"
-"%(requester_name)s solicitou acesso de %(rights)s ao documento '%(document_title)s'. \n"
+"%(requester_name)s solicitou acesso de %(rights)s ao documento "
+"'%(document_title)s'. \n"
 "Abra o documento para conceder acesso: %(link)s"
 
 #: document/emails.py:251
 #, python-format
 msgid ""
-"<p>Hey %(owner_name)s,<br>%(requester_name)s has requested %(rights)s access"
-" to the document '%(document_title)s'.</p>"
+"<p>Hey %(owner_name)s,<br>%(requester_name)s has requested %(rights)s access "
+"to the document '%(document_title)s'.</p>"
 msgstr ""
-"<p>Olá, %(owner_name)s,<br>%(requester_name)s solicitou acesso de %(rights)s"
-" ao documento '%(document_title)s'.</p>"
+"<p>Olá, %(owner_name)s,<br>%(requester_name)s solicitou acesso de %(rights)s "
+"ao documento '%(document_title)s'.</p>"
 
 #: document/emails.py:284
 msgid "access request"
@@ -399,23 +470,39 @@ msgstr "Adicionar %(name)s"
 msgid "Maintenance"
 msgstr "Manutenção"
 
-#: document/templates/admin/document/maintenance.html:24
+#: document/templates/admin/document/maintenance.html:25
 msgid ""
 "\n"
-"            Before and after upgrading Fidus Writer, you should update all the documents\n"
-"            of all users to the newest document version. Only do this if you know that\n"
+"            Before and after upgrading Fidus Writer, you should update all "
+"the documents\n"
+"            of all users to the newest document version. Only do this if you "
+"know that\n"
 "            no user is currently editing any document!\n"
 "            "
 msgstr ""
 "\n"
-"            Antes de Depois de atualizar o Fidus Writer, você deve atualizar todos os documentos\n"
-"            de todos usuários para última versão de documentos. Faça isso somente se tem certeza que\n"
+"            Antes de Depois de atualizar o Fidus Writer, você deve atualizar "
+"todos os documentos\n"
+"            de todos usuários para última versão de documentos. Faça isso "
+"somente se tem certeza que\n"
 "            não tem nenhum usuário editando documentos!\n"
 "            "
 
-#: document/templates/admin/document/maintenance.html:32
+#: document/templates/admin/document/maintenance.html:33
 msgid "Update all documents (DANGER!)"
 msgstr "Atualizar todos os documentos (PERIGO!)"
+
+#: document/views.py:1334
+msgid ""
+"This document is end-to-end encrypted. Open it in Fidus Writer to read the "
+"comment."
+msgstr ""
+"Este documento é criptografado de ponta a ponta. Abra-o no Fidus Writer para "
+"ler o comentário."
+
+#: document/views.py:2281 user_template_manager/views.py:110
+msgid "Missing template title."
+msgstr "Título do modelo ausente."
 
 #: style/models.py:74
 msgid "Default"
@@ -441,8 +528,8 @@ msgstr ""
 #: user/emails.py:19
 #, python-format
 msgid ""
-"<p>Hey %(email)s,<br> %(sender)s has invited you to connect on Fidus "
-"Writer.</p>"
+"<p>Hey %(email)s,<br> %(sender)s has invited you to connect on Fidus Writer."
+"</p>"
 msgstr ""
 "<p>Olá, %(email)s,<br> %(sender)s convidou você para se conectar no Fidus "
 "Writer.</p>"
@@ -462,10 +549,12 @@ msgstr "Convite de contato para Fidus Writer"
 #: user/emails.py:53
 #, python-format
 msgid ""
-"Hey %(recipient_name)s, %(sender_name)s has declined your invite to connect on Fidus Writer. \n"
+"Hey %(recipient_name)s, %(sender_name)s has declined your invite to connect "
+"on Fidus Writer. \n"
 "See your list of contacts here: %(link)s"
 msgstr ""
-"Olá %(recipient_name)s, %(sender_name)s recusou seu convite para se conectar no Fidus Writer. \n"
+"Olá %(recipient_name)s, %(sender_name)s recusou seu convite para se conectar "
+"no Fidus Writer. \n"
 "Veja sua lista de contatos aqui: %(link)s"
 
 #: user/emails.py:62
@@ -492,10 +581,12 @@ msgstr "Convite para Fidus Writer recusado"
 #: user/emails.py:95
 #, python-format
 msgid ""
-"Hey %(recipient_name)s, %(sender_name)s has accepted your invite to connect on Fidus Writer. \n"
+"Hey %(recipient_name)s, %(sender_name)s has accepted your invite to connect "
+"on Fidus Writer. \n"
 "See your list of contacts here: %(link)s"
 msgstr ""
-"Olá %(recipient_name)s, %(sender_name)s aceitou seu convite para se conectar no Fidus Writer. \n"
+"Olá %(recipient_name)s, %(sender_name)s aceitou seu convite para se conectar "
+"no Fidus Writer. \n"
 "Veja sua lista de contatos aqui: %(link)s"
 
 #: user/emails.py:104
@@ -533,7 +624,7 @@ msgstr ""
 msgid "Can login as another user"
 msgstr "Pode entrar como outro usuário"
 
-#: user/models.py:115
+#: user/models.py:116
 msgid "email address"
 msgstr "endereço de e-mail"
 
@@ -549,15 +640,15 @@ msgid ""
 "You are receiving this e-mail because user %(user_display)s has given yours "
 "as an e-mail address to connect their account."
 msgstr ""
-"Você está recebendo este e-mail porque o usuário %(user_display)s forneceu o"
-" seu como um endereço de e-mail para conectar sua conta."
+"Você está recebendo este e-mail porque o usuário %(user_display)s forneceu o "
+"seu como um endereço de e-mail para conectar sua conta."
 
 #: user/templates/account/email/email_confirmation_message.html:16
 #, python-format
 msgid "To confirm this is correct, go to <a href=\"%(url)s\">%(url)s</a>."
 msgstr ""
-"Para confirmar que isso está correto, vá para <a "
-"href=\"%(url)s\">%(url)s</a>."
+"Para confirmar que isso está correto, vá para <a href=\"%(url)s\">%(url)s</"
+"a>."
 
 #: user/templates/account/email/email_confirmation_message.html:20
 #: user/templates/account/email/password_reset_key_message.html:26
@@ -578,24 +669,24 @@ msgid ""
 "It can be safely ignored if you did not request a password reset. Click the "
 "link below to reset your password."
 msgstr ""
-"Ele pode ser ignorado com segurança se você não solicitou uma redefinição de"
-" senha. Clique no link abaixo para redefinir sua senha."
+"Ele pode ser ignorado com segurança se você não solicitou uma redefinição de "
+"senha. Clique no link abaixo para redefinir sua senha."
 
 #: user/templates/account/email/password_reset_key_message.html:21
 #, python-format
 msgid "In case you forgot, your username is %(username)s."
 msgstr "No caso de ter esquecido, seu nome de usuário é %(username)s."
 
-#: user/views.py:69
+#: user/views.py:78
 msgid "Your old password was entered incorrectly. Please enter it again."
 msgstr ""
 "Sua senha antiga foi digitada incorretamente. Por favor, insira-o novamente."
 
-#: user/views.py:73
+#: user/views.py:82
 msgid "The two password fields didn't match."
 msgstr "Os dois campos de senha não correspondiam."
 
-#: user/views.py:674
+#: user/views.py:728
 msgid "Code is invalid"
 msgstr "O código é inválido"
 
@@ -611,37 +702,19 @@ msgstr "Imagem muito grande"
 msgid "No file uploaded"
 msgstr "Nenhum arquivo carregado"
 
-#: book/emails.py:99
-msgid "Book"
-msgstr "Livro"
-
-#: book/emails.py:101
-msgid "Editor"
-msgstr "Editor"
-
-#: book/emails.py:106
-msgid "Access books"
-msgstr "Acessar os livros"
-
-#: book/emails.py:109
-#, python-format
-msgid "Book shared: %(book_title)s"
-msgstr "Livro compartilhado: %(book_title)s"
-
-
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public."
 #~ msgstr ""
-#~ "foi submetido para publicação. Você ou outro editor precisa aprová-lo antes "
-#~ "que seja disponibilizado ao público em geral."
+#~ "foi submetido para publicação. Você ou outro editor precisa aprová-lo "
+#~ "antes que seja disponibilizado ao público em geral."
 
 #~ msgid ""
 #~ "been submitted to be published. You or another editor need to approve it "
 #~ "before it will be made accessible to the general public.</p>"
 #~ msgstr ""
-#~ "foi submetido para publicação. Você ou outro editor precisa aprová-lo antes "
-#~ "que ele fique acessível ao público em geral.</p>"
+#~ "foi submetido para publicação. Você ou outro editor precisa aprová-lo "
+#~ "antes que ele fique acessível ao público em geral.</p>"
 
 #~ msgid "Access the Document"
 #~ msgstr "Acesse o documento"
@@ -650,15 +723,15 @@ msgstr "Livro compartilhado: %(book_title)s"
 #~ "been reviewed. You or another author need to change some things before it "
 #~ "can be published. Please resubmit it once you are done. "
 #~ msgstr ""
-#~ "foi revisado. Você ou outro autor precisa mudar algumas coisas antes que ele"
-#~ " possa ser publicado. Por favor, reenvie-o quando terminar. "
+#~ "foi revisado. Você ou outro autor precisa mudar algumas coisas antes que "
+#~ "ele possa ser publicado. Por favor, reenvie-o quando terminar. "
 
 #~ msgid ""
 #~ "been reviewed. You or another author need to change some things before it "
 #~ "can be published. Please resubmit it once you are done.</p>"
 #~ msgstr ""
-#~ "foi revisado. Você ou outro autor precisa mudar algumas coisas antes que ele"
-#~ " possa ser publicado. Envie-o novamente quando terminar.</p>"
+#~ "foi revisado. Você ou outro autor precisa mudar algumas coisas antes que "
+#~ "ele possa ser publicado. Envie-o novamente quando terminar.</p>"
 
 #~ msgid "been reviewed and rejected. "
 #~ msgstr "foi revisado e rejeitado. "
